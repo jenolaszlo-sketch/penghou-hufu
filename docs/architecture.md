@@ -1,5 +1,15 @@
 # Hufu architecture and ownership
 
+Current integration direction (2026-10-03): [ADR 0011](decisions/0011-neutral-zhinu-authority-extension.md)
+and the [neutral authority-extension plan](../../Penghou.Zhinu/docs/authority-extension-plan.md)
+supersede earlier coupling and delivery order below. The
+[Penghou-owned workflow contracts](../../Penghou/docs/workflow-abstractions-plan.md)
+live in Penghou.Workflow.Abstractions. Zhinu implements execution and Hufu implements authorization in an optional
+adapter depending only on that contract package and Hufu core. Concrete SQLite
+start coordination remains a separately qualified legacy integration until ZA-5
+resolves its disposition. Resource enforcement and Hufu policy stay independent
+of workflow execution. The new seam is planned, not implemented.
+
 [Authority-Mediated Language Execution (AMLE)](authority-mediated-language-execution.md)
 names this shared architectural direction: Luban expresses and executes bounded
 semantic operations, Hufu mediates contextual authority, and trusted resource

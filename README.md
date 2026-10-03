@@ -1,5 +1,14 @@
 # Penghou.Hufu
 
+Current integration plan: [product-neutral workflow contracts](../Penghou/docs/workflow-abstractions-plan.md)
+and [runtime integration](../Penghou.Zhinu/docs/authority-extension-plan.md).
+Hufu remains independently usable. Penghou owns Penghou.Workflow.Abstractions;
+Zhinu is one runtime and optional Penghou.Hufu.Workflow implements authorization
+without a workflow-engine dependency. Publish the contracts first, complete
+Zhinu implementation, then Hufu workflow integration. This is planned
+work; [ADR 0011](docs/decisions/0011-neutral-zhinu-authority-extension.md) and the
+[handoff](docs/zhinu-authority-handoff.md) distinguish current code from that target.
+
 Penghou.Hufu is the proposed reusable authority library and authority-store
 boundary for workflows, delegated agents, and background operations. Its purpose
 is to make execution permissions explicit, durable, and auditable across hosts.
@@ -39,6 +48,7 @@ does not replace OS isolation for opaque native execution.
 
 The design is recorded in:
 
+- [Published Zhinu package adoption](docs/zhinu-package-adoption.md)
 - [Workflow authority specification](docs/workflow-authority-spec.md)
 - [Current authority prototype profile](docs/current-authority-profile.md)
 - [Durable authority store profile](docs/durable-authority-store.md)

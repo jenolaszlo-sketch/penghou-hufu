@@ -1,5 +1,13 @@
 # Co-located operation-start profile v1
 
+Migration status, 2026-10-03: this is the **legacy experimental composition**.
+The [neutral authority-extension plan](../../Penghou.Zhinu/docs/authority-extension-plan.md)
+and [ADR 0011](decisions/0011-neutral-zhinu-authority-extension.md) govern future
+integration. Preserve this profile's qualified atomic-start guarantees while
+ZA-5 determines retention or retirement. The proposed activity authorization
+callback supplies workflow preflight, not this shared transaction. Do not extend
+the current SQL coupling into the new `Hufu.Zhinu` translation adapter.
+
 Status: Experimental implementation, updated 2026-10-02. Qualification is recorded in
 [operation-start qualification](operation-start-qualification.md).
 [ADR 0009](decisions/0009-colocated-operation-start.md) defines the selected order.

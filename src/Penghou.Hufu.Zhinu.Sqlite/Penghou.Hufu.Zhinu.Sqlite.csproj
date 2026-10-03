@@ -4,9 +4,16 @@
     <IsPackable>false</IsPackable>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UseZhinuSource Condition="'$(UseZhinuSource)' == ''">false</UseZhinuSource>
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Penghou.Hufu.Sqlite\Penghou.Hufu.Sqlite.csproj" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(UseZhinuSource)' != 'true'">
+    <PackageReference Include="Penghou.Zhinu" Version="[0.1.0-preview.15]" />
+    <PackageReference Include="Penghou.Zhinu.Sqlite" Version="[0.1.0-preview.15]" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(UseZhinuSource)' == 'true'">
     <ProjectReference Include="..\..\..\Penghou.Zhinu\src\Penghou.Zhinu.Sqlite\Penghou.Zhinu.Sqlite.csproj" />
   </ItemGroup>
 </Project>

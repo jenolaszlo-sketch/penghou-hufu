@@ -1,10 +1,9 @@
 #Requires -Version 7.0
 [CmdletBinding()]
-param([string] $ZhinuRoot = (Join-Path $PSScriptRoot '../../Penghou.Zhinu'), [string] $CandidateFeedPath)
+param([string] $CandidateFeedPath)
 $ErrorActionPreference = 'Stop'
 if (!$IsWindows) { throw 'This qualification requires the supported Windows Local/native profiles.' }
 $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
-$zhinu = (Resolve-Path -LiteralPath $ZhinuRoot).Path
 & (Join-Path $PSScriptRoot 'Restore-BiscuitCandidate.ps1')
 $scratch = Join-Path ([IO.Path]::GetTempPath()) ('hufu-public-packages-' + [guid]::NewGuid().ToString('N'))
 $consumer = Join-Path $scratch 'Penghou.Hufu'
@@ -33,9 +32,6 @@ try {
     foreach ($name in @('Directory.Build.props', 'Penghou.Hufu.slnx', 'nuget.config')) {
         Copy-Item -LiteralPath (Join-Path $repo $name) -Destination $consumer
     }
-    $isolatedZhinu = Join-Path $scratch 'Penghou.Zhinu'
-    Copy-SourceTree (Join-Path $zhinu 'src') (Join-Path $isolatedZhinu 'src')
-    Copy-Item -LiteralPath (Join-Path $zhinu 'Directory.Build.props') -Destination $isolatedZhinu
     $biscuitFeed = Join-Path $consumer 'artifacts/biscuitsharp-feed'
     New-Item -ItemType Directory -Path $biscuitFeed -Force | Out-Null
     Copy-Item -LiteralPath (Join-Path $repo 'artifacts/biscuitsharp-feed/BiscuitSharp.0.1.0-preview.2.nupkg') -Destination $biscuitFeed
@@ -57,21 +53,23 @@ try {
     }
     $env:NUGET_PACKAGES = $cache
     $solution = Join-Path $consumer 'Penghou.Hufu.slnx'
-    dotnet restore $solution --configfile (Join-Path $consumer 'nuget.config') --packages $cache --no-cache -p:UsePenghouSource=false -p:UseLubanSource=false
+    dotnet restore $solution --configfile (Join-Path $consumer 'nuget.config') --packages $cache --no-cache -p:UsePenghouSource=false -p:UseLubanSource=false -p:UseZhinuSource=false
     if ($LASTEXITCODE -ne 0) { throw 'Isolated public-package restore failed.' }
 
     $packageEvidence = @()
-    foreach ($id in @('penghou.io.abstractions', 'penghou.io.protocols', 'penghou.io.local', 'penghou.luban')) {
-        $directory = Join-Path $cache "$id/0.1.0-preview.1"
+    foreach ($id in @('penghou.io.abstractions', 'penghou.io.protocols', 'penghou.io.local', 'penghou.luban', 'penghou.zhinu', 'penghou.zhinu.sqlite')) {
+        $version = if ($id -like 'penghou.zhinu*') { '0.1.0-preview.15' } else { '0.1.0-preview.1' }
+        $requiredSource = if ($id -like 'penghou.zhinu*') { 'https://api.nuget.org/v3/index.json' } else { $expectedSource }
+        $directory = Join-Path $cache "$id/$version"
         $metadata = Get-Content -LiteralPath (Join-Path $directory '.nupkg.metadata') -Raw | ConvertFrom-Json
-        if ($metadata.source.TrimEnd('/') -ne $expectedSource.TrimEnd('/')) { throw "$id did not restore from the required source." }
-        $archive = Join-Path $directory "$id.0.1.0-preview.1.nupkg"
-        $packageEvidence += [ordered]@{ id = $id; version = '0.1.0-preview.1'; source = $metadata.source; sha256 = (Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash.ToLowerInvariant() }
+        if ($metadata.source.TrimEnd('/') -ne $requiredSource.TrimEnd('/')) { throw "$id did not restore from the required source." }
+        $archive = Join-Path $directory "$id.$version.nupkg"
+        $packageEvidence += [ordered]@{ id = $id; version = $version; source = $metadata.source; sha256 = (Get-FileHash -LiteralPath $archive -Algorithm SHA256).Hash.ToLowerInvariant() }
     }
     foreach ($asset in Get-ChildItem -LiteralPath $consumer -Recurse -Filter project.assets.json) {
         $json = Get-Content -LiteralPath $asset.FullName -Raw | ConvertFrom-Json
         foreach ($library in $json.libraries.PSObject.Properties) {
-            if ($library.Name -match '^Penghou\.(IO\.|Luban/)' -and $library.Value.type -ne 'package') {
+            if ($library.Name -match '^Penghou\.(IO\.|Luban/|Zhinu[./])' -and $library.Value.type -ne 'package') {
                 throw "Source dependency detected in $($asset.FullName): $($library.Name)"
             }
         }
@@ -82,7 +80,7 @@ try {
         $results = Join-Path $scratch "results/$tfm"
         foreach ($suite in @('Penghou.Hufu.Tests', 'Penghou.Hufu.Biscuit.Tests', 'Penghou.Hufu.IO.Tests')) {
             $project = Join-Path $consumer "tests/$suite/$suite.csproj"
-            dotnet test $project -c Release -f $tfm --no-restore -p:UsePenghouSource=false -p:UseLubanSource=false --results-directory (Join-Path $results $suite) --logger trx
+            dotnet test $project -c Release -f $tfm --no-restore -p:UsePenghouSource=false -p:UseLubanSource=false -p:UseZhinuSource=false --results-directory (Join-Path $results $suite) --logger trx
             if ($LASTEXITCODE -ne 0) { throw "Isolated Hufu integration failed ($suite, $tfm)." }
         }
         $trxFiles = @(Get-ChildItem -LiteralPath $results -Recurse -Filter '*.trx')
@@ -97,16 +95,16 @@ try {
         }
     }
     $report = [ordered]@{
-        schema = if ($CandidateFeedPath) { 'hufu-candidate-resource-packages-v1' } else { 'hufu-public-resource-packages-v1' }
+        schema = if ($CandidateFeedPath) { 'hufu-candidate-resource-packages-v2' } else { 'hufu-public-resource-packages-v2' }
         recordedUtc = [DateTimeOffset]::UtcNow.ToString('O')
         operatingSystem = [Environment]::OSVersion.VersionString
         resourcePackages = $packageEvidence
         tests = $testEvidence
-        isolatedFrom = @('Penghou source', 'Luban source', 'existing package caches', 'original build outputs')
-        remainingSourceDependency = 'Zhinu (copied source; not a package migration claim)'
+        isolatedFrom = @('Penghou source', 'Luban source', 'Zhinu source', 'existing package caches', 'original build outputs')
+        remainingSourceDependency = $null
         biscuitDependency = 'Exact qualified unpublished BiscuitSharp preview.2 artifact; not a public-feed claim'
     }
-    $reportName = if ($CandidateFeedPath) { 'candidate-resource-packages.json' } else { 'public-resource-packages.json' }
+    $reportName = if ($CandidateFeedPath) { 'candidate-resource-packages-with-zhinu.json' } else { 'public-resource-packages-with-zhinu.json' }
     $reportPath = Join-Path $repo "docs/qualification/$reportName"
     New-Item -ItemType Directory -Path (Split-Path $reportPath) -Force | Out-Null
     [IO.File]::WriteAllText($reportPath, ($report | ConvertTo-Json -Depth 8) + [char]10, [Text.UTF8Encoding]::new($false))

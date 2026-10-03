@@ -15,6 +15,4 @@
     <Project Path="tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.IO.Tests/Penghou.Hufu.IO.Tests.csproj" />
   </Folder>
-  <Project Path="../Penghou.Zhinu/src/Penghou.Zhinu.Sqlite/Penghou.Zhinu.Sqlite.csproj" />
-  <Project Path="../Penghou.Zhinu/src/Penghou.Zhinu/Penghou.Zhinu.csproj" />
 </Solution>

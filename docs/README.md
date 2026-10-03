@@ -1,5 +1,14 @@
 # Penghou.Hufu design documents
 
+Start with [Penghou's workflow contract plan](../../Penghou/docs/workflow-abstractions-plan.md),
+then the [runtime integration plan](../../Penghou.Zhinu/docs/authority-extension-plan.md),
+[ADR 0011](decisions/0011-neutral-zhinu-authority-extension.md) and
+[handoff](zhinu-authority-handoff.md). They supersede earlier integration order;
+historical implementation/qualification entries below remain evidence for their
+stated versions, not acceptance of the new seam.
+The [activity queue](../../Penghou.Zhinu/docs/authority-extension-activities.md)
+is the current source for ready work, dependencies, held work and close-out evidence.
+
 Read the [Authority-Mediated Language Execution (AMLE) guide](authority-mediated-language-execution.md) for the shared pattern, complementary Luban/Hufu roles, and current implementation limits.
 
 
@@ -7,6 +16,7 @@ Hufu is the reusable authority domain and planned durable authority-store bounda
 
 | Document | Purpose | Status |
 | --- | --- | --- |
+| [Zhinu package adoption](zhinu-package-adoption.md) | Exact public preview.15 dependencies without a source checkout | 426 cases passed across .NET 8/10 |
 | [Current completion review](completion-review.md) | Published dependency adoption and prioritized remaining Hufu gates | IO/Luban public adoption qualified; Hufu host/API/release work remains |
 | [Architecture](architecture.md) | Library boundary, dependencies, store ownership, and integration | Proposed design |
 | [ADR 0001](decisions/0001-hufu-owns-workflow-authority.md) | Decision to establish Hufu as a separate library | Library boundary selected; API/storage details proposed |

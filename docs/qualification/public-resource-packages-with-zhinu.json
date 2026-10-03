@@ -1,0 +1,96 @@
+{
+  "schema": "hufu-public-resource-packages-v2",
+  "recordedUtc": "2026-10-03T06:07:32.4686795+00:00",
+  "operatingSystem": "Microsoft Windows NT 10.0.26200.0",
+  "resourcePackages": [
+    {
+      "id": "penghou.io.abstractions",
+      "version": "0.1.0-preview.1",
+      "source": "https://api.nuget.org/v3/index.json",
+      "sha256": "c91d7234eff52a8315de3aeab956d2b62faef22d633b0dc44417d0ce3b8b23c2"
+    },
+    {
+      "id": "penghou.io.protocols",
+      "version": "0.1.0-preview.1",
+      "source": "https://api.nuget.org/v3/index.json",
+      "sha256": "fd92fb0811777e94d799bbe72049529e62ba8cbf9ecd74c34c9b770c75715fbc"
+    },
+    {
+      "id": "penghou.io.local",
+      "version": "0.1.0-preview.1",
+      "source": "https://api.nuget.org/v3/index.json",
+      "sha256": "4caa0b7ebbb15c15e67960f1662d8d5ced6bd5a01ddd23c7400f72fb59b9a8ed"
+    },
+    {
+      "id": "penghou.luban",
+      "version": "0.1.0-preview.1",
+      "source": "https://api.nuget.org/v3/index.json",
+      "sha256": "1e81e10475ca4dcb8bd0ba6bc7e0702b730f10abe01ea7590db3a3dea2580246"
+    },
+    {
+      "id": "penghou.zhinu",
+      "version": "0.1.0-preview.15",
+      "source": "https://api.nuget.org/v3/index.json",
+      "sha256": "eeb2c5ba600c0017575c4ca123682676ca20edc0184b36f07671cea1638ce665"
+    },
+    {
+      "id": "penghou.zhinu.sqlite",
+      "version": "0.1.0-preview.15",
+      "source": "https://api.nuget.org/v3/index.json",
+      "sha256": "a4591b9df025851ab32aeeee24ccf23a653c79d1bc20e1f353347db99bcc928f"
+    }
+  ],
+  "tests": [
+    {
+      "framework": "net8.0",
+      "suite": "Penghou.Hufu.Biscuit.Tests",
+      "passed": 93,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "framework": "net8.0",
+      "suite": "Penghou.Hufu.IO.Tests",
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "framework": "net8.0",
+      "suite": "Penghou.Hufu.Tests",
+      "passed": 101,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "framework": "net10.0",
+      "suite": "Penghou.Hufu.Biscuit.Tests",
+      "passed": 93,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "framework": "net10.0",
+      "suite": "Penghou.Hufu.IO.Tests",
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "framework": "net10.0",
+      "suite": "Penghou.Hufu.Tests",
+      "passed": 101,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "isolatedFrom": [
+    "Penghou source",
+    "Luban source",
+    "Zhinu source",
+    "existing package caches",
+    "original build outputs"
+  ],
+  "remainingSourceDependency": null,
+  "biscuitDependency": "Exact qualified unpublished BiscuitSharp preview.2 artifact; not a public-feed claim"
+}
