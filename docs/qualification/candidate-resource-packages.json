@@ -1,0 +1,83 @@
+{
+  "schema": "hufu-candidate-resource-packages-v1",
+  "recordedUtc": "2026-10-03T09:20:43.8656271+08:00",
+  "operatingSystem": "Microsoft Windows NT 10.0.26200.0",
+  "resourcePackages": [
+    {
+      "id": "penghou.io.abstractions",
+      "version": "0.1.0-preview.1",
+      "source": "C:\\Users\\Laszlos\\source\\repos\\Penghou.Hufu\\artifacts\\resource-release-feed",
+      "sha256": "c00a68a0d15bc3861ead0da2f32020a7fcd6379fd0501b1054a52407d8df7250"
+    },
+    {
+      "id": "penghou.io.protocols",
+      "version": "0.1.0-preview.1",
+      "source": "C:\\Users\\Laszlos\\source\\repos\\Penghou.Hufu\\artifacts\\resource-release-feed",
+      "sha256": "b5ea0004e89dd69069953122c1eed054b6e74dddc846925b1e3ce8f22cbe25ff"
+    },
+    {
+      "id": "penghou.io.local",
+      "version": "0.1.0-preview.1",
+      "source": "C:\\Users\\Laszlos\\source\\repos\\Penghou.Hufu\\artifacts\\resource-release-feed",
+      "sha256": "da2a3b0c94b381f964c52d4a034dbd76e51a90b012b0f18594ac426b4a37ac63"
+    },
+    {
+      "id": "penghou.luban",
+      "version": "0.1.0-preview.1",
+      "source": "C:\\Users\\Laszlos\\source\\repos\\Penghou.Hufu\\artifacts\\resource-release-feed",
+      "sha256": "075f24e84517e9d55f5c4c180b92b4a1a72244f6521f51e5eccebac9ea08a79e"
+    }
+  ],
+  "tests": [
+    {
+      "framework": "net8.0",
+      "suite": "Penghou.Hufu.Biscuit.Tests",
+      "passed": 93,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "framework": "net8.0",
+      "suite": "Penghou.Hufu.IO.Tests",
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "framework": "net8.0",
+      "suite": "Penghou.Hufu.Tests",
+      "passed": 101,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "framework": "net10.0",
+      "suite": "Penghou.Hufu.Biscuit.Tests",
+      "passed": 93,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "framework": "net10.0",
+      "suite": "Penghou.Hufu.IO.Tests",
+      "passed": 19,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "framework": "net10.0",
+      "suite": "Penghou.Hufu.Tests",
+      "passed": 101,
+      "failed": 0,
+      "skipped": 0
+    }
+  ],
+  "isolatedFrom": [
+    "Penghou source",
+    "Luban source",
+    "existing package caches",
+    "original build outputs"
+  ],
+  "remainingSourceDependency": "Zhinu (copied source; not a package migration claim)",
+  "biscuitDependency": "Exact qualified unpublished BiscuitSharp preview.2 artifact; not a public-feed claim"
+}

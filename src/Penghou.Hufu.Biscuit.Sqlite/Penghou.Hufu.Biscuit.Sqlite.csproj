@@ -1,0 +1,4 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup><TargetFrameworks>net8.0;net10.0</TargetFrameworks><IsPackable>false</IsPackable><IsAotCompatible>true</IsAotCompatible></PropertyGroup>
+  <ItemGroup><ProjectReference Include="../Penghou.Hufu.Biscuit/Penghou.Hufu.Biscuit.csproj" /><ProjectReference Include="../Penghou.Hufu.Sqlite/Penghou.Hufu.Sqlite.csproj" /></ItemGroup>
+</Project>

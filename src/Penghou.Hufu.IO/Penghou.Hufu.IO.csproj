@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <PackageId>Penghou.Hufu.IO</PackageId>
+    <Version>0.1.0-preview.1</Version>
+    <Title>Penghou Hufu IO integration</Title>
+    <Description>Optional Hufu authority enforcement for neutral Penghou IO providers.</Description>
+    <IsPackable>true</IsPackable>
+    <UsePenghouSource Condition="'$(UsePenghouSource)' == ''">false</UsePenghouSource>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Penghou.Hufu/Penghou.Hufu.csproj" />
+    <ProjectReference Include="../../../Penghou/src/Penghou.IO.Abstractions/Penghou.IO.Abstractions.csproj" Condition="'$(UsePenghouSource)' == 'true'" />
+    <ProjectReference Include="../../../Penghou/src/Penghou.IO.Protocols/Penghou.IO.Protocols.csproj" Condition="'$(UsePenghouSource)' == 'true'" />
+    <PackageReference Include="Penghou.IO.Abstractions" Version="[0.1.0-preview.1]" Condition="'$(UsePenghouSource)' != 'true'" />
+    <PackageReference Include="Penghou.IO.Protocols" Version="[0.1.0-preview.1]" Condition="'$(UsePenghouSource)' != 'true'" />
+  </ItemGroup>
+</Project>

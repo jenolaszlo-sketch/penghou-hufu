@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Penghou.Hufu.Sqlite\Penghou.Hufu.Sqlite.csproj" />
+    <ProjectReference Include="..\..\..\Penghou.Zhinu\src\Penghou.Zhinu.Sqlite\Penghou.Zhinu.Sqlite.csproj" />
+  </ItemGroup>
+</Project>

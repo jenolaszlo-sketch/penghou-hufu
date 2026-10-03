@@ -1,0 +1,20 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Penghou.Hufu.Biscuit/Penghou.Hufu.Biscuit.csproj" />
+    <Project Path="src/Penghou.Hufu.Biscuit.Sqlite/Penghou.Hufu.Biscuit.Sqlite.csproj" />
+    <Project Path="src/Penghou.Hufu.Cedar/Penghou.Hufu.Cedar.csproj" />
+    <Project Path="src/Penghou.Hufu.Luban/Penghou.Hufu.Luban.csproj" />
+    <Project Path="src/Penghou.Hufu.IO/Penghou.Hufu.IO.csproj" />
+    <Project Path="src/Penghou.Hufu.Sqlite/Penghou.Hufu.Sqlite.csproj" />
+    <Project Path="src/Penghou.Hufu.Zhinu.Sqlite/Penghou.Hufu.Zhinu.Sqlite.csproj" />
+    <Project Path="src/Penghou.Hufu/Penghou.Hufu.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Penghou.Hufu.Biscuit.Tests/Penghou.Hufu.Biscuit.Tests.csproj" />
+    <Project Path="tests/Penghou.Hufu.StartWorker.Tests/Penghou.Hufu.StartWorker.Tests.csproj" />
+    <Project Path="tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj" />
+    <Project Path="tests/Penghou.Hufu.IO.Tests/Penghou.Hufu.IO.Tests.csproj" />
+  </Folder>
+  <Project Path="../Penghou.Zhinu/src/Penghou.Zhinu.Sqlite/Penghou.Zhinu.Sqlite.csproj" />
+  <Project Path="../Penghou.Zhinu/src/Penghou.Zhinu/Penghou.Zhinu.csproj" />
+</Solution>

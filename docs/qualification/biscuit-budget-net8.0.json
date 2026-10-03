@@ -1,0 +1,501 @@
+{
+  "format": "hufu-biscuit-budget-probe-v1",
+  "capturedAt": "2026-10-02T16:15:55.3245518+00:00",
+  "framework": ".NET 8.0.31",
+  "runtimeIdentifier": "win-x64",
+  "os": "Microsoft Windows 10.0.26200",
+  "logicalProcessorCount": 18,
+  "profile": "hufu-biscuit-v1",
+  "mapping": "hufu-biscuit-mapping-v2:f0225d72eda1bbfab9bf3274ed53cda6aa482f01913e036be7f3d2d8a8a25f21",
+  "engine": "biscuit-engine-v1:049bb64b53e6487314b02194586ace73753b037c8b48303fb3c71be13748c02d",
+  "package": "BiscuitSharp/0.1.0-preview.2",
+  "packageSha256": "c5f0c94aa14cf82b68239ed49314a3cf468780337432cdff89975beed6ead3b1",
+  "sampledPeakWorkingSetBytes": 88481792,
+  "sampleCount": 264,
+  "sampleIntervalMilliseconds": 20,
+  "memoryScope": "Whole probe process including managed runtime, Cedar, SQLite, tests and native bridge. Sampled observation, not a hard memory cap.",
+  "fixtureScope": "Synthetic local host and fixed clock; protected authentication/custody, real tenant traffic and production concurrency are not qualified.",
+  "observations": [
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 1,
+      "workers": 1,
+      "evaluations": 16,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 1,
+      "p50Milliseconds": 0.213,
+      "p95Milliseconds": 1.7791,
+      "maximumMilliseconds": 1.7791,
+      "totalElapsedMilliseconds": 8.2928,
+      "outcomes": {
+        "None": 16
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 1,
+      "workers": 4,
+      "evaluations": 64,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 1,
+      "p50Milliseconds": 0.2659,
+      "p95Milliseconds": 0.483,
+      "maximumMilliseconds": 0.7586,
+      "totalElapsedMilliseconds": 6.6277,
+      "outcomes": {
+        "None": 64
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 1,
+      "workers": 1,
+      "evaluations": 16,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 5,
+      "p50Milliseconds": 0.2174,
+      "p95Milliseconds": 0.231,
+      "maximumMilliseconds": 0.231,
+      "totalElapsedMilliseconds": 3.5231,
+      "outcomes": {
+        "None": 16
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 1,
+      "workers": 4,
+      "evaluations": 64,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 5,
+      "p50Milliseconds": 0.2855,
+      "p95Milliseconds": 0.5175,
+      "maximumMilliseconds": 0.573,
+      "totalElapsedMilliseconds": 5.6704,
+      "outcomes": {
+        "None": 64
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 1,
+      "workers": 1,
+      "evaluations": 16,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 25,
+      "p50Milliseconds": 0.2837,
+      "p95Milliseconds": 0.3169,
+      "maximumMilliseconds": 0.3169,
+      "totalElapsedMilliseconds": 4.659,
+      "outcomes": {
+        "None": 16
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 1,
+      "workers": 4,
+      "evaluations": 64,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 25,
+      "p50Milliseconds": 0.2577,
+      "p95Milliseconds": 0.4688,
+      "maximumMilliseconds": 3.4223,
+      "totalElapsedMilliseconds": 9.3469,
+      "outcomes": {
+        "None": 64
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 1,
+      "workers": 1,
+      "evaluations": 16,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 100,
+      "p50Milliseconds": 0.197,
+      "p95Milliseconds": 0.3526,
+      "maximumMilliseconds": 0.3526,
+      "totalElapsedMilliseconds": 3.6988,
+      "outcomes": {
+        "None": 16
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 1,
+      "workers": 4,
+      "evaluations": 64,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 100,
+      "p50Milliseconds": 0.2314,
+      "p95Milliseconds": 0.4136,
+      "maximumMilliseconds": 0.5496,
+      "totalElapsedMilliseconds": 5.3851,
+      "outcomes": {
+        "None": 64
+      }
+    },
+    {
+      "workload": "registered-preflight-with-durable-evidence",
+      "blocks": 1,
+      "workers": 1,
+      "evaluations": 8,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 100,
+      "p50Milliseconds": 19.5664,
+      "p95Milliseconds": 82.0042,
+      "maximumMilliseconds": 82.0042,
+      "totalElapsedMilliseconds": 218.0812,
+      "outcomes": {
+        "None": 8
+      }
+    },
+    {
+      "workload": "registered-preflight-with-durable-evidence",
+      "blocks": 1,
+      "workers": 4,
+      "evaluations": 32,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 100,
+      "p50Milliseconds": 26.2829,
+      "p95Milliseconds": 497.3582,
+      "maximumMilliseconds": 809.6377,
+      "totalElapsedMilliseconds": 1125.3233,
+      "outcomes": {
+        "None": 32
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 8,
+      "workers": 1,
+      "evaluations": 16,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 1,
+      "p50Milliseconds": 0.6164,
+      "p95Milliseconds": 0.7755,
+      "maximumMilliseconds": 0.7755,
+      "totalElapsedMilliseconds": 10.237,
+      "outcomes": {
+        "None": 16
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 8,
+      "workers": 4,
+      "evaluations": 64,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 1,
+      "p50Milliseconds": 0.7182,
+      "p95Milliseconds": 1.2634,
+      "maximumMilliseconds": 1.3906,
+      "totalElapsedMilliseconds": 14.5159,
+      "outcomes": {
+        "None": 64
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 8,
+      "workers": 1,
+      "evaluations": 16,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 5,
+      "p50Milliseconds": 0.626,
+      "p95Milliseconds": 0.9449,
+      "maximumMilliseconds": 0.9449,
+      "totalElapsedMilliseconds": 11.0854,
+      "outcomes": {
+        "None": 16
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 8,
+      "workers": 4,
+      "evaluations": 64,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 5,
+      "p50Milliseconds": 0.6954,
+      "p95Milliseconds": 1.1558,
+      "maximumMilliseconds": 1.5262,
+      "totalElapsedMilliseconds": 13.2452,
+      "outcomes": {
+        "None": 64
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 8,
+      "workers": 1,
+      "evaluations": 16,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 25,
+      "p50Milliseconds": 0.6012,
+      "p95Milliseconds": 0.8045,
+      "maximumMilliseconds": 0.8045,
+      "totalElapsedMilliseconds": 10.2352,
+      "outcomes": {
+        "None": 16
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 8,
+      "workers": 4,
+      "evaluations": 64,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 25,
+      "p50Milliseconds": 0.6632,
+      "p95Milliseconds": 0.7404,
+      "maximumMilliseconds": 0.8213,
+      "totalElapsedMilliseconds": 11.6081,
+      "outcomes": {
+        "None": 64
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 8,
+      "workers": 1,
+      "evaluations": 16,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 100,
+      "p50Milliseconds": 0.6738,
+      "p95Milliseconds": 0.9086,
+      "maximumMilliseconds": 0.9086,
+      "totalElapsedMilliseconds": 11.4066,
+      "outcomes": {
+        "None": 16
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 8,
+      "workers": 4,
+      "evaluations": 64,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 100,
+      "p50Milliseconds": 0.7346,
+      "p95Milliseconds": 1.3065,
+      "maximumMilliseconds": 1.4449,
+      "totalElapsedMilliseconds": 14.7968,
+      "outcomes": {
+        "None": 64
+      }
+    },
+    {
+      "workload": "registered-preflight-with-durable-evidence",
+      "blocks": 8,
+      "workers": 1,
+      "evaluations": 8,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 100,
+      "p50Milliseconds": 43.3805,
+      "p95Milliseconds": 44.5752,
+      "maximumMilliseconds": 44.5752,
+      "totalElapsedMilliseconds": 345.0365,
+      "outcomes": {
+        "None": 8
+      }
+    },
+    {
+      "workload": "registered-preflight-with-durable-evidence",
+      "blocks": 8,
+      "workers": 4,
+      "evaluations": 32,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 100,
+      "p50Milliseconds": 35.8438,
+      "p95Milliseconds": 638.2071,
+      "maximumMilliseconds": 1137.3404,
+      "totalElapsedMilliseconds": 1373.7543,
+      "outcomes": {
+        "None": 32
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 32,
+      "workers": 1,
+      "evaluations": 16,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 1,
+      "p50Milliseconds": 1.9858,
+      "p95Milliseconds": 2.5428,
+      "maximumMilliseconds": 2.5428,
+      "totalElapsedMilliseconds": 33.0347,
+      "outcomes": {
+        "None": 16
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 32,
+      "workers": 4,
+      "evaluations": 64,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 1,
+      "p50Milliseconds": 2.0424,
+      "p95Milliseconds": 3.2191,
+      "maximumMilliseconds": 4.5258,
+      "totalElapsedMilliseconds": 37.643,
+      "outcomes": {
+        "None": 64
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 32,
+      "workers": 1,
+      "evaluations": 16,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 5,
+      "p50Milliseconds": 1.9257,
+      "p95Milliseconds": 1.9882,
+      "maximumMilliseconds": 1.9882,
+      "totalElapsedMilliseconds": 30.9981,
+      "outcomes": {
+        "None": 16
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 32,
+      "workers": 4,
+      "evaluations": 64,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 5,
+      "p50Milliseconds": 2.0303,
+      "p95Milliseconds": 3.825,
+      "maximumMilliseconds": 4.1597,
+      "totalElapsedMilliseconds": 39.8584,
+      "outcomes": {
+        "None": 64
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 32,
+      "workers": 1,
+      "evaluations": 16,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 25,
+      "p50Milliseconds": 1.9796,
+      "p95Milliseconds": 2.9874,
+      "maximumMilliseconds": 2.9874,
+      "totalElapsedMilliseconds": 33.2127,
+      "outcomes": {
+        "None": 16
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 32,
+      "workers": 4,
+      "evaluations": 64,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 25,
+      "p50Milliseconds": 2.0076,
+      "p95Milliseconds": 3.6991,
+      "maximumMilliseconds": 4.2249,
+      "totalElapsedMilliseconds": 37.6392,
+      "outcomes": {
+        "None": 64
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 32,
+      "workers": 1,
+      "evaluations": 16,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 100,
+      "p50Milliseconds": 2.0149,
+      "p95Milliseconds": 2.7341,
+      "maximumMilliseconds": 2.7341,
+      "totalElapsedMilliseconds": 33.4706,
+      "outcomes": {
+        "None": 16
+      }
+    },
+    {
+      "workload": "fixed-native-policy",
+      "blocks": 32,
+      "workers": 4,
+      "evaluations": 64,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 100,
+      "p50Milliseconds": 2.0533,
+      "p95Milliseconds": 3.0514,
+      "maximumMilliseconds": 3.3546,
+      "totalElapsedMilliseconds": 36.7593,
+      "outcomes": {
+        "None": 64
+      }
+    },
+    {
+      "workload": "registered-preflight-with-durable-evidence",
+      "blocks": 32,
+      "workers": 1,
+      "evaluations": 8,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 100,
+      "p50Milliseconds": 111.3216,
+      "p95Milliseconds": 118.5806,
+      "maximumMilliseconds": 118.5806,
+      "totalElapsedMilliseconds": 902.7737,
+      "outcomes": {
+        "None": 8
+      }
+    },
+    {
+      "workload": "registered-preflight-with-durable-evidence",
+      "blocks": 32,
+      "workers": 4,
+      "evaluations": 32,
+      "maxFacts": 2000,
+      "maxIterations": 50,
+      "maxTimeMilliseconds": 100,
+      "p50Milliseconds": 114.3778,
+      "p95Milliseconds": 1120.0551,
+      "maximumMilliseconds": 1356.3896,
+      "totalElapsedMilliseconds": 3137.0383,
+      "outcomes": {
+        "AuthorizationUnavailable": 1,
+        "None": 31
+      }
+    }
+  ]
+}

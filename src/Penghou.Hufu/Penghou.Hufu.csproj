@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <PackageId>Penghou.Hufu</PackageId>
+    <Title>Penghou Hufu</Title>
+    <Description>Workflow authority library for explicit, auditable execution decisions.</Description>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+</Project>

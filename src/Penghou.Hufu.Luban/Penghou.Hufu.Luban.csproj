@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+    <UseLubanSource Condition="'$(UseLubanSource)' == ''">false</UseLubanSource>
+    <LubanRoot Condition="'$(LubanRoot)' == ''">$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)..\..\..\Penghou.Luban'))</LubanRoot>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Penghou.Hufu/Penghou.Hufu.csproj" />
+    <ProjectReference Include="$(LubanRoot)/src/Penghou.Luban/Penghou.Luban.csproj" Condition="'$(UseLubanSource)' == 'true'" />
+    <PackageReference Include="Penghou.Luban" Version="[0.1.0-preview.1]" Condition="'$(UseLubanSource)' != 'true'" />
+  </ItemGroup>
+</Project>
