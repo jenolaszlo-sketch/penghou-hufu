@@ -4,19 +4,19 @@
 
 This section supersedes older integration ordering. The user's new boundary is
 recorded in [ADR 0011](decisions/0011-neutral-zhinu-authority-extension.md) and the
-canonical [Zhinu delivery plan](../../Penghou.Zhinu/docs/authority-extension-plan.md).
-Read the [Penghou workflow contract plan](../../Penghou/docs/workflow-abstractions-plan.md)
+canonical [Zhinu delivery plan](https://github.com/jenolaszlo-sketch/penghou-zhinu/blob/main/docs/authority-extension-plan.md).
+Read the [Penghou workflow contract plan](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/workflow-abstractions-plan.md)
 and [handoff](zhinu-authority-handoff.md) before resuming staged work.
 Penghou WA-1/2/3 are complete; `Penghou.Workflow.Abstractions` `0.1.0-preview.2`
 is published and its package/consumer qualification is recorded in the
-[qualification record](../../Penghou/docs/workflow-public-package-qualification.json).
+[qualification record](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/workflow-public-package-qualification.json).
 Zhinu ZA-2 exact published-package source adoption, including fresh seven-package
-consumer closure, is complete; see the [adoption evidence](../../Penghou.Zhinu/docs/workflow-package-adoption.md).
+consumer closure, is complete; see the [adoption evidence](https://github.com/jenolaszlo-sketch/penghou-zhinu/blob/main/docs/workflow-package-adoption.md).
 ZA-3A/3B/4 and the unchanged preview.15 compatibility suite are locally
-qualified in `0.2.0-preview.1`; commit/push and user-run ZA-6 publication with
+qualified in `0.2.0-preview.1`; remote CI and user-run ZA-6 publication with
 remote CI are next. Hufu workflow integration
 (HA-1/2/3) follows that publication; its adapter and release remain pending.
-Use the [activity queue](../../Penghou.Zhinu/docs/authority-extension-activities.md)
+Use the [activity queue](https://github.com/jenolaszlo-sketch/penghou-zhinu/blob/main/docs/authority-extension-activities.md)
 for ready/blocked/held work and acceptance. Independent Hufu activities can
 proceed while Zhinu qualification continues.
 
@@ -83,7 +83,7 @@ sequential per database; four-worker full-host availability remains open.
 IO/Luban publication and Hufu public-package adoption are qualified above.
 ## Resource capability integration correction — 2026-10-02
 
-Canonical direction: [resource-abstractions architecture](../../Penghou/docs/resource-abstractions-architecture.md).
+Canonical direction: [resource-abstractions architecture](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/resource-abstractions-architecture.md).
 The existing Hufu.Luban language authorizer and SQLite start adapters do not
 complete a provider-independent resource decorator.
 
@@ -123,9 +123,9 @@ runtime direction. Evidence and observability are foundational. Prioritize store
 and lineage contracts, deterministic explanations, execution requirements, and
 one local filesystem broker. [ADR 0004](decisions/0004-typed-effects-over-sandbox.md)
 selects LOP. [ADR 0005](decisions/0005-luban-owns-typed-effects.md) establishes
-[Penghou.Luban](../../Penghou.Luban/README.md) as the separate effect-runtime
-owner. Its [roadmap](../../Penghou.Luban/ROADMAP.md) and
-[implementation plan](../../Penghou.Luban/docs/implementation-plan.md) own
+[Penghou.Luban](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/README.md) as the separate effect-runtime
+owner. Its [roadmap](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/ROADMAP.md) and
+[implementation plan](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/docs/implementation-plan.md) own
 effect-provider delivery, while Penghou owns shared resource I/O providers.
 Hufu tracks [authority integration](luban-integration.md).
 See the [current authority prototype profile](current-authority-profile.md) for
@@ -148,14 +148,14 @@ The initial license follows Fuwen's reusable-library convention: Apache-2.0. No 
 
 ## M1: contracts and deterministic evaluation
 
-The [revised Luban delivery plan](../../Penghou.Luban/docs/implementation-plan.md)
+The [revised Luban delivery plan](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/docs/implementation-plan.md)
 starts with shared request identity and a real Windows read-only provider, then
 migrates its existing handlers before language/preview/mutation work. Hufu and
 CedarSharp do not block that neutral slice. Hufu contracts/store work can run
 independently; real governed effect/batch admission follows qualified providers
 and Hufu's own authority/Cedar/store gates. Controlled standalone test policies
 are not a substitute for these production integration gates. See the
-[shared provider plan](../../Penghou/docs/implementation-plan.md).
+[shared provider plan](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/implementation-plan.md).
 
 - [ ] Define generic execution subject, immutable authority records, exact admission bindings, and typed decision outcomes.
 - [x] Implement bounded current authority snapshot/request/decision contracts and a fail-closed known-root Luban read-authorizer prototype with required snapshot-source, evaluator, and decision-recorder interfaces. This does not authenticate snapshot construction, persist authority, or serialize Zhinu operation start with revocation.
@@ -286,7 +286,7 @@ BiscuitSharp.
 
 Independent old-revision branch continuation and deployment as a network service remain optional. They must not delay the first complete protected-operation integration.
 
-Luban owns the planned [surface language](../../Penghou.Luban/docs/language-syntax-spec.md),
+Luban owns the planned [surface language](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/docs/language-syntax-spec.md),
 including bounded typed pipelines and closed pure filters. Hufu consumes its
 trusted lowered requirements and does not implement a second parser or executor.
 
@@ -301,10 +301,10 @@ Penghou.Workflow.Abstractions `0.1.0-preview.2` is published. Source commit
 `5a76b7c` passed all seven CI jobs in [run 37115430526](https://github.com/jenolaszlo-sketch/penghou/actions/runs/37115430526);
 all four publication jobs passed in [run 37116694209](https://github.com/jenolaszlo-sketch/penghou/actions/runs/37116694209).
 Exact package contents match CI apart from the repository signature; fresh-cache
-NuGet-only consumers pass on .NET 8/10. See the [release checkpoint](../../Penghou/docs/workflow-package-release-handoff.md)
-and [qualification record](../../Penghou/docs/workflow-public-package-qualification.json).
+NuGet-only consumers pass on .NET 8/10. See the [release checkpoint](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/workflow-package-release-handoff.md)
+and [qualification record](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/workflow-public-package-qualification.json).
 WA-1/2/3 and Zhinu ZA-2 source adoption are complete, including the fresh
-seven-package consumer graph. ZA-3A/3B/4 are locally qualified; commit/push and
+seven-package consumer graph. ZA-3A/3B/4 are locally qualified and pushed; remote CI and
 user-run ZA-6 publication with remote CI are next. Hufu HA-1/2/3 follows that
 publication. Preserve independent HA-0A/B cleanup, keep the older staged Hufu
 snapshot on hold, and retain the frozen legacy-profile decision. Contract package
@@ -312,15 +312,14 @@ evidence does not replace the Zhinu runtime qualification or authorize effects.
 
 ## Current next activities
 
-Commit/push and user-publish Zhinu candidate `0.2.0-preview.1` through **ZA-6**
-with remote CI; Hufu **HA-1/2/3** follows publication.
+Verify remote CI, then user-publish Zhinu candidate `0.2.0-preview.1` through **ZA-6**; Hufu **HA-1/2/3** follows publication.
 ZA-2 exact published-package source adoption and fresh seven-package consumer
 closure are complete, and ZA-3A/3B/4 plus the unchanged preview.15 compatibility
 suite are locally qualified. Preserve independent **HA-0A/B** cleanup and the frozen
 legacy-profile decision; keep the older staged Hufu snapshot on hold. Luban
 **LW-1** is optional neutral-host integration, and its language core stays
 independent of workflow authorization.
-See the [activity queue](../../Penghou.Zhinu/docs/authority-extension-activities.md).
+See the [activity queue](https://github.com/jenolaszlo-sketch/penghou-zhinu/blob/main/docs/authority-extension-activities.md).
 
 ## Historical host gate - separate qualification stream
 

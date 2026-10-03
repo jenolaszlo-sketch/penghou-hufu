@@ -1,14 +1,15 @@
 # Hufu architecture and ownership
 
 Current integration direction (2026-10-03): [ADR 0011](decisions/0011-neutral-zhinu-authority-extension.md)
-and the [neutral authority-extension plan](../../Penghou.Zhinu/docs/authority-extension-plan.md)
+and the [neutral authority-extension plan](https://github.com/jenolaszlo-sketch/penghou-zhinu/blob/main/docs/authority-extension-plan.md)
 supersede earlier coupling and delivery order below. The
-[Penghou-owned workflow contracts](../../Penghou/docs/workflow-abstractions-plan.md)
+[Penghou-owned workflow contracts](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/workflow-abstractions-plan.md)
 live in Penghou.Workflow.Abstractions. Zhinu implements execution and Hufu implements authorization in an optional
 adapter depending only on that contract package and Hufu core. Concrete SQLite
 start coordination remains a separately qualified legacy integration until ZA-5
 resolves its disposition. Resource enforcement and Hufu policy stay independent
-of workflow execution. The new seam is planned, not implemented.
+of workflow execution. Zhinu's runtime seam is implemented and locally qualified;
+the Hufu translation adapter remains planned until the Zhinu release is published.
 
 [Authority-Mediated Language Execution (AMLE)](authority-mediated-language-execution.md)
 names this shared architectural direction: Luban expresses and executes bounded
@@ -53,15 +54,15 @@ versioned execution requirements, capability brokers, and foundational evidence
 and observability. SQLite remains the initial optional authority store.
 
 [ADR 0005](decisions/0005-luban-owns-typed-effects.md) establishes
-[Penghou.Luban](../../Penghou.Luban/README.md) as the independent owner of
-[typed effects](../../Penghou.Luban/docs/typed-effect-runtime.md), refining
+[Penghou.Luban](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/README.md) as the independent owner of
+[typed effects](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/docs/typed-effect-runtime.md), refining
 ADR 0004's temporary ownership. Requests/results stay independent of Hufu and
 workflow engines. Luban owns effect providers and their plan; Hufu retains
 [authority integration](luban-integration.md). Penghou.Hufu.Luban depends on both
 for the known-root read profile without either core referencing the other. Consumers use explicit operations,
 and a governed host selects qualified providers. No raw process escape hatch.
 
-Luban also owns a bounded [surface language](../../Penghou.Luban/docs/language-syntax-spec.md)
+Luban also owns a bounded [surface language](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/docs/language-syntax-spec.md)
 and compiler for finite typed dataflow and closed pure filters. Hufu's adapter
 consumes trusted lowered effects and requirements with exact semantic IR,
 catalogue/schema/provider versions, bounds, payload hashes, and workspace
@@ -84,8 +85,8 @@ Hufu's known-root read-authorizer is a prototype; governed whole-plan and
 production resource-boundary adapters remain pending.
 
 [ADR 0007](decisions/0007-preview-resolution-commit-barrier.md) selects
-[Luban preview resolution](../../Penghou.Luban/docs/preview-resolution-commit-barrier.md)
-and [resource-provider barrier requirements](../../Penghou/docs/preview-commit-contract.md).
+[Luban preview resolution](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/docs/preview-resolution-commit-barrier.md)
+and [resource-provider barrier requirements](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/preview-commit-contract.md).
 Luban now implements Local-only capture: freeze explicit-authorized-view glob
 targets, admit every selected target before content reads, and capture immutable
 TextPatch payloads with protected observation identity. All-match, truncation,
@@ -101,7 +102,7 @@ namespace. Batch admission and recovery inspection are supplied by the host; no
 durable store or Hufu adapter is included. The host must protect the root, drive,
 mount, and directory namespace from untrusted actors; this is not general
 filesystem confinement. Hufu whole-plan admission, governed execution, and
-durable recovery remain pending. See Luban's [batch execution profile](../../Penghou.Luban/docs/batch-execution-profile.md).
+durable recovery remain pending. See Luban's [batch execution profile](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/docs/batch-execution-profile.md).
 This capture performs real authorized reads and differs from effect-free
 counterfactual policy simulation. Batch execution is sequential and non-atomic;
 post-start failures may leave partial outcomes and do not imply a transaction.

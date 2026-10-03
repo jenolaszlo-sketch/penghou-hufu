@@ -1,12 +1,12 @@
 # Penghou.Hufu
 
-Current integration plan: [product-neutral workflow contracts](../Penghou/docs/workflow-abstractions-plan.md)
-and [runtime integration](../Penghou.Zhinu/docs/authority-extension-plan.md).
+Current integration plan: [product-neutral workflow contracts](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/workflow-abstractions-plan.md)
+and [runtime integration](https://github.com/jenolaszlo-sketch/penghou-zhinu/blob/main/docs/authority-extension-plan.md).
 Hufu remains independently usable. Penghou owns Penghou.Workflow.Abstractions;
 Zhinu is one runtime and optional Penghou.Hufu.Workflow implements authorization
-without a workflow-engine dependency. Publish the contracts first, complete
-Zhinu implementation, then Hufu workflow integration. This is planned
-work; [ADR 0011](docs/decisions/0011-neutral-zhinu-authority-extension.md) and the
+without a workflow-engine dependency. The contracts are published and Zhinu
+runtime implementation is locally qualified and pushed. Hufu workflow
+integration follows the published Zhinu release; [ADR 0011](docs/decisions/0011-neutral-zhinu-authority-extension.md) and the
 [handoff](docs/zhinu-authority-handoff.md) distinguish current code from that target.
 
 Penghou.Hufu is the proposed reusable authority library and authority-store
@@ -32,7 +32,7 @@ See [package adoption](docs/resource-package-adoption.md) and the
 
 ## Authority-Mediated Language Execution
 
-Hufu and [Luban](../Penghou.Luban/README.md) express the proposed
+Hufu and [Luban](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/README.md) express the proposed
 **Authority-Mediated Language Execution (AMLE)** pattern: an agent requests effects
 through a constrained semantic language, and each protected effect is checked
 against contextual authority before a trusted resource adapter performs it.
@@ -41,7 +41,7 @@ Penghou.IO supplies resource abstractions and providers. Hufu is optional in
 Luban, but host-supplied authorization is required.
 
 Read the [AMLE guide](docs/authority-mediated-language-execution.md) and
-[Luban's complementary guide](../Penghou.Luban/docs/authority-mediated-language-execution.md)
+[Luban's complementary guide](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/docs/authority-mediated-language-execution.md)
 for the shared pattern, evidence and future simulation direction. Current WhatIf
 is capture-only; complete governed mutation integration remains pending. AMLE
 does not replace OS isolation for opaque native execution.
@@ -63,7 +63,7 @@ The design is recorded in:
 - [Decision: LOP typed effects; no sandbox implementation](docs/decisions/0004-typed-effects-over-sandbox.md)
 - [Penghou.Luban integration](docs/luban-integration.md)
 - [Decision: Luban owns typed effects](docs/decisions/0005-luban-owns-typed-effects.md)
-- [Luban's canonical effect design](../Penghou.Luban/docs/typed-effect-runtime.md)
+- [Luban's canonical effect design](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/docs/typed-effect-runtime.md)
 - [Original proposal](docs/archive/original-proposal.md)
 
 The proposed scope includes requirements, grants, envelopes, approval requests

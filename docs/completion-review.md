@@ -2,8 +2,8 @@
 
 Current review: 2026-10-03, reconciled with the neutral Zhinu authority plan.
 Use [ADR 0011](decisions/0011-neutral-zhinu-authority-extension.md), the
-[canonical plan](../../Penghou.Zhinu/docs/authority-extension-plan.md),
-[current activities](../../Penghou.Zhinu/docs/authority-extension-activities.md)
+[canonical plan](https://github.com/jenolaszlo-sketch/penghou-zhinu/blob/main/docs/authority-extension-plan.md),
+[current activities](https://github.com/jenolaszlo-sketch/penghou-zhinu/blob/main/docs/authority-extension-activities.md)
 and [handoff](zhinu-authority-handoff.md). This current work list replaces the
 earlier repository/host-first priority table; historical qualification records
 remain evidence for their actual versions.
@@ -28,11 +28,11 @@ remain evidence for their actual versions.
   all four publication jobs passed in [run 37116694209](https://github.com/jenolaszlo-sketch/penghou/actions/runs/37116694209).
   Exact public package contents match CI apart from the repository signature,
   and fresh-cache NuGet-only consumers pass on .NET 8/10. See the [package
-  qualification record](../../Penghou/docs/workflow-public-package-qualification.json).
+  qualification record](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/workflow-public-package-qualification.json).
   Zhinu ZA-3A/3B/4 are locally qualified in candidate `0.2.0-preview.1`;
   the 1,017 runtime tests and isolated seven-package consumer passed on both
   supported TFMs, and the unchanged preview.15 compatibility suite passed on
-  .NET 8/10. Zhinu commit/push and NuGet publication with remote CI remain
+  .NET 8/10. Zhinu remote CI and NuGet publication with remote CI remain
   pending. Hufu.Workflow adapter implementation and Hufu publication/CI
   qualification have not occurred. Keep the older Hufu
   staging snapshot on hold; preserve HA-0A/B cleanup and the frozen legacy-profile
@@ -44,18 +44,17 @@ remain evidence for their actual versions.
 | --- | --- |
 | HA-0A | Ready independently: reconcile generic staged changes and review the bounded initial package set, API inventories and CI tooling. Hufu core progress does not wait for Penghou.Workflow.Abstractions publication |
 | HA-0B | Ready independently: separate existing Zhinu operation-start/process-worker tests, preserve their regressions, and qualify core test/build/package graphs without Zhinu |
-| ZA-1A/B/C/D contribution | Implemented and locally qualified in Zhinu candidate `0.2.0-preview.1`; see the current qualification record. Commit/push and ZA-6 publication with remote CI are pending |
+| ZA-1A/B/C/D contribution | Implemented and locally qualified in Zhinu candidate `0.2.0-preview.1`; see the current qualification record. Remote CI and ZA-6 publication with remote CI are pending |
 | ZA-5A/B | Preserve the frozen legacy SQLite profile decision; any ZA-5B replacement/retirement requires explicit evidence preserving required final-start guarantees |
 | HA-1 | After the completed Zhinu phase ZA-6: build the optional translation adapter with only Hufu + Penghou.Workflow.Abstractions dependencies, including trusted approval mapping |
 | HA-2 | After runtime and adapter candidates: qualify translation, denied starts, revoked retries, approval resume, compensation, fencing, evidence and process/replay recovery in the separate integration suite |
 | HA-3 | After the completed Zhinu phase ZA-6 and HA-2 integration: consume exact published abstraction packages, inspect transitive graphs, qualify fresh-cache consumers/CI and the reviewed release set. The user performs Hufu publication |
 
-The [Penghou workflow contract plan](../../Penghou/docs/workflow-abstractions-plan.md)
+The [Penghou workflow contract plan](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/workflow-abstractions-plan.md)
 records completed WA-1/2/3 delivery. Zhinu ZA-2 source adoption, including the
-fresh seven-package consumer graph, is complete; see the [adoption evidence](../../Penghou.Zhinu/docs/workflow-package-adoption.md).
+fresh seven-package consumer graph, is complete; see the [adoption evidence](https://github.com/jenolaszlo-sketch/penghou-zhinu/blob/main/docs/workflow-package-adoption.md).
 ZA-3A/3B/4 and the unchanged preview.15 compatibility suite are locally
-qualified. Commit/push and user-publish Zhinu `0.2.0-preview.1` through ZA-6
-with remote CI. Hufu
+qualified. Verify remote CI, then user-publish Zhinu `0.2.0-preview.1` through ZA-6. Hufu
 HA-1/2/3 follows that publication; the adapter and Hufu release remain pending.
 The activity queue carries
 precise dependencies and deliverables. Candidate development and public adoption
