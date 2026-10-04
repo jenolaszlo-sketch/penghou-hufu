@@ -479,3 +479,34 @@ Sequential Hufu lookup followed by standalone Zhinu acquisition is still not
 an atomic substitute. This stream is not the neutral adapter's immediate queue.
 
 Current exact-package and isolated consumer evidence is recorded in [resource package adoption](resource-package-adoption.md). Public-feed qualification is complete for IO/Luban and the initial Hufu preview.1 release; subsequent versions need fresh qualification.
+
+## Governable model and HTTP follow-up — 2026-10-04
+
+Canonical dependency queue: [Baize governable transport roadmap](../../Penghou.Baize/docs/governable-model-http-plan.md).
+GM-0/1/1P contract delivery and GM-2/3/4/5 Baize coverage precede this optional
+integration; Baize remains independent and never references Hufu. Current
+filesystem action support does not imply model or arbitrary HTTP authorization.
+
+- [ ] **HM-1:** optional neutral model/HTTP decorators, named by the generic
+  capability when possible (`Penghou.Hufu.Model` / `Penghou.Hufu.Http`). Define
+  supported provider/model/operation/endpoint and data-release profiles, bind
+  authenticated context, preserve required evidence and re-check each actual
+  invocation/retry/open. Policy denial stops fallback by default. Allow an
+  approved model with arbitrary HTTP denied; trusted provider dispatch must not
+  be enabled by a caller-controlled flag or URL.
+- [ ] **HM-2:** reference the host's existing atomic budget reservations and
+  settlement, including concurrency, cancellation, partial/unknown usage and
+  ambiguous paid outcomes; do not create a second accounting ledger.
+- [ ] **HM-3:** host-selected credential broker resolves opaque profiles only
+  after authorization; test denial causes zero credential resolution/provider I/O.
+- [ ] **HM-4:** optional advisory candidate filtering, followed by a fresh final
+  check. Correlation metadata never establishes identity or permission.
+- [ ] **HM-5:** compose a separately qualified external isolation provider with
+  a trusted broker where needed; prove agent credential/network bypass closure.
+  An in-process decorator alone does not contain arbitrary code.
+
+Initial revocation blocks new calls and stream opens. Active stream cancellation,
+remote-job termination and stronger drain guarantees remain separate profiles.
+Hufu does not own provider protocols, a credential vault, billing ledger or OS
+sandbox. The sandbox-parent experiment was already completed externally and is
+not reopened by these milestones.
