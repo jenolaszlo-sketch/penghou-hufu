@@ -33,6 +33,11 @@ captures one real evaluation. Fresh standalone consumers exercise both APIs and
 redacted summary disclosure on both frameworks. CI also runs the explanation
 security and Cedar capture tests on Linux, alongside the Windows full suite.
 
+Core also includes [optional bounded telemetry](optional-telemetry.md). Fresh
+package consumers exercise actual closed-category metric emission and preserve
+fail-closed authorization after telemetry shutdown. Linux CI includes portable
+telemetry tests; Windows retains full regression. No SDK/exporter package is added.
+
 CI never publishes. The input-free **Publish to NuGet** workflow requires `main`,
 repeats release checks for the selected commit, and publishes those same verified
 artifacts. NuGet identity setup is repository-specific; the user's configured

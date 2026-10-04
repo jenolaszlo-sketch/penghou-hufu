@@ -3,193 +3,217 @@
   "date": "2026-10-04",
   "status": "locally-qualified-awaiting-remote-ci-and-user-publication",
   "candidateVersion": "0.1.0-preview.1",
-  "baseline": "aa12ab5 plus installed uncommitted neutral-workflow and core-hardening phases",
-  "priorWorkflowEvidence": "workflow-authorization.json",
-  "priorCoreEvidence": "core-hardening.json",
+  "baseline": "42a045b",
+  "priorExplanationEvidence": "decision-explanations.json",
   "profiles": {
     "CORE-ADMISSION": "implemented-and-locally-qualified",
     "CORE-ISSUANCE": "implemented-and-locally-qualified",
     "CORE-EXPLANATIONS": "bounded-typed-path-slice-implemented-and-locally-qualified",
-    "CORE-TELEMETRY": "next-independent-work"
+    "CORE-TELEMETRY": "bounded-request-preflight-slice-implemented-and-locally-qualified"
   },
   "sourceRegression": {
-    "total": 764,
-    "passed": 764,
+    "total": 816,
+    "passed": 816,
     "failed": 0,
     "skipped": 0,
-    "perFramework": 382,
+    "perFramework": 408,
     "reports": [
       {
-        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_34_33_net8.0.trx",
-        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-explanations\\results\\full-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_34_33_net8.0.trx",
-        "sha256": "63775e702ffec5bd9af4cb2b55dd0fcfd1ac317ae1c9de0c8cfd439aca068ce3",
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_02_57_net8.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\results\\final-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_02_57_net8.0.trx",
+        "sha256": "deb3cbe37e29d36e07940946a7b967d8cbf75ca7ba2fe669337d9e6bdbae0f1d",
         "targetFramework": "net8.0",
         "total": 93,
         "passed": 93,
         "failed": 0,
         "skipped": 0,
-        "explanationClasses": {}
+        "telemetryClasses": {}
       },
       {
-        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_34_46_net10.0.trx",
-        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-explanations\\results\\full-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_34_46_net10.0.trx",
-        "sha256": "7d01dab974183582e337db5294d762096d478a91ddc5b145371e47d0c6058b31",
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_05_net10.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\results\\final-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_05_net10.0.trx",
+        "sha256": "ee5b56deccb27b37fdc3bcc88ff51995bfaa216b64ba6b178f527f3efcd04ef0",
         "targetFramework": "net10.0",
         "total": 93,
         "passed": 93,
         "failed": 0,
         "skipped": 0,
-        "explanationClasses": {}
+        "telemetryClasses": {}
       },
       {
-        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_00_net8.0.trx",
-        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-explanations\\results\\full-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_00_net8.0.trx",
-        "sha256": "e56f3cdd978c4e53a9c36c375ab04302425ca0d3cb2952dc20fd749e2a7bbfdd",
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_14_net8.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\results\\final-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_14_net8.0.trx",
+        "sha256": "ca349e576728ef0f4916a9baa0f2d6dcbba4cf9529b150935c08ab52db4b3b20",
         "targetFramework": "net8.0",
         "total": 19,
         "passed": 19,
         "failed": 0,
         "skipped": 0,
-        "explanationClasses": {}
+        "telemetryClasses": {}
       },
       {
-        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_03_net10.0.trx",
-        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-explanations\\results\\full-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_03_net10.0.trx",
-        "sha256": "4e751dc8ae285bd8a34801cfa25561ea1f7ce593f4ff6b7b238a78b2dde36fc3",
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_15_net10.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\results\\final-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_15_net10.0.trx",
+        "sha256": "a2aa5623776d95eb4e4e36c0a5f5b10389304952078c1ef02993a9e57bb98653",
         "targetFramework": "net10.0",
         "total": 19,
         "passed": 19,
         "failed": 0,
         "skipped": 0,
-        "explanationClasses": {}
+        "telemetryClasses": {}
       },
       {
-        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_09_net8.0.trx",
-        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-explanations\\results\\full-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_09_net8.0.trx",
-        "sha256": "a9bd4d961a9ff46ea8b87e989ebe5d814f5208e9621c7e51d6c8e34eebcf6c01",
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_17_net8.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\results\\final-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_17_net8.0.trx",
+        "sha256": "a81b7649b031c9e90f4df1db057847b89364223eff8319fd482605e26b26761c",
         "targetFramework": "net8.0",
         "total": 22,
         "passed": 22,
         "failed": 0,
         "skipped": 0,
-        "explanationClasses": {}
+        "telemetryClasses": {}
       },
       {
-        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_18_net10.0.trx",
-        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-explanations\\results\\full-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_18_net10.0.trx",
-        "sha256": "810cdc5139f930b341380017015512dd7a20e0d71815262685995560705877c9",
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_21_net10.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\results\\final-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_21_net10.0.trx",
+        "sha256": "df86ac0c29b99d9c37e1ef41a7b7e2bfd83e51f589d43e0cba8560a40daa7501",
         "targetFramework": "net10.0",
         "total": 22,
         "passed": 22,
         "failed": 0,
         "skipped": 0,
-        "explanationClasses": {}
+        "telemetryClasses": {}
       },
       {
-        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_23_net8.0.trx",
-        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-explanations\\results\\full-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_23_net8.0.trx",
-        "sha256": "c9d289f90404c9485bd00c10538048ed3f205acdaa5fd0cabe1fc059545f27e1",
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_24_net8.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\results\\final-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_24_net8.0.trx",
+        "sha256": "23f5c41a62203d80f1a90a726eee98011cb6aed6a67d476f5375c0fb0ca09e1a",
         "targetFramework": "net8.0",
-        "total": 184,
-        "passed": 184,
+        "total": 210,
+        "passed": 210,
         "failed": 0,
         "skipped": 0,
-        "explanationClasses": {
-          "AuthorityExplanationReaderTests": 21,
-          "AuthorityExplanationCedarTests": 11
+        "telemetryClasses": {
+          "AuthorityTelemetryTests": 26
         }
       },
       {
-        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_25_net10.0.trx",
-        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-explanations\\results\\full-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_25_net10.0.trx",
-        "sha256": "fa0d452cc88798159d821ba63827db27a714bbd63a062353558e45c92a251dea",
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_26_net10.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\results\\final-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_26_net10.0.trx",
+        "sha256": "f636acbfbeb841cec3bdb8d2189dc3e2f31dde4680b11be3af2786c835e21841",
         "targetFramework": "net10.0",
-        "total": 184,
-        "passed": 184,
+        "total": 210,
+        "passed": 210,
         "failed": 0,
         "skipped": 0,
-        "explanationClasses": {
-          "AuthorityExplanationReaderTests": 21,
-          "AuthorityExplanationCedarTests": 11
+        "telemetryClasses": {
+          "AuthorityTelemetryTests": 26
         }
       },
       {
-        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_32_net8.0.trx",
-        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-explanations\\results\\full-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_32_net8.0.trx",
-        "sha256": "bf77d87445fab9c1567447942d5c92d76f79e6833abdd53499caae9abaa087eb",
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_30_net8.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\results\\final-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_30_net8.0.trx",
+        "sha256": "ea06a7536ddbf9fe6f51933520eeb8ae3cef8d2782c0a029d79387308ae59cc4",
         "targetFramework": "net8.0",
         "total": 12,
         "passed": 12,
         "failed": 0,
         "skipped": 0,
-        "explanationClasses": {}
+        "telemetryClasses": {}
       },
       {
-        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_37_net10.0.trx",
-        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-explanations\\results\\full-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_37_net10.0.trx",
-        "sha256": "2267987c2b5529c024c1cfecb1d6537075a6d586c7c50ad4ea85c1edd2f89a20",
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_32_net10.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\results\\final-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_32_net10.0.trx",
+        "sha256": "e82ce2741959bb835dbc5be0a32f91da44d4bef732be2dbe9272488fafdff545",
         "targetFramework": "net10.0",
         "total": 12,
         "passed": 12,
         "failed": 0,
         "skipped": 0,
-        "explanationClasses": {}
+        "telemetryClasses": {}
       },
       {
-        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_42_net8.0.trx",
-        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-explanations\\results\\full-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_42_net8.0.trx",
-        "sha256": "94e2914ab7830d82ffb2a231dd706e0af0f8a1f3e4d93171fff709cd13c05050",
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_34_net8.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\results\\final-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_34_net8.0.trx",
+        "sha256": "b9c854a172867178f6316160be4ebfdf696aca6861978e6cf227b3d6409f8c92",
         "targetFramework": "net8.0",
         "total": 52,
         "passed": 52,
         "failed": 0,
         "skipped": 0,
-        "explanationClasses": {}
+        "telemetryClasses": {}
       },
       {
-        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_44_net10.0.trx",
-        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-explanations\\results\\full-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_35_44_net10.0.trx",
-        "sha256": "a939d4144bf3a9fbd383bba300115e319d52453a898d6caa4640c5887fd3b75b",
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_35_net10.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\results\\final-regression\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_03_35_net10.0.trx",
+        "sha256": "0297b3e2a4e6d37177431c4e98b887bc054a7e1a1f5909e41f2138c0ff356b48",
         "targetFramework": "net10.0",
         "total": 52,
         "passed": 52,
         "failed": 0,
         "skipped": 0,
-        "explanationClasses": {}
+        "telemetryClasses": {}
       }
     ]
   },
-  "newExplanationCases": {
-    "total": 64,
-    "perFramework": 32,
+  "newTelemetryCases": {
+    "total": 52,
+    "perFramework": 26,
     "reports": [
       {
-        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_32_37_net10.0.trx",
-        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-explanations\\results\\explanations-final\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_32_37_net10.0.trx",
-        "sha256": "feab9bd62d536209e9bfe8ed2f8c527fab70320c3b3c56fbd9e71447d89486c4",
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_02_53_net10.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\results\\telemetry-final-reviewed\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_02_53_net10.0.trx",
+        "sha256": "3195132391ac174434252bc3c82e58952a334b549a6406a6ceac2cac88bb1853",
         "targetFramework": "net10.0",
-        "total": 32,
-        "passed": 32,
+        "total": 26,
+        "passed": 26,
         "failed": 0,
         "skipped": 0,
-        "explanationClasses": {
-          "AuthorityExplanationCedarTests": 11,
-          "AuthorityExplanationReaderTests": 21
+        "telemetryClasses": {
+          "AuthorityTelemetryTests": 26
         }
       },
       {
-        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_32_37_net8.0.trx",
-        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-explanations\\results\\explanations-final\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_32_37_net8.0.trx",
-        "sha256": "7288114ebb20e7f5e389a07de477b40cbba0da1767d99b115cadf108631f9549",
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_02_53_net8.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\results\\telemetry-final-reviewed\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_02_53_net8.0.trx",
+        "sha256": "3ec4a9ea31300897d1acdc18423afb50270e0019fdcd8a6dc8af453a692cda1d",
         "targetFramework": "net8.0",
-        "total": 32,
-        "passed": 32,
+        "total": 26,
+        "passed": 26,
         "failed": 0,
         "skipped": 0,
-        "explanationClasses": {
-          "AuthorityExplanationReaderTests": 21,
-          "AuthorityExplanationCedarTests": 11
+        "telemetryClasses": {
+          "AuthorityTelemetryTests": 26
         }
+      }
+    ]
+  },
+  "sourceCompositionRecheck": {
+    "total": 24,
+    "perFramework": 12,
+    "restoredDefaultProjectReferences": true,
+    "reports": [
+      {
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_04_25_net10.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\results\\source-integration-reviewed\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_04_25_net10.0.trx",
+        "sha256": "d0349343f5e05f29873fe024baa08ade1037f0035d71ee8ec8a7c0693fd483e3",
+        "targetFramework": "net10.0",
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "telemetryClasses": {}
+      },
+      {
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_04_25_net8.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\results\\source-integration-reviewed\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_04_25_net8.0.trx",
+        "sha256": "fd431005c2fabdf29836299a891f918203ec6ea29c212d40526575239e57e4ca",
+        "targetFramework": "net8.0",
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0,
+        "telemetryClasses": {}
       }
     ]
   },
@@ -198,26 +222,26 @@
     "perFramework": 12,
     "reports": [
       {
-        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_37_23_net10.0.trx",
-        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-explanations\\repo\\qualification\\integration-9bb0fd25d71f446b8c0557adf29c4002\\tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_37_23_net10.0.trx",
-        "sha256": "ea2ba96f9aa1d533f7386185ef3d124093510780c97d34db37722bae4a50b899",
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_02_49_net10.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\repo\\qualification\\integration-bdf698899a5c4a8da8dd7f52020db844\\tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_02_49_net10.0.trx",
+        "sha256": "f0c3e1ab3a6376d76c813072d0732f90d180567c23edfd755d10f3a5e328b81a",
         "targetFramework": "net10.0",
         "total": 12,
         "passed": 12,
         "failed": 0,
         "skipped": 0,
-        "explanationClasses": {}
+        "telemetryClasses": {}
       },
       {
-        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_37_23_net8.0.trx",
-        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-explanations\\repo\\qualification\\integration-9bb0fd25d71f446b8c0557adf29c4002\\tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_37_23_net8.0.trx",
-        "sha256": "5beeaedec69a698ee7226abe9401913a9238c074642df8c3857b65b4349e743f",
+        "report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_02_49_net8.0.trx",
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-telemetry\\repo\\qualification\\integration-bdf698899a5c4a8da8dd7f52020db844\\tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_02_49_net8.0.trx",
+        "sha256": "4782dfb45f039448076a83e93e941c07c7d51eed137b1dd4e1e9592155b69726",
         "targetFramework": "net8.0",
         "total": 12,
         "passed": 12,
         "failed": 0,
         "skipped": 0,
-        "explanationClasses": {}
+        "telemetryClasses": {}
       }
     ]
   },
@@ -225,87 +249,102 @@
     {
       "Id": "Penghou.Hufu",
       "Version": "0.1.0-preview.1",
-      "Sha256": "BEA38046CD01668552DDEF7EB705BE5439C2B29B17ADE7DD3180FD896BAE456A",
-      "SymbolSha256": "1D4DCE7449E0E7167ADEA90E4C48508CDE485DADD97D708977E58CD689661CE5"
+      "Sha256": "D1E82BC99AE68EABF8FF81C2C4EC0AF7FCEC0BA4668EB4F2E258B323A025E421",
+      "SymbolSha256": "DB11FD865E35B0F1336AF2459DF49CD7E5BBB50A4750F12990FA0E99E442D546"
     },
     {
       "Id": "Penghou.Hufu.Cedar",
       "Version": "0.1.0-preview.1",
-      "Sha256": "9E9900DF376F149C17F9D4399073A6B47984C0BB6D00CE7903F856EF849F66C7",
-      "SymbolSha256": "FA29D4CF3D887933FC627B9D900E3DB61B2C47605DDBC97E1631498D26EF1F51"
+      "Sha256": "81B7953B4ED2853D27F4A27A8F38ED897A02A27B25B9238ED8A4F96F7F7CCF19",
+      "SymbolSha256": "654F6836BACC70358D8F7CF2519C8DEB0C407368577CA0448FD6198F6188E7E5"
     },
     {
       "Id": "Penghou.Hufu.IO",
       "Version": "0.1.0-preview.1",
-      "Sha256": "D7576BDF9C5467E30933BED71E25C226AE8740AE8F179132CE2D05B0924D15C4",
-      "SymbolSha256": "1FCDF238728F0F7271ACE00C7C6363E1191E1E6D6D128DC75A01134CBFB74667"
+      "Sha256": "E23FBA506819AD5D3248049AAF199A8C4DD09095B4E4EBFBE1BED58C764A7C0E",
+      "SymbolSha256": "8EDDB45D7073B528054B495A92414596E72F3693E8CFE36EBBF058E5B5E60FE2"
     },
     {
       "Id": "Penghou.Hufu.Luban",
       "Version": "0.1.0-preview.1",
-      "Sha256": "C35373C57431A0E97EEB6142834D8F0E142A7F41E684BFF96BE41B373E3BDC5A",
-      "SymbolSha256": "F6F737B28C69640AE0AFF44DEE059A35BB00BEE434505CE9D7A1B12E64916800"
+      "Sha256": "477C1F50DAC22888BF091ED871D70ADABCE6AF7B0CF2D95F2A93D9E82AC839F3",
+      "SymbolSha256": "8AA3F89C737FD4A4E1F5D6F41B0C74C0AF1F13FB7C0668BACAA6599DD527AE82"
     },
     {
       "Id": "Penghou.Hufu.Sqlite",
       "Version": "0.1.0-preview.1",
-      "Sha256": "5436FE3B117DFE924D43F4E9C4ADFA3C2B8F73800DB217EFA7A598DE109D6B4C",
-      "SymbolSha256": "776A4E0D447A3A87931A6E1F2D236D224C07C8E3C0140147654AB7CCC46E4993"
+      "Sha256": "B7F02D139C524513306B4E5C15737EFDB2CF99178E18615AF405E483280F0DD8",
+      "SymbolSha256": "A3F4AB9B49507EAF6C96476BB571E95C572685D913FCD60BEEACDCF7A9126B1B"
     },
     {
       "Id": "Penghou.Hufu.Workflow",
       "Version": "0.1.0-preview.1",
-      "Sha256": "46E1536C2FF9240D0228F286BC536D49D42BEB74352AC15E90C539E2F2505DA3",
-      "SymbolSha256": "E3B254DC6AA3629217EC36026F711A7EFE08B19DEAEAEE07C6C0FB3B2514BADF"
+      "Sha256": "B9B28178CD0CC2942B273BAAF80164F18699AFB3EF77A2592FAD8370AF153509",
+      "SymbolSha256": "4D5C7013FF402E10A47CD9AC634E2206C98A74F746B6F553EB92D65B4484FEEB"
     }
   ],
   "evidence": {
-    "packageInspection": "decision-explanations-package-inspection.json",
-    "standaloneConsumers": "decision-explanations-package-consumers.json",
-    "packageOnlyIntegration": "decision-explanations-packaged-workflow-integration.json",
-    "independentGraphs": "decision-explanations-independent-graph.json",
+    "packageInspection": "package-inspection.json",
+    "standaloneConsumers": "package-consumers.json",
+    "packageOnlyIntegration": "packaged-workflow-integration.json",
+    "independentGraphs": "independent-graph.json",
     "publishedRuntime": "zhinu-public-release.json"
   },
   "evidenceHashes": {
-    "decision-explanations-package-inspection.json": "15542dcb58771683a1893881079482a457b413065174c2f3378f324c77cd0b1d",
-    "decision-explanations-package-consumers.json": "f5389d5c3f78ac9dcede53c86e6ce3db0899dcd94afd3cd2c52ca63887004bff",
-    "decision-explanations-packaged-workflow-integration.json": "eb092edce846216956942bcb6b0bbbc2ba77e1f96bab84aa4d73557e11b2d1c1",
-    "decision-explanations-independent-graph.json": "b01cc6f519ff6c2e45a4a31b6f6fd32c0c6698bf536c53a86f8dbacd81a6866b"
+    "package-inspection.json": "85df85dcba94c445e68401c8e497ed41f3f66fb1f8b61cd840bcd6c9fa5dd1d1",
+    "package-consumers.json": "e2da8a15f183bd3173c047564dc61e4d845ff61fbbb00f44c640be8cf70aaedb",
+    "packaged-workflow-integration.json": "29e39263f38c673e3f6da7b407cad044213e488de2d06078140c8bee520e0593",
+    "independent-graph.json": "b01cc6f519ff6c2e45a4a31b6f6fd32c0c6698bf536c53a86f8dbacd81a6866b"
   },
   "workflowValidation": {
     "yamlParsed": true,
     "duplicateKeysChecked": true,
     "portableCoreTestsOnLinux": true,
-    "explanationSecurityAndCedarTestsOnLinux": true,
+    "telemetryIsolationTestsOnLinux": true,
     "bothOsRequiredBeforePublication": true,
     "allPowerShellScriptsParsed": true,
     "remoteCiExecuted": false
   },
+  "telemetryProfile": {
+    "source": "Penghou.Hufu",
+    "version": "1.0.0",
+    "maxQueuedMeasurements": 4096,
+    "defaultQueuedMeasurements": 256,
+    "workersPerOwner": 1,
+    "actionCategories": 7,
+    "outcomeCategories": 6,
+    "metricLabelCombinations": 42,
+    "durationSecondsMaximum": 86400,
+    "optionalBclOnly": true,
+    "requestPayloadRetained": false,
+    "ambientCorrelationRetained": false,
+    "mandatoryEvidenceSubstitute": false
+  },
   "limitations": [
     "Local checks ran on Windows; Linux awaits remote CI.",
-    "Six initial Hufu candidates remain unpublished; commit/push and user-run main publication are pending.",
-    "Capture construction is data, not provenance or authority; the host authenticates source snapshots, actual evaluator captures, viewer credentials and record custody.",
-    "Grant facts describe typed snapshot predicates, not Cedar determining-policy identities or causal grant attribution.",
-    "Summary contains only decision outcome and null details; Detailed explicitly authorizes all bounded typed facts, including canonical paths and identifiers.",
-    "The profile covers one supplied exact snapshot/evaluation instant; missing layer outcomes remain explicit partial coverage.",
-    "No full lineage, missing execution requirements, retained historical reconstruction, sufficient-authority proposals, comparison or simulation is implemented.",
-    "The projection is informational, not a current authority permit, evidence receipt or execution/start authorization. Required-recording and later resource/runtime checks can still block execution.",
-    "One MiB default System.Text.Json UTF-8 projection limit and finite asynchronous read-policy budget are enforced; underlying cancellation-ignoring or synchronous blocking work remains host-owned.",
-    "No production host or atomic revocation/release guarantee is added; downstream AI data release is separately governed.",
+    "The earlier 764-case checkpoint is committed as Hufu42a045b/Penghou77bac95/Zhinu a1df6e9. Telemetry source/docs remain local; no push or publication is performed.",
+    "All six initial Hufu candidate packages remain unpublished; remote CI and user-controlled main publication remain gates.",
+    "This instruments completed request-preflight observations only; broker effects, approval waits, measurable revocation propagation, authorized evidence correlation and outcome reconciliation remain separate gates.",
+    "Closed action/outcome/timing data is lossy operational telemetry, not provenance, audit totals, authority or mandatory evidence receipts.",
+    "One host-owned worker and finite queue isolate synchronous listener delays; permanently blocked listeners cannot be terminated and host-wide/process capacity remains host-owned.",
+    "Dispose is nonblocking and stops acceptance/discards pending data; already executing emissions may complete afterwards and no flush/drain guarantee is supplied.",
+    "The decorator invokes exactly once with the original request/token and returns/rethrows the exact inner outcome. It does not repair a malformed or permissive authorizer.",
+    "Emission failures are ordinary synchronous instrumentation exceptions; host-selected listeners/exporters own their own redaction, access controls, credentials and data-release authorization.",
+    "No engine/SDK/exporter dependency, protected correlation identifier, production host or mutation-start/revocation guarantee is added.",
     "Biscuit and frozen legacy adapters remain outside the initial six-package release."
   ],
   "reviewedSourceHashes": {
-    ".github/workflows/ci.yml": "43375ef4515556021e0393731d7f569b949b4b46f550d671479d448be9a805fe",
-    ".github/workflows/publish.yml": "640b72a6e205511f13cfd074aff499d678b29aeed3df69aec57a243ef8713efd",
+    ".github/workflows/ci.yml": "5916251e194345edf0d7f1cb6af4cae1019fa1f344db46bee9aada3d0de62986",
+    ".github/workflows/publish.yml": "6ffe789f311b79295e9ae6ff002a23fe534e7dc991ee8b6790f6ca2dd85407a7",
     ".gitignore": "6b9ac7f72c575d11c6e8f8ff0542b8f58aba9f77bc176007d300c17b38a345a4",
-    "AGENTS.md": "dd513146dec00d42e2cbf2c12b7b109e94d591d577d047ad27a29cbbc07d69fe",
+    "AGENTS.md": "464724d5c9f46ebdde4c341d93be7eea364c60b62fa4481f056a0b55c953616b",
     "Directory.Build.props": "c9abce1c0f8ed3e510d16c770860b1ab7925b101feacf5e7b31eb1be74ff27ef",
     "LICENSE": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30",
     "Penghou.Hufu.Core.slnx": "fec1ec23ba4796903df795d466671179b992d3a6898e51fdee8897b6cc4d9a5d",
     "Penghou.Hufu.slnx": "18ede554043e4ba43653a75ae6ae2d2f2c448f107e3729079e8508a6303c0552",
-    "README.md": "26fb68cff6058f7cf28c2d0d928c172ce801665a0aa3dcd4f7891c31649a1fd1",
-    "docs/README.md": "614e58b1c9fc1b80f8cdecf9971734809e1870864a07be94ddc439bada41ddd7",
-    "docs/architecture.md": "3487a1b94bf3ee23340c3a3a4e4479631e2adefbc08d1e07c0c40dd497f134dd",
+    "README.md": "b2119df8c7a4e3a5bf8c359e6e70d6762bef5c3fed564c7f77e6a8bdbaf65e32",
+    "docs/README.md": "5fc06fb629be4b27487395d77203d1b4af5cbe0643ea56b9575f0da9374d8c53",
+    "docs/architecture.md": "d46a6d2e8a15c9770c21cd85ad2c4a0498d69ce5e0cd5c04612f0921980b4353",
     "docs/archive/local-first-authority-runtime-proposal-2026-10-01.md": "d7b205cb34b74b382065ecd8992841e5c21c631937343f9d77ec50adf7e57853",
     "docs/archive/original-proposal.md": "e24aa92c440084e5d7916e4d83efb8593cdb92fc13366ef9f47a61b6d9b5b24a",
     "docs/archive/typed-effect-runtime-proposal-2026-10-01.md": "71bcc5de159dc91a1c32e1085bbec7f18b4d7d43109eb25ed264c03f80985aae",
@@ -316,10 +355,10 @@
     "docs/biscuit-integration-qualification.md": "6a093e7b019e2700deff5166caeff10c0804b878a687c5f0027a3a6481625482",
     "docs/biscuit-integration-recalibration.md": "e4cc9767bfbbb2e1b8d0765af7d9c130e6226e804200bf55acb335b3e20242b2",
     "docs/biscuit-integration-source-manifest.json": "18d6247bfbbda4e85342d39f534cf4cca8ce224bb4edab4ae7b381a5bc97a364",
-    "docs/completion-review.md": "8c6d51b81049180be14c1cb0e48f330894f411da51445ef278d5b3611b7db6fc",
-    "docs/core-admission-and-issuance.md": "b81bb60e08c2884deda768d2eab6043606f90ee50e26c7b2a969d4e2c53bb55c",
-    "docs/current-authority-profile.md": "644a0279bd6df3b9c4af9cfac4d6cfd3f64ead48803cb68f3bada8b5ad32c907",
-    "docs/decision-explanations.md": "4dc76d9235759f8b6aaa7b835db2bffb509aa8dc5fe495f2e623922768f86299",
+    "docs/completion-review.md": "a28f1ea30f60d0ab8cbc85fa41a2f3b2f668456df91d24aea465998464fb6ba4",
+    "docs/core-admission-and-issuance.md": "3bc78e846df6dc6c9c287359498a0ff388a01fab0bfb7dc507ed03dd34ccbff8",
+    "docs/current-authority-profile.md": "cf04ce17154fc5bd76c378c575d229d9e0fec25508cb5fe4b6c29af803ede329",
+    "docs/decision-explanations.md": "0aa14f3db59e69e1c0e0ede516787f6de2838a853e1f5dbcf6d2e2d07b6bd0b3",
     "docs/decisions/0001-hufu-owns-workflow-authority.md": "97b0843dce05d2b491e070419b87e49fca95b9eaa72f119d3da66da7db4b2eb3",
     "docs/decisions/0002-use-cedarsharp-for-policy-evaluation.md": "3f51d5196ecd6c76dc763b9e4562b71ed9ae94125576aaf861aa74bce009e427",
     "docs/decisions/0003-local-first-authority-runtime.md": "b107f9dbf34b8df0d163901736a6b1a6564007eee6e61435e627379e2754dddc",
@@ -334,24 +373,25 @@
     "docs/document-migration.md": "aedbb0e3fe16af530dd455f30df07f0990bcd8b82306f64271fbee153278fc76",
     "docs/durable-authority-store-qualification.md": "bcf326bfc600010ef7d8d9b6e782b77ea19f6b5cc8a644097e18cb982bc669e9",
     "docs/durable-authority-store.md": "39c2dfd561555e51b014a887717f475a63cc1ae7c4b0e728981afc03b69a819e",
-    "docs/ha-0a-review.md": "cbae275413ae8cbc0e937ffe86566ca0682177c07cd9989694640dbd8b685f6b",
+    "docs/ha-0a-review.md": "223fe7b2b73382d05fbfa6e0ec83f78f17a5809f282f75b58b9ce40a7efd3bc0",
     "docs/local-first-authority-runtime.md": "9df9a65c9924249b30e2f963ccf0f3925876c6f463f5d4d71e0cfcf7fd604915",
     "docs/luban-api-consumer-qualification.md": "fcfcedebe3d289e372882617725c50d6fa9cc8fe4ef439e405637e1759c14adf",
     "docs/luban-integration.md": "a29fe52f2fd1c6db24ea0cbec47108d0a291c19de133a6f282b6f867f3c06c55",
     "docs/operation-start-profile.md": "0c47311e015ff02fc90e3684a9e6ea715dc97fb0738e69a3bd951a9f068edfe8",
     "docs/operation-start-qualification.md": "9162d52c654c3ce235ae39b1d3a210d5d3e0c7ecd1c3848408070427a5648b78",
-    "docs/package-release-profile.md": "fa5236809bdecd078119473c200373b843f6ba986962d400060aeb68769c071d",
+    "docs/optional-telemetry.md": "7864d0f20d6d396b5aa0a1025fe9af4a8ce0bdf28e501165c4036f7b0db86956",
+    "docs/package-release-profile.md": "3efdda65601e5fdfb40c108aec767abc9356f63eaced03ff11bbc316474ea85e",
     "docs/resource-package-adoption.md": "5be8ed5bfc3b98e5fe008cc5c56a0e83e659bc44dd70a0bb4f0b821b463aae15",
-    "docs/roadmap.md": "360c67a7d5120c383678fb180146a15f8ef81d3f9096b095b8a14bbb59dc4c31",
+    "docs/roadmap.md": "db995a34f8bf275ad2e4037f8f25e4f4cf427c79d839046db38eb3af32905eeb",
     "docs/typed-effect-runtime.md": "914389ef4f6e7684961ad7381adc68a26e83a667e86191c2afb21e85ea265a97",
     "docs/workflow-authority-spec.md": "edee3101aceecc9dce13c0675629e77ff132560d4edd6aeb1b0941c0e6d68bee",
     "docs/workflow-authorizer.md": "7c2c2e8d0e2b2cef036cf756bea4537718942128e6c6491b2b22b0dd02c0d9a8",
-    "docs/zhinu-authority-handoff.md": "6c5378e77b2a21c049cb473d6f1ef46d39bf95eb7e978ee7d3943269c4aacac9",
+    "docs/zhinu-authority-handoff.md": "adb90e96298a6676e303c4796b6418603466879ddf6fe5eedc64a27563432b95",
     "docs/zhinu-package-adoption.md": "9f6315969f26556bb97617d4411c2df2799aa6d32ecedd8a4291a4bb46eccd57",
     "eng/Measure-BiscuitBudget.ps1": "3217b23e472c31e8073f3961a048481e49cf54293af39c48fc75d6a981985ada",
     "eng/Pack-HufuRelease.ps1": "f036b9733c1976677e42a5b4219c7fb46dce3c7bae305e1b93a6df4c90ec39b6",
     "eng/Restore-BiscuitCandidate.ps1": "476542e3993b3d5e7337cb51114e7607b76354d6707a67ab1e90d823f51c08f2",
-    "eng/Test-HufuPackageConsumers.ps1": "3115bfe7ed162e177f4c17426110cab6d6637ccda1d664ce69edc968ff3d6a8f",
+    "eng/Test-HufuPackageConsumers.ps1": "4822005670405241b4d8b29ad306646fdfa0c2ed15993aa2584aee1cac1b02c3",
     "eng/Test-PackagedWorkflowIntegration.ps1": "ec0cc78ec102a76fc8b0f5438408ebee6ee20e415e1bbc8861bbce39437faae3",
     "eng/Test-PublishedResourcePackages.ps1": "19f262cd9b3d58249e4d9c42df404e47f6c540376a56ff95d25edcfc4ae3f26f",
     "eng/Verify-HufuCoreGraph.ps1": "9b8f309122f58d342ddaf6b4f26ae04ef45fc6ad0848504929df3d9d88f19c1d",
@@ -408,11 +448,13 @@
     "src/Penghou.Hufu/AuthorityOperationStart.cs": "30ab31ff9c27cfbc0f85465d917684ba1d0c62ea8316f9f40433bb0a69bcc372",
     "src/Penghou.Hufu/AuthorityRequestAuthorizer.cs": "a2cdbf597a4881cefd13c1494d366661147106951a649c4197ed2fac18a99503",
     "src/Penghou.Hufu/AuthorityStore.cs": "b8b297761da505eb92083326ca5ca3f96bef2eb9b7ef34796b85f9db48fbda8f",
+    "src/Penghou.Hufu/AuthorityTelemetry.cs": "6885624874400eb8267b5d6db030ea86f19fdc1dcfdd2db8f621fbab85331c46",
     "src/Penghou.Hufu/BoundedAuthorityIssuanceAuthorizer.cs": "0aa20da940e6c3337ce61b28e48ab7edcab5306c546363e63e9d8b7e8f42996e",
     "src/Penghou.Hufu/BoundedAuthorityRequestAuthorizer.cs": "630268f09d2994a6d4c47c652bfb02a36d00d7361c24e82dfbb756a07ee7c9a4",
     "src/Penghou.Hufu/Penghou.Hufu.csproj": "6dc9c59cb323b3ef038e650bc3ef78381e496f30900c9fdb91324c2bbf13193f",
     "src/Penghou.Hufu/PublicAPI.Shipped.txt": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd",
-    "src/Penghou.Hufu/PublicAPI.Unshipped.txt": "ac4fd2f2dbe3e8247ab2c36a563a94483dd182be4e8612442bdf66faa81c5234",
+    "src/Penghou.Hufu/PublicAPI.Unshipped.txt": "b71e68b04deaf2564fa8802db17d4a406f87aeb648c1652c730646507af91a3a",
+    "src/Penghou.Hufu/TelemetryAuthorityRequestAuthorizer.cs": "d7653e00ddd05dfbebd4b4fdeac91fc853be6373ed9238a263573f8c4e5cbf87",
     "tests/Penghou.Hufu.Biscuit.Tests/BiscuitAncestryFailureTests.cs": "e383c8de794e7b1568d2b9a732eae7f93ce7e5a74bb7db4aab73219e48951f96",
     "tests/Penghou.Hufu.Biscuit.Tests/BiscuitAuthorityIntegrationTests.cs": "27c9e836cb3864997fe019d366d4efc5605231f688f5d638e4faea58550c2023",
     "tests/Penghou.Hufu.Biscuit.Tests/BiscuitBudgetProbe.cs": "600b217f2de91b9a64c94b3fd04ecb514984d4f3f84750836435b85a2f551a6a",
@@ -436,6 +478,7 @@
     "tests/Penghou.Hufu.Tests/AuthorityIssuanceProfileTests.cs": "54bc8f44c0ebe06abd41237241e05c2d8695cd18d37e234e749b8930657d496a",
     "tests/Penghou.Hufu.Tests/AuthorityIssuanceStoreTests.cs": "84db4ac93709bbfd4e915854b1353307800f2401f55e44dc09eb56fcd8371f5d",
     "tests/Penghou.Hufu.Tests/AuthoritySnapshotTests.cs": "871eb65cfd6a24c7d5b5f47022453feb6a1cfce3d625a585ab91ca4ca8777509",
+    "tests/Penghou.Hufu.Tests/AuthorityTelemetryTests.cs": "e2d5da1cd64f83406f0d0548886a9248abf8586a9cac7554c21df59ac305691a",
     "tests/Penghou.Hufu.Tests/BoundedAuthorityRequestAuthorizerTests.cs": "531252ad8664440b2c77acde17d2abd15a5b8873d55a9fc8b6c5b2d0a4736386",
     "tests/Penghou.Hufu.Tests/CedarAuthorityEvaluatorTests.cs": "793a47da9288653f4091506982ad486efb1655a8e82ae3420fd8db283704ee87",
     "tests/Penghou.Hufu.Tests/CurrentAuthorityRequestAuthorizerTests.cs": "cef86f7304b3315368fb832584bc1aee73f3419d5bc0246ef969282c6fb7873f",
@@ -448,7 +491,5 @@
     "tests/Penghou.Hufu.Workflow.Tests/Penghou.Hufu.Workflow.Tests.csproj": "5d70f9c882bae135c701caab24d4aa2803dc1ec2d6049d61dbaeaa41608fcf83",
     "tools/BiscuitBudgetProbe/BiscuitBudgetProbe.csproj": "2fa96e0b7897aad78d5ac488c0771138812f693b1f34cdadffaa4c8d12bad095",
     "tools/BiscuitBudgetProbe/Program.cs": "b2a9c6016e43c23abf1ef2bcf5ae7cc3087ccd1f6d626182ca121b877bce1c74"
-  },
-  "evidenceScope": "historical-decision-explanations-before-optional-telemetry",
-  "supersededBy": "optional-telemetry.json"
+  }
 }

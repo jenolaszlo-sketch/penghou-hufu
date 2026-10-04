@@ -13,12 +13,12 @@ and publication run
 [37138352675](https://github.com/jenolaszlo-sketch/penghou-zhinu/actions/runs/37138352675)
 succeeded. WA-1/2/3, ZA-2, and ZA-6 are complete.
 
-For Hufu, HA-0A/B and HA-1 are complete. The public adapter and its host boundary are described in [workflow-authorizer.md](workflow-authorizer.md). The current full suite passed 764 tests total, 382 per framework: core 184, Biscuit 93, IO 19, legacy integration 22, Workflow 52, and workflow integration 12. The new bounded explanation slice adds 32 cases per framework; see [profile](decision-explanations.md) and [current qualification](qualification/decision-explanations.json). The independently reviewed core admission/issuance profiles add 73 cases per framework; see [the profile](core-admission-and-issuance.md) and [earlier core evidence](qualification/core-hardening.json). The earlier 554/700-case records are preserved as historical evidence. HA-2 passed fresh-cache candidate-package qualification on both frameworks; HA-3 source tooling is ready, with remote CI and user-controlled publication pending. The proposed release set contains six Hufu packages at `0.1.0-preview.1`; no production host is shipped.
+For Hufu, HA-0A/B and HA-1 are complete. The public adapter and its host boundary are described in [workflow-authorizer.md](workflow-authorizer.md). The current full suite passed 816 tests total, 408 per framework: core 210, Biscuit 93, IO 19, legacy integration 22, Workflow 52, and workflow integration 12. The bounded request telemetry slice adds 26 cases per framework; see [profile](optional-telemetry.md) and [current qualification](qualification/optional-telemetry.json). The earlier bounded explanation slice adds 32 cases per framework; see [profile](decision-explanations.md) and [explanation qualification](qualification/decision-explanations.json). The independently reviewed core admission/issuance profiles add 73 cases per framework; see [the profile](core-admission-and-issuance.md) and [earlier core evidence](qualification/core-hardening.json). The earlier 554/700/764-case records are preserved as historical evidence. HA-2 passed fresh-cache candidate-package qualification on both frameworks; HA-3 source tooling is ready, with remote CI and user-controlled publication pending. The proposed release set contains six Hufu packages at `0.1.0-preview.1`; no production host is shipped.
 
 ## Reading order
 
 1. [Penghou workflow contract ownership/publication plan](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/workflow-abstractions-plan.md), then the [canonical Zhinu plan](https://github.com/jenolaszlo-sketch/penghou-zhinu/blob/main/docs/authority-extension-plan.md) and its current activity queue.
-2. [Decision explanations](decision-explanations.md) and [current evidence](qualification/decision-explanations.json), then [core admission and issuance](core-admission-and-issuance.md) and [earlier core qualification](qualification/core-hardening.json), then [ADR 0011](decisions/0011-neutral-zhinu-authority-extension.md), the [Hufu roadmap](roadmap.md), and the [adapter boundary](workflow-authorizer.md).
+2. [Optional telemetry](optional-telemetry.md) and [current evidence](qualification/optional-telemetry.json), then [Decision explanations](decision-explanations.md) and [explanation evidence](qualification/decision-explanations.json), then [core admission and issuance](core-admission-and-issuance.md) and [earlier core qualification](qualification/core-hardening.json), then [ADR 0011](decisions/0011-neutral-zhinu-authority-extension.md), the [Hufu roadmap](roadmap.md), and the [adapter boundary](workflow-authorizer.md).
 3. Current execution/store semantics and the [resource baseline](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/resource-abstractions-architecture.md).
 4. Existing operation-start profiles as regression evidence, not as the new default integration architecture.
 
@@ -77,9 +77,12 @@ well as the Windows full suite; remote CI has not run for this revision.
 
 The bounded typed-path explanation profile is implemented and locally qualified,
 with exact capture and separately authenticated/redacted disclosure. Preserve
-its informational status and explicit partial coverage. Optional bounded
-telemetry is the next independent opportunity; broader lineage/requirements
-and historical reconstruction remain separate explanation extensions. Luban v2, the production single-patch host
+its informational status and explicit partial coverage. The [bounded request
+telemetry slice](optional-telemetry.md) is also implemented. Preserve its finite
+queue/worker, closed labels and independence from mandatory evidence/results.
+Broader broker/approval/revocation telemetry and protected correlation remain
+host/integration gates; lineage/requirements and historical reconstruction
+remain separate explanation extensions. Luban v2, the production single-patch host
 and outcome journal are still held in separate qualified deliveries. Do not
 bulk-install the old completion snapshot or infer authenticated services from
 the new interface types.
@@ -87,13 +90,15 @@ the new interface types.
 ## Ready-to-use release resume prompt
 
 > HA-0A/B, HA-1 and local HA-2 are complete. Read this handoff, the workflow
-> authorizer manual, core-admission-and-issuance.md and both qualification
+> authorizer manual, optional-telemetry.md, core-admission-and-issuance.md and qualification
 > records (workflow-authorization.json, core-hardening.json and
-> decision-explanations.json). Read decision-explanations.md for disclosure limits.
-> Source tests pass 764 cases and package-only integration passes 12 per
+> decision-explanations.json, optional-telemetry.json). Read decision-explanations.md
+> for disclosure limits and optional-telemetry.md for observation/privacy bounds.
+> Source tests pass 816 cases and package-only integration passes 12 per
 > framework; six package/symbol pairs and standalone fresh-cache consumers
-> are qualified. Review and commit/push the Hufu implementation plus the
-> synchronized Penghou/Zhinu documentation. Verify both OS CI jobs before
+> are qualified. The earlier qualified Hufu implementation and synchronized
+> Penghou/Zhinu documentation were committed (42a045b/77bac95/a1df6e9); current
+> telemetry changes are local. Review and commit/push the telemetry delivery. Verify both OS CI jobs before
 > the user runs the input-free main publication workflow. That workflow also
 > requires both OS validation before publishing the same inspected bytes.
 > Configure this repository's NuGet trusted-publisher identity and NUGET_USER

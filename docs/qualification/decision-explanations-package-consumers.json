@@ -1,7 +1,7 @@
 {
   "SchemaVersion": 1,
   "PackageVersion": "0.1.0-preview.1",
-  "FreshCache": "C:\\Users\\Laszlos\\AppData\\Local\\Temp\\hfc-814d5d181b0e4346b033722b155b4863",
+  "FreshCache": "C:\\Users\\Laszlos\\AppData\\Local\\Temp\\hfc-1bc19c0cd15449299cddcac98add41a7",
   "Packages": [
     "CedarSharp/1.0.0",
     "Microsoft.Data.Sqlite/10.0.10",
@@ -28,8 +28,7 @@
       "CoreAdmissionProbePassed": true,
       "CoreIssuanceProbePassed": true,
       "CedarExplanationCapturePassed": true,
-      "RedactedExplanationSummaryPassed": true,
-      "OptionalTelemetryIsolationPassed": true
+      "RedactedExplanationSummaryPassed": true
     },
     {
       "TargetFramework": "net10.0",
@@ -37,8 +36,7 @@
       "CoreAdmissionProbePassed": true,
       "CoreIssuanceProbePassed": true,
       "CedarExplanationCapturePassed": true,
-      "RedactedExplanationSummaryPassed": true,
-      "OptionalTelemetryIsolationPassed": true
+      "RedactedExplanationSummaryPassed": true
     }
   ],
   "NoProjectReferences": true,

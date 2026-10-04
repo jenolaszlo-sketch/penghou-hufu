@@ -27,6 +27,7 @@ Set-Content -LiteralPath (Join-Path $consumer 'Program.cs') @'
 using Penghou.Hufu;
 using Penghou.Hufu.Workflow;
 using Penghou.Workflow.Abstractions;
+using System.Diagnostics.Metrics;
 
 Type[] packages = [typeof(AuthoritySnapshot), typeof(Penghou.Hufu.Cedar.CedarAuthorityEvaluator),
     typeof(Penghou.Hufu.IO.HufuResourceAuthorizer), typeof(Penghou.Hufu.Luban.HufuLanguageAuthorizer),
@@ -69,6 +70,36 @@ if (explained.Status != AuthorityExplanationReadStatus.Disclosed || explained.Pr
     explained.Projection.Details is not null)
     throw new Exception("The separately authorized summary must contain only the captured outcome.");
 Console.WriteLine("Packaged Cedar capture and authorized redacted explanation summary passed.");
+
+var measurement = new TaskCompletionSource<(long Value, Dictionary<string, object?> Tags)>(TaskCreationOptions.RunContinuationsAsynchronously);
+using (var listener = new MeterListener())
+{
+    listener.InstrumentPublished = (instrument, owner) =>
+    {
+        if (instrument.Meter.Name == AuthorityTelemetry.SourceName && instrument.Name == AuthorityTelemetry.AuthorizationCountName)
+            owner.EnableMeasurementEvents(instrument);
+    };
+    listener.SetMeasurementEventCallback<long>((instrument, value, tags, state) =>
+    {
+        var copied = new Dictionary<string, object?>();
+        foreach (var tag in tags) copied[tag.Key] = tag.Value;
+        measurement.TrySetResult((value, copied));
+    });
+    listener.Start();
+    using var telemetry = new AuthorityTelemetry(maxQueuedMeasurements: 1);
+    var observed = new TelemetryAuthorityRequestAuthorizer(bounded, telemetry);
+    if ((await observed.AuthorizeAsync(request)).Status != AuthorityStatus.Unavailable)
+        throw new Exception("Telemetry must preserve required fail-closed preflight.");
+    var exported = await measurement.Task.WaitAsync(TimeSpan.FromSeconds(5));
+    if (exported.Value != 1 || exported.Tags.Count != 2 ||
+        !Equals(exported.Tags["hufu.action"], "read_file") || !Equals(exported.Tags["hufu.outcome"], "unavailable"))
+        throw new Exception("Telemetry must emit only closed bounded categories.");
+    // Disposal and absent collectors must never alter mandatory-evidence failure.
+    telemetry.Dispose();
+    if ((await observed.AuthorizeAsync(request)).Status != AuthorityStatus.Unavailable || telemetry.DroppedMeasurements != 1)
+        throw new Exception("Optional telemetry must preserve the exact fail-closed preflight result after shutdown.");
+}
+Console.WriteLine("Packaged optional telemetry emits closed categories and preserves fail-closed authorization after shutdown.");
 
 // Explicit trusted test fixture, not a production credential authenticator.
 sealed class ProbeExplanationPolicy(AuthorityStoreActor expectedActor, string expectedExplanation) : IAuthorityExplanationAccessPolicy
@@ -133,7 +164,7 @@ $results = foreach ($tfm in @('net8.0','net10.0')) {
     if ($LASTEXITCODE -ne 0) { throw "Consumer build failed: $tfm" }
     dotnet (Join-Path $consumer "bin/Release/$tfm/Consumer.dll") | Out-Host
     if ($LASTEXITCODE -ne 0) { throw "Consumer execution failed: $tfm" }
-    [ordered]@{ TargetFramework=$tfm; RecordedDenialPassed=$true; CoreAdmissionProbePassed=$true; CoreIssuanceProbePassed=$true; CedarExplanationCapturePassed=$true; RedactedExplanationSummaryPassed=$true }
+    [ordered]@{ TargetFramework=$tfm; RecordedDenialPassed=$true; CoreAdmissionProbePassed=$true; CoreIssuanceProbePassed=$true; CedarExplanationCapturePassed=$true; RedactedExplanationSummaryPassed=$true; OptionalTelemetryIsolationPassed=$true }
 }
 ConvertTo-Json -InputObject ([ordered]@{SchemaVersion=1;PackageVersion=$Version;FreshCache=$cache;Packages=@($libraries.Name);Targets=@($results);NoProjectReferences=$true;NoZhinuDependencies=$true;Status='passed'}) -Depth 8 |
     Set-Content -LiteralPath (Join-Path $run 'qualification.json')

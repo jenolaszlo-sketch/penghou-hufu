@@ -103,5 +103,5 @@ mandatory decision evidence and actual effect/start checks remain required.
 Full lineage, missing execution requirements, sufficient-authority proposals,
 state comparisons, counterfactual simulation and historical reconstruction with
 pinned retained evidence remain roadmap work. Sending a projection to an AI
-provider is a separately governed data release. Optional bounded telemetry is
-the next independent core delivery.
+provider is a separately governed data release. The [bounded request telemetry slice](optional-telemetry.md)
+is implemented separately; it exports no explanation data or protected correlation.

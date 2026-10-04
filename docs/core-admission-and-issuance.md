@@ -131,6 +131,6 @@ security tests on Linux alongside the Windows full suite. Remote results require
 a pushed revision; local results are recorded separately.
 
 The bounded [decision explanation profile](decision-explanations.md) is now
-implemented and separately qualified. Optional bounded telemetry is the next
-independent core delivery. Complete issuance/delegation services and
+implemented and separately qualified. The [bounded request telemetry slice](optional-telemetry.md)
+is also implemented, without changing admission, issuance or mandatory evidence. Complete issuance/delegation services and
 the governed mutation host remain separate roadmap gates.

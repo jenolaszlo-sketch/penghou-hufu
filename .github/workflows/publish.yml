@@ -41,8 +41,8 @@ jobs:
         if: runner.os == 'Linux'
         shell: pwsh
         run: |
-          dotnet test tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj -c Release --filter 'FullyQualifiedName~BoundedAuthorityRequestAuthorizerTests|FullyQualifiedName~AuthorityIssuanceProfileTests|FullyQualifiedName~AuthorityIssuanceStoreTests|FullyQualifiedName~AuthorityExplanationReaderTests|FullyQualifiedName~AuthorityExplanationCedarTests' --logger trx --results-directory test-results
-          if ($LASTEXITCODE -ne 0) { throw 'Portable core security/explanation tests failed.' }
+          dotnet test tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj -c Release --filter 'FullyQualifiedName~BoundedAuthorityRequestAuthorizerTests|FullyQualifiedName~AuthorityIssuanceProfileTests|FullyQualifiedName~AuthorityIssuanceStoreTests|FullyQualifiedName~AuthorityExplanationReaderTests|FullyQualifiedName~AuthorityExplanationCedarTests|FullyQualifiedName~AuthorityTelemetryTests' --logger trx --results-directory test-results
+          if ($LASTEXITCODE -ne 0) { throw 'Portable core security/explanation/telemetry tests failed.' }
           dotnet test tests/Penghou.Hufu.Workflow.Tests/Penghou.Hufu.Workflow.Tests.csproj -c Release --logger trx --results-directory test-results
           if ($LASTEXITCODE -ne 0) { throw 'Portable adapter tests failed.' }
           dotnet test tests/Penghou.Hufu.Workflow.Integration.Tests/Penghou.Hufu.Workflow.Integration.Tests.csproj -c Release --logger trx --results-directory test-results

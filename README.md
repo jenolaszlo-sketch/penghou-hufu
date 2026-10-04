@@ -33,6 +33,11 @@ actual evaluator outcome with bounded typed grant/layer facts. A separate host
 policy controls summary or detailed disclosure; summaries hide policy and
 resource details. Explanations are informational and confer no execution rights.
 
+Optional [bounded telemetry](docs/optional-telemetry.md) observes request preflight
+through a finite queue and one background worker. Closed categories and timing
+contain no request/path/identity or diagnostic payload. Host-selected listeners
+cannot replace required evidence or change authorization results.
+
 The optional `Penghou.Hufu.IO` project adapts current Hufu decisions to the
 neutral `IResourceAuthorizer` hook and supplies a request-gated workspace facade.
 It keeps provider-side candidate and mutation-start hooks in the composition and
@@ -66,6 +71,7 @@ The design is recorded in:
 - [Current authority prototype profile](docs/current-authority-profile.md)
 - [Core request admission and authenticated issuance](docs/core-admission-and-issuance.md)
 - [Exact-operation decision explanations](docs/decision-explanations.md)
+- [Optional bounded authorization telemetry](docs/optional-telemetry.md)
 - [Durable authority store profile](docs/durable-authority-store.md)
 - [Co-located operation-start profile](docs/operation-start-profile.md)
 - [Decision: current authority and evidence transactions](docs/decisions/0008-current-authority-store.md)

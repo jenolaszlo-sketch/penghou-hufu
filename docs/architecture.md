@@ -243,7 +243,10 @@ Use lightweight .NET tracing and metrics compatible with OpenTelemetry; hosts
 select exporters. Sampled telemetry is separate from authoritative evidence.
 Collector/exporter failures do not prevent locally evidenced execution. Keep
 secrets and sensitive arguments out of telemetry and bound metric cardinality.
-Signed checkpoints and external anchoring are deferred.
+The bounded [request telemetry profile](optional-telemetry.md) is implemented in
+core, with one finite queue/worker and no exporter dependency. Broker, approval
+and revocation instrumentation remain host/integration work. Signed checkpoints
+and external anchoring are deferred.
 
 ## First complete integration
 

@@ -1,7 +1,7 @@
 {
   "SchemaVersion": 1,
   "CandidateVersion": "0.1.0-preview.1",
-  "FreshCache": "C:\\Users\\Laszlos\\AppData\\Local\\Temp\\hfi-d1afea8f25934c80b9af3503ade1e4d3",
+  "FreshCache": "C:\\Users\\Laszlos\\AppData\\Local\\Temp\\hfi-3b69a609ed034bdd945d927e24e9beac",
   "PublishedZhinuVersion": "0.2.0-preview.1",
   "PublishedNeutralVersion": "0.1.0-preview.2",
   "NoProjectReferences": true,
@@ -36,12 +36,12 @@
   ],
   "Reports": [
     {
-      "Report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_02_49_net10.0.trx",
+      "Report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_37_23_net10.0.trx",
       "Total": 12,
       "Passed": 12
     },
     {
-      "Report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_09_02_49_net8.0.trx",
+      "Report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_08_37_23_net8.0.trx",
       "Total": 12,
       "Passed": 12
     }

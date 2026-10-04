@@ -16,6 +16,7 @@ Hufu is the reusable authority domain and planned durable authority-store bounda
 
 | Document | Purpose | Status |
 | --- | --- | --- |
+| [Optional telemetry](optional-telemetry.md) | Bounded isolated preflight observations, privacy and host export obligations | Implemented request slice; broader broker/approval/revocation instrumentation remains open |
 | [Decision explanations](decision-explanations.md) | Exact evaluator capture and separately authorized summary/details | Bounded typed-path profile; see linked qualification and limits |
 | [Core admission and issuance](core-admission-and-issuance.md) | Shared evaluator capacity, current authenticated issuer ceiling and exact command approval | Implemented; local .NET 8/10 and candidate-package qualification in linked record |
 | [Zhinu package adoption](zhinu-package-adoption.md) | Exact public preview.15 dependencies without a source checkout | 426 cases passed across .NET 8/10 |

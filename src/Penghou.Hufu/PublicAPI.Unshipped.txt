@@ -1,6 +1,14 @@
 #nullable enable
 const Penghou.Hufu.AuthorityDecisionExplanation.Profile = "hufu-typed-path-explanation-v1" -> string!
 const Penghou.Hufu.AuthorityExplanationReader.MaximumProjectionBytes = 1048576 -> int
+const Penghou.Hufu.AuthorityTelemetry.AuthorizationActivityName = "hufu.authorize" -> string!
+const Penghou.Hufu.AuthorityTelemetry.AuthorizationCountName = "hufu.authorization.completed" -> string!
+const Penghou.Hufu.AuthorityTelemetry.AuthorizationDurationName = "hufu.authorization.duration" -> string!
+const Penghou.Hufu.AuthorityTelemetry.DroppedMeasurementsName = "hufu.telemetry.dropped" -> string!
+const Penghou.Hufu.AuthorityTelemetry.EmissionFailuresName = "hufu.telemetry.emission_failures" -> string!
+const Penghou.Hufu.AuthorityTelemetry.InstrumentationVersion = "1.0.0" -> string!
+const Penghou.Hufu.AuthorityTelemetry.MaximumQueuedMeasurements = 4096 -> int
+const Penghou.Hufu.AuthorityTelemetry.SourceName = "Penghou.Hufu" -> string!
 const Penghou.Hufu.BoundedAuthorityRequestAuthorizer.MaximumExecuting = 256 -> int
 const Penghou.Hufu.BoundedAuthorityRequestAuthorizer.MaximumQueued = 4096 -> int
 override Penghou.Hufu.AuthenticatedAuthorityContext.Equals(object? obj) -> bool
@@ -640,6 +648,11 @@ Penghou.Hufu.AuthoritySubject.SubjectId.get -> string!
 Penghou.Hufu.AuthoritySubject.SubjectId.init -> void
 Penghou.Hufu.AuthoritySubject.TenantId.get -> string!
 Penghou.Hufu.AuthoritySubject.TenantId.init -> void
+Penghou.Hufu.AuthorityTelemetry
+Penghou.Hufu.AuthorityTelemetry.AuthorityTelemetry(int maxQueuedMeasurements = 256) -> void
+Penghou.Hufu.AuthorityTelemetry.Dispose() -> void
+Penghou.Hufu.AuthorityTelemetry.DroppedMeasurements.get -> long
+Penghou.Hufu.AuthorityTelemetry.EmissionFailures.get -> long
 Penghou.Hufu.AuthorityValidation
 Penghou.Hufu.BoundedAuthorityIssuanceAuthorizer
 Penghou.Hufu.BoundedAuthorityIssuanceAuthorizer.AuthorizeAsync(Penghou.Hufu.AuthorityStoreAccessRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityStoreAuthorization!>
@@ -675,6 +688,9 @@ Penghou.Hufu.IAuthorityStore.RecordDecisionAsync(Penghou.Hufu.AuthorityStoreActo
 Penghou.Hufu.IAuthorityStore.RevokeAsync(Penghou.Hufu.AuthorityRevokeCommand! command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityMutationResult!>
 Penghou.Hufu.IAuthorityStoreAuthorizer
 Penghou.Hufu.IAuthorityStoreAuthorizer.AuthorizeAsync(Penghou.Hufu.AuthorityStoreAccessRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityStoreAuthorization!>
+Penghou.Hufu.TelemetryAuthorityRequestAuthorizer
+Penghou.Hufu.TelemetryAuthorityRequestAuthorizer.AuthorizeAsync(Penghou.Hufu.AuthorityRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityRequestAuthorization!>
+Penghou.Hufu.TelemetryAuthorityRequestAuthorizer.TelemetryAuthorityRequestAuthorizer(Penghou.Hufu.IAuthorityRequestAuthorizer! inner, Penghou.Hufu.AuthorityTelemetry! telemetry) -> void
 static Penghou.Hufu.AuthenticatedAuthorityContext.operator !=(Penghou.Hufu.AuthenticatedAuthorityContext? left, Penghou.Hufu.AuthenticatedAuthorityContext? right) -> bool
 static Penghou.Hufu.AuthenticatedAuthorityContext.operator ==(Penghou.Hufu.AuthenticatedAuthorityContext? left, Penghou.Hufu.AuthenticatedAuthorityContext? right) -> bool
 static Penghou.Hufu.AuthorityChangeRecord.operator !=(Penghou.Hufu.AuthorityChangeRecord? left, Penghou.Hufu.AuthorityChangeRecord? right) -> bool

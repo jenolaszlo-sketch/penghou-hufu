@@ -14,6 +14,10 @@ The bounded [decision explanation profile](decision-explanations.md) captures
 actual evaluator outcomes and typed snapshot facts. A separate authenticated
 host policy authorizes disclosure; explanation results do not authorize I/O.
 
+Optional [authorization telemetry](optional-telemetry.md) records closed categories
+and timing through a finite worker queue. It neither changes authorization nor
+substitutes for mandatory evidence; broker/runtime instrumentation remains open.
+
 ## Supplied implementation
 
 `Penghou.Hufu` supplies immutable authority snapshots, typed actions and path

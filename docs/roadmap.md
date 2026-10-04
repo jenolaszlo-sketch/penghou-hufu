@@ -1,5 +1,26 @@
 # Hufu implementation roadmap
 
+## Optional request telemetry checkpoint - 2026-10-04
+
+The [bounded telemetry profile](optional-telemetry.md) is implemented in core:
+a finite scalar queue and one worker emit .NET traces/metrics with closed action/
+outcome labels and capped monotonic timing. It retains no request/path/identity,
+diagnostic or ambient activity payload. Blocked/throwing listeners, saturation
+and shutdown cannot change the exact inner authorization result or mandatory
+evidence obligations. The decorator observes caller-visible preflight only.
+
+Focused telemetry tests pass 26 cases per framework. Current full
+regression passes 816 cases, 408 per framework, with
+zero failures/skips. All six candidates, fresh package consumers (including real
+metric emission) and package-only workflow integration pass in
+[current evidence](qualification/optional-telemetry.json). The 764-case
+explanation checkpoint below is preserved as historical evidence.
+
+Broader broker/approval/revocation instrumentation, authorized evidence
+correlation and governed mutation hosting remain separate gates. The earlier
+764-case checkpoint is committed as Hufu 42a045b; this telemetry delivery is
+local. Push/remote CI and user-controlled initial Hufu publication remain open.
+
 ## Decision explanation checkpoint - 2026-10-04
 
 The [exact-operation explanation profile](decision-explanations.md) is implemented
@@ -8,14 +29,14 @@ snapshot facts remain distinct from captured layer decisions. A mandatory
 independent host policy binds viewer/session, explanation identity, disclosure
 level and expiry; Summary exposes only the captured outcome. Missing layer
 results are explicit, and raw reason text/native diagnostics are never projected.
-The focused suite passes 32 cases per framework. Current full regression passes
+The focused suite passes 32 cases per framework. That checkpoint's full regression passed
 764 cases, 382 per framework, with zero failures/skips. The six-package set,
 fresh standalone consumers and package-only workflow integration are requalified
-in [current evidence](qualification/decision-explanations.json).
+in [explanation checkpoint evidence](qualification/decision-explanations.json).
 
 This completes the bounded typed-path explanation slice. Broader lineage,
 missing execution requirements, historical reconstruction and simulations remain
-future work. Optional bounded telemetry is the next independent core delivery.
+future work. Request-preflight telemetry is now implemented and qualified above.
 
 ## Earlier core admission and issuance checkpoint - 2026-10-04
 
@@ -27,7 +48,7 @@ policy and a fresh trust reload after policy awaits. Their focused suite passes
 73 cases per framework, including real current-authorizer source/evidence work
 and SQLite publication/reopen/replay. That checkpoint passed 700 cases, 350 per framework, with no failures or
 skips. Its package proofs are preserved as [historical core evidence](qualification/core-hardening.json);
-current explanation/release qualification is linked above.
+current telemetry/release qualification is linked above.
 
 - [x] **CORE-ADMISSION:** bounded active/queued capacity, FIFO, timeout,
   cancellation accounting and fail-closed inner result validation.
@@ -37,8 +58,9 @@ current explanation/release qualification is linked above.
 - [x] **CORE-EXPLANATIONS, bounded typed-path slice:** exact evaluator capture,
   frozen typed facts and separately authorized summary/details with explicit
   partial coverage. Broader lineage/requirements/reconstruction remain open.
-- [ ] **CORE-TELEMETRY:** optional bounded tracing/metrics, with redaction and
-  exporters independent of required durable evidence.
+- [x] **CORE-TELEMETRY, bounded request slice:** optional isolated tracing/metrics,
+  closed labels and exporters independent of required durable evidence. Broader
+  broker/approval/revocation instrumentation and authorized correlation remain open.
 
 These core slices do not close the full M1/M2 or trusted production host gates.
 Cross-process capacity, actual authenticated host services, generalized
@@ -238,7 +260,8 @@ adapter or authority runtime.
 - [ ] Persist requests, decisions, grants, envelope versions, revocation, and authority admission bindings.
 - [ ] Persist/refer to exact Cedar policy, schema, and entity snapshots with provenance; avoid an independently mutable shadow policy store.
 - [ ] Persist tenant-bound lineage, exclusions, approval/requirement versions, decision evidence, and authenticated broker receipt references; test invalid/cyclic/cross-tenant lineage.
-- [ ] Add lightweight OpenTelemetry-compatible tracing and bounded metrics with host-selected export; test redaction and exporter independence from mandatory evidence.
+- [x] Implement the bounded request-preflight OpenTelemetry-compatible trace/metric slice with host-selected listeners; test redaction and independence from mandatory evidence.
+- [ ] Extend instrumentation to broker operations, approval waits and measurable revocation propagation, with separately authorized protected evidence correlation.
 - [ ] Prove denied/indeterminate decision attribution, failed pre-dispatch evidence blocking, idempotent receipts, and uncertainty after possible external completion.
 - [ ] Exercise crash/reopen, duplicate commands, conflicts, partial decision application, and tenant isolation.
 - [ ] Extract reusable store conformance helpers into Penghou.Hufu.Testing only when a second adapter/consumer benefits.

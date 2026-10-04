@@ -21,14 +21,19 @@ records remain evidence for their actual revisions.
   are individually reviewed and implemented. Their 73 new cases per framework
   cover actual outstanding source/evidence work, cancellation races, exact
   approvals, containment, policy composition and SQLite publication/replay.
-- Current full regression: 764 passed, 382 per framework; zero failed/skipped.
+- Current full regression: 816 passed, 408 per framework;
+  zero failed/skipped. 26 new telemetry cases per framework cover
+  mandatory recorder failures, exact result/exception/cancellation preservation,
+  bounded loss/shutdown and blocked/throwing listener privacy/isolation. See
+  [current telemetry evidence](qualification/optional-telemetry.json).
+- The earlier explanation checkpoint passed 764 cases, 382 per framework.
   The 32 new explanation cases per framework cover actual Cedar capture,
   redacted summaries, exact disclosure binding, expiry, immutable data and bounds.
   Six release package/symbol pairs, API inventories, isolated standalone consumers
   and package-only workflow integration are locally requalified. See
-  [current explanation evidence](qualification/decision-explanations.json). The
+  [earlier explanation evidence](qualification/decision-explanations.json). The
   [700-case core checkpoint](qualification/core-hardening.json) and earlier
-  [554-case workflow record](qualification/workflow-authorization.json) is preserved.
+  [554-case workflow record](qualification/workflow-authorization.json) are preserved.
 
 ## Current work order
 
@@ -39,7 +44,7 @@ records remain evidence for their actual revisions.
 | Core admission/issuance | Implemented and locally qualified; actual authenticated services and aggregate host/process capacity remain host gates |
 | HA-3 | Commit/push reviewed source/docs, verify both OS CI jobs, then user-run main publication; initial six Hufu packages remain unpublished |
 | Core explanations | Bounded exact-operation typed-path slice implemented and locally qualified; lineage/requirements and retained historical reconstruction remain future extensions |
-| Optional telemetry | Next independent opportunity: bounded tracing/metrics, exporters independent of mandatory evidence |
+| Optional telemetry | Bounded request slice implemented and locally qualified; broker/approval/revocation metrics and protected correlation remain separate host work |
 | ZA-5B | Separate replacement/retirement decision preserving the frozen legacy final-start guarantee |
 
 Luban v2 and the single-patch host/outcome journal remain separate deferred

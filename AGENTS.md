@@ -29,6 +29,10 @@ with independently authenticated current issuer ceiling and exact command,
 sequence, snapshot and expiry approval, reloaded after asynchronous policy.
 Do this before changing behavior or public contracts. Read the
 [explanation disclosure profile](docs/decision-explanations.md).
+Read [optional telemetry](docs/optional-telemetry.md) before changing instrumentation.
+Keep the finite scalar queue, worker isolation and closed labels. Never enqueue
+requests, identifiers, diagnostics, credential/context or ambient activity data.
+Telemetry cannot alter results, cancellation, capacity or mandatory evidence.
 Preserve the single evaluator capture, informational typed facts, partial coverage
 and mandatory exact actor/explanation/expiry disclosure policy. Default summaries
 must expose only the outcome; raw capture and diagnostics remain host-only. Keep the authority boundary

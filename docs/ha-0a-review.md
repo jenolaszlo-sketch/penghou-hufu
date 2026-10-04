@@ -30,7 +30,7 @@ layer. See [profile](core-admission-and-issuance.md) and
 framework, 700 full-suite cases and refreshed six-package qualification.
 The table's older candidate descriptions are historical review context; the
 new profile specifies the accepted behavior. No other old-snapshot group was
-bulk-installed. The bounded [decision explanation slice](decision-explanations.md) is now implemented; telemetry remains future work.
+bulk-installed. The bounded [decision explanation slice](decision-explanations.md) is now implemented. The [bounded request telemetry slice](optional-telemetry.md) is separately implemented; broader instrumentation remains host/integration work.
 
 ## Candidate inventory for bounded extraction
 
