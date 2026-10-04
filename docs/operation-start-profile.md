@@ -11,8 +11,10 @@ the current SQL coupling into the new `Penghou.Hufu.Workflow` translation adapte
 Status: Experimental implementation, updated 2026-10-02. Qualification is recorded in
 [operation-start qualification](operation-start-qualification.md).
 [ADR 0009](decisions/0009-colocated-operation-start.md) defines the selected order.
-This is a start gate; complete governed Luban mutation hosts and typed terminal
-outcome/recovery wiring remain pending.
+This legacy composition is a start gate. The independent
+[single-patch host](single-patch-host.md) now connects published conditional
+Local I/O to neutral Hufu start contracts and durable terminal recovery; it
+does not extend this legacy workflow composition or replace its qualification.
 
 ## Composition and authority
 
@@ -33,7 +35,8 @@ is inferred from them. The initial owner profile requires pooling disabled.
 `SqliteAuthorityOperationStartGate` registers one trusted participant at
 construction. Agent data cannot choose a different participant. Core contracts
 remain independent of Cedar, Zhinu, Luban and SQLite; the composition project
-depends on the concrete adapters. These APIs remain experimental/unpackaged.
+depends on the concrete adapters. The legacy composition remains experimental
+and unpackaged; the generic Hufu/Sqlite start contracts are published separately.
 
 Every start reauthenticates the explicit host actor/session through
 `IAuthorityStoreAuthorizer` with `StartOperation` and the complete immutable

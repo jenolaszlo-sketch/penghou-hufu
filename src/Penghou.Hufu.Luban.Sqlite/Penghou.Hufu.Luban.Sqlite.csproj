@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <Description>Optional governed single-target Luban conditional-write host with co-located authority, exact approval and durable outcomes.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Penghou.Hufu.Luban/Penghou.Hufu.Luban.csproj" />
+    <ProjectReference Include="../Penghou.Hufu.Sqlite/Penghou.Hufu.Sqlite.csproj" />
+  </ItemGroup>
+</Project>

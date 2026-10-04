@@ -1,5 +1,10 @@
 # HA-0A staged reuse review
 
+Later disposition: the deferred single-patch proposal was replaced by the
+independent [preview.3 host and outcome journal](single-patch-host.md), with
+[separate qualification](qualification/single-patch-host.json). The historical
+review below retains its original scope; no staged snapshot was bulk-installed.
+
 Review date: 2026-10-04. This records HA-0A disposition of the older `.tmp/hufu-completion` review baseline against the then-current tree (`aa12ab5`), ADR 0011, roadmap, handoff, and resource baseline. It is historical candidate evidence, not an inventory of the current workflow stage. HA-0A is complete; current implementation and gates are described in [the workflow authorizer boundary](workflow-authorizer.md) and [handoff](zhinu-authority-handoff.md). The candidate's 510 tests and package checks apply only to those revisions and cases.
 
 ## Decision

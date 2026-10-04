@@ -10,7 +10,11 @@ neutral contract, without a workflow-engine dependency. All six Hufu packages
 are published at `0.1.0-preview.2`, including explicit
 [Luban v2 read/diff authorization](docs/luban-v2-authorization.md).
 [Public-package and three-platform CI evidence](docs/qualification/hufu-luban-v2-public-release.json)
-records the release; the original preview.1 evidence remains historical. See [the authorizer boundary](docs/workflow-authorizer.md),
+records the release; the original preview.1 evidence remains historical.
+The next preview.3 candidate adds optional
+[governed single-patch hosting](docs/single-patch-host.md) through the new
+`Penghou.Hufu.Luban.Sqlite` package. It has no workflow-engine dependency;
+local qualification and remote publication are separate gates. See [the authorizer boundary](docs/workflow-authorizer.md),
 [ADR 0011](docs/decisions/0011-neutral-zhinu-authority-extension.md), and the
 [current handoff](docs/zhinu-authority-handoff.md).
 
@@ -45,8 +49,10 @@ The optional `Penghou.Hufu.IO` project adapts current Hufu decisions to the
 neutral `IResourceAuthorizer` hook and supplies a request-gated workspace facade.
 It keeps provider-side candidate and mutation-start hooks in the composition and
 has no permissive default. Its conditional `WriteFile` permission is separate
-from patch permission. A production Hufu-to-`IResourceMutationJournal` adapter
-and qualification of the real locked mutation start remain pending. Normal builds consume exact published IO/Luban 0.1.0-preview.1 packages.
+from patch permission. The separate `Penghou.Hufu.Luban.Sqlite` candidate supplies a governed
+single-patch host, co-located exact approval/start and durable outcomes for the
+controlled Windows NTFS conditional writer. Production authentication/custody
+services and broader mutation profiles remain host work. Normal builds consume exact published IO/Luban 0.1.0-preview.1 packages.
 A fresh isolated public-feed restore passes 426 tests across both frameworks.
 See [package adoption](docs/resource-package-adoption.md) and the
 [remaining-work review](docs/completion-review.md).
@@ -64,7 +70,8 @@ Luban, but host-supplied authorization is required.
 Read the [AMLE guide](docs/authority-mediated-language-execution.md) and
 [Luban's complementary guide](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/docs/authority-mediated-language-execution.md)
 for the shared pattern, evidence and future simulation direction. Current WhatIf
-is capture-only; complete governed mutation integration remains pending. AMLE
+is capture-only; governed execution uses the separate single-patch host.
+Batch governance and simulated execution remain future work. AMLE
 does not replace OS isolation for opaque native execution.
 
 The design is recorded in:
@@ -76,7 +83,8 @@ The design is recorded in:
 - [Exact-operation decision explanations](docs/decision-explanations.md)
 - [Optional bounded authorization telemetry](docs/optional-telemetry.md)
 - [Durable authority store profile](docs/durable-authority-store.md)
-- [Co-located operation-start profile](docs/operation-start-profile.md)
+- [Governed single-patch host and recovery](docs/single-patch-host.md)
+- [Legacy co-located operation-start profile](docs/operation-start-profile.md)
 - [Decision: current authority and evidence transactions](docs/decisions/0008-current-authority-store.md)
 - [Architecture](docs/architecture.md)
 - [Roadmap](docs/roadmap.md)

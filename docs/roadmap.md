@@ -1,5 +1,27 @@
 # Hufu implementation roadmap
 
+## Governed single-patch candidate - 2026-10-04
+
+The optional seventh package `Penghou.Hufu.Luban.Sqlite` connects the real
+published conditional writer to exact semantic approval, current resource
+authority, co-located start and durable outcomes. See [the profile and usage](single-patch-host.md)
+and [qualification](qualification/single-patch-host.json). The concrete filesystem
+profile is Windows HostControlled NTFS; journal tests run on all CI platforms.
+No Zhinu or new leaf-package implementation is introduced.
+Local regression passes 962 cases (481 per framework), including 40 new cases
+per framework. Seven package/symbol pairs, fresh standalone consumers,
+package-only patch tests (80) and workflow integration (24) pass. Remote CI
+and publication remain separate gates.
+
+- [x] **HOST-PATCH:** bounded single-target composition, exact locked facts,
+  mandatory evidence, approval/revocation writer order and conservative recovery.
+- [ ] **HOST-PATCH-RELEASE:** seven preview.3 package/symbol pairs, remote three-platform
+  CI and user-controlled publication. Existing six packages validate compatibility
+  against published preview.2; the new optional adapter has no published baseline.
+- [ ] **HOST-SERVICES:** production credential/issuer/approval services and database/
+  workspace custody in a concrete application. Batch, revocation drain and VFS
+  simulation remain separate designs.
+
 ## Luban v2 read/diff checkpoint - 2026-10-04
 
 The explicit [read/diff profile](luban-v2-authorization.md) adds bounded v2
@@ -21,9 +43,8 @@ case added after the 880-case full solution run.
   revocation/evidence gates, zero provider access on initial denial and portable CI tests.
 - [x] **LUBAN-V2-RELEASE:** all six preview.2 packages indexed, CI and publication
   validation passed on Windows/Ubuntu/macOS; fresh public-package consumers passed.
-- [ ] **HOST-PATCH:** review and qualify a separate single-patch host, exact locked
-  object start, required durable evidence/outcomes and ambiguous-result recovery.
-  This must not be inferred from a successful read/diff or workflow preflight.
+The next HOST-PATCH delivery is recorded above; read/diff and workflow
+preflight retain their separate, narrower guarantees.
 
 
 ## macOS CI coverage - 2026-10-04
@@ -143,7 +164,8 @@ Hufu core, Cedar and Biscuit have no Zhinu dependency. The frozen
 covered by a separate legacy integration project. It is not a dependency of the
 new workflow adapter. The latter is preflight authorization only and does not
 claim an atomic mutation-start fence. Biscuit remains experimental/unpublished;
-Luban v2 read/diff is published in preview.2; the host journal remains deferred. Older completion-snapshot
+Luban v2 read/diff is published in preview.2; the independent single-patch
+host/journal is a preview.3 candidate qualified separately above. Older completion-snapshot
 reviews below document their historical baseline, not the current stage.
 ## Published Zhinu package qualification - 2026-10-03
 
@@ -328,7 +350,10 @@ Gate: durable state never widens authority on replay; inspectable provenance and
 - [ ] Enforce structured requirements and report the exact handler versions/evidence; reject unsupported guarantees without dispatch.
 - [ ] Add local opaque credential-use bindings as required by the first credentialed operation; keep raw secrets outside authority records and agent context.
 - [x] Implement the experimental [co-located SQLite start profile](operation-start-profile.md) under [ADR 0009](decisions/0009-colocated-operation-start.md): actual Zhinu generation/step/lease checks, current authority, acquisition and mandatory evidence in one writer transaction. Exact replay never redispatches. This supplies block-new-starts semantics, not drain-before-acknowledgement or filesystem transactions.
-- [ ] Connect a real governed Luban single-patch host, exact semantic admission, final resource checks and terminal Completed/NoMutation/Ambiguous recovery to that start gate; qualify provider/start races and response loss before claiming a governed mutation release.
+- [x] Connect an independent governed Luban single-patch host, exact semantic
+  admission, final resource checks and terminal Completed/NoMutation/Ambiguous
+  recovery. Provider/start races and response loss are qualified in the
+  [preview.3 profile](single-patch-host.md); remote release is still pending.
 - [ ] Bind data-release and exact-effect approvals where the supported operations require them.
 - [ ] Reference existing budget reservations; do not create a second accounting ledger.
 - [ ] Publish typed provider profiles and tests proving supported strict effects, unknown-shell rejection, and no alternate execution route in the configured agent surface.
@@ -426,10 +451,11 @@ HA-2 and initial HA-3 are complete: six fresh-cache package consumers and packag
 The optional current-state/evidence store and legacy co-located Hufu/Zhinu start
 transaction are implemented. Their block-new-starts profile allows earlier
 committed starts to finish after revocation acknowledgement. The separate
-production host stream qualifies complete-plan approval, locked-object binding,
-final resource checks and durable terminal recovery. Staged single-patch/journal
-components are reviewed under HA-0A; they do not establish a production trusted
-host. Batches and stronger revocation-drain guarantees remain later gates.
+single-patch candidate qualifies exact approval, locked-object binding,
+final resource checks and durable terminal recovery without an engine dependency.
+Its [separate profile](single-patch-host.md) replaces the older staged proposal.
+Production authentication/custody, batches and stronger revocation-drain
+guarantees remain later gates.
 Sequential Hufu lookup followed by standalone Zhinu acquisition is still not
 an atomic substitute. This stream is not the neutral adapter's immediate queue.
 

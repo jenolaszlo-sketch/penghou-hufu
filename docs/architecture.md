@@ -84,8 +84,11 @@ Preflight the whole pipeline against known requirements and targets before
 upstream work, then recheck at effect start and concrete resource access.
 Readiness is not permission; dynamic targets and changed authority require live
 checks. The shared project has a qualified Windows read-only Local provider.
-Hufu's known-root read-authorizer is a prototype; governed whole-plan and
-production resource-boundary adapters remain pending.
+Hufu's known-root read-authorizer and explicit read/diff profile remain separate
+from the optional [single-patch host](single-patch-host.md). That adapter governs
+one approved exact captured patch through current resource checks, co-located
+start and durable recovery. Broader whole-plan and production service profiles
+remain future work.
 
 [ADR 0007](decisions/0007-preview-resolution-commit-barrier.md) selects
 [Luban preview resolution](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/docs/preview-resolution-commit-barrier.md)
@@ -104,8 +107,9 @@ callback or API. Luban separately implements standalone one-target and narrow
 namespace. Batch admission and recovery inspection are supplied by the host; no
 durable store or Hufu adapter is included. The host must protect the root, drive,
 mount, and directory namespace from untrusted actors; this is not general
-filesystem confinement. Hufu whole-plan admission, governed execution, and
-durable recovery remain pending. See Luban's [batch execution profile](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/docs/batch-execution-profile.md).
+filesystem confinement. Hufu's separate single-patch candidate supplies exact
+approval, governed execution and durable outcomes for one target. Governed
+batches remain pending. See Luban's [batch execution profile](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/docs/batch-execution-profile.md).
 This capture performs real authorized reads and differs from effect-free
 counterfactual policy simulation. Batch execution is sequential and non-atomic;
 post-start failures may leave partial outcomes and do not imply a transaction.

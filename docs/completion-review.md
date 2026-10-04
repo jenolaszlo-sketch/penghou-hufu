@@ -6,6 +6,19 @@ Current review: 2026-10-04. Read the [handoff](zhinu-authority-handoff.md),
 They supersede the older repository/host-first queue. Historical qualification
 records remain evidence for their actual revisions.
 
+## Single-patch candidate
+
+The new optional [single-patch host](single-patch-host.md) supplies exact semantic
+admission, final resource checks, co-located approved start and durable terminal
+recovery without a workflow-engine dependency. The seven-package preview.3
+candidate has its own [qualification record](qualification/single-patch-host.json).
+Remote CI and publication remain pending; the checkpoint below describes the
+published preview.2 baseline.
+Local regression passes 962 cases (481 per framework), including 40 new cases
+per framework. Seven package/symbol pairs, fresh standalone consumers,
+package-only patch tests (80) and workflow integration (24) pass. Remote CI
+and publication remain separate gates.
+
 ## Verified checkpoint
 
 All six preview.2 packages are indexed on NuGet. See [public metadata, three-platform
@@ -56,15 +69,17 @@ counts below describe earlier checkpoints.
 | ZA-5B | Separate replacement/retirement decision preserving the frozen legacy final-start guarantee |
 
 The [Luban v2 read/diff adapter](luban-v2-authorization.md) is now implemented
-in preview.2. The single-patch host/outcome journal remains a separate delivery. No other old `.tmp/hufu-completion` group was bulk-installed. That
+in preview.2. The single-patch host/outcome journal is now an independently qualified
+preview.3 candidate, described above. No other old `.tmp/hufu-completion` group was bulk-installed. That
 snapshot's 510-case report does not qualify the current release graph.
 
 ## Remaining scope
 
 The new trust-source interface does not authenticate credentials by itself.
 One concrete host still needs authenticated issuer/approval/custody services,
-actual shared capacity, exact resource binding, final atomic mutation start
-and durable outcome reconciliation. Current issuance rechecks after policy
+actual shared capacity and database/workspace custody. The bounded single-patch
+adapter supplies exact resource binding, co-located start and durable outcome
+reconciliation; integrating it with those authenticated services remains host work. Current issuance rechecks after policy
 awaits; it does not order parent revocation and publication across stores.
 Workflow preflight does not supply those effect-boundary guarantees.
 

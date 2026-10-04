@@ -1,0 +1,251 @@
+#nullable enable
+override Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.Equals(object? obj) -> bool
+override Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.GetHashCode() -> int
+override Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.ToString() -> string!
+override Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.Equals(object? obj) -> bool
+override Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.GetHashCode() -> int
+override Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.ToString() -> string!
+override Penghou.Hufu.Luban.Sqlite.PatchApprovalResult.Equals(object? obj) -> bool
+override Penghou.Hufu.Luban.Sqlite.PatchApprovalResult.GetHashCode() -> int
+override Penghou.Hufu.Luban.Sqlite.PatchApprovalResult.ToString() -> string!
+override Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.Equals(object? obj) -> bool
+override Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.GetHashCode() -> int
+override Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.ToString() -> string!
+override Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.Equals(object? obj) -> bool
+override Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.GetHashCode() -> int
+override Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.ToString() -> string!
+override Penghou.Hufu.Luban.Sqlite.PatchJournalOptions.Equals(object? obj) -> bool
+override Penghou.Hufu.Luban.Sqlite.PatchJournalOptions.GetHashCode() -> int
+override Penghou.Hufu.Luban.Sqlite.PatchJournalOptions.ToString() -> string!
+override Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead.Equals(object? obj) -> bool
+override Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead.GetHashCode() -> int
+override Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead.ToString() -> string!
+override Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.Equals(object? obj) -> bool
+override Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.GetHashCode() -> int
+override Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.ToString() -> string!
+Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost
+Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost.AdmitAsync(Penghou.Luban.Execution.PatchAdmissionRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Luban.Language.LanguageAuthorityDecision!>
+Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost.AuthorizeResourceAsync(Penghou.Luban.Execution.PatchResourceCheck! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.IO.Abstractions.ResourceAuthorizationDecision!>
+Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost.CompleteAsync(Penghou.Luban.Execution.PatchCompletion! completion, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<bool>
+Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost.CreatePreviewAuthorizer(Penghou.Luban.EffectInvocation! invocation, Penghou.Luban.Resolution.CompiledPreviewDocument! document) -> Penghou.Luban.Resolution.IPreviewAuthorizer!
+Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost.HufuSinglePatchHost(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.AuthenticatedAuthorityContext! context, Penghou.Hufu.Sqlite.SqliteAuthorityStore! store, Penghou.Hufu.IAuthorityEvaluator! evaluator, Penghou.Hufu.Luban.Sqlite.IHufuPatchDecisionEvidenceFactory! evidenceFactory, Penghou.Hufu.Luban.Sqlite.SqlitePatchOutcomeJournal! journal) -> void
+Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost.InspectAsync(Penghou.Luban.Execution.PatchAdmissionRequest! admission, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead!>
+Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost.ReconcileAmbiguousAsync(Penghou.Luban.Execution.PatchAdmissionRequest! admission, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<bool>
+Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost.StartAsync(Penghou.Luban.Execution.PatchStartRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.IO.Abstractions.MutationStartDecision!>
+Penghou.Hufu.Luban.Sqlite.IHufuPatchDecisionEvidenceFactory
+Penghou.Hufu.Luban.Sqlite.IHufuPatchDecisionEvidenceFactory.CreateAsync(Penghou.Hufu.AuthorityRequest! request, Penghou.Hufu.AuthorityDecision! decision, System.DateTimeOffset evaluatedAt, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityDecisionRecord?>
+Penghou.Hufu.Luban.Sqlite.IPatchJournalAuthorizer
+Penghou.Hufu.Luban.Sqlite.IPatchJournalAuthorizer.AuthorizeAsync(Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityStoreAuthorization!>
+Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand
+Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.<Clone>$() -> Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand!
+Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.Actor.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.Admission.get -> Penghou.Luban.Execution.PatchAdmissionRequest!
+Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.Admission.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.CommandId.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.CommandId.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.Context.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.Context.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.Deconstruct(out string! CommandId, out Penghou.Hufu.AuthorityStoreActor! Actor, out Penghou.Hufu.AuthenticatedAuthorityContext! Context, out Penghou.Luban.Execution.PatchAdmissionRequest! Admission, out System.DateTimeOffset ExpiresAt) -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.Equals(Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand? other) -> bool
+Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.ExpiresAt.get -> System.DateTimeOffset
+Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.ExpiresAt.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.PatchApprovalCommand(string! CommandId, Penghou.Hufu.AuthorityStoreActor! Actor, Penghou.Hufu.AuthenticatedAuthorityContext! Context, Penghou.Luban.Execution.PatchAdmissionRequest! Admission, System.DateTimeOffset ExpiresAt) -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.<Clone>$() -> Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord!
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.Actor.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.AdmissionIdentity.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.AdmissionIdentity.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.CommandId.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.CommandId.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.Context.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.Context.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.Deconstruct(out string! CommandId, out Penghou.Hufu.AuthorityStoreActor! Actor, out Penghou.Hufu.AuthenticatedAuthorityContext! Context, out string! OperationId, out string! AdmissionIdentity, out System.DateTimeOffset ExpiresAt, out Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent! Intent, out bool Revoked, out string? RevokeCommandId, out Penghou.Hufu.AuthorityStoreActor? RevokedBy) -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.Equals(Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord? other) -> bool
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.ExpiresAt.get -> System.DateTimeOffset
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.ExpiresAt.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.Intent.get -> Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent!
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.Intent.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.OperationId.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.OperationId.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.PatchApprovalRecord(string! CommandId, Penghou.Hufu.AuthorityStoreActor! Actor, Penghou.Hufu.AuthenticatedAuthorityContext! Context, string! OperationId, string! AdmissionIdentity, System.DateTimeOffset ExpiresAt, Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent! Intent, bool Revoked = false, string? RevokeCommandId = null, Penghou.Hufu.AuthorityStoreActor? RevokedBy = null) -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.RevokeCommandId.get -> string?
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.RevokeCommandId.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.Revoked.get -> bool
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.Revoked.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.RevokedBy.get -> Penghou.Hufu.AuthorityStoreActor?
+Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.RevokedBy.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalResult
+Penghou.Hufu.Luban.Sqlite.PatchApprovalResult.<Clone>$() -> Penghou.Hufu.Luban.Sqlite.PatchApprovalResult!
+Penghou.Hufu.Luban.Sqlite.PatchApprovalResult.Deconstruct(out Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus Status, out Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord? Record) -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalResult.Equals(Penghou.Hufu.Luban.Sqlite.PatchApprovalResult? other) -> bool
+Penghou.Hufu.Luban.Sqlite.PatchApprovalResult.PatchApprovalResult(Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus Status, Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord? Record = null) -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalResult.Record.get -> Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord?
+Penghou.Hufu.Luban.Sqlite.PatchApprovalResult.Record.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalResult.Status.get -> Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus
+Penghou.Hufu.Luban.Sqlite.PatchApprovalResult.Status.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus
+Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus.Active = 8 -> Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus
+Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus.CapacityExceeded = 4 -> Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus
+Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus.Conflict = 3 -> Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus
+Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus.Denied = 1 -> Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus
+Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus.Expired = 9 -> Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus
+Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus.InvalidRequest = 2 -> Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus
+Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus.NotFound = 7 -> Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus
+Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus.Recorded = 5 -> Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus
+Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus.Replayed = 6 -> Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus
+Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus.Revoked = 10 -> Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus
+Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus.Unavailable = 0 -> Penghou.Hufu.Luban.Sqlite.PatchApprovalStatus
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.<Clone>$() -> Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent!
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.Deconstruct(out string! DocumentIdentity, out string! NodeIdentity, out string! PlanIdentity, out Penghou.IO.Abstractions.HostInvocation! Invocation, out Penghou.IO.Abstractions.RequestIdentity RequestIdentity, out Penghou.IO.Abstractions.WorkspaceId Workspace, out Penghou.IO.Abstractions.WorkspacePath Path, out string! ProviderProfile, out Penghou.IO.Abstractions.ResourceVersion OriginalVersion, out Penghou.IO.Abstractions.ResourceVersion ProposedVersion, out int OriginalByteLength, out int ProposedByteLength) -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.DocumentIdentity.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.DocumentIdentity.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.Equals(Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent? other) -> bool
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.Invocation.get -> Penghou.IO.Abstractions.HostInvocation!
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.Invocation.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.NodeIdentity.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.NodeIdentity.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.OriginalByteLength.get -> int
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.OriginalByteLength.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.OriginalVersion.get -> Penghou.IO.Abstractions.ResourceVersion
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.OriginalVersion.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.PatchApprovedIntent(string! DocumentIdentity, string! NodeIdentity, string! PlanIdentity, Penghou.IO.Abstractions.HostInvocation! Invocation, Penghou.IO.Abstractions.RequestIdentity RequestIdentity, Penghou.IO.Abstractions.WorkspaceId Workspace, Penghou.IO.Abstractions.WorkspacePath Path, string! ProviderProfile, Penghou.IO.Abstractions.ResourceVersion OriginalVersion, Penghou.IO.Abstractions.ResourceVersion ProposedVersion, int OriginalByteLength, int ProposedByteLength) -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.Path.get -> Penghou.IO.Abstractions.WorkspacePath
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.Path.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.PlanIdentity.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.PlanIdentity.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.ProposedByteLength.get -> int
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.ProposedByteLength.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.ProposedVersion.get -> Penghou.IO.Abstractions.ResourceVersion
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.ProposedVersion.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.ProviderProfile.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.ProviderProfile.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.RequestIdentity.get -> Penghou.IO.Abstractions.RequestIdentity
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.RequestIdentity.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.Workspace.get -> Penghou.IO.Abstractions.WorkspaceId
+Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.Workspace.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.<Clone>$() -> Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest!
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.Actor.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.AdmissionIdentity.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.AdmissionIdentity.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.Approval.get -> Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand?
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.Approval.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.CommandId.get -> string?
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.CommandId.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.Completion.get -> Penghou.IO.Abstractions.MutationCompletion?
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.Completion.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.Context.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.Context.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.Deconstruct(out Penghou.Hufu.AuthorityStoreActor! Actor, out Penghou.Hufu.AuthenticatedAuthorityContext! Context, out Penghou.Hufu.Luban.Sqlite.PatchJournalOperation Operation, out string! OperationId, out string! AdmissionIdentity, out string? CommandId, out Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand? Approval, out Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord? Outcome, out Penghou.IO.Abstractions.MutationCompletion? Completion) -> void
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.Equals(Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest? other) -> bool
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.Operation.get -> Penghou.Hufu.Luban.Sqlite.PatchJournalOperation
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.Operation.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.OperationId.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.OperationId.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.Outcome.get -> Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord?
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.Outcome.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.PatchJournalAccessRequest(Penghou.Hufu.AuthorityStoreActor! Actor, Penghou.Hufu.AuthenticatedAuthorityContext! Context, Penghou.Hufu.Luban.Sqlite.PatchJournalOperation Operation, string! OperationId, string! AdmissionIdentity, string? CommandId = null, Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand? Approval = null, Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord? Outcome = null, Penghou.IO.Abstractions.MutationCompletion? Completion = null) -> void
+Penghou.Hufu.Luban.Sqlite.PatchJournalOperation
+Penghou.Hufu.Luban.Sqlite.PatchJournalOperation.Approve = 0 -> Penghou.Hufu.Luban.Sqlite.PatchJournalOperation
+Penghou.Hufu.Luban.Sqlite.PatchJournalOperation.Complete = 5 -> Penghou.Hufu.Luban.Sqlite.PatchJournalOperation
+Penghou.Hufu.Luban.Sqlite.PatchJournalOperation.ReadApproval = 2 -> Penghou.Hufu.Luban.Sqlite.PatchJournalOperation
+Penghou.Hufu.Luban.Sqlite.PatchJournalOperation.ReadOutcome = 4 -> Penghou.Hufu.Luban.Sqlite.PatchJournalOperation
+Penghou.Hufu.Luban.Sqlite.PatchJournalOperation.ReconcileAmbiguous = 6 -> Penghou.Hufu.Luban.Sqlite.PatchJournalOperation
+Penghou.Hufu.Luban.Sqlite.PatchJournalOperation.Reserve = 3 -> Penghou.Hufu.Luban.Sqlite.PatchJournalOperation
+Penghou.Hufu.Luban.Sqlite.PatchJournalOperation.RevokeApproval = 1 -> Penghou.Hufu.Luban.Sqlite.PatchJournalOperation
+Penghou.Hufu.Luban.Sqlite.PatchJournalOptions
+Penghou.Hufu.Luban.Sqlite.PatchJournalOptions.<Clone>$() -> Penghou.Hufu.Luban.Sqlite.PatchJournalOptions!
+Penghou.Hufu.Luban.Sqlite.PatchJournalOptions.Deconstruct(out int MaxEntries, out long MaxStoredBytes) -> void
+Penghou.Hufu.Luban.Sqlite.PatchJournalOptions.Equals(Penghou.Hufu.Luban.Sqlite.PatchJournalOptions? other) -> bool
+Penghou.Hufu.Luban.Sqlite.PatchJournalOptions.MaxEntries.get -> int
+Penghou.Hufu.Luban.Sqlite.PatchJournalOptions.MaxEntries.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchJournalOptions.MaxStoredBytes.get -> long
+Penghou.Hufu.Luban.Sqlite.PatchJournalOptions.MaxStoredBytes.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchJournalOptions.PatchJournalOptions(int MaxEntries = 10000, long MaxStoredBytes = 67108864) -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead.<Clone>$() -> Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead!
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead.Deconstruct(out Penghou.Hufu.Luban.Sqlite.PatchRecoveryState State, out Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord? Record) -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead.Equals(Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead? other) -> bool
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead.PatchOutcomeRead(Penghou.Hufu.Luban.Sqlite.PatchRecoveryState State, Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord? Record = null) -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead.Record.get -> Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord?
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead.Record.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead.State.get -> Penghou.Hufu.Luban.Sqlite.PatchRecoveryState
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead.State.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.<Clone>$() -> Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord!
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.Actor.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.AdmissionIdentity.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.AdmissionIdentity.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.BindingIdentity.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.BindingIdentity.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.BindingJson.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.BindingJson.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.Context.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.Context.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.DecisionCommandId.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.DecisionCommandId.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.Deconstruct(out Penghou.Hufu.AuthorityStoreActor! Actor, out Penghou.Hufu.AuthenticatedAuthorityContext! Context, out string! OperationId, out string! AdmissionIdentity, out string! DocumentIdentity, out string! NodeIdentity, out string! PlanIdentity, out Penghou.IO.Abstractions.MutationStartRequest! Start, out string! DecisionCommandId, out long SnapshotSequence, out string! BindingJson, out string! BindingIdentity, out Penghou.Hufu.Luban.Sqlite.PatchRecoveryState State, out string? EvidenceId, out Penghou.IO.Abstractions.ResourceVersion? ObservedVersion) -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.DocumentIdentity.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.DocumentIdentity.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.Equals(Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord? other) -> bool
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.EvidenceId.get -> string?
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.EvidenceId.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.NodeIdentity.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.NodeIdentity.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.ObservedVersion.get -> Penghou.IO.Abstractions.ResourceVersion?
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.ObservedVersion.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.OperationId.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.OperationId.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.PatchOutcomeRecord(Penghou.Hufu.AuthorityStoreActor! Actor, Penghou.Hufu.AuthenticatedAuthorityContext! Context, string! OperationId, string! AdmissionIdentity, string! DocumentIdentity, string! NodeIdentity, string! PlanIdentity, Penghou.IO.Abstractions.MutationStartRequest! Start, string! DecisionCommandId, long SnapshotSequence, string! BindingJson, string! BindingIdentity, Penghou.Hufu.Luban.Sqlite.PatchRecoveryState State, string? EvidenceId = null, Penghou.IO.Abstractions.ResourceVersion? ObservedVersion = null) -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.PlanIdentity.get -> string!
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.PlanIdentity.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.SnapshotSequence.get -> long
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.SnapshotSequence.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.Start.get -> Penghou.IO.Abstractions.MutationStartRequest!
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.Start.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.State.get -> Penghou.Hufu.Luban.Sqlite.PatchRecoveryState
+Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.State.init -> void
+Penghou.Hufu.Luban.Sqlite.PatchRecoveryState
+Penghou.Hufu.Luban.Sqlite.PatchRecoveryState.Ambiguous = 6 -> Penghou.Hufu.Luban.Sqlite.PatchRecoveryState
+Penghou.Hufu.Luban.Sqlite.PatchRecoveryState.Completed = 4 -> Penghou.Hufu.Luban.Sqlite.PatchRecoveryState
+Penghou.Hufu.Luban.Sqlite.PatchRecoveryState.NoMutation = 5 -> Penghou.Hufu.Luban.Sqlite.PatchRecoveryState
+Penghou.Hufu.Luban.Sqlite.PatchRecoveryState.NotFound = 0 -> Penghou.Hufu.Luban.Sqlite.PatchRecoveryState
+Penghou.Hufu.Luban.Sqlite.PatchRecoveryState.Reserved = 2 -> Penghou.Hufu.Luban.Sqlite.PatchRecoveryState
+Penghou.Hufu.Luban.Sqlite.PatchRecoveryState.Started = 3 -> Penghou.Hufu.Luban.Sqlite.PatchRecoveryState
+Penghou.Hufu.Luban.Sqlite.PatchRecoveryState.Unavailable = 1 -> Penghou.Hufu.Luban.Sqlite.PatchRecoveryState
+Penghou.Hufu.Luban.Sqlite.SqlitePatchOutcomeJournal
+Penghou.Hufu.Luban.Sqlite.SqlitePatchOutcomeJournal.ApproveAsync(Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand! command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Luban.Sqlite.PatchApprovalResult!>
+Penghou.Hufu.Luban.Sqlite.SqlitePatchOutcomeJournal.CompleteAsync(Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord! expected, Penghou.IO.Abstractions.MutationCompletion! completion, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<bool>
+Penghou.Hufu.Luban.Sqlite.SqlitePatchOutcomeJournal.InspectAsync(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.AuthenticatedAuthorityContext! context, string! operationId, string! admissionIdentity, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead!>
+Penghou.Hufu.Luban.Sqlite.SqlitePatchOutcomeJournal.OpenAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Microsoft.Data.Sqlite.SqliteConnection!>
+Penghou.Hufu.Luban.Sqlite.SqlitePatchOutcomeJournal.ProfileIdentity.get -> string!
+Penghou.Hufu.Luban.Sqlite.SqlitePatchOutcomeJournal.ReadApprovalAsync(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.AuthenticatedAuthorityContext! context, string! operationId, string! admissionIdentity, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Luban.Sqlite.PatchApprovalResult!>
+Penghou.Hufu.Luban.Sqlite.SqlitePatchOutcomeJournal.ReconcileAmbiguousAsync(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.AuthenticatedAuthorityContext! context, string! operationId, string! admissionIdentity, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<bool>
+Penghou.Hufu.Luban.Sqlite.SqlitePatchOutcomeJournal.ReserveAsync(Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord! record, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<bool>
+Penghou.Hufu.Luban.Sqlite.SqlitePatchOutcomeJournal.RevokeApprovalAsync(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.AuthenticatedAuthorityContext! context, string! operationId, string! admissionIdentity, string! commandId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Luban.Sqlite.PatchApprovalResult!>
+Penghou.Hufu.Luban.Sqlite.SqlitePatchOutcomeJournal.SqlitePatchOutcomeJournal(string! databasePath, Penghou.Hufu.Luban.Sqlite.IPatchJournalAuthorizer! authorizer, System.TimeProvider? clock = null, Penghou.Hufu.Luban.Sqlite.PatchJournalOptions? options = null) -> void
+Penghou.Hufu.Luban.Sqlite.SqlitePatchOutcomeJournal.TimeProvider.get -> System.TimeProvider!
+Penghou.Hufu.Luban.Sqlite.SqlitePatchOutcomeJournal.TryStartAsync(Microsoft.Data.Sqlite.SqliteConnection! connection, Microsoft.Data.Sqlite.SqliteTransaction! transaction, Penghou.Hufu.AuthorityOperationStartCommand! command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Sqlite.SqliteRuntimeStartResult!>
+static Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost.AdmissionIdentity(Penghou.Hufu.AuthenticatedAuthorityContext! context, Penghou.Luban.Execution.PatchAdmissionRequest! admission) -> string!
+static Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost.PrepareAdmission(Penghou.Hufu.AuthenticatedAuthorityContext! context, Penghou.Luban.Resolution.CompiledPreviewDocument! document, Penghou.Luban.Resolution.ResolvedEffectPlan! plan, string! operationId) -> Penghou.Luban.Execution.PatchAdmissionRequest!
+static Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.operator !=(Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand? left, Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand? right) -> bool
+static Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand.operator ==(Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand? left, Penghou.Hufu.Luban.Sqlite.PatchApprovalCommand? right) -> bool
+static Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.operator !=(Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord? left, Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord? right) -> bool
+static Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord.operator ==(Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord? left, Penghou.Hufu.Luban.Sqlite.PatchApprovalRecord? right) -> bool
+static Penghou.Hufu.Luban.Sqlite.PatchApprovalResult.operator !=(Penghou.Hufu.Luban.Sqlite.PatchApprovalResult? left, Penghou.Hufu.Luban.Sqlite.PatchApprovalResult? right) -> bool
+static Penghou.Hufu.Luban.Sqlite.PatchApprovalResult.operator ==(Penghou.Hufu.Luban.Sqlite.PatchApprovalResult? left, Penghou.Hufu.Luban.Sqlite.PatchApprovalResult? right) -> bool
+static Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.operator !=(Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent? left, Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent? right) -> bool
+static Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent.operator ==(Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent? left, Penghou.Hufu.Luban.Sqlite.PatchApprovedIntent? right) -> bool
+static Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.operator !=(Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest? left, Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest? right) -> bool
+static Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest.operator ==(Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest? left, Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest? right) -> bool
+static Penghou.Hufu.Luban.Sqlite.PatchJournalOptions.operator !=(Penghou.Hufu.Luban.Sqlite.PatchJournalOptions? left, Penghou.Hufu.Luban.Sqlite.PatchJournalOptions? right) -> bool
+static Penghou.Hufu.Luban.Sqlite.PatchJournalOptions.operator ==(Penghou.Hufu.Luban.Sqlite.PatchJournalOptions? left, Penghou.Hufu.Luban.Sqlite.PatchJournalOptions? right) -> bool
+static Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead.operator !=(Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead? left, Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead? right) -> bool
+static Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead.operator ==(Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead? left, Penghou.Hufu.Luban.Sqlite.PatchOutcomeRead? right) -> bool
+static Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.operator !=(Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord? left, Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord? right) -> bool
+static Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord.operator ==(Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord? left, Penghou.Hufu.Luban.Sqlite.PatchOutcomeRecord? right) -> bool

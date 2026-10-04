@@ -1,5 +1,11 @@
 # Handoff: authority extension inversion
 
+Current independent delivery: [single-patch host](single-patch-host.md) in optional
+Hufu.Luban.Sqlite, with [local qualification](qualification/single-patch-host.json).
+It introduces no Zhinu dependency or runtime lease claim. Preview.3 publication
+and remote CI are pending. Preserve the published six preview.2 packages and
+frozen legacy workflow profile as separate evidence.
+
 Updated 2026-10-04. Current gate status and evidence supersede the older resume prompts and snapshot inventories below.
 
 ## Current status
@@ -68,7 +74,7 @@ current gates above, not that historical prompt.
 - Keep Hufu core, Cedar and Biscuit free of Zhinu dependencies. The optional workflow adapter depends on Hufu and the exact published neutral contract only; no Zhinu runtime/SQL, Luban, IO, Cedar, Biscuit or host UI dependency is allowed.
 - Preserve required aggregate decision evidence, trusted host binding, typed approval outcomes, fail-closed behavior and fresh authorization for each retry or resumed dispatch. Historical permits do not authorize a new dispatch.
 - Keep resource access authorization separate from workflow preflight. Existing resource/Luban/Biscuit profiles remain independently governed.
-- Biscuit remains experimental and unpublished, with its pinned artifact outside the Hufu release set. Luban v2 read/diff is published in preview.2; the single-patch host journal remains deferred. No production workflow host is included in this release.
+- Biscuit remains experimental and unpublished, with its pinned artifact outside the Hufu release set. Luban v2 read/diff is published in preview.2; the separate single-patch host journal is a preview.3 candidate. No production workflow host is included in this release.
 - HA-2 package-backed qualification passed locally on both frameworks. HA-3 initial publication is complete. Preview.2 three-platform CI and user-controlled publication are complete; future releases require their own qualification.
 
 ## Core checkpoint and next independent work
@@ -89,8 +95,9 @@ telemetry slice](optional-telemetry.md) is also implemented. Preserve its finite
 queue/worker, closed labels and independence from mandatory evidence/results.
 Broader broker/approval/revocation telemetry and protected correlation remain
 host/integration gates; lineage/requirements and historical reconstruction
-remain separate explanation extensions. Broader Luban v2 mappings, the production single-patch host
-and outcome journal are still held in separate qualified deliveries. Do not
+remain separate explanation extensions. Broader Luban v2 mappings and concrete
+production authentication/custody services remain separate deliveries. The
+bounded single-patch candidate is qualified independently above. Do not
 bulk-install the old completion snapshot or infer authenticated services from
 the new interface types.
 
@@ -103,12 +110,14 @@ the new interface types.
 > local proof remains historical. Read luban-v2-authorization.md, the roadmap,
 > completion review and package release profile. Preserve v1 defaults, exact
 > v2 input scopes, current state, mandatory evidence and callback evidence limits.
-> The next independent delivery is HOST-PATCH: review the single-patch host/outcome
-> journal proposal against actual locked-object start, revocation ordering,
-> mandatory durable evidence, outcome recovery and ambiguous-result handling.
+> HOST-PATCH has an independent preview.3 implementation. Read single-patch-host.md
+> and qualification/single-patch-host.json before continuing with its remote
+> three-platform CI and user-controlled publication. Preserve exact approval,
+> locked-object start, revocation ordering, mandatory evidence and conservative
+> recovery. The new seventh package has no published compatibility baseline.
 > Do not infer mutation permission or candidate-object authorization from read/diff.
 > Keep semantic admission separate from concrete resource checks. Never bulk-install
 > older staging candidates, add a workflow-engine dependency to Hufu.Workflow,
 > or replace the frozen legacy atomic-start profile without boundary qualification.
-> Before changing released implementation, choose a new package version and use
-> preview.2 as the compatibility baseline. Publication remains user-controlled.
+> Preview.3 is selected, with preview.2 as the compatibility baseline for the
+> six existing packages. Publication remains user-controlled.

@@ -1,0 +1,1131 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "passed-local",
+  "candidateVersion": "0.1.0-preview.3",
+  "sourceBaseline": "cd08aa01d11df567f9e4a216c33607b231449875",
+  "sourceIdentityKind": "SHA-256 inventory of final text code, API inventories and build/release inputs with CRLF normalized to LF; not a new Git commit or public release",
+  "sourceIdentity": "680df2912b12759fae8342cae7c836a5c0a67d63d4a55eb55dc7164d60ec07d9",
+  "sourceFiles": [
+    {
+      "path": ".github/workflows/ci.yml",
+      "sha256": "d66bbc4f55a24624f1f9f109019a62455d8163e850e1dc9c6dd57aee6cdb9982"
+    },
+    {
+      "path": ".github/workflows/publish.yml",
+      "sha256": "cc63ff37cb9a5b16f894b87340cec5a72b54e4baee5c47eca2282a0833cb28d3"
+    },
+    {
+      "path": "Directory.Build.props",
+      "sha256": "0b44e3f7d948e69cae65c99a5e4f0d285888f904586b1d8490bf13414f02f66e"
+    },
+    {
+      "path": "NuGet.Config",
+      "sha256": "f90da135bb5809aec521fdec6deee0cb65ec41d74551e28a67f6fff0e30357f5"
+    },
+    {
+      "path": "Penghou.Hufu.slnx",
+      "sha256": "f07ff0a2e7bdbb3f27d2ababca6d2980de15aff5c935dd27ed32145567547003"
+    },
+    {
+      "path": "eng/Measure-BiscuitBudget.ps1",
+      "sha256": "3217b23e472c31e8073f3961a048481e49cf54293af39c48fc75d6a981985ada"
+    },
+    {
+      "path": "eng/Pack-HufuRelease.ps1",
+      "sha256": "728ecb20cff035436e1f70010c4f7bb28f3650ccc546d7283502bf26485f16b6"
+    },
+    {
+      "path": "eng/Restore-BiscuitCandidate.ps1",
+      "sha256": "476542e3993b3d5e7337cb51114e7607b76354d6707a67ab1e90d823f51c08f2"
+    },
+    {
+      "path": "eng/Test-HufuPackageConsumers.ps1",
+      "sha256": "9155cab28e12be683243894cff834287ee5a9401d519f9f401d64ecd7ce8a830"
+    },
+    {
+      "path": "eng/Test-PackagedPatchIntegration.ps1",
+      "sha256": "c9565d124d3c5a56477413aa7d69ba1779237c8483dc1bc9c7d866f7e37f141b"
+    },
+    {
+      "path": "eng/Test-PackagedWorkflowIntegration.ps1",
+      "sha256": "ec0cc78ec102a76fc8b0f5438408ebee6ee20e415e1bbc8861bbce39437faae3"
+    },
+    {
+      "path": "eng/Test-PublishedResourcePackages.ps1",
+      "sha256": "19f262cd9b3d58249e4d9c42df404e47f6c540376a56ff95d25edcfc4ae3f26f"
+    },
+    {
+      "path": "eng/Verify-HufuCoreGraph.ps1",
+      "sha256": "3cf3c0c9bd6b619e626251ac27433d51ef095b8844633f8b9f3887eb4fda0af2"
+    },
+    {
+      "path": "eng/Verify-HufuPackageSet.ps1",
+      "sha256": "d17a37525a3368b67e4855a270aa4835f6e33287e4846def960a1152b32793bf"
+    },
+    {
+      "path": "src/Penghou.Hufu.Biscuit.Sqlite/BiscuitSqliteDecisionRecorder.cs",
+      "sha256": "2e8921464a242038cc9e59e45ef92e4afa55aca4fa42c1ce34f638871d67df63"
+    },
+    {
+      "path": "src/Penghou.Hufu.Biscuit.Sqlite/BiscuitSqliteStartParticipant.cs",
+      "sha256": "ecd4fc1d4fa9784d15196af4b56e9ac5ea64256d8679dc72f2c5f76a67f352a9"
+    },
+    {
+      "path": "src/Penghou.Hufu.Biscuit.Sqlite/Penghou.Hufu.Biscuit.Sqlite.csproj",
+      "sha256": "9afda95c9767ac64eb79aaf27573e5997b3b3bfd1c1670cbaa178901189fa276"
+    },
+    {
+      "path": "src/Penghou.Hufu.Biscuit.Sqlite/SqliteBiscuitCredentialRegistry.cs",
+      "sha256": "4af98b1b3effbc8d1d137c97faad83ef1f856ee2fcc2acfb9ba5d178b4d4692b"
+    },
+    {
+      "path": "src/Penghou.Hufu.Biscuit.Sqlite/SqliteBiscuitRegistryEvidence.cs",
+      "sha256": "3ee6e4c691086fcc6664187d4b261d2a9c01de6f49685deb3f756dc607a73124"
+    },
+    {
+      "path": "src/Penghou.Hufu.Biscuit.Sqlite/SqliteBiscuitRegistryStorage.cs",
+      "sha256": "5a3dd75ee745a9f22d302894e184e0275859d4c944d741f6557a2789f10aa624"
+    },
+    {
+      "path": "src/Penghou.Hufu.Biscuit/BiscuitAuthorityService.cs",
+      "sha256": "7ed3f25651837c9fbc1c5648a86e411654df5d3d8fd03696728e69787cc863d6"
+    },
+    {
+      "path": "src/Penghou.Hufu.Biscuit/BiscuitCodec.cs",
+      "sha256": "7dc7a6da849739d5534ac2f51fa24eeb74d7903f7c4c5cefe2fa60563f6d975d"
+    },
+    {
+      "path": "src/Penghou.Hufu.Biscuit/BiscuitContracts.cs",
+      "sha256": "8ed3ea7ce68bc12ce8043d9df143fe2f63a577fe8c5423e8616311887f8fc9ed"
+    },
+    {
+      "path": "src/Penghou.Hufu.Biscuit/BiscuitCredentialRegistration.cs",
+      "sha256": "41dfc54205882cd0688386920b5dd79921b89a60384f5fa7b9ef3b637a6641a6"
+    },
+    {
+      "path": "src/Penghou.Hufu.Biscuit/BiscuitKeyRing.cs",
+      "sha256": "d7eefbb105e473a9a24ee4282bfaddb8eab5f24a983eedaa7b0bbc05e572188e"
+    },
+    {
+      "path": "src/Penghou.Hufu.Biscuit/BiscuitProfile.cs",
+      "sha256": "fbb0bb92814861c7e4d5f6819e245325b350ad2d12114ea7215727d9515b0deb"
+    },
+    {
+      "path": "src/Penghou.Hufu.Biscuit/BiscuitRequestAuthorizer.cs",
+      "sha256": "cf21be3972107dd10e5edffe106723ea5442defc382785f94b07904295aafdef"
+    },
+    {
+      "path": "src/Penghou.Hufu.Biscuit/DatalogLiteral.cs",
+      "sha256": "544ac99044d20634fee0c569018e0cf6a313d61b855e49270477b58593a121c1"
+    },
+    {
+      "path": "src/Penghou.Hufu.Biscuit/Penghou.Hufu.Biscuit.csproj",
+      "sha256": "8ce71ba4c5b7f7c33e73ecb6765107213500cf80ec9bb1fdbcd03f12e057879f"
+    },
+    {
+      "path": "src/Penghou.Hufu.Cedar/AssemblyInfo.cs",
+      "sha256": "e3c78b0f229e2590dfeaff2eb01723bd8539b12d0f93ad6fb719b7407e3610b5"
+    },
+    {
+      "path": "src/Penghou.Hufu.Cedar/CedarAuthorityEvaluator.cs",
+      "sha256": "07794a17081bb0488fb479cd5f66b64eae4a676484f3eb278db00e3e16c69296"
+    },
+    {
+      "path": "src/Penghou.Hufu.Cedar/Penghou.Hufu.Cedar.csproj",
+      "sha256": "2cd58c7029c0b8eb3e1554bf6fa5052566d99bfbeecff433d32a48d41f29165f"
+    },
+    {
+      "path": "src/Penghou.Hufu.Cedar/PublicAPI.Shipped.txt",
+      "sha256": "405c9afd219e17533e3db230cad0d93aff8ef3cd0d6fc0dfda18304ab0bc2501"
+    },
+    {
+      "path": "src/Penghou.Hufu.Cedar/PublicAPI.Unshipped.txt",
+      "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+    },
+    {
+      "path": "src/Penghou.Hufu.IO/HufuResourceAuthorizer.cs",
+      "sha256": "8f9b037047ef6a9ed1657d0e6222385a00166e5c8111c32bf5b051a78c6ba761"
+    },
+    {
+      "path": "src/Penghou.Hufu.IO/HufuWorkspaceAccess.cs",
+      "sha256": "de5b3a41fc826de86cb5f8c23fe0d9c6ebe0c05001b347305b8e2cadaa0b9d54"
+    },
+    {
+      "path": "src/Penghou.Hufu.IO/Penghou.Hufu.IO.csproj",
+      "sha256": "f848843a0e5960a43285c279ae203d49f7cd3c3b2eeb3d772a9355f0d9ba5e94"
+    },
+    {
+      "path": "src/Penghou.Hufu.IO/PublicAPI.Shipped.txt",
+      "sha256": "9757a4af5688eae51ca70e1e4d4bd8428b825fcc475e11a0a0dac7f7fe735083"
+    },
+    {
+      "path": "src/Penghou.Hufu.IO/PublicAPI.Unshipped.txt",
+      "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+    },
+    {
+      "path": "src/Penghou.Hufu.Luban.Sqlite/HufuSinglePatchHost.cs",
+      "sha256": "431ae2721766e52de487d3a473a7fd1e55a1a6b6b9d879aad902948aa564a425"
+    },
+    {
+      "path": "src/Penghou.Hufu.Luban.Sqlite/PatchHostContracts.cs",
+      "sha256": "a8534ce1f3cd0f4be61f0d51e8fe90ea425f65118ab08dfb4ff2086e1d8cd853"
+    },
+    {
+      "path": "src/Penghou.Hufu.Luban.Sqlite/PatchIdentity.cs",
+      "sha256": "737e3cdbc4aca21d84133af3b50ffeb4d95900d96b23acb0b01595c078c636bf"
+    },
+    {
+      "path": "src/Penghou.Hufu.Luban.Sqlite/PatchPreviewAuthorizer.cs",
+      "sha256": "728fb437dc6159bf31be4883612d2a6609c2ede22a1023c4d614af1a1b4e962e"
+    },
+    {
+      "path": "src/Penghou.Hufu.Luban.Sqlite/Penghou.Hufu.Luban.Sqlite.csproj",
+      "sha256": "f6220bf2801163e6bc9be94b1ee705fdfe37a5ad2e665eb1381cc123a2b1edac"
+    },
+    {
+      "path": "src/Penghou.Hufu.Luban.Sqlite/PublicAPI.Shipped.txt",
+      "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+    },
+    {
+      "path": "src/Penghou.Hufu.Luban.Sqlite/PublicAPI.Unshipped.txt",
+      "sha256": "4cf057a8f92531e782c13db47742555edcddc0cf50572acaa96bc6255abe6a61"
+    },
+    {
+      "path": "src/Penghou.Hufu.Luban.Sqlite/SqlitePatchOutcomeJournal.cs",
+      "sha256": "a215b265b91264c50d165229ad04403f0dd57149ec237f45674c7fd1db2681d4"
+    },
+    {
+      "path": "src/Penghou.Hufu.Luban/HufuLanguageAuthorityProfile.cs",
+      "sha256": "325337ff4285b7b280bbf2e5399b807ff2f2b78d217713370a8783d01a608fab"
+    },
+    {
+      "path": "src/Penghou.Hufu.Luban/HufuLanguageAuthorizer.cs",
+      "sha256": "b18801baa16e6d117c089795e51b9fd7bfc9844148fa54ad6ad0e7a30db493a8"
+    },
+    {
+      "path": "src/Penghou.Hufu.Luban/Penghou.Hufu.Luban.csproj",
+      "sha256": "93cd6406762ef8524e159684c499215c6e953ba2b797b59bc5c9725be6b3c7e3"
+    },
+    {
+      "path": "src/Penghou.Hufu.Luban/PublicAPI.Shipped.txt",
+      "sha256": "3f5371811e5181f54ff3bf14cbf4c18a6c3b483aea6edb4fec7e877c469d3b17"
+    },
+    {
+      "path": "src/Penghou.Hufu.Luban/PublicAPI.Unshipped.txt",
+      "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+    },
+    {
+      "path": "src/Penghou.Hufu.Sqlite/Penghou.Hufu.Sqlite.csproj",
+      "sha256": "46ea9d5ce66b1cfcb1807a0a08439e5079a7ad12ca4004322bf5a9ab7990a632"
+    },
+    {
+      "path": "src/Penghou.Hufu.Sqlite/PublicAPI.Shipped.txt",
+      "sha256": "6ca9a66239cc10a8e4045bee948d7811c597b1b5f5d12f3d0684b8adfe6496f6"
+    },
+    {
+      "path": "src/Penghou.Hufu.Sqlite/PublicAPI.Unshipped.txt",
+      "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+    },
+    {
+      "path": "src/Penghou.Hufu.Sqlite/SqliteAuthorityOperationStartGate.cs",
+      "sha256": "1d440662fed8b756e40d4a1456450c7f046956536160d634bbff5822ad12ba33"
+    },
+    {
+      "path": "src/Penghou.Hufu.Sqlite/SqliteAuthorityStore.cs",
+      "sha256": "1f35f9629cc3f115b6234421a87b959e77f03ba2ad20dccc4dce7194f0b1f892"
+    },
+    {
+      "path": "src/Penghou.Hufu.Sqlite/StoreCodec.cs",
+      "sha256": "2551c491a7d5c47ef8566fe7ed90abea84b617f09be54d5914469dc4f77f97d0"
+    },
+    {
+      "path": "src/Penghou.Hufu.Workflow/HufuExecutionAuthorizer.cs",
+      "sha256": "c288a218d007cd272671c85c42b4f4c03def0209cd9439edd2d054a4feccba61"
+    },
+    {
+      "path": "src/Penghou.Hufu.Workflow/Penghou.Hufu.Workflow.csproj",
+      "sha256": "c13d83103dce74f4d93d42238751fcdab5eb4c0db88d4c16c218613cb9b312c5"
+    },
+    {
+      "path": "src/Penghou.Hufu.Workflow/PublicAPI.Shipped.txt",
+      "sha256": "6c5f42a411dc5911d6f5f7e7eb93a0118365769dfaec4344c9a6872b2c48c061"
+    },
+    {
+      "path": "src/Penghou.Hufu.Workflow/PublicAPI.Unshipped.txt",
+      "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+    },
+    {
+      "path": "src/Penghou.Hufu.Workflow/WorkflowApproval.cs",
+      "sha256": "4b5957e5c429e310210b3c92cf7913c6a152c1d7dd015d2d9739d796d84f21ce"
+    },
+    {
+      "path": "src/Penghou.Hufu.Workflow/WorkflowAuthorityBinding.cs",
+      "sha256": "5aaf8328a4e1e88cc573b368fc37f3c0f04eef892d63c048a15fe5874bfb0c34"
+    },
+    {
+      "path": "src/Penghou.Hufu.Workflow/WorkflowAuthorizationRecord.cs",
+      "sha256": "9ebb4bfad0637711ef6cb91594e0dcef0c24012c8c4c7a00a9ce52f68fd6d6a2"
+    },
+    {
+      "path": "src/Penghou.Hufu.Zhinu.Sqlite/Penghou.Hufu.Zhinu.Sqlite.csproj",
+      "sha256": "04ed61a00c91e89b2232b0468b4ce2479a4c384cc7b08b226081d850dcee6aa8"
+    },
+    {
+      "path": "src/Penghou.Hufu.Zhinu.Sqlite/ZhinuPatchStartBinding.cs",
+      "sha256": "cacd7ddef257a445b06bd37016598ee6f5bde0e23acba2f44ad52b164d876a0d"
+    },
+    {
+      "path": "src/Penghou.Hufu.Zhinu.Sqlite/ZhinuSqliteAuthorityDatabase.cs",
+      "sha256": "51fad0890d1e229807a0e3f96eca8c11d4d706772eacf6c33e8a7660dac436ec"
+    },
+    {
+      "path": "src/Penghou.Hufu/AuthorityExplanation.cs",
+      "sha256": "a5f46bbf1221d870e3eda1d7b74b70ee88ee2195ad8a6d27524b9d9beff255df"
+    },
+    {
+      "path": "src/Penghou.Hufu/AuthorityExplanationReader.cs",
+      "sha256": "a859edf6c3797cb5fb255aeea5678007a07fffa09b5d5082552ecb7d2bdd737d"
+    },
+    {
+      "path": "src/Penghou.Hufu/AuthorityModel.cs",
+      "sha256": "aaa1fc841aa9d2755cbf24977b5275cfb51eea125f012f1b933e8d05e5e23504"
+    },
+    {
+      "path": "src/Penghou.Hufu/AuthorityOperationStart.cs",
+      "sha256": "30ab31ff9c27cfbc0f85465d917684ba1d0c62ea8316f9f40433bb0a69bcc372"
+    },
+    {
+      "path": "src/Penghou.Hufu/AuthorityRequestAuthorizer.cs",
+      "sha256": "a2cdbf597a4881cefd13c1494d366661147106951a649c4197ed2fac18a99503"
+    },
+    {
+      "path": "src/Penghou.Hufu/AuthorityStore.cs",
+      "sha256": "b8b297761da505eb92083326ca5ca3f96bef2eb9b7ef34796b85f9db48fbda8f"
+    },
+    {
+      "path": "src/Penghou.Hufu/AuthorityTelemetry.cs",
+      "sha256": "6885624874400eb8267b5d6db030ea86f19fdc1dcfdd2db8f621fbab85331c46"
+    },
+    {
+      "path": "src/Penghou.Hufu/BoundedAuthorityIssuanceAuthorizer.cs",
+      "sha256": "0aa20da940e6c3337ce61b28e48ab7edcab5306c546363e63e9d8b7e8f42996e"
+    },
+    {
+      "path": "src/Penghou.Hufu/BoundedAuthorityRequestAuthorizer.cs",
+      "sha256": "630268f09d2994a6d4c47c652bfb02a36d00d7361c24e82dfbb756a07ee7c9a4"
+    },
+    {
+      "path": "src/Penghou.Hufu/Penghou.Hufu.csproj",
+      "sha256": "6dc9c59cb323b3ef038e650bc3ef78381e496f30900c9fdb91324c2bbf13193f"
+    },
+    {
+      "path": "src/Penghou.Hufu/PublicAPI.Shipped.txt",
+      "sha256": "b71e68b04deaf2564fa8802db17d4a406f87aeb648c1652c730646507af91a3a"
+    },
+    {
+      "path": "src/Penghou.Hufu/PublicAPI.Unshipped.txt",
+      "sha256": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd"
+    },
+    {
+      "path": "src/Penghou.Hufu/TelemetryAuthorityRequestAuthorizer.cs",
+      "sha256": "d7653e00ddd05dfbebd4b4fdeac91fc853be6373ed9238a263573f8c4e5cbf87"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Biscuit.Tests/BiscuitAncestryFailureTests.cs",
+      "sha256": "e383c8de794e7b1568d2b9a732eae7f93ce7e5a74bb7db4aab73219e48951f96"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Biscuit.Tests/BiscuitAuthorityIntegrationTests.cs",
+      "sha256": "27c9e836cb3864997fe019d366d4efc5605231f688f5d638e4faea58550c2023"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Biscuit.Tests/BiscuitBudgetProbe.cs",
+      "sha256": "600b217f2de91b9a64c94b3fd04ecb514984d4f3f84750836435b85a2f551a6a"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Biscuit.Tests/BiscuitIntegrationFixture.cs",
+      "sha256": "bfb2c9f4f7d84622ff00f769774258aeaf6e67f4801f8300c1ab873ae53b855b"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Biscuit.Tests/BiscuitLubanReadTests.cs",
+      "sha256": "cb7fc46b85ad65cfabf8e32d5d6f46ba23b4aee4b952a2affcd1914204624479"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Biscuit.Tests/BiscuitOperationStartTests.cs",
+      "sha256": "f9db77210f9b15b30a97f6f11ae4876b7a9765165560a82b3cfb8c1741bba9bf"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Biscuit.Tests/BiscuitProfileTests.cs",
+      "sha256": "83e65e8c959510d53391866d1bffbdcef03ca542900f6d46bf78d31e368ed3f7"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Biscuit.Tests/BiscuitResourceReadTests.cs",
+      "sha256": "5bef2aa3040d9c4237446fb826665598dfafaa813712c172e41dca68fd624d10"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Biscuit.Tests/BiscuitValidityTests.cs",
+      "sha256": "7cf9630fecfb25232b73dd56e1347330bd10500878c061c9dc87e573c568cec0"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Biscuit.Tests/Penghou.Hufu.Biscuit.Tests.csproj",
+      "sha256": "aaaaeb301dfee507b24a35be5e69f5a828e008988eca448830098f841e2cb8cd"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Biscuit.Tests/WindowsResourceTestHelpers.cs",
+      "sha256": "5050cb70ac9f00fd5ad8a157779853a80c814ea0db90997ed9ec00575fbc62ed"
+    },
+    {
+      "path": "tests/Penghou.Hufu.IO.Tests/HufuWorkspaceAccessTests.cs",
+      "sha256": "e472e54319dc22e91f5a641dad863813c731b42df5281105e359450dd715e4d2"
+    },
+    {
+      "path": "tests/Penghou.Hufu.IO.Tests/LocalHufuIntegrationTests.cs",
+      "sha256": "035eae97e81487fc287642019e354f8e8e39c2044380d89e3e23f4724b5f0fe6"
+    },
+    {
+      "path": "tests/Penghou.Hufu.IO.Tests/Penghou.Hufu.IO.Tests.csproj",
+      "sha256": "dd6ea3f781ac89e848b5bc272ab14b555c57566e8c42711d0448937fec7be5db"
+    },
+    {
+      "path": "tests/Penghou.Hufu.LegacyIntegration.Tests/Penghou.Hufu.LegacyIntegration.Tests.csproj",
+      "sha256": "21491731fd5c5465587eef833593706dafd5328c6783b2bdee6a4a2e59e61e40"
+    },
+    {
+      "path": "tests/Penghou.Hufu.LegacyIntegration.Tests/ZhinuOperationStartTests.cs",
+      "sha256": "bcbad333cdec3a7af0854ece11c0724b25753e6656430b46a04f03f62bd5aba5"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Luban.Sqlite.Tests/HufuSinglePatchHostTests.cs",
+      "sha256": "c514cf8b3b28c837a9c6b890251a18be8401175b29505579ddf2f5f25f8e9837"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Luban.Sqlite.Tests/PatchOutcomeJournalTests.cs",
+      "sha256": "10ef06325fe360418ebc7b4b57cfdd6e47a181c4418a70d65ddb321ce5d340a1"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Luban.Sqlite.Tests/Penghou.Hufu.Luban.Sqlite.Tests.csproj",
+      "sha256": "29b14777e8eb2d0c982c883b6752c940727d75ffd67c6a4bc5baf78e2fa54f94"
+    },
+    {
+      "path": "tests/Penghou.Hufu.StartWorker.Tests/Penghou.Hufu.StartWorker.Tests.csproj",
+      "sha256": "a0a985ea928e142e871dd4f85fba262e4756e3602b86799005b46ece38de1bd6"
+    },
+    {
+      "path": "tests/Penghou.Hufu.StartWorker.Tests/Program.cs",
+      "sha256": "8625e9b81b2c51dd94ea8426797c6f62de40bec3e4960713734902d245384b39"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Tests/AuthorityExplanationCedarTests.cs",
+      "sha256": "9d743351951d7d4ab600b5f497703627841a4e6d0e1a4736875db1803cf71cc8"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Tests/AuthorityExplanationReaderTests.cs",
+      "sha256": "9cccd19ce1a41605eb6b1c38dd1c34748b14fe3e9939f29568df5c8b41404cdd"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Tests/AuthorityIssuanceProfileTests.cs",
+      "sha256": "54bc8f44c0ebe06abd41237241e05c2d8695cd18d37e234e749b8930657d496a"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Tests/AuthorityIssuanceStoreTests.cs",
+      "sha256": "84db4ac93709bbfd4e915854b1353307800f2401f55e44dc09eb56fcd8371f5d"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Tests/AuthoritySnapshotTests.cs",
+      "sha256": "871eb65cfd6a24c7d5b5f47022453feb6a1cfce3d625a585ab91ca4ca8777509"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Tests/AuthorityTelemetryTests.cs",
+      "sha256": "e2d5da1cd64f83406f0d0548886a9248abf8586a9cac7554c21df59ac305691a"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Tests/BoundedAuthorityRequestAuthorizerTests.cs",
+      "sha256": "531252ad8664440b2c77acde17d2abd15a5b8873d55a9fc8b6c5b2d0a4736386"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Tests/CedarAuthorityEvaluatorTests.cs",
+      "sha256": "511e27109fc836eed9bbd984c542f4b28c142c011d355e859cd9447d1120b401"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Tests/CurrentAuthorityRequestAuthorizerTests.cs",
+      "sha256": "cef86f7304b3315368fb832584bc1aee73f3419d5bc0246ef969282c6fb7873f"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Tests/HufuLanguageAuthorizerTests.cs",
+      "sha256": "7304e48aeaaefc06ff5e440ba705efc3f80ed052a7e17cf924227e7dcc35a5cf"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Tests/HufuLanguageV2AuthorizerTests.cs",
+      "sha256": "38359cb0963e66a7104dce14d83d8632ca1a337d4d811426ed2d69844c02c4b4"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Tests/HufuLanguageV2LocalTests.cs",
+      "sha256": "3983444a01cafc887885c5564bcb16055f6da1fdd669394d85c6c74d4ca61151"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj",
+      "sha256": "06dc4c0429094492a5f4e7f601e3e95f1735c5670a4fc0ef99b252b0e0c70bbb"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Tests/SqliteAuthorityStoreTests.cs",
+      "sha256": "6f9fd2cb247e7c764ad68849c8da3721dc7cf2f40f45bb1cafe84e8098a58bca"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Workflow.Integration.Tests/Penghou.Hufu.Workflow.Integration.Tests.csproj",
+      "sha256": "c6784b7272bc4c0adf286c5a5228392290fd019c4d85492ae0f0d33bcee7884a"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Workflow.Integration.Tests/WorkflowAuthorizationIntegrationTests.cs",
+      "sha256": "df8b8dc4533202bafef985f8fd5efdd88edc7c6a3f56bdfd7b311752c91e4ac0"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Workflow.Tests/HufuExecutionAuthorizerTests.cs",
+      "sha256": "f7db4665e492167220cf1ed7319268539dfc485716be61f71fc831fe59110b02"
+    },
+    {
+      "path": "tests/Penghou.Hufu.Workflow.Tests/Penghou.Hufu.Workflow.Tests.csproj",
+      "sha256": "5d70f9c882bae135c701caab24d4aa2803dc1ec2d6049d61dbaeaa41608fcf83"
+    }
+  ],
+  "localPlatform": "Windows x64",
+  "targetFrameworks": [
+    "net8.0",
+    "net10.0"
+  ],
+  "qualifiedProfile": {
+    "package": "Penghou.Hufu.Luban.Sqlite",
+    "writer": "local-windows-ntfs-controlled-write-v1",
+    "participant": "hufu-sqlite-single-patch-start-v1",
+    "maxFileBytes": 1048576,
+    "singleExactTarget": true,
+    "noWorkflowEngineDependency": true
+  },
+  "regression": {
+    "total": 962,
+    "passed": 962,
+    "failed": 0,
+    "skipped": 0,
+    "perFramework": 481,
+    "componentsPerFramework": {
+      "core": 243,
+      "Biscuit": 93,
+      "IO": 19,
+      "legacyIntegration": 22,
+      "Workflow": 52,
+      "workflowIntegration": 12,
+      "portablePatchJournal": 15,
+      "controlledWriterHost": 25
+    },
+    "runs": [
+      {
+        "artifact": "test-results/release-regression/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_31_55_net8.0.trx",
+        "sha256": "be2b4fe34061aa3964eee8532356545ee74ae3325ac7d51b8912f6cf28f64ca0",
+        "assembly": "penghou.hufu.biscuit.tests.dll",
+        "targetFramework": "net8.0",
+        "passed": 93,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "artifact": "test-results/release-regression/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_32_14_net10.0.trx",
+        "sha256": "6cbd492c604ed281d512317f7e182e18d5d30af7e8762ba4545bff8bf0968a36",
+        "assembly": "penghou.hufu.biscuit.tests.dll",
+        "targetFramework": "net10.0",
+        "passed": 93,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "artifact": "test-results/release-regression/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_32_52_net8.0.trx",
+        "sha256": "bd37729c335fc16e23e0f5155dea816794589e625bdacfc5e8c8a0fd492d0fb6",
+        "assembly": "penghou.hufu.io.tests.dll",
+        "targetFramework": "net8.0",
+        "passed": 19,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "artifact": "test-results/release-regression/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_32_54_net10.0.trx",
+        "sha256": "c7e2095e4f0fb8511a147e6e3ca48e457996eeffbd15a1bdd51cae5dfcb6392e",
+        "assembly": "penghou.hufu.io.tests.dll",
+        "targetFramework": "net10.0",
+        "passed": 19,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "artifact": "test-results/release-regression/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_32_58_net8.0.trx",
+        "sha256": "631d5bb2a0e905314892f4808ac0e8783bd7e302581a3f098b1eff9b35c7b15b",
+        "assembly": "penghou.hufu.legacyintegration.tests.dll",
+        "targetFramework": "net8.0",
+        "passed": 22,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "artifact": "test-results/release-regression/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_33_08_net10.0.trx",
+        "sha256": "f5d50e54b872eb337ff50f0e6de29e0a64157550f5f3904abb52e8d8311d3a20",
+        "assembly": "penghou.hufu.legacyintegration.tests.dll",
+        "targetFramework": "net10.0",
+        "passed": 22,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "artifact": "test-results/release-regression/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_33_17_net8.0.trx",
+        "sha256": "bc01177d8ffa1a1bbe1e78a4919b02b4144b45bb99f1d69fabf521e74b416114",
+        "assembly": "penghou.hufu.luban.sqlite.tests.dll",
+        "targetFramework": "net8.0",
+        "passed": 40,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "artifact": "test-results/release-regression/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_34_08_net10.0.trx",
+        "sha256": "e55d1a06551da9535d6f49de2f86b5c9758abe47aaea6fad4bcbfbdb650df846",
+        "assembly": "penghou.hufu.luban.sqlite.tests.dll",
+        "targetFramework": "net10.0",
+        "passed": 40,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "artifact": "test-results/release-regression/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_34_58_net8.0.trx",
+        "sha256": "b012861b3e2c3211d0b29bde869bc0ee4dc3cce89f547d95c66d77a220d6c0f9",
+        "assembly": "penghou.hufu.tests.dll",
+        "targetFramework": "net8.0",
+        "passed": 243,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "artifact": "test-results/release-regression/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_35_09_net10.0.trx",
+        "sha256": "c8ad4768fcebbb7a96c8fbbb5a7f2ecac6b9000a65c244852dee217377b670a8",
+        "assembly": "penghou.hufu.tests.dll",
+        "targetFramework": "net10.0",
+        "passed": 243,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "artifact": "test-results/release-regression/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_35_18_net8.0.trx",
+        "sha256": "18634008bb397f9090fcabd069d465dab0c94be19ec1ae3d21b063386eac21fa",
+        "assembly": "penghou.hufu.workflow.integration.tests.dll",
+        "targetFramework": "net8.0",
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "artifact": "test-results/release-regression/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_35_21_net10.0.trx",
+        "sha256": "59e2cd6cbc13a02fc172927734ff216e7e36a963e1e2ba2b2effe4f92ff917eb",
+        "assembly": "penghou.hufu.workflow.integration.tests.dll",
+        "targetFramework": "net10.0",
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "artifact": "test-results/release-regression/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_35_25_net8.0.trx",
+        "sha256": "444cf88dcbd5610691e6922e0b0fd05be261ef532ed0dae22a4486d07cf28ecd",
+        "assembly": "penghou.hufu.workflow.tests.dll",
+        "targetFramework": "net8.0",
+        "passed": 52,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "artifact": "test-results/release-regression/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_35_28_net10.0.trx",
+        "sha256": "d13ee3f1f19f57fae4db713845911eafa6bec4b3e69be51b7f94931a423326e4",
+        "assembly": "penghou.hufu.workflow.tests.dll",
+        "targetFramework": "net10.0",
+        "passed": 52,
+        "failed": 0,
+        "skipped": 0
+      }
+    ]
+  },
+  "newCases": {
+    "perFramework": 40,
+    "total": 80,
+    "portableJournalPerFramework": 15,
+    "windowsActualProviderPerFramework": 25
+  },
+  "packageInspection": {
+    "SchemaVersion": 1,
+    "Packages": [
+      {
+        "Id": "Penghou.Hufu",
+        "Version": "0.1.0-preview.3",
+        "Sha256": "CDCDD4EF46806A2C7B845BFB57B824DD194B44E23C36723E4471219F09300BEE",
+        "SymbolSha256": "F56C699BAD01B3F372E2E29A5AE0C16D40E4CA233AA1910BD0331D270AFF5F54"
+      },
+      {
+        "Id": "Penghou.Hufu.Cedar",
+        "Version": "0.1.0-preview.3",
+        "Sha256": "7E2EEC5AD4459A2CD13EDA0DF7AE03D1344463D022E879DEE3CCF00C6FA2FBF3",
+        "SymbolSha256": "9F98087AD0570017B7BF0A7851F3C49102A295ACE4BB885C73FA673EA93473A6"
+      },
+      {
+        "Id": "Penghou.Hufu.IO",
+        "Version": "0.1.0-preview.3",
+        "Sha256": "C88003143F1CD0E874ABAE27EB161799155D0854F1C9272565051B15859E2B61",
+        "SymbolSha256": "D23670A921F1F8C371C62E7AE79F4CD9E5B766690D47A5234DEA4D1A8D189837"
+      },
+      {
+        "Id": "Penghou.Hufu.Luban",
+        "Version": "0.1.0-preview.3",
+        "Sha256": "D0576D5FC6A20C19AF0505143DC1749AAD4F13BB7E47666EEC325948ACE4A8DC",
+        "SymbolSha256": "78DFBC512AF83F1F60FB4120EFCE3EEFFC9A3224BAB6B170A41011907931E1D4"
+      },
+      {
+        "Id": "Penghou.Hufu.Luban.Sqlite",
+        "Version": "0.1.0-preview.3",
+        "Sha256": "989AFB60D729E5A3F0FBCAA4C1C53F2D11DBDD894684C2E5BF948AAD9D0AB597",
+        "SymbolSha256": "84A1C474AABBF88BEE25D12FD1886489A4A4A0A74A44782E680086593DB18ACE"
+      },
+      {
+        "Id": "Penghou.Hufu.Sqlite",
+        "Version": "0.1.0-preview.3",
+        "Sha256": "4C4EB903D1E78E80FDC6A1DB9D2EF8076B97087AA49EEE17BF5252AA1691A189",
+        "SymbolSha256": "277C966DA8BA6675938CE3003C3BF3B45344F606CFC750A9CBD2622D89BA9162"
+      },
+      {
+        "Id": "Penghou.Hufu.Workflow",
+        "Version": "0.1.0-preview.3",
+        "Sha256": "A4D03F7BC6A27FD3898E995F7570865B67CF29EBF934A15E52328C09E75F31F4",
+        "SymbolSha256": "9535896ECF4A016ED7B30B8FC8088E84EF306D2662FCC644CA1AB9E1DEE73BC9"
+      }
+    ],
+    "NoZhinuDependencies": true,
+    "Status": "passed"
+  },
+  "compatibilityBaseline": "published 0.1.0-preview.2 for existing six; no baseline for new adapter",
+  "consumerQualification": {
+    "freshConsumer": {
+      "artifact": "qualification/consumer-6a4caa5f90cb496b979e192321358526/qualification.json",
+      "sha256": "ec25522b06df0f081f38f45d75981395d2b213f27194eadcee176b015c52ce5d",
+      "report": {
+        "SchemaVersion": 1,
+        "PackageVersion": "0.1.0-preview.3",
+        "FreshCache": "C:\\Users\\Laszlos\\AppData\\Local\\Temp\\hfc-9f285d17246e42259f45cdeac0396fa4",
+        "Packages": [
+          "CedarSharp/1.0.0",
+          "Microsoft.Data.Sqlite/10.0.10",
+          "Microsoft.Data.Sqlite.Core/10.0.10",
+          "Penghou.Hufu/0.1.0-preview.3",
+          "Penghou.Hufu.Cedar/0.1.0-preview.3",
+          "Penghou.Hufu.IO/0.1.0-preview.3",
+          "Penghou.Hufu.Luban/0.1.0-preview.3",
+          "Penghou.Hufu.Luban.Sqlite/0.1.0-preview.3",
+          "Penghou.Hufu.Sqlite/0.1.0-preview.3",
+          "Penghou.Hufu.Workflow/0.1.0-preview.3",
+          "Penghou.IO.Abstractions/0.1.0-preview.1",
+          "Penghou.IO.Protocols/0.1.0-preview.1",
+          "Penghou.Luban/0.1.0-preview.1",
+          "Penghou.Workflow.Abstractions/0.1.0-preview.2",
+          "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+          "SQLitePCLRaw.core/2.1.12",
+          "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+          "SQLitePCLRaw.provider.e_sqlite3/2.1.12"
+        ],
+        "Targets": [
+          {
+            "TargetFramework": "net8.0",
+            "RecordedDenialPassed": true,
+            "CoreAdmissionProbePassed": true,
+            "CoreIssuanceProbePassed": true,
+            "CedarExplanationCapturePassed": true,
+            "RedactedExplanationSummaryPassed": true,
+            "OptionalTelemetryIsolationPassed": true,
+            "ExplicitLubanV2ProbePassed": true,
+            "OptionalPatchJournalProbePassed": true
+          },
+          {
+            "TargetFramework": "net10.0",
+            "RecordedDenialPassed": true,
+            "CoreAdmissionProbePassed": true,
+            "CoreIssuanceProbePassed": true,
+            "CedarExplanationCapturePassed": true,
+            "RedactedExplanationSummaryPassed": true,
+            "OptionalTelemetryIsolationPassed": true,
+            "ExplicitLubanV2ProbePassed": true,
+            "OptionalPatchJournalProbePassed": true
+          }
+        ],
+        "NoProjectReferences": true,
+        "NoZhinuDependencies": true,
+        "Status": "passed"
+      }
+    },
+    "packagedWorkflow": {
+      "artifact": "qualification/integration-7bc7ca3d5f3a41fe9a7a989bf44c748b/qualification.json",
+      "sha256": "f38b2746565388bf2c25826bbbd2d8987fb1b0780340f65c059b56336574f94e",
+      "report": {
+        "SchemaVersion": 1,
+        "CandidateVersion": "0.1.0-preview.3",
+        "FreshCache": "C:\\Users\\Laszlos\\AppData\\Local\\Temp\\hfi-e7cc5c75385f49f8854c6b47472aecd8",
+        "PublishedZhinuVersion": "0.2.0-preview.1",
+        "PublishedNeutralVersion": "0.1.0-preview.2",
+        "NoProjectReferences": true,
+        "Packages": [
+          "Microsoft.CodeCoverage/17.14.1",
+          "Microsoft.Data.Sqlite/10.0.10",
+          "Microsoft.Data.Sqlite.Core/10.0.10",
+          "Microsoft.Extensions.DependencyInjection.Abstractions/10.0.9",
+          "Microsoft.Extensions.Logging.Abstractions/10.0.9",
+          "Microsoft.NET.Test.Sdk/17.14.1",
+          "Microsoft.TestPlatform.ObjectModel/17.14.1",
+          "Microsoft.TestPlatform.TestHost/17.14.1",
+          "Newtonsoft.Json/13.0.3",
+          "Penghou.Hufu/0.1.0-preview.3",
+          "Penghou.Hufu.Workflow/0.1.0-preview.3",
+          "Penghou.Workflow.Abstractions/0.1.0-preview.2",
+          "Penghou.Zhinu/0.2.0-preview.1",
+          "Penghou.Zhinu.Sqlite/0.2.0-preview.1",
+          "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+          "SQLitePCLRaw.core/2.1.12",
+          "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+          "SQLitePCLRaw.provider.e_sqlite3/2.1.12",
+          "System.Diagnostics.DiagnosticSource/10.0.9",
+          "xunit/2.9.3",
+          "xunit.abstractions/2.0.3",
+          "xunit.analyzers/1.18.0",
+          "xunit.assert/2.9.3",
+          "xunit.core/2.9.3",
+          "xunit.extensibility.core/2.9.3",
+          "xunit.extensibility.execution/2.9.3",
+          "xunit.runner.visualstudio/2.8.2"
+        ],
+        "Reports": [
+          {
+            "Report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_32_46_net10.0.trx",
+            "Total": 12,
+            "Passed": 12
+          },
+          {
+            "Report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_32_47_net8.0.trx",
+            "Total": 12,
+            "Passed": 12
+          }
+        ],
+        "Status": "passed"
+      },
+      "tests": [
+        {
+          "artifact": "qualification/integration-7bc7ca3d5f3a41fe9a7a989bf44c748b/tests/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_32_46_net10.0.trx",
+          "sha256": "144cb0ea6070a450bd5ca4f202453f7569abc11ac0814259c0e493bc581f555e",
+          "assembly": "penghou.hufu.workflow.integration.tests.dll",
+          "targetFramework": "net10.0",
+          "passed": 12,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "artifact": "qualification/integration-7bc7ca3d5f3a41fe9a7a989bf44c748b/tests/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_32_47_net8.0.trx",
+          "sha256": "2d4eda2663b4243dce213fffd9c395e7c8868321605fb6d09c61be59c8795942",
+          "assembly": "penghou.hufu.workflow.integration.tests.dll",
+          "targetFramework": "net8.0",
+          "passed": 12,
+          "failed": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    "packagedPatch": {
+      "artifact": "qualification/patch-consumer-c882cdcb70c54ad78a47284b97cc890f/qualification.json",
+      "sha256": "81023180535eca86dea7fde03046c8d6b3338cbfad9036f73dcb82eaef019f4d",
+      "report": {
+        "SchemaVersion": 1,
+        "PackageVersion": "0.1.0-preview.3",
+        "FreshCache": "C:\\Users\\Laszlos\\AppData\\Local\\Temp\\hpfc-a7aaf99b28a04bc4b6e84f2befc97228",
+        "Packages": [
+          "CedarSharp/1.0.0",
+          "Microsoft.CodeCoverage/17.14.1",
+          "Microsoft.Data.Sqlite/10.0.10",
+          "Microsoft.Data.Sqlite.Core/10.0.10",
+          "Microsoft.NET.Test.Sdk/17.14.1",
+          "Microsoft.TestPlatform.ObjectModel/17.14.1",
+          "Microsoft.TestPlatform.TestHost/17.14.1",
+          "Newtonsoft.Json/13.0.3",
+          "Penghou.Hufu/0.1.0-preview.3",
+          "Penghou.Hufu.Cedar/0.1.0-preview.3",
+          "Penghou.Hufu.IO/0.1.0-preview.3",
+          "Penghou.Hufu.Luban/0.1.0-preview.3",
+          "Penghou.Hufu.Luban.Sqlite/0.1.0-preview.3",
+          "Penghou.Hufu.Sqlite/0.1.0-preview.3",
+          "Penghou.Hufu.Workflow/0.1.0-preview.3",
+          "Penghou.IO.Abstractions/0.1.0-preview.1",
+          "Penghou.IO.Local/0.1.0-preview.1",
+          "Penghou.IO.Protocols/0.1.0-preview.1",
+          "Penghou.Luban/0.1.0-preview.1",
+          "Penghou.Workflow.Abstractions/0.1.0-preview.2",
+          "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+          "SQLitePCLRaw.core/2.1.12",
+          "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+          "SQLitePCLRaw.provider.e_sqlite3/2.1.12",
+          "xunit/2.9.3",
+          "xunit.abstractions/2.0.3",
+          "xunit.analyzers/1.18.0",
+          "xunit.assert/2.9.3",
+          "xunit.core/2.9.3",
+          "xunit.extensibility.core/2.9.3",
+          "xunit.extensibility.execution/2.9.3",
+          "xunit.runner.visualstudio/3.1.4"
+        ],
+        "Targets": [
+          {
+            "TargetFramework": "net8.0",
+            "PortableJournal": true,
+            "ControlledWindowsWriter": true,
+            "Passed": true
+          },
+          {
+            "TargetFramework": "net10.0",
+            "PortableJournal": true,
+            "ControlledWindowsWriter": true,
+            "Passed": true
+          }
+        ],
+        "NoProjectReferences": true,
+        "NoZhinuDependencies": true,
+        "Status": "passed"
+      },
+      "tests": [
+        {
+          "artifact": "qualification/patch-consumer-c882cdcb70c54ad78a47284b97cc890f/tests/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_33_01_net8.0.trx",
+          "sha256": "ac8e8474e5c9399e90815011496ccbb6aec2a38e4da64b25432040187461b5af",
+          "assembly": "penghou.hufu.luban.sqlite.tests.dll",
+          "targetFramework": "net8.0",
+          "passed": 40,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "artifact": "qualification/patch-consumer-c882cdcb70c54ad78a47284b97cc890f/tests/Laszlos_LAPTOP-KBD8D8JG_2026-10-04_17_34_06_net10.0.trx",
+          "sha256": "ef8ec743d8463f7eda71cecf635ed338de7ec3b64756411cc8ecc521dae0b534",
+          "assembly": "penghou.hufu.luban.sqlite.tests.dll",
+          "targetFramework": "net10.0",
+          "passed": 40,
+          "failed": 0,
+          "skipped": 0
+        }
+      ]
+    }
+  },
+  "independentGraph": {
+    "SchemaVersion": 1,
+    "Projects": [
+      {
+        "Project": "src/Penghou.Hufu",
+        "Libraries": [
+          "Microsoft.CodeAnalysis.PublicApiAnalyzers/5.6.0"
+        ],
+        "NoZhinuDependencies": true
+      },
+      {
+        "Project": "src/Penghou.Hufu.Cedar",
+        "Libraries": [
+          "CedarSharp/1.0.0",
+          "Microsoft.CodeAnalysis.PublicApiAnalyzers/5.6.0",
+          "Penghou.Hufu/0.1.0-preview.3"
+        ],
+        "NoZhinuDependencies": true
+      },
+      {
+        "Project": "src/Penghou.Hufu.Biscuit",
+        "Libraries": [
+          "BiscuitSharp/0.1.0-preview.2",
+          "CedarSharp/1.0.0",
+          "Microsoft.NET.ILLink.Tasks/8.0.31",
+          "Microsoft.NET.ILLink.Tasks/10.0.12",
+          "Penghou.Hufu/0.1.0-preview.3",
+          "Penghou.Hufu.Cedar/0.1.0-preview.3"
+        ],
+        "NoZhinuDependencies": true
+      },
+      {
+        "Project": "src/Penghou.Hufu.Workflow",
+        "Libraries": [
+          "Microsoft.CodeAnalysis.PublicApiAnalyzers/5.6.0",
+          "Penghou.Workflow.Abstractions/0.1.0-preview.2",
+          "Penghou.Hufu/0.1.0-preview.3"
+        ],
+        "NoZhinuDependencies": true
+      },
+      {
+        "Project": "tests/Penghou.Hufu.Tests",
+        "Libraries": [
+          "CedarSharp/1.0.0",
+          "Microsoft.CodeCoverage/17.14.1",
+          "Microsoft.Data.Sqlite/10.0.10",
+          "Microsoft.Data.Sqlite.Core/10.0.10",
+          "Microsoft.NET.Test.Sdk/17.14.1",
+          "Microsoft.TestPlatform.ObjectModel/17.14.1",
+          "Microsoft.TestPlatform.TestHost/17.14.1",
+          "Newtonsoft.Json/13.0.3",
+          "Penghou.IO.Abstractions/0.1.0-preview.1",
+          "Penghou.IO.Local/0.1.0-preview.1",
+          "Penghou.IO.Protocols/0.1.0-preview.1",
+          "Penghou.Luban/0.1.0-preview.1",
+          "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+          "SQLitePCLRaw.core/2.1.12",
+          "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+          "SQLitePCLRaw.provider.e_sqlite3/2.1.12",
+          "xunit/2.9.3",
+          "xunit.abstractions/2.0.3",
+          "xunit.analyzers/1.18.0",
+          "xunit.assert/2.9.3",
+          "xunit.core/2.9.3",
+          "xunit.extensibility.core/2.9.3",
+          "xunit.extensibility.execution/2.9.3",
+          "xunit.runner.visualstudio/2.8.2",
+          "Penghou.Hufu/0.1.0-preview.3",
+          "Penghou.Hufu.Cedar/0.1.0-preview.3",
+          "Penghou.Hufu.Luban/0.1.0-preview.3",
+          "Penghou.Hufu.Sqlite/0.1.0-preview.3"
+        ],
+        "NoZhinuDependencies": true
+      },
+      {
+        "Project": "tests/Penghou.Hufu.IO.Tests",
+        "Libraries": [
+          "Microsoft.CodeCoverage/17.14.1",
+          "Microsoft.NET.Test.Sdk/17.14.1",
+          "Microsoft.TestPlatform.ObjectModel/17.14.1",
+          "Microsoft.TestPlatform.TestHost/17.14.1",
+          "Newtonsoft.Json/13.0.3",
+          "Penghou.IO.Abstractions/0.1.0-preview.1",
+          "Penghou.IO.Local/0.1.0-preview.1",
+          "Penghou.IO.Protocols/0.1.0-preview.1",
+          "xunit/2.9.3",
+          "xunit.abstractions/2.0.3",
+          "xunit.analyzers/1.18.0",
+          "xunit.assert/2.9.3",
+          "xunit.core/2.9.3",
+          "xunit.extensibility.core/2.9.3",
+          "xunit.extensibility.execution/2.9.3",
+          "xunit.runner.visualstudio/2.8.2",
+          "Penghou.Hufu/0.1.0-preview.3",
+          "Penghou.Hufu.IO/0.1.0-preview.1"
+        ],
+        "NoZhinuDependencies": true
+      },
+      {
+        "Project": "tests/Penghou.Hufu.Workflow.Tests",
+        "Libraries": [
+          "Microsoft.CodeCoverage/17.14.1",
+          "Microsoft.NET.Test.Sdk/17.14.1",
+          "Microsoft.TestPlatform.ObjectModel/17.14.1",
+          "Microsoft.TestPlatform.TestHost/17.14.1",
+          "Newtonsoft.Json/13.0.3",
+          "Penghou.Workflow.Abstractions/0.1.0-preview.2",
+          "xunit/2.9.3",
+          "xunit.abstractions/2.0.3",
+          "xunit.analyzers/1.18.0",
+          "xunit.assert/2.9.3",
+          "xunit.core/2.9.3",
+          "xunit.extensibility.core/2.9.3",
+          "xunit.extensibility.execution/2.9.3",
+          "xunit.runner.visualstudio/2.8.2",
+          "Penghou.Hufu/0.1.0-preview.3",
+          "Penghou.Hufu.Workflow/0.1.0-preview.3"
+        ],
+        "NoZhinuDependencies": true
+      },
+      {
+        "Project": "src/Penghou.Hufu.Luban.Sqlite",
+        "Libraries": [
+          "Microsoft.CodeAnalysis.PublicApiAnalyzers/5.6.0",
+          "Microsoft.Data.Sqlite/10.0.10",
+          "Microsoft.Data.Sqlite.Core/10.0.10",
+          "Penghou.IO.Abstractions/0.1.0-preview.1",
+          "Penghou.IO.Protocols/0.1.0-preview.1",
+          "Penghou.Luban/0.1.0-preview.1",
+          "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+          "SQLitePCLRaw.core/2.1.12",
+          "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+          "SQLitePCLRaw.provider.e_sqlite3/2.1.12",
+          "Penghou.Hufu/0.1.0-preview.3",
+          "Penghou.Hufu.Luban/0.1.0-preview.3",
+          "Penghou.Hufu.Sqlite/0.1.0-preview.3"
+        ],
+        "NoZhinuDependencies": true
+      },
+      {
+        "Project": "tests/Penghou.Hufu.Luban.Sqlite.Tests",
+        "Libraries": [
+          "CedarSharp/1.0.0",
+          "Microsoft.CodeCoverage/17.14.1",
+          "Microsoft.Data.Sqlite/10.0.10",
+          "Microsoft.Data.Sqlite.Core/10.0.10",
+          "Microsoft.NET.Test.Sdk/17.14.1",
+          "Microsoft.TestPlatform.ObjectModel/17.14.1",
+          "Microsoft.TestPlatform.TestHost/17.14.1",
+          "Newtonsoft.Json/13.0.3",
+          "Penghou.IO.Abstractions/0.1.0-preview.1",
+          "Penghou.IO.Local/0.1.0-preview.1",
+          "Penghou.IO.Protocols/0.1.0-preview.1",
+          "Penghou.Luban/0.1.0-preview.1",
+          "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+          "SQLitePCLRaw.core/2.1.12",
+          "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+          "SQLitePCLRaw.provider.e_sqlite3/2.1.12",
+          "xunit/2.9.3",
+          "xunit.abstractions/2.0.3",
+          "xunit.analyzers/1.18.0",
+          "xunit.assert/2.9.3",
+          "xunit.core/2.9.3",
+          "xunit.extensibility.core/2.9.3",
+          "xunit.extensibility.execution/2.9.3",
+          "xunit.runner.visualstudio/3.1.4",
+          "Penghou.Hufu/0.1.0-preview.3",
+          "Penghou.Hufu.Cedar/0.1.0-preview.3",
+          "Penghou.Hufu.Luban/0.1.0-preview.3",
+          "Penghou.Hufu.Luban.Sqlite/0.1.0-preview.3",
+          "Penghou.Hufu.Sqlite/0.1.0-preview.3"
+        ],
+        "NoZhinuDependencies": true
+      }
+    ],
+    "Status": "passed"
+  },
+  "review": "Luna implemented/reviewed the journal and actual-provider tests and independently reviewed the final host, preview, identity validation and manual.",
+  "qualifiedBoundaries": [
+    "exact approval target facts",
+    "current resource and release checks with required evidence",
+    "same final snapshot sequence/identity/version",
+    "earliest PatchFile evidence anchors all grant transitions through commit",
+    "co-located approval/revocation and authority/start writer order",
+    "exact locked-object/provider/byte-version binding",
+    "no replay dispatch",
+    "durable Completed/NoMutation/Ambiguous evidence",
+    "start and completion response loss",
+    "conservative ambiguity reconciliation",
+    "bounded records/capacity and corruption rejection",
+    "foreign/attached/TEMP schema rejection; empty TEMP allowed",
+    "canonical physical owner path"
+  ],
+  "ciStatus": "Windows/Ubuntu/macOS configured; new remote runs pending",
+  "publicationStatus": "pending user-controlled publication from main",
+  "limitations": [
+    "Windows HostControlled NTFS execution only",
+    "journal portable; remote platform qualification pending",
+    "no atomic filesystem/SQLite completion transaction",
+    "no automatic retry or hash-based terminal promotion",
+    "block-new-starts without revocation drain",
+    "trusted credential/issuer/approval services and database/workspace custody remain host obligations",
+    "batch/VFS/simulation and frozen legacy retirement remain separate gates"
+  ],
+  "artifactNote": "Raw local TRX, candidate bytes and isolated caches are retained in the staging tree. CI uploads its own exact run artifacts.",
+  "installedCheckout": {
+    "normalizedSourceInventoryMatches": true,
+    "buildTargets": [
+      "net8.0",
+      "net10.0"
+    ],
+    "warnings": 0,
+    "errors": 0
+  }
+}

@@ -6,7 +6,7 @@ $ErrorActionPreference = 'Stop'
 $repo = [IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $projects = @('src/Penghou.Hufu','src/Penghou.Hufu.Cedar','src/Penghou.Hufu.Biscuit',
     'src/Penghou.Hufu.Workflow','tests/Penghou.Hufu.Tests','tests/Penghou.Hufu.IO.Tests',
-    'tests/Penghou.Hufu.Workflow.Tests')
+    'tests/Penghou.Hufu.Workflow.Tests','src/Penghou.Hufu.Luban.Sqlite','tests/Penghou.Hufu.Luban.Sqlite.Tests')
 $graph = foreach ($project in $projects) {
     $assetsPath = Join-Path $repo "$project/obj/project.assets.json"
     if (-not (Test-Path -LiteralPath $assetsPath -PathType Leaf)) { throw "Restore the full solution before checking independence: $project" }

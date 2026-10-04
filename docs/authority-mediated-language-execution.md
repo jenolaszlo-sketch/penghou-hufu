@@ -90,6 +90,10 @@ execution must recheck current authority and target state.
 observations and patch proposals; `CaptureComplete` does not grant permission to
 commit, and `CanCommit` remains false. Stateful VFS/WhatIf execution is deferred
 VFS-5 work. Separate patch executors do not change the capture contract.
+Hufu's optional [single-patch host](single-patch-host.md) connects one exact
+captured patch to explicit approval, current resource checks, co-located start
+and durable outcomes. That execution path requires its own trusted composition
+and does not make capture or a policy simulation executable.
 
 ## Relationship to sandboxing
 

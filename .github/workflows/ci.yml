@@ -45,6 +45,8 @@ jobs:
           if ($LASTEXITCODE -ne 0) { throw 'Portable adapter tests failed.' }
           dotnet test tests/Penghou.Hufu.Workflow.Integration.Tests/Penghou.Hufu.Workflow.Integration.Tests.csproj -c Release --logger trx --results-directory test-results
           if ($LASTEXITCODE -ne 0) { throw 'Published-runtime integration tests failed.' }
+          dotnet test tests/Penghou.Hufu.Luban.Sqlite.Tests/Penghou.Hufu.Luban.Sqlite.Tests.csproj -c Release --filter 'FullyQualifiedName!~HufuSinglePatchHostTests' --logger trx --results-directory test-results
+          if ($LASTEXITCODE -ne 0) { throw 'Portable patch journal tests failed.' }
       - name: macOS native Cedar, Biscuit and SQLite regression
         if: runner.os == 'macOS'
         shell: pwsh
@@ -62,6 +64,7 @@ jobs:
           ./eng/Pack-HufuRelease.ps1 -Version $version
           ./eng/Test-HufuPackageConsumers.ps1 -PackageDirectory artifacts/packages -Version $version
           ./eng/Test-PackagedWorkflowIntegration.ps1 -PackageDirectory artifacts/packages -Version $version
+          ./eng/Test-PackagedPatchIntegration.ps1 -PackageDirectory artifacts/packages -Version $version
       - name: Retain qualification evidence
         if: always()
         uses: actions/upload-artifact@v4

@@ -1,9 +1,16 @@
 # Hufu package release profile
 
-The reviewed release set is `Penghou.Hufu`, `Penghou.Hufu.Cedar`,
+Current candidate: seven packages at `0.1.0-preview.3`, including the optional
+`Penghou.Hufu.Luban.Sqlite` [single-patch host](single-patch-host.md). Existing
+six packages use published preview.2 for compatibility validation; the new
+adapter has no baseline. Local evidence is [recorded separately](qualification/single-patch-host.json);
+remote CI and user-controlled publication are pending. The following published
+checkpoint remains historical release evidence.
+
+The published preview.2 set is `Penghou.Hufu`, `Penghou.Hufu.Cedar`,
 `Penghou.Hufu.Sqlite`, `Penghou.Hufu.IO`, `Penghou.Hufu.Luban` and
-`Penghou.Hufu.Workflow`. Each targets .NET 8 and .NET 10. The checked-in version
-is `0.1.0-preview.2`. All six are published and indexed; [public release evidence](qualification/hufu-luban-v2-public-release.json)
+`Penghou.Hufu.Workflow`. Each targets .NET 8 and .NET 10. All six preview.2
+packages are published and indexed; [public release evidence](qualification/hufu-luban-v2-public-release.json)
 records exact metadata/hashes, three-platform CI/publication and fresh consumers.
 The original preview.1 record remains historical. Each future release needs a new
 version and qualification, then user-controlled publication from `main`.
@@ -20,14 +27,15 @@ Biscuit and Biscuit.Sqlite remain experimental and outside this release set.
 Their regression tests require the hash-pinned unpublished BiscuitSharp
 preview.2 artifact through `eng/Restore-BiscuitCandidate.ps1`; released Hufu
 packages restore exclusively from public NuGet dependencies. The explicit
-[Luban v2 read/diff profile](luban-v2-authorization.md) is published in preview.2. The older single-patch host/journal remains deferred under
+[Luban v2 read/diff profile](luban-v2-authorization.md) is published in preview.2. The older staged single-patch proposal was replaced by the independent
+[preview.3 host](single-patch-host.md). Its earlier deferral was recorded under
 [the reuse review](ha-0a-review.md).
 
 Public API inventories are regenerated from this reviewed source and enforced
 with PublicApiAnalyzers. Published preview.1 and preview.2 APIs are now shipped;
-future additions stay in the unshipped inventory until publication. This release
-was validated against preview.1. Before the next implementation release, bump
-the version and set preview.2 as the package compatibility baseline. Strict target-framework package validation, package contents and
+future additions stay in the unshipped inventory until publication. Preview.2
+was validated against preview.1; preview.3 uses published preview.2 for the six
+existing packages. The new adapter has no published baseline. Strict target-framework package validation, package contents and
 dependency checks, isolated fresh-cache consumers and separate integration tests
 qualify the candidate. Local checks do not establish production host identity,
 approval custody, resource enforcement or cross-process admission capacity.
@@ -55,9 +63,12 @@ Both CI and publication validation run on Windows, Ubuntu and `macos-15`
 (ARM64), with .NET 8 and .NET 10. Windows runs the full solution. Linux and
 macOS run portable core admission, issuance, explanation, telemetry and
 Luban v2 authority-mapping tests,
-Workflow unit tests and integration against the published Zhinu runtime.
-All three platforms inspect the six release package/symbol pairs, run fresh
-standalone package consumers and run package-only workflow integration.
+Workflow unit tests and integration against the published Zhinu runtime,
+plus the portable SQLite patch journal suite.
+All three platforms inspect the seven current release package/symbol pairs, run fresh
+standalone package consumers and run package-only workflow and patch integration.
+Package-only patch tests exercise the actual controlled Windows writer on Windows;
+Linux/macOS run journal approval/start/recovery against the candidate packages.
 Publication waits for every validation job; it remains an input-free manual
 dispatch from `main`.
 

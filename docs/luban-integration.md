@@ -7,7 +7,7 @@ a general resource decorator. HTTP contracts have a separate future domain owner
 Capture-only WhatIf remains unchanged; overlay execution is deferred VFS-5.
 
 Status: V1 reads and explicit v2 read/diff authorization implemented, 2026-10-04;
-production mutation governance remains pending. See [v2 usage and limits](luban-v2-authorization.md). The prototype includes optional current-state/evidence SQLite integration; it is not an atomic mutation-start protocol.
+the separate bounded [single-patch host](single-patch-host.md) is a preview.3 candidate. See [v2 usage and limits](luban-v2-authorization.md). The prototype includes optional current-state/evidence SQLite integration; it is not an atomic mutation-start protocol.
 [ADR 0005](decisions/0005-luban-owns-typed-effects.md) selects Luban as the separate
 effect-runtime owner. Read its [design](../../Penghou.Luban/docs/typed-effect-runtime.md)
 and [implementation plan](../../Penghou.Luban/docs/implementation-plan.md) for
@@ -37,7 +37,8 @@ and receipt inspection are supplied by the host; they are not Hufu governance or
 a durable recovery store. The host must protect the root, drive, mount, and
 directory namespace from untrusted actors. Neither profile provides general
 filesystem confinement. Governed batch admission, durable recovery, and Hufu
-commit/start integration remain pending;
+batch commit/start integration remain pending. Independent single-target
+governance is supplied by the separate Hufu.Luban.Sqlite candidate;
 CedarSharp 1.0.0 is qualified; the Hufu.Cedar typed projection/evaluator
 prototype and known-root read consumer pass the local Windows x64 qualification.
 The optional [current-state/evidence store](durable-authority-store.md) is implemented; complete authority lifecycle, governed admission, and production integration remain open. Hufu now has a
@@ -63,8 +64,9 @@ authority prototype profile](current-authority-profile.md).
 | Provider selection, identity, credentials and operation UI | Host; Marang supervisor or Guyabano local composition |
 
 Luban and Hufu cores stay independent. Penghou.Hufu.Luban depends on both for
-the implemented known-root read profile; broader capability-family and mutation
-adapters remain planned.
+the implemented read and read/diff profiles. Optional Hufu.Luban.Sqlite adds
+the bounded single-patch host without changing either core; broader capability
+families and batch adapters remain planned.
 No direct reference from Luban core to Cedar, workflow engines, MCP, or a specific
 supervisor is needed. A registered effect is discoverable behavior, not authority.
 
@@ -102,9 +104,10 @@ closed. No permissive provider or authorizer is supplied.
 `WriteFile` has its own Hufu action and does not map to `PatchFile`. This adapter
 does not implement a Hufu-backed `IResourceMutationJournal` or atomically bind
 `IAuthorityOperationStartGate` to the physical object's locked mutation start.
-Conditional writes remain unavailable as a governed guarantee until a trusted
-host supplies and qualifies that exact start mapping, including revocation order,
-evidence failure and ambiguous outcome recovery. The focused Hufu.IO suite also
+The separate [Hufu.Luban.Sqlite host](single-patch-host.md) supplies this exact
+start mapping for one approved captured patch, including revocation order,
+evidence failure and ambiguous recovery. General Hufu.IO writes still require
+a qualified host journal; this does not broaden the resource facade itself. The focused Hufu.IO suite also
 uses the real Windows Local provider with a deterministic evaluator over Hufu
 snapshots and a test-only mutation journal. It verifies bounded reads, excluded
 candidate non-disclosure, paginated listing on one retained session, exact-version

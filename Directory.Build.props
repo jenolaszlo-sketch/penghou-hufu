@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <Version>0.1.0-preview.2</Version>
+    <Version>0.1.0-preview.3</Version>
     <IsPackable>false</IsPackable>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -12,7 +12,7 @@
     <Authors>Penghou.Hufu contributors</Authors>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'Penghou.Hufu' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Cedar' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.IO' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Luban' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Sqlite' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Workflow'">
+  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'Penghou.Hufu' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Cedar' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.IO' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Luban' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Sqlite' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Workflow' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Luban.Sqlite'">
     <IsPackable>true</IsPackable>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>authorization;authority;workflow</PackageTags>
@@ -26,7 +26,7 @@
     <!-- Existing preview APIs have incomplete XML comments; API inventories remain enforced. -->
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <EnablePackageValidation>true</EnablePackageValidation>
-    <PackageValidationBaselineVersion>0.1.0-preview.1</PackageValidationBaselineVersion>
+    <PackageValidationBaselineVersion Condition="'$(MSBuildProjectName)' != 'Penghou.Hufu.Luban.Sqlite'">0.1.0-preview.2</PackageValidationBaselineVersion>
     <EnableStrictModeForCompatibleTfms>true</EnableStrictModeForCompatibleTfms>
   </PropertyGroup>
   <ItemGroup Condition="'$(IsPackable)' == 'true'">

@@ -9,7 +9,8 @@ $run = [IO.Path]::GetFullPath((Join-Path $OutputDirectory ('consumer-' + [Guid]:
 $cache = Join-Path ([IO.Path]::GetTempPath()) ('hfc-' + [Guid]::NewGuid().ToString('N'))
 $consumer = Join-Path $run 'consumer'
 New-Item -ItemType Directory -Path $cache,$consumer -Force | Out-Null
-$ids = @('Penghou.Hufu','Penghou.Hufu.Cedar','Penghou.Hufu.IO','Penghou.Hufu.Luban','Penghou.Hufu.Sqlite','Penghou.Hufu.Workflow')
+$ids = @('Penghou.Hufu','Penghou.Hufu.Cedar','Penghou.Hufu.IO','Penghou.Hufu.Luban','Penghou.Hufu.Sqlite','Penghou.Hufu.Workflow','Penghou.Hufu.Luban.Sqlite')
+if ($Version -in @('0.1.0-preview.1','0.1.0-preview.2')) { $ids = @($ids | Where-Object { $_ -ne 'Penghou.Hufu.Luban.Sqlite' }) }
 Set-Content -LiteralPath (Join-Path $consumer 'Directory.Build.props') '<Project />'
 Set-Content -LiteralPath (Join-Path $consumer 'Directory.Build.targets') '<Project />'
 $references = ($ids | ForEach-Object { "<PackageReference Include=`"$_`" Version=`"[$Version]`"/>" }) -join "`n"
@@ -35,9 +36,9 @@ using System.Diagnostics.Metrics;
 
 Type[] packages = [typeof(AuthoritySnapshot), typeof(Penghou.Hufu.Cedar.CedarAuthorityEvaluator),
     typeof(Penghou.Hufu.IO.HufuResourceAuthorizer), typeof(Penghou.Hufu.Luban.HufuLanguageAuthorizer),
-    typeof(Penghou.Hufu.Sqlite.SqliteAuthorityStore), typeof(HufuExecutionAuthorizer)];
-if (packages.Select(t => t.Assembly.GetName().Name).Distinct().Count() != 6)
-    throw new Exception("Six candidate package assemblies must load independently.");
+    typeof(Penghou.Hufu.Sqlite.SqliteAuthorityStore), typeof(HufuExecutionAuthorizer), typeof(Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost)];
+if (packages.Select(t => t.Assembly.GetName().Name).Distinct().Count() != 7)
+    throw new Exception("Seven candidate package assemblies must load independently.");
 var recorder = new Recorder();
 var authorizer = new HufuExecutionAuthorizer("probe-policy", "probe-host", "probe-mapping-v1",
     new Bindings(), new Authority(), new Approval(), recorder);
@@ -47,7 +48,7 @@ if (result.Decision != ExecutionAuthorizationDecision.Denied || result.EvidenceI
     result.AuthorizationRequestId != context.AuthorizationRequestId || recorder.Record?.Context != context ||
     recorder.Record.Result.Decision != ExecutionAuthorizationDecision.Denied)
     throw new Exception("Empty declarations must deny with the exact recorded outcome before any trusted service activation.");
-Console.WriteLine("Six-package standalone consumer and recorded denial passed.");
+Console.WriteLine("Seven-package standalone consumer and recorded denial passed.");
 
 var authorityContext = new AuthenticatedAuthorityContext("tenant", "subject", "run", "revision", "fence");
 var request = new AuthorityRequest(authorityContext, AuthorityAction.ReadFile, "workspace", "src/file.txt", "probe-request");
@@ -140,6 +141,29 @@ if ((await missingEvidence.AuthorizeAsync(admission)).Status != LanguageAuthorit
     throw new Exception("An undocumented permit cannot admit a packaged diff.");
 Console.WriteLine("Packaged explicit v2 profile, both input scopes, v1 compatibility and evidence failure passed.");
 
+// Optional patch journal: real native schema initialization and independently denied history.
+var patchDatabase = Path.Combine(Path.GetTempPath(), "hufu-package-patch-" + Guid.NewGuid().ToString("N") + ".db");
+try
+{
+    var patchJournal = new Penghou.Hufu.Luban.Sqlite.SqlitePatchOutcomeJournal(patchDatabase, new DenyPatchJournal());
+    using (var connection = await patchJournal.OpenAsync())
+        if (connection.State != System.Data.ConnectionState.Open) throw new Exception("Patch journal owner must initialize the real SQLite database.");
+    if ((await patchJournal.InspectAsync(actor, authorityContext, "probe-patch", new string('a', 64))).State != Penghou.Hufu.Luban.Sqlite.PatchRecoveryState.Unavailable)
+        throw new Exception("Patch history must remain unavailable without independent authentication/policy.");
+    if (patchJournal.ProfileIdentity != "hufu-sqlite-single-patch-start-v1") throw new Exception("Unexpected patch participant profile.");
+}
+finally
+{
+    foreach (var suffix in new[] { "", "-wal", "-shm" }) File.Delete(patchDatabase + suffix);
+}
+Console.WriteLine("Packaged co-located patch journal and denied disclosure passed.");
+
+sealed class DenyPatchJournal : Penghou.Hufu.Luban.Sqlite.IPatchJournalAuthorizer
+{
+    public ValueTask<AuthorityStoreAuthorization> AuthorizeAsync(Penghou.Hufu.Luban.Sqlite.PatchJournalAccessRequest request, CancellationToken cancellationToken = default) =>
+        ValueTask.FromResult(new AuthorityStoreAuthorization(AuthorityStatus.Deny));
+}
+
 sealed class DiffAuthority(bool evidence = true) : IAuthorityRequestAuthorizer
 {
     public List<AuthorityRequest> Requests { get; } = [];
@@ -199,6 +223,14 @@ sealed class Recorder : IWorkflowAuthorizationRecorder
     { Record = record; return ValueTask.FromResult<string?>("recorded-probe"); }
 }
 '@
+if ($Version -in @('0.1.0-preview.1','0.1.0-preview.2')) {
+    $program = $program.Replace(', typeof(Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost)', '').Replace('Count() != 7','Count() != 6')
+    $program = $program.Replace('Seven candidate','Six candidate').Replace('Seven-package','Six-package')
+    $start = $program.IndexOf('// Optional patch journal:', [StringComparison]::Ordinal)
+    $end = $program.IndexOf('sealed class DiffAuthority', [StringComparison]::Ordinal)
+    if ($start -lt 0 -or $end -le $start) { throw 'Patch probe boundaries must be present.' }
+    $program = $program.Remove($start, $end - $start)
+}
 # Preserve qualification of immutable preview.1 recovery artifacts, which do not
 # expose the new opt-in profile. Later candidates must run the v2 API probes.
 if ($Version -eq '0.1.0-preview.1') {
@@ -226,7 +258,7 @@ $results = foreach ($tfm in @('net8.0','net10.0')) {
     if ($LASTEXITCODE -ne 0) { throw "Consumer build failed: $tfm" }
     dotnet (Join-Path $consumer "bin/Release/$tfm/Consumer.dll") | Out-Host
     if ($LASTEXITCODE -ne 0) { throw "Consumer execution failed: $tfm" }
-    [ordered]@{ TargetFramework=$tfm; RecordedDenialPassed=$true; CoreAdmissionProbePassed=$true; CoreIssuanceProbePassed=$true; CedarExplanationCapturePassed=$true; RedactedExplanationSummaryPassed=$true; OptionalTelemetryIsolationPassed=$true; ExplicitLubanV2ProbePassed=($Version -ne '0.1.0-preview.1') }
+    [ordered]@{ TargetFramework=$tfm; RecordedDenialPassed=$true; CoreAdmissionProbePassed=$true; CoreIssuanceProbePassed=$true; CedarExplanationCapturePassed=$true; RedactedExplanationSummaryPassed=$true; OptionalTelemetryIsolationPassed=$true; ExplicitLubanV2ProbePassed=($Version -ne '0.1.0-preview.1'); OptionalPatchJournalProbePassed=($Version -notin @('0.1.0-preview.1','0.1.0-preview.2')) }
 }
 ConvertTo-Json -InputObject ([ordered]@{SchemaVersion=1;PackageVersion=$Version;FreshCache=$cache;Packages=@($libraries.Name);Targets=@($results);NoProjectReferences=$true;NoZhinuDependencies=$true;Status='passed'}) -Depth 8 |
     Set-Content -LiteralPath (Join-Path $run 'qualification.json')

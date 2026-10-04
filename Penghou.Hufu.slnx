@@ -4,6 +4,7 @@
     <Project Path="src/Penghou.Hufu.Biscuit.Sqlite/Penghou.Hufu.Biscuit.Sqlite.csproj" />
     <Project Path="src/Penghou.Hufu.Cedar/Penghou.Hufu.Cedar.csproj" />
     <Project Path="src/Penghou.Hufu.Luban/Penghou.Hufu.Luban.csproj" />
+    <Project Path="src/Penghou.Hufu.Luban.Sqlite/Penghou.Hufu.Luban.Sqlite.csproj" />
     <Project Path="src/Penghou.Hufu.IO/Penghou.Hufu.IO.csproj" />
     <Project Path="src/Penghou.Hufu.Sqlite/Penghou.Hufu.Sqlite.csproj" />
     <Project Path="src/Penghou.Hufu.Zhinu.Sqlite/Penghou.Hufu.Zhinu.Sqlite.csproj" />
@@ -15,6 +16,7 @@
     <Project Path="tests/Penghou.Hufu.StartWorker.Tests/Penghou.Hufu.StartWorker.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.IO.Tests/Penghou.Hufu.IO.Tests.csproj" />
+    <Project Path="tests/Penghou.Hufu.Luban.Sqlite.Tests/Penghou.Hufu.Luban.Sqlite.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.LegacyIntegration.Tests/Penghou.Hufu.LegacyIntegration.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.Workflow.Tests/Penghou.Hufu.Workflow.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.Workflow.Integration.Tests/Penghou.Hufu.Workflow.Integration.Tests.csproj" />
