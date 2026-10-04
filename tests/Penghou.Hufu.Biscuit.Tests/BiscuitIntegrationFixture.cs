@@ -73,6 +73,17 @@ internal sealed class BiscuitIntegrationFixture : IDisposable, IBiscuitAuthority
         new(Context,action,"workspace",path,Guid.NewGuid().ToString("N"));
     internal async Task<BiscuitEnvelope> IssueAsync()
     {
+        var current = await Store.ReadCurrentAsync(Actor, Context);
+        if (current.Status != AuthorityReadStatus.Active)
+        {
+            using var connection = await OpenAsync();
+            using var command = connection.CreateCommand();
+            command.CommandText = "PRAGMA database_list";
+            using var reader = await command.ExecuteReaderAsync();
+            var databases = new List<string>();
+            while (await reader.ReadAsync()) databases.Add(reader.GetString(1) + "=" + reader.GetString(2));
+            Assert.Fail($"Current authority fixture status={current.Status}; configured={DatabasePath}; source={connection.DataSource}; databases={string.Join(';', databases)}; now={Clock.GetUtcNow():O}");
+        }
         var result = await Service.IssueAsync(new(Context,"workflow","grant"));
         Assert.True(result.IsSuccess,result.FailureCode.ToString());
         return result.Envelope!;
