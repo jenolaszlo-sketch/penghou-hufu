@@ -6,6 +6,14 @@ SQLite prototype described in the [store profile](durable-authority-store.md).
 The approval/delegation lifecycle, governed mutation admission, and production
 authority runtime remain pending. These APIs are not a stable package contract.
 
+The optional [core admission and issuance profiles](core-admission-and-issuance.md)
+now provide shared evaluation capacity and finite typed-scope publication
+checks. Their exact limits and current evidence are documented separately.
+
+The bounded [decision explanation profile](decision-explanations.md) captures
+actual evaluator outcomes and typed snapshot facts. A separate authenticated
+host policy authorizes disclosure; explanation results do not authorize I/O.
+
 ## Supplied implementation
 
 `Penghou.Hufu` supplies immutable authority snapshots, typed actions and path

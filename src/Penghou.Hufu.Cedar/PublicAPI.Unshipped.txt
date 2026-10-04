@@ -1,0 +1,54 @@
+#nullable enable
+override Penghou.Hufu.Cedar.CedarEvaluationDetails.Equals(object? obj) -> bool
+override Penghou.Hufu.Cedar.CedarEvaluationDetails.GetHashCode() -> int
+override Penghou.Hufu.Cedar.CedarEvaluationDetails.ToString() -> string!
+override Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.Equals(object? obj) -> bool
+override Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.GetHashCode() -> int
+override Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.ToString() -> string!
+Penghou.Hufu.Cedar.CedarAuthorityEvaluator
+Penghou.Hufu.Cedar.CedarAuthorityEvaluator.CedarAuthorityEvaluator() -> void
+Penghou.Hufu.Cedar.CedarAuthorityEvaluator.Evaluate(Penghou.Hufu.AuthoritySnapshot! snapshot, Penghou.Hufu.AuthorityRequest! request, System.DateTimeOffset now) -> Penghou.Hufu.AuthorityDecision!
+Penghou.Hufu.Cedar.CedarAuthorityEvaluator.EvaluateDetailed(Penghou.Hufu.AuthoritySnapshot! snapshot, Penghou.Hufu.AuthorityRequest! request, System.DateTimeOffset now) -> Penghou.Hufu.Cedar.CedarEvaluationDetails!
+Penghou.Hufu.Cedar.CedarAuthorityEvaluator.EvaluateExplained(Penghou.Hufu.AuthoritySnapshot! snapshot, Penghou.Hufu.AuthorityRequest! request, System.DateTimeOffset now) -> Penghou.Hufu.AuthorityDecisionExplanation!
+Penghou.Hufu.Cedar.CedarEvaluationDetails
+Penghou.Hufu.Cedar.CedarEvaluationDetails.<Clone>$() -> Penghou.Hufu.Cedar.CedarEvaluationDetails!
+Penghou.Hufu.Cedar.CedarEvaluationDetails.CedarEvaluationDetails(Penghou.Hufu.AuthorityDecision! Decision, CedarSharp.CedarVersion? NativeIdentity, string! SchemaDigest, string! EntityDigest, System.Collections.Generic.IReadOnlyList<Penghou.Hufu.Cedar.CedarLayerEvaluationDetail!>! Layers, string? FailureCode) -> void
+Penghou.Hufu.Cedar.CedarEvaluationDetails.Decision.get -> Penghou.Hufu.AuthorityDecision!
+Penghou.Hufu.Cedar.CedarEvaluationDetails.Decision.init -> void
+Penghou.Hufu.Cedar.CedarEvaluationDetails.Deconstruct(out Penghou.Hufu.AuthorityDecision! Decision, out CedarSharp.CedarVersion? NativeIdentity, out string! SchemaDigest, out string! EntityDigest, out System.Collections.Generic.IReadOnlyList<Penghou.Hufu.Cedar.CedarLayerEvaluationDetail!>! Layers, out string? FailureCode) -> void
+Penghou.Hufu.Cedar.CedarEvaluationDetails.EntityDigest.get -> string!
+Penghou.Hufu.Cedar.CedarEvaluationDetails.EntityDigest.init -> void
+Penghou.Hufu.Cedar.CedarEvaluationDetails.Equals(Penghou.Hufu.Cedar.CedarEvaluationDetails? other) -> bool
+Penghou.Hufu.Cedar.CedarEvaluationDetails.FailureCode.get -> string?
+Penghou.Hufu.Cedar.CedarEvaluationDetails.FailureCode.init -> void
+Penghou.Hufu.Cedar.CedarEvaluationDetails.Layers.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.Cedar.CedarLayerEvaluationDetail!>!
+Penghou.Hufu.Cedar.CedarEvaluationDetails.Layers.init -> void
+Penghou.Hufu.Cedar.CedarEvaluationDetails.NativeIdentity.get -> CedarSharp.CedarVersion?
+Penghou.Hufu.Cedar.CedarEvaluationDetails.NativeIdentity.init -> void
+Penghou.Hufu.Cedar.CedarEvaluationDetails.SchemaDigest.get -> string!
+Penghou.Hufu.Cedar.CedarEvaluationDetails.SchemaDigest.init -> void
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.<Clone>$() -> Penghou.Hufu.Cedar.CedarLayerEvaluationDetail!
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.Authorization.get -> CedarSharp.CedarAuthorizationResult?
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.Authorization.init -> void
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.CedarLayerEvaluationDetail(string! LayerId, string! SnapshotDigest, string! SchemaDigest, string! PolicyDigest, string! EntityDigest, CedarSharp.CedarValidationResult? PolicyValidation, CedarSharp.CedarFullRequestCheckResult? RequestValidation, CedarSharp.CedarAuthorizationResult? Authorization) -> void
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.Deconstruct(out string! LayerId, out string! SnapshotDigest, out string! SchemaDigest, out string! PolicyDigest, out string! EntityDigest, out CedarSharp.CedarValidationResult? PolicyValidation, out CedarSharp.CedarFullRequestCheckResult? RequestValidation, out CedarSharp.CedarAuthorizationResult? Authorization) -> void
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.EntityDigest.get -> string!
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.EntityDigest.init -> void
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.Equals(Penghou.Hufu.Cedar.CedarLayerEvaluationDetail? other) -> bool
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.LayerId.get -> string!
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.LayerId.init -> void
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.PolicyDigest.get -> string!
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.PolicyDigest.init -> void
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.PolicyValidation.get -> CedarSharp.CedarValidationResult?
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.PolicyValidation.init -> void
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.RequestValidation.get -> CedarSharp.CedarFullRequestCheckResult?
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.RequestValidation.init -> void
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.SchemaDigest.get -> string!
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.SchemaDigest.init -> void
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.SnapshotDigest.get -> string!
+Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.SnapshotDigest.init -> void
+static Penghou.Hufu.Cedar.CedarEvaluationDetails.operator !=(Penghou.Hufu.Cedar.CedarEvaluationDetails? left, Penghou.Hufu.Cedar.CedarEvaluationDetails? right) -> bool
+static Penghou.Hufu.Cedar.CedarEvaluationDetails.operator ==(Penghou.Hufu.Cedar.CedarEvaluationDetails? left, Penghou.Hufu.Cedar.CedarEvaluationDetails? right) -> bool
+static Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.operator !=(Penghou.Hufu.Cedar.CedarLayerEvaluationDetail? left, Penghou.Hufu.Cedar.CedarLayerEvaluationDetail? right) -> bool
+static Penghou.Hufu.Cedar.CedarLayerEvaluationDetail.operator ==(Penghou.Hufu.Cedar.CedarLayerEvaluationDetail? left, Penghou.Hufu.Cedar.CedarLayerEvaluationDetail? right) -> bool

@@ -1,0 +1,746 @@
+#nullable enable
+const Penghou.Hufu.AuthorityDecisionExplanation.Profile = "hufu-typed-path-explanation-v1" -> string!
+const Penghou.Hufu.AuthorityExplanationReader.MaximumProjectionBytes = 1048576 -> int
+const Penghou.Hufu.BoundedAuthorityRequestAuthorizer.MaximumExecuting = 256 -> int
+const Penghou.Hufu.BoundedAuthorityRequestAuthorizer.MaximumQueued = 4096 -> int
+override Penghou.Hufu.AuthenticatedAuthorityContext.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthenticatedAuthorityContext.GetHashCode() -> int
+override Penghou.Hufu.AuthenticatedAuthorityContext.ToString() -> string!
+override Penghou.Hufu.AuthorityChangeRecord.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityChangeRecord.GetHashCode() -> int
+override Penghou.Hufu.AuthorityChangeRecord.ToString() -> string!
+override Penghou.Hufu.AuthorityCurrentRead.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityCurrentRead.GetHashCode() -> int
+override Penghou.Hufu.AuthorityCurrentRead.ToString() -> string!
+override Penghou.Hufu.AuthorityDecision.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityDecision.GetHashCode() -> int
+override Penghou.Hufu.AuthorityDecision.ToString() -> string!
+override Penghou.Hufu.AuthorityDecisionEntry.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityDecisionEntry.GetHashCode() -> int
+override Penghou.Hufu.AuthorityDecisionEntry.ToString() -> string!
+override Penghou.Hufu.AuthorityDecisionRead.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityDecisionRead.GetHashCode() -> int
+override Penghou.Hufu.AuthorityDecisionRead.ToString() -> string!
+override Penghou.Hufu.AuthorityDecisionRecord.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityDecisionRecord.GetHashCode() -> int
+override Penghou.Hufu.AuthorityDecisionRecord.ToString() -> string!
+override Penghou.Hufu.AuthorityEvidenceWrite.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityEvidenceWrite.GetHashCode() -> int
+override Penghou.Hufu.AuthorityEvidenceWrite.ToString() -> string!
+override Penghou.Hufu.AuthorityExplanationAccess.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityExplanationAccess.GetHashCode() -> int
+override Penghou.Hufu.AuthorityExplanationAccess.ToString() -> string!
+override Penghou.Hufu.AuthorityExplanationDetails.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityExplanationDetails.GetHashCode() -> int
+override Penghou.Hufu.AuthorityExplanationDetails.ToString() -> string!
+override Penghou.Hufu.AuthorityExplanationProjection.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityExplanationProjection.GetHashCode() -> int
+override Penghou.Hufu.AuthorityExplanationProjection.ToString() -> string!
+override Penghou.Hufu.AuthorityExplanationRead.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityExplanationRead.GetHashCode() -> int
+override Penghou.Hufu.AuthorityExplanationRead.ToString() -> string!
+override Penghou.Hufu.AuthorityGrant.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityGrant.GetHashCode() -> int
+override Penghou.Hufu.AuthorityGrant.ToString() -> string!
+override Penghou.Hufu.AuthorityHistoryRead.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityHistoryRead.GetHashCode() -> int
+override Penghou.Hufu.AuthorityHistoryRead.ToString() -> string!
+override Penghou.Hufu.AuthorityIssuancePrincipal.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityIssuancePrincipal.GetHashCode() -> int
+override Penghou.Hufu.AuthorityIssuancePrincipal.ToString() -> string!
+override Penghou.Hufu.AuthorityLayer.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityLayer.GetHashCode() -> int
+override Penghou.Hufu.AuthorityLayer.ToString() -> string!
+override Penghou.Hufu.AuthorityLayerOutcome.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityLayerOutcome.GetHashCode() -> int
+override Penghou.Hufu.AuthorityLayerOutcome.ToString() -> string!
+override Penghou.Hufu.AuthorityMutationResult.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityMutationResult.GetHashCode() -> int
+override Penghou.Hufu.AuthorityMutationResult.ToString() -> string!
+override Penghou.Hufu.AuthorityOperationStartCommand.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityOperationStartCommand.GetHashCode() -> int
+override Penghou.Hufu.AuthorityOperationStartCommand.ToString() -> string!
+override Penghou.Hufu.AuthorityOperationStartRecord.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityOperationStartRecord.GetHashCode() -> int
+override Penghou.Hufu.AuthorityOperationStartRecord.ToString() -> string!
+override Penghou.Hufu.AuthorityOperationStartResult.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityOperationStartResult.GetHashCode() -> int
+override Penghou.Hufu.AuthorityOperationStartResult.ToString() -> string!
+override Penghou.Hufu.AuthorityPublishCommand.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityPublishCommand.GetHashCode() -> int
+override Penghou.Hufu.AuthorityPublishCommand.ToString() -> string!
+override Penghou.Hufu.AuthorityRequest.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityRequest.GetHashCode() -> int
+override Penghou.Hufu.AuthorityRequest.ToString() -> string!
+override Penghou.Hufu.AuthorityRequestAuthorization.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityRequestAuthorization.GetHashCode() -> int
+override Penghou.Hufu.AuthorityRequestAuthorization.ToString() -> string!
+override Penghou.Hufu.AuthorityRevokeCommand.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityRevokeCommand.GetHashCode() -> int
+override Penghou.Hufu.AuthorityRevokeCommand.ToString() -> string!
+override Penghou.Hufu.AuthorityScope.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityScope.GetHashCode() -> int
+override Penghou.Hufu.AuthorityScope.ToString() -> string!
+override Penghou.Hufu.AuthorityStoreAccessRequest.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityStoreAccessRequest.GetHashCode() -> int
+override Penghou.Hufu.AuthorityStoreAccessRequest.ToString() -> string!
+override Penghou.Hufu.AuthorityStoreActor.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityStoreActor.GetHashCode() -> int
+override Penghou.Hufu.AuthorityStoreActor.ToString() -> string!
+override Penghou.Hufu.AuthorityStoreAuthorization.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityStoreAuthorization.GetHashCode() -> int
+override Penghou.Hufu.AuthorityStoreAuthorization.ToString() -> string!
+override Penghou.Hufu.AuthoritySubject.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthoritySubject.GetHashCode() -> int
+override Penghou.Hufu.AuthoritySubject.ToString() -> string!
+Penghou.Hufu.AuthenticatedAuthorityContext
+Penghou.Hufu.AuthenticatedAuthorityContext.<Clone>$() -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.AuthenticatedAuthorityContext.AuthenticatedAuthorityContext(string! TenantId, string! SubjectId, string! RunId, string! RevisionId, string! FenceId) -> void
+Penghou.Hufu.AuthenticatedAuthorityContext.Deconstruct(out string! TenantId, out string! SubjectId, out string! RunId, out string! RevisionId, out string! FenceId) -> void
+Penghou.Hufu.AuthenticatedAuthorityContext.Equals(Penghou.Hufu.AuthenticatedAuthorityContext? other) -> bool
+Penghou.Hufu.AuthenticatedAuthorityContext.FenceId.get -> string!
+Penghou.Hufu.AuthenticatedAuthorityContext.FenceId.init -> void
+Penghou.Hufu.AuthenticatedAuthorityContext.RevisionId.get -> string!
+Penghou.Hufu.AuthenticatedAuthorityContext.RevisionId.init -> void
+Penghou.Hufu.AuthenticatedAuthorityContext.RunId.get -> string!
+Penghou.Hufu.AuthenticatedAuthorityContext.RunId.init -> void
+Penghou.Hufu.AuthenticatedAuthorityContext.SubjectId.get -> string!
+Penghou.Hufu.AuthenticatedAuthorityContext.SubjectId.init -> void
+Penghou.Hufu.AuthenticatedAuthorityContext.TenantId.get -> string!
+Penghou.Hufu.AuthenticatedAuthorityContext.TenantId.init -> void
+Penghou.Hufu.AuthorityAction
+Penghou.Hufu.AuthorityAction.ListDirectory = 1 -> Penghou.Hufu.AuthorityAction
+Penghou.Hufu.AuthorityAction.PatchFile = 3 -> Penghou.Hufu.AuthorityAction
+Penghou.Hufu.AuthorityAction.ReadFile = 0 -> Penghou.Hufu.AuthorityAction
+Penghou.Hufu.AuthorityAction.ReadMetadata = 2 -> Penghou.Hufu.AuthorityAction
+Penghou.Hufu.AuthorityAction.Release = 4 -> Penghou.Hufu.AuthorityAction
+Penghou.Hufu.AuthorityAction.WriteFile = 5 -> Penghou.Hufu.AuthorityAction
+Penghou.Hufu.AuthorityChangeKind
+Penghou.Hufu.AuthorityChangeKind.Published = 0 -> Penghou.Hufu.AuthorityChangeKind
+Penghou.Hufu.AuthorityChangeKind.Revoked = 1 -> Penghou.Hufu.AuthorityChangeKind
+Penghou.Hufu.AuthorityChangeRecord
+Penghou.Hufu.AuthorityChangeRecord.<Clone>$() -> Penghou.Hufu.AuthorityChangeRecord!
+Penghou.Hufu.AuthorityChangeRecord.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.AuthorityChangeRecord.Actor.init -> void
+Penghou.Hufu.AuthorityChangeRecord.AuthorityChangeRecord(long Sequence, Penghou.Hufu.AuthorityChangeKind Kind, string! CommandId, Penghou.Hufu.AuthorityStoreActor! Actor, Penghou.Hufu.AuthenticatedAuthorityContext! Context, Penghou.Hufu.AuthoritySnapshot? Snapshot, string! ReasonCode, System.DateTimeOffset RecordedAt) -> void
+Penghou.Hufu.AuthorityChangeRecord.CommandId.get -> string!
+Penghou.Hufu.AuthorityChangeRecord.CommandId.init -> void
+Penghou.Hufu.AuthorityChangeRecord.Context.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.AuthorityChangeRecord.Context.init -> void
+Penghou.Hufu.AuthorityChangeRecord.Deconstruct(out long Sequence, out Penghou.Hufu.AuthorityChangeKind Kind, out string! CommandId, out Penghou.Hufu.AuthorityStoreActor! Actor, out Penghou.Hufu.AuthenticatedAuthorityContext! Context, out Penghou.Hufu.AuthoritySnapshot? Snapshot, out string! ReasonCode, out System.DateTimeOffset RecordedAt) -> void
+Penghou.Hufu.AuthorityChangeRecord.Equals(Penghou.Hufu.AuthorityChangeRecord? other) -> bool
+Penghou.Hufu.AuthorityChangeRecord.Kind.get -> Penghou.Hufu.AuthorityChangeKind
+Penghou.Hufu.AuthorityChangeRecord.Kind.init -> void
+Penghou.Hufu.AuthorityChangeRecord.ReasonCode.get -> string!
+Penghou.Hufu.AuthorityChangeRecord.ReasonCode.init -> void
+Penghou.Hufu.AuthorityChangeRecord.RecordedAt.get -> System.DateTimeOffset
+Penghou.Hufu.AuthorityChangeRecord.RecordedAt.init -> void
+Penghou.Hufu.AuthorityChangeRecord.Sequence.get -> long
+Penghou.Hufu.AuthorityChangeRecord.Sequence.init -> void
+Penghou.Hufu.AuthorityChangeRecord.Snapshot.get -> Penghou.Hufu.AuthoritySnapshot?
+Penghou.Hufu.AuthorityChangeRecord.Snapshot.init -> void
+Penghou.Hufu.AuthorityCurrentRead
+Penghou.Hufu.AuthorityCurrentRead.<Clone>$() -> Penghou.Hufu.AuthorityCurrentRead!
+Penghou.Hufu.AuthorityCurrentRead.AuthorityCurrentRead(Penghou.Hufu.AuthorityReadStatus Status, Penghou.Hufu.AuthorityChangeRecord? Record = null) -> void
+Penghou.Hufu.AuthorityCurrentRead.Deconstruct(out Penghou.Hufu.AuthorityReadStatus Status, out Penghou.Hufu.AuthorityChangeRecord? Record) -> void
+Penghou.Hufu.AuthorityCurrentRead.Equals(Penghou.Hufu.AuthorityCurrentRead? other) -> bool
+Penghou.Hufu.AuthorityCurrentRead.Record.get -> Penghou.Hufu.AuthorityChangeRecord?
+Penghou.Hufu.AuthorityCurrentRead.Record.init -> void
+Penghou.Hufu.AuthorityCurrentRead.Status.get -> Penghou.Hufu.AuthorityReadStatus
+Penghou.Hufu.AuthorityCurrentRead.Status.init -> void
+Penghou.Hufu.AuthorityDecision
+Penghou.Hufu.AuthorityDecision.<Clone>$() -> Penghou.Hufu.AuthorityDecision!
+Penghou.Hufu.AuthorityDecision.AuthorityDecision(Penghou.Hufu.AuthorityStatus Status, string! ReasonCode, string! SnapshotVersion, string! EvaluatorIdentity, string! SnapshotIdentity) -> void
+Penghou.Hufu.AuthorityDecision.Deconstruct(out Penghou.Hufu.AuthorityStatus Status, out string! ReasonCode, out string! SnapshotVersion, out string! EvaluatorIdentity, out string! SnapshotIdentity) -> void
+Penghou.Hufu.AuthorityDecision.Equals(Penghou.Hufu.AuthorityDecision? other) -> bool
+Penghou.Hufu.AuthorityDecision.EvaluatorIdentity.get -> string!
+Penghou.Hufu.AuthorityDecision.EvaluatorIdentity.init -> void
+Penghou.Hufu.AuthorityDecision.ReasonCode.get -> string!
+Penghou.Hufu.AuthorityDecision.ReasonCode.init -> void
+Penghou.Hufu.AuthorityDecision.SnapshotIdentity.get -> string!
+Penghou.Hufu.AuthorityDecision.SnapshotIdentity.init -> void
+Penghou.Hufu.AuthorityDecision.SnapshotVersion.get -> string!
+Penghou.Hufu.AuthorityDecision.SnapshotVersion.init -> void
+Penghou.Hufu.AuthorityDecision.Status.get -> Penghou.Hufu.AuthorityStatus
+Penghou.Hufu.AuthorityDecision.Status.init -> void
+Penghou.Hufu.AuthorityDecisionEntry
+Penghou.Hufu.AuthorityDecisionEntry.<Clone>$() -> Penghou.Hufu.AuthorityDecisionEntry!
+Penghou.Hufu.AuthorityDecisionEntry.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.AuthorityDecisionEntry.Actor.init -> void
+Penghou.Hufu.AuthorityDecisionEntry.AuthorityDecisionEntry(Penghou.Hufu.AuthorityStoreActor! Actor, Penghou.Hufu.AuthorityDecisionRecord! Record, long SnapshotSequence, System.DateTimeOffset RecordedAt) -> void
+Penghou.Hufu.AuthorityDecisionEntry.Deconstruct(out Penghou.Hufu.AuthorityStoreActor! Actor, out Penghou.Hufu.AuthorityDecisionRecord! Record, out long SnapshotSequence, out System.DateTimeOffset RecordedAt) -> void
+Penghou.Hufu.AuthorityDecisionEntry.Equals(Penghou.Hufu.AuthorityDecisionEntry? other) -> bool
+Penghou.Hufu.AuthorityDecisionEntry.Record.get -> Penghou.Hufu.AuthorityDecisionRecord!
+Penghou.Hufu.AuthorityDecisionEntry.Record.init -> void
+Penghou.Hufu.AuthorityDecisionEntry.RecordedAt.get -> System.DateTimeOffset
+Penghou.Hufu.AuthorityDecisionEntry.RecordedAt.init -> void
+Penghou.Hufu.AuthorityDecisionEntry.SnapshotSequence.get -> long
+Penghou.Hufu.AuthorityDecisionEntry.SnapshotSequence.init -> void
+Penghou.Hufu.AuthorityDecisionExplanation
+Penghou.Hufu.AuthorityDecisionExplanation.AuthorityDecisionExplanation(Penghou.Hufu.AuthoritySnapshot! snapshot, Penghou.Hufu.AuthorityRequest! request, Penghou.Hufu.AuthorityDecision! decision, System.DateTimeOffset evaluatedAt, System.Collections.Generic.IEnumerable<Penghou.Hufu.AuthorityLayerOutcome!>! layerOutcomes, string? schemaIdentity = null, string? entityIdentity = null) -> void
+Penghou.Hufu.AuthorityDecisionExplanation.Coverage.get -> Penghou.Hufu.AuthorityExplanationCoverage
+Penghou.Hufu.AuthorityDecisionExplanation.Decision.get -> Penghou.Hufu.AuthorityDecision!
+Penghou.Hufu.AuthorityDecisionExplanation.EntityIdentity.get -> string?
+Penghou.Hufu.AuthorityDecisionExplanation.EvaluatedAt.get -> System.DateTimeOffset
+Penghou.Hufu.AuthorityDecisionExplanation.Identity.get -> string!
+Penghou.Hufu.AuthorityDecisionExplanation.Layers.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityLayerExplanation!>!
+Penghou.Hufu.AuthorityDecisionExplanation.MatchingMandatoryDenials.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>!
+Penghou.Hufu.AuthorityDecisionExplanation.Reason.get -> Penghou.Hufu.AuthorityExplanationReason
+Penghou.Hufu.AuthorityDecisionExplanation.Request.get -> Penghou.Hufu.AuthorityRequest!
+Penghou.Hufu.AuthorityDecisionExplanation.SchemaIdentity.get -> string?
+Penghou.Hufu.AuthorityDecisionExplanation.SnapshotValidUntil.get -> System.DateTimeOffset
+Penghou.Hufu.AuthorityDecisionRead
+Penghou.Hufu.AuthorityDecisionRead.<Clone>$() -> Penghou.Hufu.AuthorityDecisionRead!
+Penghou.Hufu.AuthorityDecisionRead.AuthorityDecisionRead(Penghou.Hufu.AuthorityReadStatus Status, Penghou.Hufu.AuthorityDecisionEntry? Entry = null) -> void
+Penghou.Hufu.AuthorityDecisionRead.Deconstruct(out Penghou.Hufu.AuthorityReadStatus Status, out Penghou.Hufu.AuthorityDecisionEntry? Entry) -> void
+Penghou.Hufu.AuthorityDecisionRead.Entry.get -> Penghou.Hufu.AuthorityDecisionEntry?
+Penghou.Hufu.AuthorityDecisionRead.Entry.init -> void
+Penghou.Hufu.AuthorityDecisionRead.Equals(Penghou.Hufu.AuthorityDecisionRead? other) -> bool
+Penghou.Hufu.AuthorityDecisionRead.Status.get -> Penghou.Hufu.AuthorityReadStatus
+Penghou.Hufu.AuthorityDecisionRead.Status.init -> void
+Penghou.Hufu.AuthorityDecisionRecord
+Penghou.Hufu.AuthorityDecisionRecord.<Clone>$() -> Penghou.Hufu.AuthorityDecisionRecord!
+Penghou.Hufu.AuthorityDecisionRecord.AuthorityDecisionRecord(string! CommandId, Penghou.Hufu.AuthorityRequest! Request, Penghou.Hufu.AuthorityDecision! Decision, System.DateTimeOffset EvaluatedAt, string! EvidenceFormat, string! EvidenceJson) -> void
+Penghou.Hufu.AuthorityDecisionRecord.CommandId.get -> string!
+Penghou.Hufu.AuthorityDecisionRecord.CommandId.init -> void
+Penghou.Hufu.AuthorityDecisionRecord.Decision.get -> Penghou.Hufu.AuthorityDecision!
+Penghou.Hufu.AuthorityDecisionRecord.Decision.init -> void
+Penghou.Hufu.AuthorityDecisionRecord.Deconstruct(out string! CommandId, out Penghou.Hufu.AuthorityRequest! Request, out Penghou.Hufu.AuthorityDecision! Decision, out System.DateTimeOffset EvaluatedAt, out string! EvidenceFormat, out string! EvidenceJson) -> void
+Penghou.Hufu.AuthorityDecisionRecord.Equals(Penghou.Hufu.AuthorityDecisionRecord? other) -> bool
+Penghou.Hufu.AuthorityDecisionRecord.EvaluatedAt.get -> System.DateTimeOffset
+Penghou.Hufu.AuthorityDecisionRecord.EvaluatedAt.init -> void
+Penghou.Hufu.AuthorityDecisionRecord.EvidenceFormat.get -> string!
+Penghou.Hufu.AuthorityDecisionRecord.EvidenceFormat.init -> void
+Penghou.Hufu.AuthorityDecisionRecord.EvidenceJson.get -> string!
+Penghou.Hufu.AuthorityDecisionRecord.EvidenceJson.init -> void
+Penghou.Hufu.AuthorityDecisionRecord.Request.get -> Penghou.Hufu.AuthorityRequest!
+Penghou.Hufu.AuthorityDecisionRecord.Request.init -> void
+Penghou.Hufu.AuthorityEvidenceStatus
+Penghou.Hufu.AuthorityEvidenceStatus.CapacityExceeded = 7 -> Penghou.Hufu.AuthorityEvidenceStatus
+Penghou.Hufu.AuthorityEvidenceStatus.Conflict = 3 -> Penghou.Hufu.AuthorityEvidenceStatus
+Penghou.Hufu.AuthorityEvidenceStatus.Denied = 1 -> Penghou.Hufu.AuthorityEvidenceStatus
+Penghou.Hufu.AuthorityEvidenceStatus.InvalidRequest = 2 -> Penghou.Hufu.AuthorityEvidenceStatus
+Penghou.Hufu.AuthorityEvidenceStatus.Recorded = 5 -> Penghou.Hufu.AuthorityEvidenceStatus
+Penghou.Hufu.AuthorityEvidenceStatus.Replayed = 6 -> Penghou.Hufu.AuthorityEvidenceStatus
+Penghou.Hufu.AuthorityEvidenceStatus.StaleAuthority = 4 -> Penghou.Hufu.AuthorityEvidenceStatus
+Penghou.Hufu.AuthorityEvidenceStatus.Unavailable = 0 -> Penghou.Hufu.AuthorityEvidenceStatus
+Penghou.Hufu.AuthorityEvidenceWrite
+Penghou.Hufu.AuthorityEvidenceWrite.<Clone>$() -> Penghou.Hufu.AuthorityEvidenceWrite!
+Penghou.Hufu.AuthorityEvidenceWrite.AuthorityEvidenceWrite(Penghou.Hufu.AuthorityEvidenceStatus Status, Penghou.Hufu.AuthorityDecisionEntry? Entry = null) -> void
+Penghou.Hufu.AuthorityEvidenceWrite.Deconstruct(out Penghou.Hufu.AuthorityEvidenceStatus Status, out Penghou.Hufu.AuthorityDecisionEntry? Entry) -> void
+Penghou.Hufu.AuthorityEvidenceWrite.Entry.get -> Penghou.Hufu.AuthorityDecisionEntry?
+Penghou.Hufu.AuthorityEvidenceWrite.Entry.init -> void
+Penghou.Hufu.AuthorityEvidenceWrite.Equals(Penghou.Hufu.AuthorityEvidenceWrite? other) -> bool
+Penghou.Hufu.AuthorityEvidenceWrite.Status.get -> Penghou.Hufu.AuthorityEvidenceStatus
+Penghou.Hufu.AuthorityEvidenceWrite.Status.init -> void
+Penghou.Hufu.AuthorityExplanationAccess
+Penghou.Hufu.AuthorityExplanationAccess.<Clone>$() -> Penghou.Hufu.AuthorityExplanationAccess!
+Penghou.Hufu.AuthorityExplanationAccess.Actor.get -> Penghou.Hufu.AuthorityStoreActor?
+Penghou.Hufu.AuthorityExplanationAccess.Actor.init -> void
+Penghou.Hufu.AuthorityExplanationAccess.AuthorityExplanationAccess(Penghou.Hufu.AuthorityStatus Status, Penghou.Hufu.AuthorityStoreActor? Actor = null, string? ExplanationIdentity = null, Penghou.Hufu.AuthorityExplanationDetailLevel DetailLevel = Penghou.Hufu.AuthorityExplanationDetailLevel.Summary, System.DateTimeOffset? ValidUntil = null) -> void
+Penghou.Hufu.AuthorityExplanationAccess.Deconstruct(out Penghou.Hufu.AuthorityStatus Status, out Penghou.Hufu.AuthorityStoreActor? Actor, out string? ExplanationIdentity, out Penghou.Hufu.AuthorityExplanationDetailLevel DetailLevel, out System.DateTimeOffset? ValidUntil) -> void
+Penghou.Hufu.AuthorityExplanationAccess.DetailLevel.get -> Penghou.Hufu.AuthorityExplanationDetailLevel
+Penghou.Hufu.AuthorityExplanationAccess.DetailLevel.init -> void
+Penghou.Hufu.AuthorityExplanationAccess.Equals(Penghou.Hufu.AuthorityExplanationAccess? other) -> bool
+Penghou.Hufu.AuthorityExplanationAccess.ExplanationIdentity.get -> string?
+Penghou.Hufu.AuthorityExplanationAccess.ExplanationIdentity.init -> void
+Penghou.Hufu.AuthorityExplanationAccess.Status.get -> Penghou.Hufu.AuthorityStatus
+Penghou.Hufu.AuthorityExplanationAccess.Status.init -> void
+Penghou.Hufu.AuthorityExplanationAccess.ValidUntil.get -> System.DateTimeOffset?
+Penghou.Hufu.AuthorityExplanationAccess.ValidUntil.init -> void
+Penghou.Hufu.AuthorityExplanationCoverage
+Penghou.Hufu.AuthorityExplanationCoverage.CapturedLayerOutcomes = 1 -> Penghou.Hufu.AuthorityExplanationCoverage
+Penghou.Hufu.AuthorityExplanationCoverage.SnapshotFactsOnly = 0 -> Penghou.Hufu.AuthorityExplanationCoverage
+Penghou.Hufu.AuthorityExplanationDetailLevel
+Penghou.Hufu.AuthorityExplanationDetailLevel.Detailed = 1 -> Penghou.Hufu.AuthorityExplanationDetailLevel
+Penghou.Hufu.AuthorityExplanationDetailLevel.Summary = 0 -> Penghou.Hufu.AuthorityExplanationDetailLevel
+Penghou.Hufu.AuthorityExplanationDetails
+Penghou.Hufu.AuthorityExplanationDetails.<Clone>$() -> Penghou.Hufu.AuthorityExplanationDetails!
+Penghou.Hufu.AuthorityExplanationDetails.AuthorityExplanationDetails(string! Profile, string! ExplanationIdentity, Penghou.Hufu.AuthorityRequest! Request, string! SnapshotIdentity, string! SnapshotVersion, System.DateTimeOffset SnapshotValidUntil, string! EvaluatorIdentity, System.DateTimeOffset EvaluatedAt, string? SchemaIdentity, string? EntityIdentity, Penghou.Hufu.AuthorityExplanationReason Reason, Penghou.Hufu.AuthorityExplanationCoverage Coverage, System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityLayerExplanation!>! Layers, System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>! MatchingMandatoryDenials) -> void
+Penghou.Hufu.AuthorityExplanationDetails.Coverage.get -> Penghou.Hufu.AuthorityExplanationCoverage
+Penghou.Hufu.AuthorityExplanationDetails.Coverage.init -> void
+Penghou.Hufu.AuthorityExplanationDetails.Deconstruct(out string! Profile, out string! ExplanationIdentity, out Penghou.Hufu.AuthorityRequest! Request, out string! SnapshotIdentity, out string! SnapshotVersion, out System.DateTimeOffset SnapshotValidUntil, out string! EvaluatorIdentity, out System.DateTimeOffset EvaluatedAt, out string? SchemaIdentity, out string? EntityIdentity, out Penghou.Hufu.AuthorityExplanationReason Reason, out Penghou.Hufu.AuthorityExplanationCoverage Coverage, out System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityLayerExplanation!>! Layers, out System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>! MatchingMandatoryDenials) -> void
+Penghou.Hufu.AuthorityExplanationDetails.EntityIdentity.get -> string?
+Penghou.Hufu.AuthorityExplanationDetails.EntityIdentity.init -> void
+Penghou.Hufu.AuthorityExplanationDetails.Equals(Penghou.Hufu.AuthorityExplanationDetails? other) -> bool
+Penghou.Hufu.AuthorityExplanationDetails.EvaluatedAt.get -> System.DateTimeOffset
+Penghou.Hufu.AuthorityExplanationDetails.EvaluatedAt.init -> void
+Penghou.Hufu.AuthorityExplanationDetails.EvaluatorIdentity.get -> string!
+Penghou.Hufu.AuthorityExplanationDetails.EvaluatorIdentity.init -> void
+Penghou.Hufu.AuthorityExplanationDetails.ExplanationIdentity.get -> string!
+Penghou.Hufu.AuthorityExplanationDetails.ExplanationIdentity.init -> void
+Penghou.Hufu.AuthorityExplanationDetails.Layers.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityLayerExplanation!>!
+Penghou.Hufu.AuthorityExplanationDetails.Layers.init -> void
+Penghou.Hufu.AuthorityExplanationDetails.MatchingMandatoryDenials.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>!
+Penghou.Hufu.AuthorityExplanationDetails.MatchingMandatoryDenials.init -> void
+Penghou.Hufu.AuthorityExplanationDetails.Profile.get -> string!
+Penghou.Hufu.AuthorityExplanationDetails.Profile.init -> void
+Penghou.Hufu.AuthorityExplanationDetails.Reason.get -> Penghou.Hufu.AuthorityExplanationReason
+Penghou.Hufu.AuthorityExplanationDetails.Reason.init -> void
+Penghou.Hufu.AuthorityExplanationDetails.Request.get -> Penghou.Hufu.AuthorityRequest!
+Penghou.Hufu.AuthorityExplanationDetails.Request.init -> void
+Penghou.Hufu.AuthorityExplanationDetails.SchemaIdentity.get -> string?
+Penghou.Hufu.AuthorityExplanationDetails.SchemaIdentity.init -> void
+Penghou.Hufu.AuthorityExplanationDetails.SnapshotIdentity.get -> string!
+Penghou.Hufu.AuthorityExplanationDetails.SnapshotIdentity.init -> void
+Penghou.Hufu.AuthorityExplanationDetails.SnapshotValidUntil.get -> System.DateTimeOffset
+Penghou.Hufu.AuthorityExplanationDetails.SnapshotValidUntil.init -> void
+Penghou.Hufu.AuthorityExplanationDetails.SnapshotVersion.get -> string!
+Penghou.Hufu.AuthorityExplanationDetails.SnapshotVersion.init -> void
+Penghou.Hufu.AuthorityExplanationProjection
+Penghou.Hufu.AuthorityExplanationProjection.<Clone>$() -> Penghou.Hufu.AuthorityExplanationProjection!
+Penghou.Hufu.AuthorityExplanationProjection.AuthorityExplanationProjection(Penghou.Hufu.AuthorityStatus DecisionStatus, Penghou.Hufu.AuthorityExplanationDetails? Details = null) -> void
+Penghou.Hufu.AuthorityExplanationProjection.DecisionStatus.get -> Penghou.Hufu.AuthorityStatus
+Penghou.Hufu.AuthorityExplanationProjection.DecisionStatus.init -> void
+Penghou.Hufu.AuthorityExplanationProjection.Deconstruct(out Penghou.Hufu.AuthorityStatus DecisionStatus, out Penghou.Hufu.AuthorityExplanationDetails? Details) -> void
+Penghou.Hufu.AuthorityExplanationProjection.Details.get -> Penghou.Hufu.AuthorityExplanationDetails?
+Penghou.Hufu.AuthorityExplanationProjection.Details.init -> void
+Penghou.Hufu.AuthorityExplanationProjection.Equals(Penghou.Hufu.AuthorityExplanationProjection? other) -> bool
+Penghou.Hufu.AuthorityExplanationRead
+Penghou.Hufu.AuthorityExplanationRead.<Clone>$() -> Penghou.Hufu.AuthorityExplanationRead!
+Penghou.Hufu.AuthorityExplanationRead.AuthorityExplanationRead(Penghou.Hufu.AuthorityExplanationReadStatus Status, Penghou.Hufu.AuthorityExplanationProjection? Projection = null) -> void
+Penghou.Hufu.AuthorityExplanationRead.Deconstruct(out Penghou.Hufu.AuthorityExplanationReadStatus Status, out Penghou.Hufu.AuthorityExplanationProjection? Projection) -> void
+Penghou.Hufu.AuthorityExplanationRead.Equals(Penghou.Hufu.AuthorityExplanationRead? other) -> bool
+Penghou.Hufu.AuthorityExplanationRead.Projection.get -> Penghou.Hufu.AuthorityExplanationProjection?
+Penghou.Hufu.AuthorityExplanationRead.Projection.init -> void
+Penghou.Hufu.AuthorityExplanationRead.Status.get -> Penghou.Hufu.AuthorityExplanationReadStatus
+Penghou.Hufu.AuthorityExplanationRead.Status.init -> void
+Penghou.Hufu.AuthorityExplanationReader
+Penghou.Hufu.AuthorityExplanationReader.AuthorityExplanationReader(Penghou.Hufu.IAuthorityExplanationAccessPolicy! policy, System.TimeProvider? timeProvider = null, System.TimeSpan? maximumEvaluationDuration = null) -> void
+Penghou.Hufu.AuthorityExplanationReader.ReadAsync(Penghou.Hufu.AuthorityStoreActor! viewer, Penghou.Hufu.AuthorityDecisionExplanation! explanation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityExplanationRead!>
+Penghou.Hufu.AuthorityExplanationReadStatus
+Penghou.Hufu.AuthorityExplanationReadStatus.Denied = 0 -> Penghou.Hufu.AuthorityExplanationReadStatus
+Penghou.Hufu.AuthorityExplanationReadStatus.Disclosed = 2 -> Penghou.Hufu.AuthorityExplanationReadStatus
+Penghou.Hufu.AuthorityExplanationReadStatus.Unavailable = 1 -> Penghou.Hufu.AuthorityExplanationReadStatus
+Penghou.Hufu.AuthorityExplanationReason
+Penghou.Hufu.AuthorityExplanationReason.EvaluatorIdentityMismatch = 6 -> Penghou.Hufu.AuthorityExplanationReason
+Penghou.Hufu.AuthorityExplanationReason.EvaluatorUnavailable = 5 -> Penghou.Hufu.AuthorityExplanationReason
+Penghou.Hufu.AuthorityExplanationReason.InvalidProjection = 7 -> Penghou.Hufu.AuthorityExplanationReason
+Penghou.Hufu.AuthorityExplanationReason.InvalidRequest = 4 -> Penghou.Hufu.AuthorityExplanationReason
+Penghou.Hufu.AuthorityExplanationReason.LayerDenied = 2 -> Penghou.Hufu.AuthorityExplanationReason
+Penghou.Hufu.AuthorityExplanationReason.Permitted = 1 -> Penghou.Hufu.AuthorityExplanationReason
+Penghou.Hufu.AuthorityExplanationReason.PolicyEvaluationError = 10 -> Penghou.Hufu.AuthorityExplanationReason
+Penghou.Hufu.AuthorityExplanationReason.PolicyValidationFailed = 8 -> Penghou.Hufu.AuthorityExplanationReason
+Penghou.Hufu.AuthorityExplanationReason.RequestValidationFailed = 9 -> Penghou.Hufu.AuthorityExplanationReason
+Penghou.Hufu.AuthorityExplanationReason.SnapshotExpired = 3 -> Penghou.Hufu.AuthorityExplanationReason
+Penghou.Hufu.AuthorityExplanationReason.Unknown = 0 -> Penghou.Hufu.AuthorityExplanationReason
+Penghou.Hufu.AuthorityGrant
+Penghou.Hufu.AuthorityGrant.<Clone>$() -> Penghou.Hufu.AuthorityGrant!
+Penghou.Hufu.AuthorityGrant.Actions.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityAction>!
+Penghou.Hufu.AuthorityGrant.Actions.init -> void
+Penghou.Hufu.AuthorityGrant.AuthorityGrant(string! Id, System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityAction>! Actions, Penghou.Hufu.AuthorityScope! Scope, System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>! Exclusions, System.DateTimeOffset NotBefore, System.DateTimeOffset ExpiresAt) -> void
+Penghou.Hufu.AuthorityGrant.Deconstruct(out string! Id, out System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityAction>! Actions, out Penghou.Hufu.AuthorityScope! Scope, out System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>! Exclusions, out System.DateTimeOffset NotBefore, out System.DateTimeOffset ExpiresAt) -> void
+Penghou.Hufu.AuthorityGrant.Equals(Penghou.Hufu.AuthorityGrant? other) -> bool
+Penghou.Hufu.AuthorityGrant.Exclusions.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>!
+Penghou.Hufu.AuthorityGrant.Exclusions.init -> void
+Penghou.Hufu.AuthorityGrant.ExpiresAt.get -> System.DateTimeOffset
+Penghou.Hufu.AuthorityGrant.ExpiresAt.init -> void
+Penghou.Hufu.AuthorityGrant.Id.get -> string!
+Penghou.Hufu.AuthorityGrant.Id.init -> void
+Penghou.Hufu.AuthorityGrant.NotBefore.get -> System.DateTimeOffset
+Penghou.Hufu.AuthorityGrant.NotBefore.init -> void
+Penghou.Hufu.AuthorityGrant.Scope.get -> Penghou.Hufu.AuthorityScope!
+Penghou.Hufu.AuthorityGrant.Scope.init -> void
+Penghou.Hufu.AuthorityGrantExplanation
+Penghou.Hufu.AuthorityGrantExplanation.ActionMatches.get -> bool
+Penghou.Hufu.AuthorityGrantExplanation.ExpiresAt.get -> System.DateTimeOffset
+Penghou.Hufu.AuthorityGrantExplanation.GrantId.get -> string!
+Penghou.Hufu.AuthorityGrantExplanation.MatchingExclusions.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>!
+Penghou.Hufu.AuthorityGrantExplanation.NotBefore.get -> System.DateTimeOffset
+Penghou.Hufu.AuthorityGrantExplanation.Scope.get -> Penghou.Hufu.AuthorityScope!
+Penghou.Hufu.AuthorityGrantExplanation.ScopeMatches.get -> bool
+Penghou.Hufu.AuthorityGrantExplanation.Validity.get -> Penghou.Hufu.AuthorityGrantValidity
+Penghou.Hufu.AuthorityGrantValidity
+Penghou.Hufu.AuthorityGrantValidity.Active = 0 -> Penghou.Hufu.AuthorityGrantValidity
+Penghou.Hufu.AuthorityGrantValidity.Expired = 2 -> Penghou.Hufu.AuthorityGrantValidity
+Penghou.Hufu.AuthorityGrantValidity.NotYetValid = 1 -> Penghou.Hufu.AuthorityGrantValidity
+Penghou.Hufu.AuthorityHistoryRead
+Penghou.Hufu.AuthorityHistoryRead.<Clone>$() -> Penghou.Hufu.AuthorityHistoryRead!
+Penghou.Hufu.AuthorityHistoryRead.AuthorityHistoryRead(Penghou.Hufu.AuthorityReadStatus Status, System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityChangeRecord!>! Records, long? NextBeforeSequence = null) -> void
+Penghou.Hufu.AuthorityHistoryRead.Deconstruct(out Penghou.Hufu.AuthorityReadStatus Status, out System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityChangeRecord!>! Records, out long? NextBeforeSequence) -> void
+Penghou.Hufu.AuthorityHistoryRead.Equals(Penghou.Hufu.AuthorityHistoryRead? other) -> bool
+Penghou.Hufu.AuthorityHistoryRead.NextBeforeSequence.get -> long?
+Penghou.Hufu.AuthorityHistoryRead.NextBeforeSequence.init -> void
+Penghou.Hufu.AuthorityHistoryRead.Records.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityChangeRecord!>!
+Penghou.Hufu.AuthorityHistoryRead.Records.init -> void
+Penghou.Hufu.AuthorityHistoryRead.Status.get -> Penghou.Hufu.AuthorityReadStatus
+Penghou.Hufu.AuthorityHistoryRead.Status.init -> void
+Penghou.Hufu.AuthorityIssuancePrincipal
+Penghou.Hufu.AuthorityIssuancePrincipal.<Clone>$() -> Penghou.Hufu.AuthorityIssuancePrincipal!
+Penghou.Hufu.AuthorityIssuancePrincipal.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.AuthorityIssuancePrincipal.Actor.init -> void
+Penghou.Hufu.AuthorityIssuancePrincipal.ApprovalValidUntil.get -> System.DateTimeOffset?
+Penghou.Hufu.AuthorityIssuancePrincipal.ApprovalValidUntil.init -> void
+Penghou.Hufu.AuthorityIssuancePrincipal.ApprovedCommandId.get -> string?
+Penghou.Hufu.AuthorityIssuancePrincipal.ApprovedCommandId.init -> void
+Penghou.Hufu.AuthorityIssuancePrincipal.ApprovedExpectedSequence.get -> long?
+Penghou.Hufu.AuthorityIssuancePrincipal.ApprovedExpectedSequence.init -> void
+Penghou.Hufu.AuthorityIssuancePrincipal.ApprovedSnapshotIdentity.get -> string?
+Penghou.Hufu.AuthorityIssuancePrincipal.ApprovedSnapshotIdentity.init -> void
+Penghou.Hufu.AuthorityIssuancePrincipal.AuthorityIssuancePrincipal(Penghou.Hufu.AuthorityStoreActor! Actor, Penghou.Hufu.AuthoritySnapshot? IssuerCeiling = null, string? ApprovedSnapshotIdentity = null, long? ApprovedExpectedSequence = null, string? ApprovedCommandId = null, System.DateTimeOffset? ApprovalValidUntil = null) -> void
+Penghou.Hufu.AuthorityIssuancePrincipal.Deconstruct(out Penghou.Hufu.AuthorityStoreActor! Actor, out Penghou.Hufu.AuthoritySnapshot? IssuerCeiling, out string? ApprovedSnapshotIdentity, out long? ApprovedExpectedSequence, out string? ApprovedCommandId, out System.DateTimeOffset? ApprovalValidUntil) -> void
+Penghou.Hufu.AuthorityIssuancePrincipal.Equals(Penghou.Hufu.AuthorityIssuancePrincipal? other) -> bool
+Penghou.Hufu.AuthorityIssuancePrincipal.IssuerCeiling.get -> Penghou.Hufu.AuthoritySnapshot?
+Penghou.Hufu.AuthorityIssuancePrincipal.IssuerCeiling.init -> void
+Penghou.Hufu.AuthorityLayer
+Penghou.Hufu.AuthorityLayer.<Clone>$() -> Penghou.Hufu.AuthorityLayer!
+Penghou.Hufu.AuthorityLayer.AuthorityLayer(string! Id, System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityGrant!>! Grants) -> void
+Penghou.Hufu.AuthorityLayer.Deconstruct(out string! Id, out System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityGrant!>! Grants) -> void
+Penghou.Hufu.AuthorityLayer.Equals(Penghou.Hufu.AuthorityLayer? other) -> bool
+Penghou.Hufu.AuthorityLayer.Grants.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityGrant!>!
+Penghou.Hufu.AuthorityLayer.Grants.init -> void
+Penghou.Hufu.AuthorityLayer.Id.get -> string!
+Penghou.Hufu.AuthorityLayer.Id.init -> void
+Penghou.Hufu.AuthorityLayerExplanation
+Penghou.Hufu.AuthorityLayerExplanation.Grants.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityGrantExplanation!>!
+Penghou.Hufu.AuthorityLayerExplanation.LayerId.get -> string!
+Penghou.Hufu.AuthorityLayerExplanation.Outcome.get -> Penghou.Hufu.AuthorityLayerOutcome?
+Penghou.Hufu.AuthorityLayerOutcome
+Penghou.Hufu.AuthorityLayerOutcome.<Clone>$() -> Penghou.Hufu.AuthorityLayerOutcome!
+Penghou.Hufu.AuthorityLayerOutcome.AuthorityLayerOutcome(string! LayerId, Penghou.Hufu.AuthorityStatus? Status, string? PolicyIdentity = null, bool HadPolicyErrors = false) -> void
+Penghou.Hufu.AuthorityLayerOutcome.Deconstruct(out string! LayerId, out Penghou.Hufu.AuthorityStatus? Status, out string? PolicyIdentity, out bool HadPolicyErrors) -> void
+Penghou.Hufu.AuthorityLayerOutcome.Equals(Penghou.Hufu.AuthorityLayerOutcome? other) -> bool
+Penghou.Hufu.AuthorityLayerOutcome.HadPolicyErrors.get -> bool
+Penghou.Hufu.AuthorityLayerOutcome.HadPolicyErrors.init -> void
+Penghou.Hufu.AuthorityLayerOutcome.LayerId.get -> string!
+Penghou.Hufu.AuthorityLayerOutcome.LayerId.init -> void
+Penghou.Hufu.AuthorityLayerOutcome.PolicyIdentity.get -> string?
+Penghou.Hufu.AuthorityLayerOutcome.PolicyIdentity.init -> void
+Penghou.Hufu.AuthorityLayerOutcome.Status.get -> Penghou.Hufu.AuthorityStatus?
+Penghou.Hufu.AuthorityLayerOutcome.Status.init -> void
+Penghou.Hufu.AuthorityMutationResult
+Penghou.Hufu.AuthorityMutationResult.<Clone>$() -> Penghou.Hufu.AuthorityMutationResult!
+Penghou.Hufu.AuthorityMutationResult.AuthorityMutationResult(Penghou.Hufu.AuthorityMutationStatus Status, Penghou.Hufu.AuthorityChangeRecord? Record = null) -> void
+Penghou.Hufu.AuthorityMutationResult.Deconstruct(out Penghou.Hufu.AuthorityMutationStatus Status, out Penghou.Hufu.AuthorityChangeRecord? Record) -> void
+Penghou.Hufu.AuthorityMutationResult.Equals(Penghou.Hufu.AuthorityMutationResult? other) -> bool
+Penghou.Hufu.AuthorityMutationResult.Record.get -> Penghou.Hufu.AuthorityChangeRecord?
+Penghou.Hufu.AuthorityMutationResult.Record.init -> void
+Penghou.Hufu.AuthorityMutationResult.Status.get -> Penghou.Hufu.AuthorityMutationStatus
+Penghou.Hufu.AuthorityMutationResult.Status.init -> void
+Penghou.Hufu.AuthorityMutationStatus
+Penghou.Hufu.AuthorityMutationStatus.Applied = 4 -> Penghou.Hufu.AuthorityMutationStatus
+Penghou.Hufu.AuthorityMutationStatus.CapacityExceeded = 6 -> Penghou.Hufu.AuthorityMutationStatus
+Penghou.Hufu.AuthorityMutationStatus.Conflict = 3 -> Penghou.Hufu.AuthorityMutationStatus
+Penghou.Hufu.AuthorityMutationStatus.Denied = 1 -> Penghou.Hufu.AuthorityMutationStatus
+Penghou.Hufu.AuthorityMutationStatus.InvalidRequest = 2 -> Penghou.Hufu.AuthorityMutationStatus
+Penghou.Hufu.AuthorityMutationStatus.Replayed = 5 -> Penghou.Hufu.AuthorityMutationStatus
+Penghou.Hufu.AuthorityMutationStatus.Unavailable = 0 -> Penghou.Hufu.AuthorityMutationStatus
+Penghou.Hufu.AuthorityOperationStartCommand
+Penghou.Hufu.AuthorityOperationStartCommand.<Clone>$() -> Penghou.Hufu.AuthorityOperationStartCommand!
+Penghou.Hufu.AuthorityOperationStartCommand.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.AuthorityOperationStartCommand.Actor.init -> void
+Penghou.Hufu.AuthorityOperationStartCommand.AuthorityOperationStartCommand(Penghou.Hufu.AuthorityStoreActor! Actor, string! OperationId, Penghou.Hufu.AuthorityRequest! Request, string! DecisionCommandId, long ExpectedSequence, string! BindingIdentity, string! BindingJson) -> void
+Penghou.Hufu.AuthorityOperationStartCommand.BindingIdentity.get -> string!
+Penghou.Hufu.AuthorityOperationStartCommand.BindingIdentity.init -> void
+Penghou.Hufu.AuthorityOperationStartCommand.BindingJson.get -> string!
+Penghou.Hufu.AuthorityOperationStartCommand.BindingJson.init -> void
+Penghou.Hufu.AuthorityOperationStartCommand.DecisionCommandId.get -> string!
+Penghou.Hufu.AuthorityOperationStartCommand.DecisionCommandId.init -> void
+Penghou.Hufu.AuthorityOperationStartCommand.Deconstruct(out Penghou.Hufu.AuthorityStoreActor! Actor, out string! OperationId, out Penghou.Hufu.AuthorityRequest! Request, out string! DecisionCommandId, out long ExpectedSequence, out string! BindingIdentity, out string! BindingJson) -> void
+Penghou.Hufu.AuthorityOperationStartCommand.Equals(Penghou.Hufu.AuthorityOperationStartCommand? other) -> bool
+Penghou.Hufu.AuthorityOperationStartCommand.ExpectedSequence.get -> long
+Penghou.Hufu.AuthorityOperationStartCommand.ExpectedSequence.init -> void
+Penghou.Hufu.AuthorityOperationStartCommand.OperationId.get -> string!
+Penghou.Hufu.AuthorityOperationStartCommand.OperationId.init -> void
+Penghou.Hufu.AuthorityOperationStartCommand.Request.get -> Penghou.Hufu.AuthorityRequest!
+Penghou.Hufu.AuthorityOperationStartCommand.Request.init -> void
+Penghou.Hufu.AuthorityOperationStartRecord
+Penghou.Hufu.AuthorityOperationStartRecord.<Clone>$() -> Penghou.Hufu.AuthorityOperationStartRecord!
+Penghou.Hufu.AuthorityOperationStartRecord.AuthorityOperationStartRecord(Penghou.Hufu.AuthorityOperationStartCommand! Command, string! ParticipantProfile, long SnapshotSequence, System.DateTimeOffset StartedAt) -> void
+Penghou.Hufu.AuthorityOperationStartRecord.Command.get -> Penghou.Hufu.AuthorityOperationStartCommand!
+Penghou.Hufu.AuthorityOperationStartRecord.Command.init -> void
+Penghou.Hufu.AuthorityOperationStartRecord.Deconstruct(out Penghou.Hufu.AuthorityOperationStartCommand! Command, out string! ParticipantProfile, out long SnapshotSequence, out System.DateTimeOffset StartedAt) -> void
+Penghou.Hufu.AuthorityOperationStartRecord.Equals(Penghou.Hufu.AuthorityOperationStartRecord? other) -> bool
+Penghou.Hufu.AuthorityOperationStartRecord.ParticipantProfile.get -> string!
+Penghou.Hufu.AuthorityOperationStartRecord.ParticipantProfile.init -> void
+Penghou.Hufu.AuthorityOperationStartRecord.SnapshotSequence.get -> long
+Penghou.Hufu.AuthorityOperationStartRecord.SnapshotSequence.init -> void
+Penghou.Hufu.AuthorityOperationStartRecord.StartedAt.get -> System.DateTimeOffset
+Penghou.Hufu.AuthorityOperationStartRecord.StartedAt.init -> void
+Penghou.Hufu.AuthorityOperationStartResult
+Penghou.Hufu.AuthorityOperationStartResult.<Clone>$() -> Penghou.Hufu.AuthorityOperationStartResult!
+Penghou.Hufu.AuthorityOperationStartResult.AuthorityOperationStartResult(Penghou.Hufu.AuthorityOperationStartStatus Status, Penghou.Hufu.AuthorityOperationStartRecord? Record = null) -> void
+Penghou.Hufu.AuthorityOperationStartResult.Deconstruct(out Penghou.Hufu.AuthorityOperationStartStatus Status, out Penghou.Hufu.AuthorityOperationStartRecord? Record) -> void
+Penghou.Hufu.AuthorityOperationStartResult.Equals(Penghou.Hufu.AuthorityOperationStartResult? other) -> bool
+Penghou.Hufu.AuthorityOperationStartResult.Record.get -> Penghou.Hufu.AuthorityOperationStartRecord?
+Penghou.Hufu.AuthorityOperationStartResult.Record.init -> void
+Penghou.Hufu.AuthorityOperationStartResult.Status.get -> Penghou.Hufu.AuthorityOperationStartStatus
+Penghou.Hufu.AuthorityOperationStartResult.Status.init -> void
+Penghou.Hufu.AuthorityOperationStartStatus
+Penghou.Hufu.AuthorityOperationStartStatus.AlreadyStarted = 8 -> Penghou.Hufu.AuthorityOperationStartStatus
+Penghou.Hufu.AuthorityOperationStartStatus.CapacityExceeded = 6 -> Penghou.Hufu.AuthorityOperationStartStatus
+Penghou.Hufu.AuthorityOperationStartStatus.Conflict = 5 -> Penghou.Hufu.AuthorityOperationStartStatus
+Penghou.Hufu.AuthorityOperationStartStatus.Denied = 1 -> Penghou.Hufu.AuthorityOperationStartStatus
+Penghou.Hufu.AuthorityOperationStartStatus.InvalidRequest = 2 -> Penghou.Hufu.AuthorityOperationStartStatus
+Penghou.Hufu.AuthorityOperationStartStatus.StaleAuthority = 3 -> Penghou.Hufu.AuthorityOperationStartStatus
+Penghou.Hufu.AuthorityOperationStartStatus.StaleRuntime = 4 -> Penghou.Hufu.AuthorityOperationStartStatus
+Penghou.Hufu.AuthorityOperationStartStatus.Started = 7 -> Penghou.Hufu.AuthorityOperationStartStatus
+Penghou.Hufu.AuthorityOperationStartStatus.Unavailable = 0 -> Penghou.Hufu.AuthorityOperationStartStatus
+Penghou.Hufu.AuthorityPublishCommand
+Penghou.Hufu.AuthorityPublishCommand.<Clone>$() -> Penghou.Hufu.AuthorityPublishCommand!
+Penghou.Hufu.AuthorityPublishCommand.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.AuthorityPublishCommand.Actor.init -> void
+Penghou.Hufu.AuthorityPublishCommand.AuthorityPublishCommand(string! CommandId, Penghou.Hufu.AuthorityStoreActor! Actor, Penghou.Hufu.AuthoritySnapshot! Snapshot, long ExpectedSequence) -> void
+Penghou.Hufu.AuthorityPublishCommand.CommandId.get -> string!
+Penghou.Hufu.AuthorityPublishCommand.CommandId.init -> void
+Penghou.Hufu.AuthorityPublishCommand.Deconstruct(out string! CommandId, out Penghou.Hufu.AuthorityStoreActor! Actor, out Penghou.Hufu.AuthoritySnapshot! Snapshot, out long ExpectedSequence) -> void
+Penghou.Hufu.AuthorityPublishCommand.Equals(Penghou.Hufu.AuthorityPublishCommand? other) -> bool
+Penghou.Hufu.AuthorityPublishCommand.ExpectedSequence.get -> long
+Penghou.Hufu.AuthorityPublishCommand.ExpectedSequence.init -> void
+Penghou.Hufu.AuthorityPublishCommand.Snapshot.get -> Penghou.Hufu.AuthoritySnapshot!
+Penghou.Hufu.AuthorityPublishCommand.Snapshot.init -> void
+Penghou.Hufu.AuthorityReadStatus
+Penghou.Hufu.AuthorityReadStatus.Active = 4 -> Penghou.Hufu.AuthorityReadStatus
+Penghou.Hufu.AuthorityReadStatus.Denied = 1 -> Penghou.Hufu.AuthorityReadStatus
+Penghou.Hufu.AuthorityReadStatus.Expired = 5 -> Penghou.Hufu.AuthorityReadStatus
+Penghou.Hufu.AuthorityReadStatus.InvalidRequest = 2 -> Penghou.Hufu.AuthorityReadStatus
+Penghou.Hufu.AuthorityReadStatus.NotFound = 3 -> Penghou.Hufu.AuthorityReadStatus
+Penghou.Hufu.AuthorityReadStatus.Revoked = 6 -> Penghou.Hufu.AuthorityReadStatus
+Penghou.Hufu.AuthorityReadStatus.StaleContext = 7 -> Penghou.Hufu.AuthorityReadStatus
+Penghou.Hufu.AuthorityReadStatus.Unavailable = 0 -> Penghou.Hufu.AuthorityReadStatus
+Penghou.Hufu.AuthorityRequest
+Penghou.Hufu.AuthorityRequest.<Clone>$() -> Penghou.Hufu.AuthorityRequest!
+Penghou.Hufu.AuthorityRequest.Action.get -> Penghou.Hufu.AuthorityAction
+Penghou.Hufu.AuthorityRequest.Action.init -> void
+Penghou.Hufu.AuthorityRequest.AuthorityRequest(Penghou.Hufu.AuthenticatedAuthorityContext! Context, Penghou.Hufu.AuthorityAction Action, string! WorkspaceId, string! RelativePath, string! RequestIdentity) -> void
+Penghou.Hufu.AuthorityRequest.Context.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.AuthorityRequest.Context.init -> void
+Penghou.Hufu.AuthorityRequest.Deconstruct(out Penghou.Hufu.AuthenticatedAuthorityContext! Context, out Penghou.Hufu.AuthorityAction Action, out string! WorkspaceId, out string! RelativePath, out string! RequestIdentity) -> void
+Penghou.Hufu.AuthorityRequest.Equals(Penghou.Hufu.AuthorityRequest? other) -> bool
+Penghou.Hufu.AuthorityRequest.RelativePath.get -> string!
+Penghou.Hufu.AuthorityRequest.RelativePath.init -> void
+Penghou.Hufu.AuthorityRequest.RequestIdentity.get -> string!
+Penghou.Hufu.AuthorityRequest.RequestIdentity.init -> void
+Penghou.Hufu.AuthorityRequest.WorkspaceId.get -> string!
+Penghou.Hufu.AuthorityRequest.WorkspaceId.init -> void
+Penghou.Hufu.AuthorityRequestAuthorization
+Penghou.Hufu.AuthorityRequestAuthorization.<Clone>$() -> Penghou.Hufu.AuthorityRequestAuthorization!
+Penghou.Hufu.AuthorityRequestAuthorization.AuthorityRequestAuthorization(Penghou.Hufu.AuthorityRequest! Request, Penghou.Hufu.AuthorityStatus Status, Penghou.Hufu.AuthorityDecision? Decision = null, bool EvidenceRecorded = false) -> void
+Penghou.Hufu.AuthorityRequestAuthorization.Decision.get -> Penghou.Hufu.AuthorityDecision?
+Penghou.Hufu.AuthorityRequestAuthorization.Decision.init -> void
+Penghou.Hufu.AuthorityRequestAuthorization.Deconstruct(out Penghou.Hufu.AuthorityRequest! Request, out Penghou.Hufu.AuthorityStatus Status, out Penghou.Hufu.AuthorityDecision? Decision, out bool EvidenceRecorded) -> void
+Penghou.Hufu.AuthorityRequestAuthorization.Equals(Penghou.Hufu.AuthorityRequestAuthorization? other) -> bool
+Penghou.Hufu.AuthorityRequestAuthorization.EvidenceRecorded.get -> bool
+Penghou.Hufu.AuthorityRequestAuthorization.EvidenceRecorded.init -> void
+Penghou.Hufu.AuthorityRequestAuthorization.IsAuthorized.get -> bool
+Penghou.Hufu.AuthorityRequestAuthorization.Request.get -> Penghou.Hufu.AuthorityRequest!
+Penghou.Hufu.AuthorityRequestAuthorization.Request.init -> void
+Penghou.Hufu.AuthorityRequestAuthorization.Status.get -> Penghou.Hufu.AuthorityStatus
+Penghou.Hufu.AuthorityRequestAuthorization.Status.init -> void
+Penghou.Hufu.AuthorityRevokeCommand
+Penghou.Hufu.AuthorityRevokeCommand.<Clone>$() -> Penghou.Hufu.AuthorityRevokeCommand!
+Penghou.Hufu.AuthorityRevokeCommand.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.AuthorityRevokeCommand.Actor.init -> void
+Penghou.Hufu.AuthorityRevokeCommand.AuthorityRevokeCommand(string! CommandId, Penghou.Hufu.AuthorityStoreActor! Actor, Penghou.Hufu.AuthenticatedAuthorityContext! Context, long ExpectedSequence, string! ReasonCode) -> void
+Penghou.Hufu.AuthorityRevokeCommand.CommandId.get -> string!
+Penghou.Hufu.AuthorityRevokeCommand.CommandId.init -> void
+Penghou.Hufu.AuthorityRevokeCommand.Context.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.AuthorityRevokeCommand.Context.init -> void
+Penghou.Hufu.AuthorityRevokeCommand.Deconstruct(out string! CommandId, out Penghou.Hufu.AuthorityStoreActor! Actor, out Penghou.Hufu.AuthenticatedAuthorityContext! Context, out long ExpectedSequence, out string! ReasonCode) -> void
+Penghou.Hufu.AuthorityRevokeCommand.Equals(Penghou.Hufu.AuthorityRevokeCommand? other) -> bool
+Penghou.Hufu.AuthorityRevokeCommand.ExpectedSequence.get -> long
+Penghou.Hufu.AuthorityRevokeCommand.ExpectedSequence.init -> void
+Penghou.Hufu.AuthorityRevokeCommand.ReasonCode.get -> string!
+Penghou.Hufu.AuthorityRevokeCommand.ReasonCode.init -> void
+Penghou.Hufu.AuthorityScope
+Penghou.Hufu.AuthorityScope.<Clone>$() -> Penghou.Hufu.AuthorityScope!
+Penghou.Hufu.AuthorityScope.AuthorityScope(string! WorkspaceId, string! RelativePath, Penghou.Hufu.AuthorityScopeKind Kind) -> void
+Penghou.Hufu.AuthorityScope.Deconstruct(out string! WorkspaceId, out string! RelativePath, out Penghou.Hufu.AuthorityScopeKind Kind) -> void
+Penghou.Hufu.AuthorityScope.Equals(Penghou.Hufu.AuthorityScope? other) -> bool
+Penghou.Hufu.AuthorityScope.Kind.get -> Penghou.Hufu.AuthorityScopeKind
+Penghou.Hufu.AuthorityScope.Kind.init -> void
+Penghou.Hufu.AuthorityScope.RelativePath.get -> string!
+Penghou.Hufu.AuthorityScope.RelativePath.init -> void
+Penghou.Hufu.AuthorityScope.WorkspaceId.get -> string!
+Penghou.Hufu.AuthorityScope.WorkspaceId.init -> void
+Penghou.Hufu.AuthorityScopeKind
+Penghou.Hufu.AuthorityScopeKind.Exact = 0 -> Penghou.Hufu.AuthorityScopeKind
+Penghou.Hufu.AuthorityScopeKind.Subtree = 1 -> Penghou.Hufu.AuthorityScopeKind
+Penghou.Hufu.AuthoritySnapshot
+Penghou.Hufu.AuthoritySnapshot.AuthoritySnapshot(Penghou.Hufu.AuthenticatedAuthorityContext! context, string! version, System.Collections.Generic.IEnumerable<Penghou.Hufu.AuthorityLayer!>! layers, System.Collections.Generic.IEnumerable<Penghou.Hufu.AuthorityScope!>! mandatoryDenials, System.DateTimeOffset validUntil) -> void
+Penghou.Hufu.AuthoritySnapshot.Context.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.AuthoritySnapshot.HasUnchangedValidity(System.DateTimeOffset evaluatedAt, System.DateTimeOffset now) -> bool
+Penghou.Hufu.AuthoritySnapshot.Identity.get -> string!
+Penghou.Hufu.AuthoritySnapshot.Layers.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityLayer!>!
+Penghou.Hufu.AuthoritySnapshot.MandatoryDenials.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>!
+Penghou.Hufu.AuthoritySnapshot.ValidUntil.get -> System.DateTimeOffset
+Penghou.Hufu.AuthoritySnapshot.Version.get -> string!
+Penghou.Hufu.AuthorityStatus
+Penghou.Hufu.AuthorityStatus.Deny = 1 -> Penghou.Hufu.AuthorityStatus
+Penghou.Hufu.AuthorityStatus.Permit = 2 -> Penghou.Hufu.AuthorityStatus
+Penghou.Hufu.AuthorityStatus.Unavailable = 0 -> Penghou.Hufu.AuthorityStatus
+Penghou.Hufu.AuthorityStoreAccessRequest
+Penghou.Hufu.AuthorityStoreAccessRequest.<Clone>$() -> Penghou.Hufu.AuthorityStoreAccessRequest!
+Penghou.Hufu.AuthorityStoreAccessRequest.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.AuthorityStoreAccessRequest.Actor.init -> void
+Penghou.Hufu.AuthorityStoreAccessRequest.AuthorityStoreAccessRequest(Penghou.Hufu.AuthorityStoreActor! Actor, Penghou.Hufu.AuthorityStoreOperation Operation, Penghou.Hufu.AuthoritySubject! Subject, Penghou.Hufu.AuthenticatedAuthorityContext? Context = null, string? CommandId = null, long? ExpectedSequence = null, Penghou.Hufu.AuthoritySnapshot? ProposedSnapshot = null, string? ReasonCode = null, Penghou.Hufu.AuthorityDecisionRecord? DecisionRecord = null, Penghou.Hufu.AuthorityOperationStartCommand? StartCommand = null) -> void
+Penghou.Hufu.AuthorityStoreAccessRequest.CommandId.get -> string?
+Penghou.Hufu.AuthorityStoreAccessRequest.CommandId.init -> void
+Penghou.Hufu.AuthorityStoreAccessRequest.Context.get -> Penghou.Hufu.AuthenticatedAuthorityContext?
+Penghou.Hufu.AuthorityStoreAccessRequest.Context.init -> void
+Penghou.Hufu.AuthorityStoreAccessRequest.DecisionRecord.get -> Penghou.Hufu.AuthorityDecisionRecord?
+Penghou.Hufu.AuthorityStoreAccessRequest.DecisionRecord.init -> void
+Penghou.Hufu.AuthorityStoreAccessRequest.Deconstruct(out Penghou.Hufu.AuthorityStoreActor! Actor, out Penghou.Hufu.AuthorityStoreOperation Operation, out Penghou.Hufu.AuthoritySubject! Subject, out Penghou.Hufu.AuthenticatedAuthorityContext? Context, out string? CommandId, out long? ExpectedSequence, out Penghou.Hufu.AuthoritySnapshot? ProposedSnapshot, out string? ReasonCode, out Penghou.Hufu.AuthorityDecisionRecord? DecisionRecord, out Penghou.Hufu.AuthorityOperationStartCommand? StartCommand) -> void
+Penghou.Hufu.AuthorityStoreAccessRequest.Equals(Penghou.Hufu.AuthorityStoreAccessRequest? other) -> bool
+Penghou.Hufu.AuthorityStoreAccessRequest.ExpectedSequence.get -> long?
+Penghou.Hufu.AuthorityStoreAccessRequest.ExpectedSequence.init -> void
+Penghou.Hufu.AuthorityStoreAccessRequest.Operation.get -> Penghou.Hufu.AuthorityStoreOperation
+Penghou.Hufu.AuthorityStoreAccessRequest.Operation.init -> void
+Penghou.Hufu.AuthorityStoreAccessRequest.ProposedSnapshot.get -> Penghou.Hufu.AuthoritySnapshot?
+Penghou.Hufu.AuthorityStoreAccessRequest.ProposedSnapshot.init -> void
+Penghou.Hufu.AuthorityStoreAccessRequest.ReasonCode.get -> string?
+Penghou.Hufu.AuthorityStoreAccessRequest.ReasonCode.init -> void
+Penghou.Hufu.AuthorityStoreAccessRequest.StartCommand.get -> Penghou.Hufu.AuthorityOperationStartCommand?
+Penghou.Hufu.AuthorityStoreAccessRequest.StartCommand.init -> void
+Penghou.Hufu.AuthorityStoreAccessRequest.Subject.get -> Penghou.Hufu.AuthoritySubject!
+Penghou.Hufu.AuthorityStoreAccessRequest.Subject.init -> void
+Penghou.Hufu.AuthorityStoreActor
+Penghou.Hufu.AuthorityStoreActor.<Clone>$() -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.AuthorityStoreActor.ActorId.get -> string!
+Penghou.Hufu.AuthorityStoreActor.ActorId.init -> void
+Penghou.Hufu.AuthorityStoreActor.AuthorityStoreActor(string! TenantId, string! ActorId, string! SessionId) -> void
+Penghou.Hufu.AuthorityStoreActor.Deconstruct(out string! TenantId, out string! ActorId, out string! SessionId) -> void
+Penghou.Hufu.AuthorityStoreActor.Equals(Penghou.Hufu.AuthorityStoreActor? other) -> bool
+Penghou.Hufu.AuthorityStoreActor.SessionId.get -> string!
+Penghou.Hufu.AuthorityStoreActor.SessionId.init -> void
+Penghou.Hufu.AuthorityStoreActor.TenantId.get -> string!
+Penghou.Hufu.AuthorityStoreActor.TenantId.init -> void
+Penghou.Hufu.AuthorityStoreAuthorization
+Penghou.Hufu.AuthorityStoreAuthorization.<Clone>$() -> Penghou.Hufu.AuthorityStoreAuthorization!
+Penghou.Hufu.AuthorityStoreAuthorization.Actor.get -> Penghou.Hufu.AuthorityStoreActor?
+Penghou.Hufu.AuthorityStoreAuthorization.Actor.init -> void
+Penghou.Hufu.AuthorityStoreAuthorization.AuthorityStoreAuthorization(Penghou.Hufu.AuthorityStatus Status, Penghou.Hufu.AuthorityStoreActor? Actor = null) -> void
+Penghou.Hufu.AuthorityStoreAuthorization.Deconstruct(out Penghou.Hufu.AuthorityStatus Status, out Penghou.Hufu.AuthorityStoreActor? Actor) -> void
+Penghou.Hufu.AuthorityStoreAuthorization.Equals(Penghou.Hufu.AuthorityStoreAuthorization? other) -> bool
+Penghou.Hufu.AuthorityStoreAuthorization.Status.get -> Penghou.Hufu.AuthorityStatus
+Penghou.Hufu.AuthorityStoreAuthorization.Status.init -> void
+Penghou.Hufu.AuthorityStoreDecisionRecorder
+Penghou.Hufu.AuthorityStoreDecisionRecorder.AuthorityStoreDecisionRecorder(Penghou.Hufu.IAuthorityStore! store, Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.IAuthorityDecisionRecordFactory! factory) -> void
+Penghou.Hufu.AuthorityStoreDecisionRecorder.RecordAsync(Penghou.Hufu.AuthorityRequest! request, Penghou.Hufu.AuthorityDecision! decision, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<bool>
+Penghou.Hufu.AuthorityStoreOperation
+Penghou.Hufu.AuthorityStoreOperation.Publish = 1 -> Penghou.Hufu.AuthorityStoreOperation
+Penghou.Hufu.AuthorityStoreOperation.ReadCurrent = 0 -> Penghou.Hufu.AuthorityStoreOperation
+Penghou.Hufu.AuthorityStoreOperation.ReadDecisions = 5 -> Penghou.Hufu.AuthorityStoreOperation
+Penghou.Hufu.AuthorityStoreOperation.ReadHistory = 4 -> Penghou.Hufu.AuthorityStoreOperation
+Penghou.Hufu.AuthorityStoreOperation.RecordDecision = 3 -> Penghou.Hufu.AuthorityStoreOperation
+Penghou.Hufu.AuthorityStoreOperation.Revoke = 2 -> Penghou.Hufu.AuthorityStoreOperation
+Penghou.Hufu.AuthorityStoreOperation.StartOperation = 6 -> Penghou.Hufu.AuthorityStoreOperation
+Penghou.Hufu.AuthorityStoreSnapshotSource
+Penghou.Hufu.AuthorityStoreSnapshotSource.AuthorityStoreSnapshotSource(Penghou.Hufu.IAuthorityStore! store, Penghou.Hufu.AuthorityStoreActor! actor) -> void
+Penghou.Hufu.AuthorityStoreSnapshotSource.GetCurrentAsync(Penghou.Hufu.AuthenticatedAuthorityContext! context, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthoritySnapshot?>
+Penghou.Hufu.AuthorityStoreValidation
+Penghou.Hufu.AuthoritySubject
+Penghou.Hufu.AuthoritySubject.<Clone>$() -> Penghou.Hufu.AuthoritySubject!
+Penghou.Hufu.AuthoritySubject.AuthoritySubject(string! TenantId, string! SubjectId, string! RunId) -> void
+Penghou.Hufu.AuthoritySubject.Deconstruct(out string! TenantId, out string! SubjectId, out string! RunId) -> void
+Penghou.Hufu.AuthoritySubject.Equals(Penghou.Hufu.AuthoritySubject? other) -> bool
+Penghou.Hufu.AuthoritySubject.RunId.get -> string!
+Penghou.Hufu.AuthoritySubject.RunId.init -> void
+Penghou.Hufu.AuthoritySubject.SubjectId.get -> string!
+Penghou.Hufu.AuthoritySubject.SubjectId.init -> void
+Penghou.Hufu.AuthoritySubject.TenantId.get -> string!
+Penghou.Hufu.AuthoritySubject.TenantId.init -> void
+Penghou.Hufu.AuthorityValidation
+Penghou.Hufu.BoundedAuthorityIssuanceAuthorizer
+Penghou.Hufu.BoundedAuthorityIssuanceAuthorizer.AuthorizeAsync(Penghou.Hufu.AuthorityStoreAccessRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityStoreAuthorization!>
+Penghou.Hufu.BoundedAuthorityIssuanceAuthorizer.BoundedAuthorityIssuanceAuthorizer(Penghou.Hufu.IAuthorityIssuanceTrustSource! trust, Penghou.Hufu.IAuthorityStoreAuthorizer! operationPolicy, System.TimeProvider? timeProvider = null, System.TimeSpan? maximumEvaluationDuration = null) -> void
+Penghou.Hufu.BoundedAuthorityRequestAuthorizer
+Penghou.Hufu.BoundedAuthorityRequestAuthorizer.AuthorizeAsync(Penghou.Hufu.AuthorityRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityRequestAuthorization!>
+Penghou.Hufu.BoundedAuthorityRequestAuthorizer.BoundedAuthorityRequestAuthorizer(Penghou.Hufu.IAuthorityRequestAuthorizer! inner, int maxExecuting, int maxQueued, System.TimeSpan admissionTimeout, System.TimeProvider? timeProvider = null) -> void
+Penghou.Hufu.CurrentAuthorityRequestAuthorizer
+Penghou.Hufu.CurrentAuthorityRequestAuthorizer.AuthorizeAsync(Penghou.Hufu.AuthorityRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityRequestAuthorization!>
+Penghou.Hufu.CurrentAuthorityRequestAuthorizer.CurrentAuthorityRequestAuthorizer(Penghou.Hufu.IAuthoritySnapshotSource! source, Penghou.Hufu.IAuthorityEvaluator! evaluator, Penghou.Hufu.IAuthorityDecisionRecorder! recorder, System.TimeProvider? clock = null) -> void
+Penghou.Hufu.IAuthorityDecisionRecorder
+Penghou.Hufu.IAuthorityDecisionRecorder.RecordAsync(Penghou.Hufu.AuthorityRequest! request, Penghou.Hufu.AuthorityDecision! decision, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<bool>
+Penghou.Hufu.IAuthorityDecisionRecordFactory
+Penghou.Hufu.IAuthorityDecisionRecordFactory.CreateAsync(Penghou.Hufu.AuthorityRequest! request, Penghou.Hufu.AuthorityDecision! decision, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityDecisionRecord?>
+Penghou.Hufu.IAuthorityEvaluator
+Penghou.Hufu.IAuthorityEvaluator.Evaluate(Penghou.Hufu.AuthoritySnapshot! snapshot, Penghou.Hufu.AuthorityRequest! request, System.DateTimeOffset now) -> Penghou.Hufu.AuthorityDecision!
+Penghou.Hufu.IAuthorityExplanationAccessPolicy
+Penghou.Hufu.IAuthorityExplanationAccessPolicy.AuthorizeAsync(Penghou.Hufu.AuthorityStoreActor! presentedActor, Penghou.Hufu.AuthorityDecisionExplanation! explanation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityExplanationAccess?>
+Penghou.Hufu.IAuthorityIssuanceTrustSource
+Penghou.Hufu.IAuthorityIssuanceTrustSource.AuthenticateAsync(Penghou.Hufu.AuthorityStoreActor! presentedActor, Penghou.Hufu.AuthorityStoreAccessRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityIssuancePrincipal?>
+Penghou.Hufu.IAuthorityOperationStartGate
+Penghou.Hufu.IAuthorityOperationStartGate.StartAsync(Penghou.Hufu.AuthorityOperationStartCommand! command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityOperationStartResult!>
+Penghou.Hufu.IAuthorityRequestAuthorizer
+Penghou.Hufu.IAuthorityRequestAuthorizer.AuthorizeAsync(Penghou.Hufu.AuthorityRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityRequestAuthorization!>
+Penghou.Hufu.IAuthoritySnapshotSource
+Penghou.Hufu.IAuthoritySnapshotSource.GetCurrentAsync(Penghou.Hufu.AuthenticatedAuthorityContext! context, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthoritySnapshot?>
+Penghou.Hufu.IAuthorityStore
+Penghou.Hufu.IAuthorityStore.PublishAsync(Penghou.Hufu.AuthorityPublishCommand! command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityMutationResult!>
+Penghou.Hufu.IAuthorityStore.ReadCurrentAsync(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.AuthenticatedAuthorityContext! context, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityCurrentRead!>
+Penghou.Hufu.IAuthorityStore.ReadDecisionAsync(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.AuthoritySubject! subject, string! commandId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityDecisionRead!>
+Penghou.Hufu.IAuthorityStore.ReadHistoryAsync(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.AuthoritySubject! subject, int maxEntries = 16, long? beforeSequence = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityHistoryRead!>
+Penghou.Hufu.IAuthorityStore.RecordDecisionAsync(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.AuthorityDecisionRecord! record, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityEvidenceWrite!>
+Penghou.Hufu.IAuthorityStore.RevokeAsync(Penghou.Hufu.AuthorityRevokeCommand! command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityMutationResult!>
+Penghou.Hufu.IAuthorityStoreAuthorizer
+Penghou.Hufu.IAuthorityStoreAuthorizer.AuthorizeAsync(Penghou.Hufu.AuthorityStoreAccessRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityStoreAuthorization!>
+static Penghou.Hufu.AuthenticatedAuthorityContext.operator !=(Penghou.Hufu.AuthenticatedAuthorityContext? left, Penghou.Hufu.AuthenticatedAuthorityContext? right) -> bool
+static Penghou.Hufu.AuthenticatedAuthorityContext.operator ==(Penghou.Hufu.AuthenticatedAuthorityContext? left, Penghou.Hufu.AuthenticatedAuthorityContext? right) -> bool
+static Penghou.Hufu.AuthorityChangeRecord.operator !=(Penghou.Hufu.AuthorityChangeRecord? left, Penghou.Hufu.AuthorityChangeRecord? right) -> bool
+static Penghou.Hufu.AuthorityChangeRecord.operator ==(Penghou.Hufu.AuthorityChangeRecord? left, Penghou.Hufu.AuthorityChangeRecord? right) -> bool
+static Penghou.Hufu.AuthorityCurrentRead.operator !=(Penghou.Hufu.AuthorityCurrentRead? left, Penghou.Hufu.AuthorityCurrentRead? right) -> bool
+static Penghou.Hufu.AuthorityCurrentRead.operator ==(Penghou.Hufu.AuthorityCurrentRead? left, Penghou.Hufu.AuthorityCurrentRead? right) -> bool
+static Penghou.Hufu.AuthorityDecision.operator !=(Penghou.Hufu.AuthorityDecision? left, Penghou.Hufu.AuthorityDecision? right) -> bool
+static Penghou.Hufu.AuthorityDecision.operator ==(Penghou.Hufu.AuthorityDecision? left, Penghou.Hufu.AuthorityDecision? right) -> bool
+static Penghou.Hufu.AuthorityDecisionEntry.operator !=(Penghou.Hufu.AuthorityDecisionEntry? left, Penghou.Hufu.AuthorityDecisionEntry? right) -> bool
+static Penghou.Hufu.AuthorityDecisionEntry.operator ==(Penghou.Hufu.AuthorityDecisionEntry? left, Penghou.Hufu.AuthorityDecisionEntry? right) -> bool
+static Penghou.Hufu.AuthorityDecisionRead.operator !=(Penghou.Hufu.AuthorityDecisionRead? left, Penghou.Hufu.AuthorityDecisionRead? right) -> bool
+static Penghou.Hufu.AuthorityDecisionRead.operator ==(Penghou.Hufu.AuthorityDecisionRead? left, Penghou.Hufu.AuthorityDecisionRead? right) -> bool
+static Penghou.Hufu.AuthorityDecisionRecord.operator !=(Penghou.Hufu.AuthorityDecisionRecord? left, Penghou.Hufu.AuthorityDecisionRecord? right) -> bool
+static Penghou.Hufu.AuthorityDecisionRecord.operator ==(Penghou.Hufu.AuthorityDecisionRecord? left, Penghou.Hufu.AuthorityDecisionRecord? right) -> bool
+static Penghou.Hufu.AuthorityEvidenceWrite.operator !=(Penghou.Hufu.AuthorityEvidenceWrite? left, Penghou.Hufu.AuthorityEvidenceWrite? right) -> bool
+static Penghou.Hufu.AuthorityEvidenceWrite.operator ==(Penghou.Hufu.AuthorityEvidenceWrite? left, Penghou.Hufu.AuthorityEvidenceWrite? right) -> bool
+static Penghou.Hufu.AuthorityExplanationAccess.operator !=(Penghou.Hufu.AuthorityExplanationAccess? left, Penghou.Hufu.AuthorityExplanationAccess? right) -> bool
+static Penghou.Hufu.AuthorityExplanationAccess.operator ==(Penghou.Hufu.AuthorityExplanationAccess? left, Penghou.Hufu.AuthorityExplanationAccess? right) -> bool
+static Penghou.Hufu.AuthorityExplanationDetails.operator !=(Penghou.Hufu.AuthorityExplanationDetails? left, Penghou.Hufu.AuthorityExplanationDetails? right) -> bool
+static Penghou.Hufu.AuthorityExplanationDetails.operator ==(Penghou.Hufu.AuthorityExplanationDetails? left, Penghou.Hufu.AuthorityExplanationDetails? right) -> bool
+static Penghou.Hufu.AuthorityExplanationProjection.operator !=(Penghou.Hufu.AuthorityExplanationProjection? left, Penghou.Hufu.AuthorityExplanationProjection? right) -> bool
+static Penghou.Hufu.AuthorityExplanationProjection.operator ==(Penghou.Hufu.AuthorityExplanationProjection? left, Penghou.Hufu.AuthorityExplanationProjection? right) -> bool
+static Penghou.Hufu.AuthorityExplanationRead.operator !=(Penghou.Hufu.AuthorityExplanationRead? left, Penghou.Hufu.AuthorityExplanationRead? right) -> bool
+static Penghou.Hufu.AuthorityExplanationRead.operator ==(Penghou.Hufu.AuthorityExplanationRead? left, Penghou.Hufu.AuthorityExplanationRead? right) -> bool
+static Penghou.Hufu.AuthorityGrant.operator !=(Penghou.Hufu.AuthorityGrant? left, Penghou.Hufu.AuthorityGrant? right) -> bool
+static Penghou.Hufu.AuthorityGrant.operator ==(Penghou.Hufu.AuthorityGrant? left, Penghou.Hufu.AuthorityGrant? right) -> bool
+static Penghou.Hufu.AuthorityHistoryRead.operator !=(Penghou.Hufu.AuthorityHistoryRead? left, Penghou.Hufu.AuthorityHistoryRead? right) -> bool
+static Penghou.Hufu.AuthorityHistoryRead.operator ==(Penghou.Hufu.AuthorityHistoryRead? left, Penghou.Hufu.AuthorityHistoryRead? right) -> bool
+static Penghou.Hufu.AuthorityIssuancePrincipal.operator !=(Penghou.Hufu.AuthorityIssuancePrincipal? left, Penghou.Hufu.AuthorityIssuancePrincipal? right) -> bool
+static Penghou.Hufu.AuthorityIssuancePrincipal.operator ==(Penghou.Hufu.AuthorityIssuancePrincipal? left, Penghou.Hufu.AuthorityIssuancePrincipal? right) -> bool
+static Penghou.Hufu.AuthorityLayer.operator !=(Penghou.Hufu.AuthorityLayer? left, Penghou.Hufu.AuthorityLayer? right) -> bool
+static Penghou.Hufu.AuthorityLayer.operator ==(Penghou.Hufu.AuthorityLayer? left, Penghou.Hufu.AuthorityLayer? right) -> bool
+static Penghou.Hufu.AuthorityLayerOutcome.operator !=(Penghou.Hufu.AuthorityLayerOutcome? left, Penghou.Hufu.AuthorityLayerOutcome? right) -> bool
+static Penghou.Hufu.AuthorityLayerOutcome.operator ==(Penghou.Hufu.AuthorityLayerOutcome? left, Penghou.Hufu.AuthorityLayerOutcome? right) -> bool
+static Penghou.Hufu.AuthorityMutationResult.operator !=(Penghou.Hufu.AuthorityMutationResult? left, Penghou.Hufu.AuthorityMutationResult? right) -> bool
+static Penghou.Hufu.AuthorityMutationResult.operator ==(Penghou.Hufu.AuthorityMutationResult? left, Penghou.Hufu.AuthorityMutationResult? right) -> bool
+static Penghou.Hufu.AuthorityOperationStartCommand.operator !=(Penghou.Hufu.AuthorityOperationStartCommand? left, Penghou.Hufu.AuthorityOperationStartCommand? right) -> bool
+static Penghou.Hufu.AuthorityOperationStartCommand.operator ==(Penghou.Hufu.AuthorityOperationStartCommand? left, Penghou.Hufu.AuthorityOperationStartCommand? right) -> bool
+static Penghou.Hufu.AuthorityOperationStartRecord.operator !=(Penghou.Hufu.AuthorityOperationStartRecord? left, Penghou.Hufu.AuthorityOperationStartRecord? right) -> bool
+static Penghou.Hufu.AuthorityOperationStartRecord.operator ==(Penghou.Hufu.AuthorityOperationStartRecord? left, Penghou.Hufu.AuthorityOperationStartRecord? right) -> bool
+static Penghou.Hufu.AuthorityOperationStartResult.operator !=(Penghou.Hufu.AuthorityOperationStartResult? left, Penghou.Hufu.AuthorityOperationStartResult? right) -> bool
+static Penghou.Hufu.AuthorityOperationStartResult.operator ==(Penghou.Hufu.AuthorityOperationStartResult? left, Penghou.Hufu.AuthorityOperationStartResult? right) -> bool
+static Penghou.Hufu.AuthorityPublishCommand.operator !=(Penghou.Hufu.AuthorityPublishCommand? left, Penghou.Hufu.AuthorityPublishCommand? right) -> bool
+static Penghou.Hufu.AuthorityPublishCommand.operator ==(Penghou.Hufu.AuthorityPublishCommand? left, Penghou.Hufu.AuthorityPublishCommand? right) -> bool
+static Penghou.Hufu.AuthorityRequest.operator !=(Penghou.Hufu.AuthorityRequest? left, Penghou.Hufu.AuthorityRequest? right) -> bool
+static Penghou.Hufu.AuthorityRequest.operator ==(Penghou.Hufu.AuthorityRequest? left, Penghou.Hufu.AuthorityRequest? right) -> bool
+static Penghou.Hufu.AuthorityRequestAuthorization.operator !=(Penghou.Hufu.AuthorityRequestAuthorization? left, Penghou.Hufu.AuthorityRequestAuthorization? right) -> bool
+static Penghou.Hufu.AuthorityRequestAuthorization.operator ==(Penghou.Hufu.AuthorityRequestAuthorization? left, Penghou.Hufu.AuthorityRequestAuthorization? right) -> bool
+static Penghou.Hufu.AuthorityRevokeCommand.operator !=(Penghou.Hufu.AuthorityRevokeCommand? left, Penghou.Hufu.AuthorityRevokeCommand? right) -> bool
+static Penghou.Hufu.AuthorityRevokeCommand.operator ==(Penghou.Hufu.AuthorityRevokeCommand? left, Penghou.Hufu.AuthorityRevokeCommand? right) -> bool
+static Penghou.Hufu.AuthorityScope.operator !=(Penghou.Hufu.AuthorityScope? left, Penghou.Hufu.AuthorityScope? right) -> bool
+static Penghou.Hufu.AuthorityScope.operator ==(Penghou.Hufu.AuthorityScope? left, Penghou.Hufu.AuthorityScope? right) -> bool
+static Penghou.Hufu.AuthorityStoreAccessRequest.operator !=(Penghou.Hufu.AuthorityStoreAccessRequest? left, Penghou.Hufu.AuthorityStoreAccessRequest? right) -> bool
+static Penghou.Hufu.AuthorityStoreAccessRequest.operator ==(Penghou.Hufu.AuthorityStoreAccessRequest? left, Penghou.Hufu.AuthorityStoreAccessRequest? right) -> bool
+static Penghou.Hufu.AuthorityStoreActor.operator !=(Penghou.Hufu.AuthorityStoreActor? left, Penghou.Hufu.AuthorityStoreActor? right) -> bool
+static Penghou.Hufu.AuthorityStoreActor.operator ==(Penghou.Hufu.AuthorityStoreActor? left, Penghou.Hufu.AuthorityStoreActor? right) -> bool
+static Penghou.Hufu.AuthorityStoreAuthorization.operator !=(Penghou.Hufu.AuthorityStoreAuthorization? left, Penghou.Hufu.AuthorityStoreAuthorization? right) -> bool
+static Penghou.Hufu.AuthorityStoreAuthorization.operator ==(Penghou.Hufu.AuthorityStoreAuthorization? left, Penghou.Hufu.AuthorityStoreAuthorization? right) -> bool
+static Penghou.Hufu.AuthorityStoreValidation.ValidActor(Penghou.Hufu.AuthorityStoreActor? actor) -> bool
+static Penghou.Hufu.AuthorityStoreValidation.ValidSubject(Penghou.Hufu.AuthoritySubject? subject) -> bool
+static Penghou.Hufu.AuthoritySubject.From(Penghou.Hufu.AuthenticatedAuthorityContext! context) -> Penghou.Hufu.AuthoritySubject!
+static Penghou.Hufu.AuthoritySubject.operator !=(Penghou.Hufu.AuthoritySubject? left, Penghou.Hufu.AuthoritySubject? right) -> bool
+static Penghou.Hufu.AuthoritySubject.operator ==(Penghou.Hufu.AuthoritySubject? left, Penghou.Hufu.AuthoritySubject? right) -> bool
+static Penghou.Hufu.AuthorityValidation.Contains(Penghou.Hufu.AuthorityScope! parent, Penghou.Hufu.AuthorityScope! child) -> bool
+static Penghou.Hufu.AuthorityValidation.IsValidRequest(Penghou.Hufu.AuthorityRequest? request) -> bool
+static Penghou.Hufu.AuthorityValidation.NormalizePath(string! path) -> string!
+static Penghou.Hufu.AuthorityValidation.ValidContext(Penghou.Hufu.AuthenticatedAuthorityContext? context) -> bool
+static Penghou.Hufu.AuthorityValidation.ValidToken(string? value) -> bool
+static readonly Penghou.Hufu.BoundedAuthorityRequestAuthorizer.MaximumAdmissionTimeout -> System.TimeSpan

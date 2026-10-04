@@ -1,0 +1,15 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/Penghou.Hufu/Penghou.Hufu.csproj" />
+    <Project Path="src/Penghou.Hufu.Cedar/Penghou.Hufu.Cedar.csproj" />
+    <Project Path="src/Penghou.Hufu.IO/Penghou.Hufu.IO.csproj" />
+    <Project Path="src/Penghou.Hufu.Luban/Penghou.Hufu.Luban.csproj" />
+    <Project Path="src/Penghou.Hufu.Sqlite/Penghou.Hufu.Sqlite.csproj" />
+    <Project Path="src/Penghou.Hufu.Workflow/Penghou.Hufu.Workflow.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj" />
+    <Project Path="tests/Penghou.Hufu.IO.Tests/Penghou.Hufu.IO.Tests.csproj" />
+    <Project Path="tests/Penghou.Hufu.Workflow.Tests/Penghou.Hufu.Workflow.Tests.csproj" />
+  </Folder>
+</Solution>

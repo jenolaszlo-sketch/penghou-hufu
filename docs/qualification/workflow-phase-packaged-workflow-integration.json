@@ -1,0 +1,50 @@
+{
+  "SchemaVersion": 1,
+  "CandidateVersion": "0.1.0-preview.1",
+  "FreshCache": "C:\\Users\\Laszlos\\AppData\\Local\\Temp\\hfi-8d5f1ead6255497787a80d74dbe96152",
+  "PublishedZhinuVersion": "0.2.0-preview.1",
+  "PublishedNeutralVersion": "0.1.0-preview.2",
+  "NoProjectReferences": true,
+  "Packages": [
+    "Microsoft.CodeCoverage/17.14.1",
+    "Microsoft.Data.Sqlite/10.0.10",
+    "Microsoft.Data.Sqlite.Core/10.0.10",
+    "Microsoft.Extensions.DependencyInjection.Abstractions/10.0.9",
+    "Microsoft.Extensions.Logging.Abstractions/10.0.9",
+    "Microsoft.NET.Test.Sdk/17.14.1",
+    "Microsoft.TestPlatform.ObjectModel/17.14.1",
+    "Microsoft.TestPlatform.TestHost/17.14.1",
+    "Newtonsoft.Json/13.0.3",
+    "Penghou.Hufu/0.1.0-preview.1",
+    "Penghou.Hufu.Workflow/0.1.0-preview.1",
+    "Penghou.Workflow.Abstractions/0.1.0-preview.2",
+    "Penghou.Zhinu/0.2.0-preview.1",
+    "Penghou.Zhinu.Sqlite/0.2.0-preview.1",
+    "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+    "SQLitePCLRaw.core/2.1.12",
+    "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+    "SQLitePCLRaw.provider.e_sqlite3/2.1.12",
+    "System.Diagnostics.DiagnosticSource/10.0.9",
+    "xunit/2.9.3",
+    "xunit.abstractions/2.0.3",
+    "xunit.analyzers/1.18.0",
+    "xunit.assert/2.9.3",
+    "xunit.core/2.9.3",
+    "xunit.extensibility.core/2.9.3",
+    "xunit.extensibility.execution/2.9.3",
+    "xunit.runner.visualstudio/2.8.2"
+  ],
+  "Reports": [
+    {
+      "Report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_07_10_28_net10.0.trx",
+      "Total": 12,
+      "Passed": 12
+    },
+    {
+      "Report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_07_10_28_net8.0.trx",
+      "Total": 12,
+      "Passed": 12
+    }
+  ],
+  "Status": "passed"
+}

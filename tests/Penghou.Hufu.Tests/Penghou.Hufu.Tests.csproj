@@ -5,5 +5,5 @@
   <ItemGroup Condition="'$(UsePenghouSource)' != 'true'"><PackageReference Include="Penghou.IO.Local" Version="[0.1.0-preview.1]" /></ItemGroup>
   <ItemGroup Condition="'$(UsePenghouSource)' == 'true'"><ProjectReference Include="../../../Penghou/src/Penghou.IO.Local/Penghou.IO.Local.csproj" /></ItemGroup>
   <ItemGroup><ProjectReference Include="../../src/Penghou.Hufu.Sqlite/Penghou.Hufu.Sqlite.csproj" /></ItemGroup>
-  <ItemGroup><ProjectReference Include="../../src/Penghou.Hufu.Zhinu.Sqlite/Penghou.Hufu.Zhinu.Sqlite.csproj" /><ProjectReference Include="../Penghou.Hufu.StartWorker.Tests/Penghou.Hufu.StartWorker.Tests.csproj" ReferenceOutputAssembly="false" /></ItemGroup>
+
 </Project>

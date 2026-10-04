@@ -1,0 +1,120 @@
+name: Publish to NuGet
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+jobs:
+  validate:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Require manual main publication
+        shell: pwsh
+        run: |
+          if ($env:GITHUB_EVENT_NAME -ne 'workflow_dispatch' -or $env:GITHUB_REF -ne 'refs/heads/main') { throw 'Publish must be dispatched from main.' }
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - name: Restore pinned experimental test dependency
+        if: runner.os == 'Windows'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ./eng/Restore-BiscuitCandidate.ps1
+      - name: Windows full regression suite
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          dotnet test Penghou.Hufu.slnx -c Release -m:1 --logger trx --results-directory test-results
+          if ($LASTEXITCODE -ne 0) { throw 'Full regression suite failed.' }
+          ./eng/Verify-HufuCoreGraph.ps1
+      - name: Linux portable core and workflow suites
+        if: runner.os == 'Linux'
+        shell: pwsh
+        run: |
+          dotnet test tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj -c Release --filter 'FullyQualifiedName~BoundedAuthorityRequestAuthorizerTests|FullyQualifiedName~AuthorityIssuanceProfileTests|FullyQualifiedName~AuthorityIssuanceStoreTests|FullyQualifiedName~AuthorityExplanationReaderTests|FullyQualifiedName~AuthorityExplanationCedarTests' --logger trx --results-directory test-results
+          if ($LASTEXITCODE -ne 0) { throw 'Portable core security/explanation tests failed.' }
+          dotnet test tests/Penghou.Hufu.Workflow.Tests/Penghou.Hufu.Workflow.Tests.csproj -c Release --logger trx --results-directory test-results
+          if ($LASTEXITCODE -ne 0) { throw 'Portable adapter tests failed.' }
+          dotnet test tests/Penghou.Hufu.Workflow.Integration.Tests/Penghou.Hufu.Workflow.Integration.Tests.csproj -c Release --logger trx --results-directory test-results
+          if ($LASTEXITCODE -ne 0) { throw 'Published-runtime integration tests failed.' }
+      - name: Qualify exact selected package artifacts
+        shell: pwsh
+        run: |
+          ./eng/Pack-HufuRelease.ps1
+          [xml]$props = Get-Content Directory.Build.props
+          $version = [string]$props.Project.PropertyGroup[0].Version
+          ./eng/Test-HufuPackageConsumers.ps1 -PackageDirectory artifacts/packages -Version $version
+          ./eng/Test-PackagedWorkflowIntegration.ps1 -PackageDirectory artifacts/packages -Version $version
+      - name: Upload validated package bytes
+        if: runner.os == 'Windows'
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-packages-${{ github.sha }}
+          path: |
+            artifacts/packages/*.nupkg
+            artifacts/packages/*.snupkg
+            artifacts/packages/package-inspection.json
+          if-no-files-found: error
+      - name: Retain release qualification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-qualification-${{ matrix.os }}-${{ github.sha }}
+          path: |
+            test-results/*.trx
+            artifacts/packages/package-inspection.json
+            qualification/**/qualification.json
+            qualification/**/tests/*.trx
+          if-no-files-found: warn
+  publish:
+    needs: validate
+    runs-on: ubuntu-latest
+    environment: nuget
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: 10.0.x
+      - uses: actions/download-artifact@v4
+        with:
+          name: release-packages-${{ github.sha }}
+          path: artifacts/packages
+      - name: Require repository publishing identity
+        shell: pwsh
+        env:
+          NUGET_USER: ${{ secrets.NUGET_USER }}
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:NUGET_USER)) { throw 'Configure NUGET_USER in the nuget environment and trust this repository/workflow/environment in NuGet.' }
+      - name: NuGet trusted-publisher login
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ secrets.NUGET_USER }}
+      - name: Publish the same validated package and symbol bytes
+        shell: pwsh
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: |
+          $report = Get-Content artifacts/packages/package-inspection.json -Raw | ConvertFrom-Json
+          if ($report.Status -ne 'passed' -or $report.Packages.Count -ne 6) { throw 'Invalid package qualification manifest.' }
+          foreach ($package in $report.Packages) {
+            foreach ($extension in @('nupkg','snupkg')) {
+              $path = "artifacts/packages/$($package.Id).$($package.Version).$extension"
+              $expected = if ($extension -eq 'nupkg') { $package.Sha256 } else { $package.SymbolSha256 }
+              if ((Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash -cne $expected) { throw "Validated artifact hash changed: $path" }
+              dotnet nuget push $path --source https://api.nuget.org/v3/index.json --api-key $env:NUGET_API_KEY
+              if ($LASTEXITCODE -ne 0) { throw "Publication failed: $path" }
+            }
+          }

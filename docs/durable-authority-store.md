@@ -14,6 +14,12 @@ pointer must match the latest event. A revoked slot is terminal; fresh execution
 requires a new run identity. Revocation can tombstone an unissued run at expected
 sequence zero. Context identities cannot be reinstated after advancement.
 
+An optional [authenticated issuance authorizer](core-admission-and-issuance.md)
+now composes host operation policy with current issuer authority, exact command
+approval and conservative containment. It rechecks trusted state after policy
+evaluation and on replay; actual authentication and atomic parent-revocation
+ordering remain host obligations.
+
 Every operation requires an explicit host `IAuthorityStoreAuthorizer`. It must
 authenticate actor/session and validate tenant, issuer ceiling, runtime context,
 read and evidence rights. The full immutable proposed snapshot or decision is

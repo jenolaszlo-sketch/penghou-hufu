@@ -1,0 +1,40 @@
+# Initial Hufu package release profile
+
+The reviewed release set is `Penghou.Hufu`, `Penghou.Hufu.Cedar`,
+`Penghou.Hufu.Sqlite`, `Penghou.Hufu.IO`, `Penghou.Hufu.Luban` and
+`Penghou.Hufu.Workflow`. Each targets .NET 8 and .NET 10. The checked-in version
+is `0.1.0-preview.1`; all six are published together by the user from `main`.
+
+The workflow adapter references only Hufu and exact
+`Penghou.Workflow.Abstractions` `0.1.0-preview.2`. Published Zhinu
+`0.2.0-preview.1` is used by the separate workflow integration tests, not by any
+release package. Core, Cedar and Biscuit remain independent of Zhinu. The
+frozen legacy SQLite start adapter stays non-packable with exact preview.15
+dependencies and a dedicated regression suite. It preserves a different atomic
+start guarantee; asynchronous preflight does not replace it.
+
+Biscuit and Biscuit.Sqlite remain experimental and outside this release set.
+Their regression tests require the hash-pinned unpublished BiscuitSharp
+preview.2 artifact through `eng/Restore-BiscuitCandidate.ps1`; released Hufu
+packages restore exclusively from public NuGet dependencies. Luban v2 and the
+older single-patch host/journal candidate are independently deferred under
+[the reuse review](ha-0a-review.md).
+
+Public API inventories are regenerated from this reviewed source and enforced
+with PublicApiAnalyzers. Shipped inventories remain empty before initial
+publication. Strict target-framework package validation, package contents and
+dependency checks, isolated fresh-cache consumers and separate integration tests
+qualify the candidate. Local checks do not establish production host identity,
+approval custody, resource enforcement or cross-process admission capacity.
+
+The core release includes [decision explanations](decision-explanations.md).
+Core owns the immutable typed capture and mandatory disclosure policy; Cedar
+captures one real evaluation. Fresh standalone consumers exercise both APIs and
+redacted summary disclosure on both frameworks. CI also runs the explanation
+security and Cedar capture tests on Linux, alongside the Windows full suite.
+
+CI never publishes. The input-free **Publish to NuGet** workflow requires `main`,
+repeats release checks for the selected commit, and publishes those same verified
+artifacts. NuGet identity setup is repository-specific; the user's configured
+trusted publishing identity and `NUGET_USER` secret in the `nuget` environment
+are required before publication. Never republish a version with changed contents.

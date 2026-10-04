@@ -8,8 +8,11 @@ live in Penghou.Workflow.Abstractions. Zhinu implements execution and Hufu imple
 adapter depending only on that contract package and Hufu core. Concrete SQLite
 start coordination remains a separately qualified legacy integration until ZA-5
 resolves its disposition. Resource enforcement and Hufu policy stay independent
-of workflow execution. Zhinu's runtime seam is implemented and locally qualified;
-the Hufu translation adapter remains planned until the Zhinu release is published.
+of workflow execution. Zhinu 0.2.0-preview.1 is published; the optional
+Hufu.Workflow adapter and its package-backed integration are locally qualified.
+Remote Hufu CI and user-controlled publication remain separate release gates.
+The optional core [decision explanation profile](decision-explanations.md)
+keeps capture and disclosure independent of execution authorization.
 
 [Authority-Mediated Language Execution (AMLE)](authority-mediated-language-execution.md)
 names this shared architectural direction: Luban expresses and executes bounded

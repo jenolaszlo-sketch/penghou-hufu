@@ -1,24 +1,37 @@
 # Penghou.Hufu
 
-Current integration plan: [product-neutral workflow contracts](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/workflow-abstractions-plan.md)
-and [runtime integration](https://github.com/jenolaszlo-sketch/penghou-zhinu/blob/main/docs/authority-extension-plan.md).
-Hufu remains independently usable. Penghou owns Penghou.Workflow.Abstractions;
-Zhinu is one runtime and optional Penghou.Hufu.Workflow implements authorization
-without a workflow-engine dependency. The contracts are published and Zhinu
-runtime implementation is locally qualified and pushed. Hufu workflow
-integration follows the published Zhinu release; [ADR 0011](docs/decisions/0011-neutral-zhinu-authority-extension.md) and the
-[handoff](docs/zhinu-authority-handoff.md) distinguish current code from that target.
+Current integration follows the [product-neutral workflow contracts](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/workflow-abstractions-plan.md)
+and [runtime plan](https://github.com/jenolaszlo-sketch/penghou-zhinu/blob/main/docs/authority-extension-plan.md).
+`Penghou.Workflow.Abstractions` 0.1.0-preview.2 is published, and Zhinu
+0.2.0-preview.1 passed its remote CI and publication gates; exact evidence is in
+[the qualification record](docs/qualification/zhinu-public-release.json).
+The optional `Penghou.Hufu.Workflow` adapter is implemented against Hufu and the
+neutral contract, without a workflow-engine dependency. The six Hufu release candidates remain unpublished;
+release gates and current qualification evidence are tracked in the handoff. See [the authorizer boundary](docs/workflow-authorizer.md),
+[ADR 0011](docs/decisions/0011-neutral-zhinu-authority-extension.md), and the
+[current handoff](docs/zhinu-authority-handoff.md).
 
 Penghou.Hufu is the proposed reusable authority library and authority-store
 boundary for workflows, delegated agents, and background operations. Its purpose
 is to make execution permissions explicit, durable, and auditable across hosts.
-The project now has a narrow M1 prototype: bounded authority snapshot/request
+The project has a narrow M1 implementation: bounded authority snapshot/request
 contracts and a Luban read-language authorizer that requires host-supplied
 current snapshots, an evaluator, and attributable decision recording. This is
 not a production authorization host or release-ready security boundary. An
 optional SQLite prototype now supplies current-state publication, terminal
 revocation, and required durable decision evidence through explicit host gates.
-Hufu remains unready for packaging.
+Hufu remains pre-release; no production workflow host is shipped.
+
+Core also supplies optional bounded request admission and an authenticated
+issuance gate. Admission limits a shared evaluator's active work and queue;
+issuance composes host operation policy with current issuer authority and exact
+command approval. See the [usage and security profile](docs/core-admission-and-issuance.md)
+for cancellation, containment and host obligations.
+
+Structured [decision explanations](docs/decision-explanations.md) capture the
+actual evaluator outcome with bounded typed grant/layer facts. A separate host
+policy controls summary or detailed disclosure; summaries hide policy and
+resource details. Explanations are informational and confer no execution rights.
 
 The optional `Penghou.Hufu.IO` project adapts current Hufu decisions to the
 neutral `IResourceAuthorizer` hook and supplies a request-gated workspace facade.
@@ -51,6 +64,8 @@ The design is recorded in:
 - [Published Zhinu package adoption](docs/zhinu-package-adoption.md)
 - [Workflow authority specification](docs/workflow-authority-spec.md)
 - [Current authority prototype profile](docs/current-authority-profile.md)
+- [Core request admission and authenticated issuance](docs/core-admission-and-issuance.md)
+- [Exact-operation decision explanations](docs/decision-explanations.md)
 - [Durable authority store profile](docs/durable-authority-store.md)
 - [Co-located operation-start profile](docs/operation-start-profile.md)
 - [Decision: current authority and evidence transactions](docs/decisions/0008-current-authority-store.md)

@@ -69,6 +69,21 @@ public sealed class CedarAuthorityEvaluator : IAuthorityEvaluator
         EvaluateDetailed(snapshot, request, now).Decision;
 
     /// <summary>
+    /// Captures one real Cedar evaluation and bounded typed snapshot facts for trusted-host explanation.
+    /// Requires an exact valid snapshot/request binding. Disclosure needs a separate AuthorityExplanationReader policy.
+    /// </summary>
+    public AuthorityDecisionExplanation EvaluateExplained(AuthoritySnapshot snapshot, AuthorityRequest request, DateTimeOffset now)
+    {
+        var details = EvaluateDetailed(snapshot, request, now);
+        var outcomes = details.Layers.Select(layer => new AuthorityLayerOutcome(layer.LayerId,
+            layer.Authorization is { } result ? ClassifyAuthorization(result).Status : null,
+            layer.PolicyDigest, layer.Authorization?.PolicyErrors.Count > 0));
+        return new(snapshot, request, details.Decision, now, outcomes,
+            details.SchemaDigest.Length == 0 ? null : details.SchemaDigest,
+            details.EntityDigest.Length == 0 ? null : details.EntityDigest);
+    }
+
+    /// <summary>
     /// Evaluates a host-authenticated snapshot and retains full CedarSharp
     /// diagnostics for trusted host audit. Do not return this object to an agent.
     /// </summary>

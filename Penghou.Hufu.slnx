@@ -8,11 +8,15 @@
     <Project Path="src/Penghou.Hufu.Sqlite/Penghou.Hufu.Sqlite.csproj" />
     <Project Path="src/Penghou.Hufu.Zhinu.Sqlite/Penghou.Hufu.Zhinu.Sqlite.csproj" />
     <Project Path="src/Penghou.Hufu/Penghou.Hufu.csproj" />
+    <Project Path="src/Penghou.Hufu.Workflow/Penghou.Hufu.Workflow.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Penghou.Hufu.Biscuit.Tests/Penghou.Hufu.Biscuit.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.StartWorker.Tests/Penghou.Hufu.StartWorker.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.IO.Tests/Penghou.Hufu.IO.Tests.csproj" />
+    <Project Path="tests/Penghou.Hufu.LegacyIntegration.Tests/Penghou.Hufu.LegacyIntegration.Tests.csproj" />
+    <Project Path="tests/Penghou.Hufu.Workflow.Tests/Penghou.Hufu.Workflow.Tests.csproj" />
+    <Project Path="tests/Penghou.Hufu.Workflow.Integration.Tests/Penghou.Hufu.Workflow.Integration.Tests.csproj" />
   </Folder>
 </Solution>

@@ -20,6 +20,7 @@ public sealed partial class SqliteAuthorityStore : IAuthorityStore
     private readonly TimeProvider _clock;
     private readonly SqliteAuthorityStoreOptions _options;
 
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("ApiDesign", "RS0026", Justification = "Preserve existing preview signatures: disk-path and trusted database-owner overloads have distinct first-parameter types.")]
     public SqliteAuthorityStore(string databasePath, IAuthorityStoreAuthorizer authorizer,
         TimeProvider? timeProvider = null, SqliteAuthorityStoreOptions? options = null)
     {
@@ -33,8 +34,11 @@ public sealed partial class SqliteAuthorityStore : IAuthorityStore
             _options.MaxStoredBytes is < 1 or > 268_435_456) throw new ArgumentOutOfRangeException(nameof(options));
         _connectionString = new SqliteConnectionStringBuilder
         {
-            DataSource = Path.GetFullPath(databasePath), Mode = SqliteOpenMode.ReadWriteCreate,
-            Cache = SqliteCacheMode.Private, Pooling = false, DefaultTimeout = 1
+            DataSource = Path.GetFullPath(databasePath),
+            Mode = SqliteOpenMode.ReadWriteCreate,
+            Cache = SqliteCacheMode.Private,
+            Pooling = false,
+            DefaultTimeout = 1
         }.ToString();
     }
 
@@ -42,6 +46,7 @@ public sealed partial class SqliteAuthorityStore : IAuthorityStore
     /// Explicit host composition for co-located authority/runtime transactions.
     /// The owner authenticates and initializes its other schemas; Hufu owns only hufu_* tables.
     /// </summary>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("ApiDesign", "RS0026", Justification = "Preserve existing preview signatures: disk-path and trusted database-owner overloads have distinct first-parameter types.")]
     public SqliteAuthorityStore(ISqliteAuthorityDatabase databaseOwner, IAuthorityStoreAuthorizer authorizer,
         SqliteAuthorityStoreOptions? options = null)
     {
@@ -478,9 +483,17 @@ public sealed partial class SqliteAuthorityStore : IAuthorityStore
 
     private static string Intent(AuthorityStoreAccessRequest access, int kind) => StoreCodec.Hash(StoreCodec.Encode(new
     {
-        Domain = "Penghou.Hufu.Command.v1", Kind = kind, access.Actor.TenantId, access.Actor.ActorId,
-        access.Subject, access.Context, access.CommandId, access.ExpectedSequence,
-        SnapshotIdentity = access.ProposedSnapshot?.Identity, access.ReasonCode, access.DecisionRecord
+        Domain = "Penghou.Hufu.Command.v1",
+        Kind = kind,
+        access.Actor.TenantId,
+        access.Actor.ActorId,
+        access.Subject,
+        access.Context,
+        access.CommandId,
+        access.ExpectedSequence,
+        SnapshotIdentity = access.ProposedSnapshot?.Identity,
+        access.ReasonCode,
+        access.DecisionRecord
     }));
     private static bool PermitStillCurrent(AuthorityDecisionRecord record, AuthorityChangeRecord? head,
         AuthorityChangeRecord publication, DateTimeOffset instant) =>
@@ -488,7 +501,7 @@ public sealed partial class SqliteAuthorityStore : IAuthorityStore
         head is { Kind: AuthorityChangeKind.Published } && head.Sequence == publication.Sequence &&
         head.Context == record.Request.Context && snapshot.HasUnchangedValidity(record.EvaluatedAt, instant);
     private static string ContextIdentity(AuthenticatedAuthorityContext context) => StoreCodec.Hash(StoreCodec.Encode(new
-        { Domain = "Penghou.Hufu.Context.v1", Context = context }));
+    { Domain = "Penghou.Hufu.Context.v1", Context = context }));
 
     private static async Task ValidateUsageAsync(SqliteConnection connection, SqliteTransaction transaction, CancellationToken ct)
     {

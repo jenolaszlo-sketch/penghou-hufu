@@ -16,6 +16,8 @@ Hufu is the reusable authority domain and planned durable authority-store bounda
 
 | Document | Purpose | Status |
 | --- | --- | --- |
+| [Decision explanations](decision-explanations.md) | Exact evaluator capture and separately authorized summary/details | Bounded typed-path profile; see linked qualification and limits |
+| [Core admission and issuance](core-admission-and-issuance.md) | Shared evaluator capacity, current authenticated issuer ceiling and exact command approval | Implemented; local .NET 8/10 and candidate-package qualification in linked record |
 | [Zhinu package adoption](zhinu-package-adoption.md) | Exact public preview.15 dependencies without a source checkout | 426 cases passed across .NET 8/10 |
 | [Current completion review](completion-review.md) | Published dependency adoption and prioritized remaining Hufu gates | IO/Luban public adoption qualified; Hufu host/API/release work remains |
 | [Architecture](architecture.md) | Library boundary, dependencies, store ownership, and integration | Proposed design |

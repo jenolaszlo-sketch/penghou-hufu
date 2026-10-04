@@ -1,0 +1,123 @@
+{
+  "SchemaVersion": 1,
+  "Projects": [
+    {
+      "Project": "src/Penghou.Hufu",
+      "Libraries": [
+        "Microsoft.CodeAnalysis.PublicApiAnalyzers/5.6.0"
+      ],
+      "NoZhinuDependencies": true
+    },
+    {
+      "Project": "src/Penghou.Hufu.Cedar",
+      "Libraries": [
+        "CedarSharp/1.0.0",
+        "Microsoft.CodeAnalysis.PublicApiAnalyzers/5.6.0",
+        "Penghou.Hufu/0.1.0-preview.1"
+      ],
+      "NoZhinuDependencies": true
+    },
+    {
+      "Project": "src/Penghou.Hufu.Biscuit",
+      "Libraries": [
+        "BiscuitSharp/0.1.0-preview.2",
+        "CedarSharp/1.0.0",
+        "Microsoft.NET.ILLink.Tasks/8.0.31",
+        "Microsoft.NET.ILLink.Tasks/10.0.12",
+        "Penghou.Hufu/0.1.0-preview.1",
+        "Penghou.Hufu.Cedar/0.1.0-preview.1"
+      ],
+      "NoZhinuDependencies": true
+    },
+    {
+      "Project": "src/Penghou.Hufu.Workflow",
+      "Libraries": [
+        "Microsoft.CodeAnalysis.PublicApiAnalyzers/5.6.0",
+        "Penghou.Workflow.Abstractions/0.1.0-preview.2",
+        "Penghou.Hufu/0.1.0-preview.1"
+      ],
+      "NoZhinuDependencies": true
+    },
+    {
+      "Project": "tests/Penghou.Hufu.Tests",
+      "Libraries": [
+        "CedarSharp/1.0.0",
+        "Microsoft.CodeCoverage/17.14.1",
+        "Microsoft.Data.Sqlite/10.0.10",
+        "Microsoft.Data.Sqlite.Core/10.0.10",
+        "Microsoft.NET.Test.Sdk/17.14.1",
+        "Microsoft.TestPlatform.ObjectModel/17.14.1",
+        "Microsoft.TestPlatform.TestHost/17.14.1",
+        "Newtonsoft.Json/13.0.3",
+        "Penghou.IO.Abstractions/0.1.0-preview.1",
+        "Penghou.IO.Local/0.1.0-preview.1",
+        "Penghou.IO.Protocols/0.1.0-preview.1",
+        "Penghou.Luban/0.1.0-preview.1",
+        "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+        "SQLitePCLRaw.core/2.1.12",
+        "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+        "SQLitePCLRaw.provider.e_sqlite3/2.1.12",
+        "xunit/2.9.3",
+        "xunit.abstractions/2.0.3",
+        "xunit.analyzers/1.18.0",
+        "xunit.assert/2.9.3",
+        "xunit.core/2.9.3",
+        "xunit.extensibility.core/2.9.3",
+        "xunit.extensibility.execution/2.9.3",
+        "xunit.runner.visualstudio/2.8.2",
+        "Penghou.Hufu/0.1.0-preview.1",
+        "Penghou.Hufu.Cedar/0.1.0-preview.1",
+        "Penghou.Hufu.Luban/0.1.0-preview.1",
+        "Penghou.Hufu.Sqlite/0.1.0-preview.1"
+      ],
+      "NoZhinuDependencies": true
+    },
+    {
+      "Project": "tests/Penghou.Hufu.IO.Tests",
+      "Libraries": [
+        "Microsoft.CodeCoverage/17.14.1",
+        "Microsoft.NET.Test.Sdk/17.14.1",
+        "Microsoft.TestPlatform.ObjectModel/17.14.1",
+        "Microsoft.TestPlatform.TestHost/17.14.1",
+        "Newtonsoft.Json/13.0.3",
+        "Penghou.IO.Abstractions/0.1.0-preview.1",
+        "Penghou.IO.Local/0.1.0-preview.1",
+        "Penghou.IO.Protocols/0.1.0-preview.1",
+        "xunit/2.9.3",
+        "xunit.abstractions/2.0.3",
+        "xunit.analyzers/1.18.0",
+        "xunit.assert/2.9.3",
+        "xunit.core/2.9.3",
+        "xunit.extensibility.core/2.9.3",
+        "xunit.extensibility.execution/2.9.3",
+        "xunit.runner.visualstudio/2.8.2",
+        "Penghou.Hufu/0.1.0-preview.1",
+        "Penghou.Hufu.IO/0.1.0-preview.1"
+      ],
+      "NoZhinuDependencies": true
+    },
+    {
+      "Project": "tests/Penghou.Hufu.Workflow.Tests",
+      "Libraries": [
+        "Microsoft.CodeCoverage/17.14.1",
+        "Microsoft.NET.Test.Sdk/17.14.1",
+        "Microsoft.TestPlatform.ObjectModel/17.14.1",
+        "Microsoft.TestPlatform.TestHost/17.14.1",
+        "Newtonsoft.Json/13.0.3",
+        "Penghou.Workflow.Abstractions/0.1.0-preview.2",
+        "xunit/2.9.3",
+        "xunit.abstractions/2.0.3",
+        "xunit.analyzers/1.18.0",
+        "xunit.assert/2.9.3",
+        "xunit.core/2.9.3",
+        "xunit.extensibility.core/2.9.3",
+        "xunit.extensibility.execution/2.9.3",
+        "xunit.runner.visualstudio/2.8.2",
+        "Penghou.Hufu/0.1.0-preview.1",
+        "Penghou.Hufu.Workflow/0.1.0-preview.1"
+      ],
+      "NoZhinuDependencies": true
+    }
+  ],
+  "Status": "passed"
+}

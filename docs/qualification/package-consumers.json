@@ -1,0 +1,45 @@
+{
+  "SchemaVersion": 1,
+  "PackageVersion": "0.1.0-preview.1",
+  "FreshCache": "C:\\Users\\Laszlos\\AppData\\Local\\Temp\\hfc-1bc19c0cd15449299cddcac98add41a7",
+  "Packages": [
+    "CedarSharp/1.0.0",
+    "Microsoft.Data.Sqlite/10.0.10",
+    "Microsoft.Data.Sqlite.Core/10.0.10",
+    "Penghou.Hufu/0.1.0-preview.1",
+    "Penghou.Hufu.Cedar/0.1.0-preview.1",
+    "Penghou.Hufu.IO/0.1.0-preview.1",
+    "Penghou.Hufu.Luban/0.1.0-preview.1",
+    "Penghou.Hufu.Sqlite/0.1.0-preview.1",
+    "Penghou.Hufu.Workflow/0.1.0-preview.1",
+    "Penghou.IO.Abstractions/0.1.0-preview.1",
+    "Penghou.IO.Protocols/0.1.0-preview.1",
+    "Penghou.Luban/0.1.0-preview.1",
+    "Penghou.Workflow.Abstractions/0.1.0-preview.2",
+    "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+    "SQLitePCLRaw.core/2.1.12",
+    "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+    "SQLitePCLRaw.provider.e_sqlite3/2.1.12"
+  ],
+  "Targets": [
+    {
+      "TargetFramework": "net8.0",
+      "RecordedDenialPassed": true,
+      "CoreAdmissionProbePassed": true,
+      "CoreIssuanceProbePassed": true,
+      "CedarExplanationCapturePassed": true,
+      "RedactedExplanationSummaryPassed": true
+    },
+    {
+      "TargetFramework": "net10.0",
+      "RecordedDenialPassed": true,
+      "CoreAdmissionProbePassed": true,
+      "CoreIssuanceProbePassed": true,
+      "CedarExplanationCapturePassed": true,
+      "RedactedExplanationSummaryPassed": true
+    }
+  ],
+  "NoProjectReferences": true,
+  "NoZhinuDependencies": true,
+  "Status": "passed"
+}

@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <Description>Product-neutral workflow authorization through Hufu with trusted binding, approval and evidence.</Description>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../Penghou.Hufu/Penghou.Hufu.csproj" />
+    <PackageReference Include="Penghou.Workflow.Abstractions" Version="[0.1.0-preview.2]" />
+  </ItemGroup>
+</Project>

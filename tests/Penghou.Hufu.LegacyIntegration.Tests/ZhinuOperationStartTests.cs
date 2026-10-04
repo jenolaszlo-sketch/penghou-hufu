@@ -10,7 +10,7 @@ using Penghou.Zhinu;
 using Penghou.Zhinu.Sqlite;
 using Xunit;
 
-namespace Penghou.Hufu.Tests;
+namespace Penghou.Hufu.LegacyIntegration.Tests;
 
 public sealed class ZhinuOperationStartTests
 {

@@ -4,6 +4,6 @@
     <PackageId>Penghou.Hufu</PackageId>
     <Title>Penghou Hufu</Title>
     <Description>Workflow authority library for explicit, auditable execution decisions.</Description>
-    <IsPackable>false</IsPackable>
+    <IsPackable>true</IsPackable>
   </PropertyGroup>
 </Project>

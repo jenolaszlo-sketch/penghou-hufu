@@ -1,0 +1,68 @@
+name: CI
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+permissions:
+  actions: read
+  contents: read
+jobs:
+  qualify:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - name: Restore pinned experimental test dependency
+        if: runner.os == 'Windows'
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: ./eng/Restore-BiscuitCandidate.ps1
+      - name: Windows full regression suite
+        if: runner.os == 'Windows'
+        shell: pwsh
+        run: |
+          dotnet test Penghou.Hufu.slnx -c Release -m:1 --logger trx --results-directory test-results
+          if ($LASTEXITCODE -ne 0) { throw 'Full regression suite failed.' }
+          ./eng/Verify-HufuCoreGraph.ps1
+      - name: Linux portable core and workflow suites
+        if: runner.os == 'Linux'
+        shell: pwsh
+        run: |
+          dotnet test tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj -c Release --filter 'FullyQualifiedName~BoundedAuthorityRequestAuthorizerTests|FullyQualifiedName~AuthorityIssuanceProfileTests|FullyQualifiedName~AuthorityIssuanceStoreTests|FullyQualifiedName~AuthorityExplanationReaderTests|FullyQualifiedName~AuthorityExplanationCedarTests' --logger trx --results-directory test-results
+          if ($LASTEXITCODE -ne 0) { throw 'Portable core security/explanation tests failed.' }
+          dotnet test tests/Penghou.Hufu.Workflow.Tests/Penghou.Hufu.Workflow.Tests.csproj -c Release --logger trx --results-directory test-results
+          if ($LASTEXITCODE -ne 0) { throw 'Portable adapter tests failed.' }
+          dotnet test tests/Penghou.Hufu.Workflow.Integration.Tests/Penghou.Hufu.Workflow.Integration.Tests.csproj -c Release --logger trx --results-directory test-results
+          if ($LASTEXITCODE -ne 0) { throw 'Published-runtime integration tests failed.' }
+      - name: Pack and inspect release packages using only public dependencies
+        shell: pwsh
+        run: |
+          [xml]$props = Get-Content Directory.Build.props
+          $version = "$($props.Project.PropertyGroup[0].Version)-ci.${{ github.run_id }}.${{ github.run_attempt }}"
+          ./eng/Pack-HufuRelease.ps1 -Version $version
+          ./eng/Test-HufuPackageConsumers.ps1 -PackageDirectory artifacts/packages -Version $version
+          ./eng/Test-PackagedWorkflowIntegration.ps1 -PackageDirectory artifacts/packages -Version $version
+      - name: Retain qualification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hufu-qualification-${{ matrix.os }}
+          path: |
+            test-results/*.trx
+            artifacts/packages/*.nupkg
+            artifacts/packages/*.snupkg
+            artifacts/packages/package-inspection.json
+            qualification/**/qualification.json
+            qualification/**/tests/*.trx
+          if-no-files-found: warn

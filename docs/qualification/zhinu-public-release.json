@@ -1,0 +1,61 @@
+{
+  "SchemaVersion": 1,
+  "VerifiedAtUtc": "2026-10-03T17:25:32.7130721+00:00",
+  "ReleaseVersion": "0.2.0-preview.1",
+  "SourceCommit": "2f02a2e91d87e6429fd17a3819308301ab91f17c",
+  "CiRun": "https://github.com/jenolaszlo-sketch/penghou-zhinu/actions/runs/37137640422",
+  "PublicationRun": "https://github.com/jenolaszlo-sketch/penghou-zhinu/actions/runs/37138352675",
+  "Packages": [
+    {
+      "Id": "Penghou.Zhinu",
+      "Version": "0.2.0-preview.1",
+      "Source": "https://api.nuget.org/v3-flatcontainer/penghou.zhinu/0.2.0-preview.1/penghou.zhinu.0.2.0-preview.1.nupkg",
+      "SourceCommit": "2f02a2e91d87e6429fd17a3819308301ab91f17c",
+      "Sha256": "A0B2D06F3054022B7A49ADACC8F92315E5CBCA0D07B8F4B06E8010426A954EDC"
+    },
+    {
+      "Id": "Penghou.Zhinu.Sqlite",
+      "Version": "0.2.0-preview.1",
+      "Source": "https://api.nuget.org/v3-flatcontainer/penghou.zhinu.sqlite/0.2.0-preview.1/penghou.zhinu.sqlite.0.2.0-preview.1.nupkg",
+      "SourceCommit": "2f02a2e91d87e6429fd17a3819308301ab91f17c",
+      "Sha256": "309DBDC252D1C523FF6DC67A5AB89F1AD5F4CB63B4F3B1968FDBE9A9A4C13DC2"
+    },
+    {
+      "Id": "Penghou.Zhinu.Hosting",
+      "Version": "0.2.0-preview.1",
+      "Source": "https://api.nuget.org/v3-flatcontainer/penghou.zhinu.hosting/0.2.0-preview.1/penghou.zhinu.hosting.0.2.0-preview.1.nupkg",
+      "SourceCommit": "2f02a2e91d87e6429fd17a3819308301ab91f17c",
+      "Sha256": "A548E206FA7BCDB444441FBCD476A7D49A4861E7DA5BB5137B02AAA883ADC9C2"
+    },
+    {
+      "Id": "Penghou.Zhinu.Hosting.AspNetCore",
+      "Version": "0.2.0-preview.1",
+      "Source": "https://api.nuget.org/v3-flatcontainer/penghou.zhinu.hosting.aspnetcore/0.2.0-preview.1/penghou.zhinu.hosting.aspnetcore.0.2.0-preview.1.nupkg",
+      "SourceCommit": "2f02a2e91d87e6429fd17a3819308301ab91f17c",
+      "Sha256": "7C4A565900300F6E9742132F44BD6AB08BFC9466B0B8BD2AC1CA2FD62323AEB1"
+    },
+    {
+      "Id": "Penghou.Zhinu.Agents",
+      "Version": "0.2.0-preview.1",
+      "Source": "https://api.nuget.org/v3-flatcontainer/penghou.zhinu.agents/0.2.0-preview.1/penghou.zhinu.agents.0.2.0-preview.1.nupkg",
+      "SourceCommit": "2f02a2e91d87e6429fd17a3819308301ab91f17c",
+      "Sha256": "3F64507BADAFAB12936BB5DA3368AABEE5FF86D20A07BAA37F854EB0B7E7C007"
+    },
+    {
+      "Id": "Penghou.Zhinu.Testing",
+      "Version": "0.2.0-preview.1",
+      "Source": "https://api.nuget.org/v3-flatcontainer/penghou.zhinu.testing/0.2.0-preview.1/penghou.zhinu.testing.0.2.0-preview.1.nupkg",
+      "SourceCommit": "2f02a2e91d87e6429fd17a3819308301ab91f17c",
+      "Sha256": "91E01EF23B8748D9907A19C70E9E58A6A0EAFE26DF072F564FFA6D334C111BA6"
+    },
+    {
+      "Id": "Penghou.Zhinu.OpenTelemetry",
+      "Version": "0.2.0-preview.1",
+      "Source": "https://api.nuget.org/v3-flatcontainer/penghou.zhinu.opentelemetry/0.2.0-preview.1/penghou.zhinu.opentelemetry.0.2.0-preview.1.nupkg",
+      "SourceCommit": "2f02a2e91d87e6429fd17a3819308301ab91f17c",
+      "Sha256": "6B12FE01B3CF11E8FB0243DFB0F8D66A846064F5FD7CEB3AEFA7B618EC7B33D8"
+    }
+  ],
+  "NoHufuDependencies": true,
+  "Status": "passed"
+}
