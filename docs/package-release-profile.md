@@ -43,3 +43,23 @@ repeats release checks for the selected commit, and publishes those same verifie
 artifacts. NuGet identity setup is repository-specific; the user's configured
 trusted publishing identity and `NUGET_USER` secret in the `nuget` environment
 are required before publication. Never republish a version with changed contents.
+
+## Initial-release recovery
+
+The first publication [run 37171589215](https://github.com/jenolaszlo-sketch/penghou-hufu/actions/runs/37171589215)
+passed Windows and Ubuntu validation and uploaded Hufu core preview.1 plus its
+symbols. It then stopped because the CLI automatically uploaded symbols alongside
+the primary package and the workflow uploaded the same symbols a second time.
+The remaining five packages were not reached.
+
+Primary uploads now use `--no-symbols`; each symbol package is uploaded explicitly
+once, after its hash check. Both uploads use `--skip-duplicate` for retryable 409
+responses. Other failures still fail publication.
+
+For `0.1.0-preview.1`, an input-free main dispatch downloads the original six-package
+artifact from that pinned run/source `3023ddb3fb9d50e01db9a8887f15f02e90cde209`
+and requalifies its package contents, standalone consumers and workflow integration.
+Recovery cannot replace the already-published core or pair it with rebuilt symbols.
+The artifact must remain available; recovery fails if it has expired. Future versions
+use their own current, validated artifacts. Increment the version before changing
+released code; the preview.1 recovery deliberately stays on its original release.

@@ -1,0 +1,179 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "fix-locally-verified-recovery-awaits-user-dispatch",
+  "initialRelease": {
+    "version": "0.1.0-preview.1",
+    "source": "3023ddb3fb9d50e01db9a8887f15f02e90cde209",
+    "run": 37171589215,
+    "bothOsValidationPassed": true,
+    "coreAndSymbolsUploaded": true,
+    "remainingPackagesReached": false
+  },
+  "publicCoreComparison": {
+    "version": "0.1.0-preview.1",
+    "originalRun": 37171589215,
+    "originalCommit": "3023ddb3fb9d50e01db9a8887f15f02e90cde209",
+    "publishedCoreContentsMatch": true,
+    "filesCompared": 10,
+    "ignoredRepositorySignatureOnly": true
+  },
+  "workflowChecks": {
+    "yamlDuplicateKeysChecked": true,
+    "powerShellParsed": true,
+    "offlineUploadCalls": 12,
+    "primaryAutoSymbolsDisabled": true,
+    "explicitSymbolsRemainEnabled": true,
+    "skipDuplicateOnBoth": true,
+    "changedArtifactRejected": true,
+    "otherPushFailuresStop": true,
+    "recoveryOnlyForPreview1": true,
+    "futureVersionsUseCurrentQualifiedArtifacts": true,
+    "noLivePushInLocalTests": true
+  },
+  "recoveredPackages": [
+    {
+      "Id": "Penghou.Hufu",
+      "Version": "0.1.0-preview.1",
+      "Sha256": "F1C01A767963EE2F51D55EBB8CAEC1C8FC9AD84D3CC5E937DA161BF86BD57A99",
+      "SymbolSha256": "6C18EBE5D395E5819559A3192C381F744AFE4DF74D116E1B9DFD49891E525D3F"
+    },
+    {
+      "Id": "Penghou.Hufu.Cedar",
+      "Version": "0.1.0-preview.1",
+      "Sha256": "EC4C475B24F3F74BB50F429815B366420B1F4904AE99AD86AFB54DD99522AD2A",
+      "SymbolSha256": "8FFD0DE0E24E0D6DD794FD0795A07B0288CD857B7A80B18B85CAF889AD08E4B6"
+    },
+    {
+      "Id": "Penghou.Hufu.IO",
+      "Version": "0.1.0-preview.1",
+      "Sha256": "2874FE4488220D4E546D68E9D0D31F33DC819DE46585933BF2B9D3FB72C1289D",
+      "SymbolSha256": "867A5BA4304739C076C3D2488086F16E693CD12552F7B4AE3412E652AFFC26D0"
+    },
+    {
+      "Id": "Penghou.Hufu.Luban",
+      "Version": "0.1.0-preview.1",
+      "Sha256": "2FBAB9BC4478A32DC979157FCA30F848F15D443A523D0BC4BCF87AF5382C203E",
+      "SymbolSha256": "3609BEB6BCF6EFEA344C5E38E1F224DF56DB463FADF7D8A09847874AFC5A8FD9"
+    },
+    {
+      "Id": "Penghou.Hufu.Sqlite",
+      "Version": "0.1.0-preview.1",
+      "Sha256": "EF543549A420B035DBA813E6D2B36B927F44E7AB580D981AF6D02F2996F735ED",
+      "SymbolSha256": "2FD2CAAA1F39A1D00F05DD719D459CE6E5D1EC018E9952C6B21C8D5AF2061BC8"
+    },
+    {
+      "Id": "Penghou.Hufu.Workflow",
+      "Version": "0.1.0-preview.1",
+      "Sha256": "3722FE347F3EA6CFE20E4377B0D6B2FAF66BAC240C50B11D839ACA4D3461C004",
+      "SymbolSha256": "7D38288AF04C28CF2BDF4BC7067EA81B5E4979DA230B70FA29B2F56EC96CA5CA"
+    }
+  ],
+  "freshConsumers": {
+    "SchemaVersion": 1,
+    "PackageVersion": "0.1.0-preview.1",
+    "FreshCache": "C:\\Users\\Laszlos\\AppData\\Local\\Temp\\hfc-b5f462b510fe4e8aaa2c9e7241deec1c",
+    "Packages": [
+      "CedarSharp/1.0.0",
+      "Microsoft.Data.Sqlite/10.0.10",
+      "Microsoft.Data.Sqlite.Core/10.0.10",
+      "Penghou.Hufu/0.1.0-preview.1",
+      "Penghou.Hufu.Cedar/0.1.0-preview.1",
+      "Penghou.Hufu.IO/0.1.0-preview.1",
+      "Penghou.Hufu.Luban/0.1.0-preview.1",
+      "Penghou.Hufu.Sqlite/0.1.0-preview.1",
+      "Penghou.Hufu.Workflow/0.1.0-preview.1",
+      "Penghou.IO.Abstractions/0.1.0-preview.1",
+      "Penghou.IO.Protocols/0.1.0-preview.1",
+      "Penghou.Luban/0.1.0-preview.1",
+      "Penghou.Workflow.Abstractions/0.1.0-preview.2",
+      "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+      "SQLitePCLRaw.core/2.1.12",
+      "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+      "SQLitePCLRaw.provider.e_sqlite3/2.1.12"
+    ],
+    "Targets": [
+      {
+        "TargetFramework": "net8.0",
+        "RecordedDenialPassed": true,
+        "CoreAdmissionProbePassed": true,
+        "CoreIssuanceProbePassed": true,
+        "CedarExplanationCapturePassed": true,
+        "RedactedExplanationSummaryPassed": true,
+        "OptionalTelemetryIsolationPassed": true
+      },
+      {
+        "TargetFramework": "net10.0",
+        "RecordedDenialPassed": true,
+        "CoreAdmissionProbePassed": true,
+        "CoreIssuanceProbePassed": true,
+        "CedarExplanationCapturePassed": true,
+        "RedactedExplanationSummaryPassed": true,
+        "OptionalTelemetryIsolationPassed": true
+      }
+    ],
+    "NoProjectReferences": true,
+    "NoZhinuDependencies": true,
+    "Status": "passed"
+  },
+  "packageOnlyIntegration": {
+    "SchemaVersion": 1,
+    "CandidateVersion": "0.1.0-preview.1",
+    "FreshCache": "C:\\Users\\Laszlos\\AppData\\Local\\Temp\\hfi-a9babdf29f6947659c96030ce7dc8003",
+    "PublishedZhinuVersion": "0.2.0-preview.1",
+    "PublishedNeutralVersion": "0.1.0-preview.2",
+    "NoProjectReferences": true,
+    "Packages": [
+      "Microsoft.CodeCoverage/17.14.1",
+      "Microsoft.Data.Sqlite/10.0.10",
+      "Microsoft.Data.Sqlite.Core/10.0.10",
+      "Microsoft.Extensions.DependencyInjection.Abstractions/10.0.9",
+      "Microsoft.Extensions.Logging.Abstractions/10.0.9",
+      "Microsoft.NET.Test.Sdk/17.14.1",
+      "Microsoft.TestPlatform.ObjectModel/17.14.1",
+      "Microsoft.TestPlatform.TestHost/17.14.1",
+      "Newtonsoft.Json/13.0.3",
+      "Penghou.Hufu/0.1.0-preview.1",
+      "Penghou.Hufu.Workflow/0.1.0-preview.1",
+      "Penghou.Workflow.Abstractions/0.1.0-preview.2",
+      "Penghou.Zhinu/0.2.0-preview.1",
+      "Penghou.Zhinu.Sqlite/0.2.0-preview.1",
+      "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+      "SQLitePCLRaw.core/2.1.12",
+      "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+      "SQLitePCLRaw.provider.e_sqlite3/2.1.12",
+      "System.Diagnostics.DiagnosticSource/10.0.9",
+      "xunit/2.9.3",
+      "xunit.abstractions/2.0.3",
+      "xunit.analyzers/1.18.0",
+      "xunit.assert/2.9.3",
+      "xunit.core/2.9.3",
+      "xunit.extensibility.core/2.9.3",
+      "xunit.extensibility.execution/2.9.3",
+      "xunit.runner.visualstudio/2.8.2"
+    ],
+    "Reports": [
+      {
+        "Report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_10_56_11_net10.0.trx",
+        "Total": 12,
+        "Passed": 12
+      },
+      {
+        "Report": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_10_56_11_net8.0.trx",
+        "Total": 12,
+        "Passed": 12
+      }
+    ],
+    "Status": "passed"
+  },
+  "reviewedFiles": {
+    ".github/workflows/publish.yml": "771834c70f4170a70164e484fa80e2a422276bd1fabecb01088141634f2b4509",
+    "docs/package-release-profile.md": "0d2a04901a513e41b51037f0d73cb2e900941d588da7ff2c1e90d2917c85f579"
+  },
+  "limitations": [
+    "Only core and symbols were uploaded in the first run; the other five packages still require user-controlled publication.",
+    "The correction has been tested locally; its corrected remote publication path has not been dispatched.",
+    "Preview.1 recovery requires the pinned GitHub artifact to remain available; it fails rather than rebuilding that partially published release.",
+    "The recovered artifact is requalified before upload. No new API or implementation changes are included in this correction."
+  ]
+}

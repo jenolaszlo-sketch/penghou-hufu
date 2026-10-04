@@ -81,16 +81,47 @@ jobs:
     runs-on: ubuntu-latest
     environment: nuget
     permissions:
+      actions: read
       contents: read
       id-token: write
     steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
       - uses: actions/setup-dotnet@v5
         with:
-          dotnet-version: 10.0.x
+          dotnet-version: |
+            8.0.x
+            10.0.x
       - uses: actions/download-artifact@v4
         with:
           name: release-packages-${{ github.sha }}
           path: artifacts/packages
+      - name: Select immutable initial-release recovery
+        id: release
+        shell: pwsh
+        run: |
+          $report = Get-Content artifacts/packages/package-inspection.json -Raw | ConvertFrom-Json
+          if ($report.Status -ne 'passed' -or $report.Packages.Count -ne 6) { throw 'Invalid package qualification manifest.' }
+          $versions = @($report.Packages.Version | Select-Object -Unique)
+          if ($versions.Count -ne 1) { throw 'Release versions must agree.' }
+          $recover = if ($versions[0] -eq '0.1.0-preview.1') { 'true' } else { 'false' }
+          "recover=$recover" >> $env:GITHUB_OUTPUT
+      - name: Recover original partially published release bytes
+        if: steps.release.outputs.recover == 'true'
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 37171589215
+          name: release-packages-3023ddb3fb9d50e01db9a8887f15f02e90cde209
+          path: artifacts/packages
+      - name: Requalify recovered package bytes
+        if: steps.release.outputs.recover == 'true'
+        shell: pwsh
+        run: |
+          ./eng/Verify-HufuPackageSet.ps1 -PackageDirectory artifacts/packages -Version 0.1.0-preview.1
+          ./eng/Test-HufuPackageConsumers.ps1 -PackageDirectory artifacts/packages -Version 0.1.0-preview.1
+          ./eng/Test-PackagedWorkflowIntegration.ps1 -PackageDirectory artifacts/packages -Version 0.1.0-preview.1
       - name: Require repository publishing identity
         shell: pwsh
         env:
@@ -114,7 +145,9 @@ jobs:
               $path = "artifacts/packages/$($package.Id).$($package.Version).$extension"
               $expected = if ($extension -eq 'nupkg') { $package.Sha256 } else { $package.SymbolSha256 }
               if ((Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash -cne $expected) { throw "Validated artifact hash changed: $path" }
-              dotnet nuget push $path --source https://api.nuget.org/v3/index.json --api-key $env:NUGET_API_KEY
+              $pushOptions = @('--skip-duplicate')
+              if ($extension -eq 'nupkg') { $pushOptions += '--no-symbols' }
+              dotnet nuget push $path --source https://api.nuget.org/v3/index.json --api-key $env:NUGET_API_KEY @pushOptions
               if ($LASTEXITCODE -ne 0) { throw "Publication failed: $path" }
             }
           }
