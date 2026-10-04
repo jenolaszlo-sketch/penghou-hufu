@@ -31,11 +31,11 @@ The core release includes [decision explanations](decision-explanations.md).
 Core owns the immutable typed capture and mandatory disclosure policy; Cedar
 captures one real evaluation. Fresh standalone consumers exercise both APIs and
 redacted summary disclosure on both frameworks. CI also runs the explanation
-security and Cedar capture tests on Linux, alongside the Windows full suite.
+security and Cedar capture tests on Linux and macOS, alongside the Windows full suite.
 
 Core also includes [optional bounded telemetry](optional-telemetry.md). Fresh
 package consumers exercise actual closed-category metric emission and preserve
-fail-closed authorization after telemetry shutdown. Linux CI includes portable
+fail-closed authorization after telemetry shutdown. Linux and macOS CI include portable
 telemetry tests; Windows retains full regression. No SDK/exporter package is added.
 
 CI never publishes. The input-free **Publish to NuGet** workflow requires `main`,
@@ -43,6 +43,28 @@ repeats release checks for the selected commit, and publishes those same verifie
 artifacts. NuGet identity setup is repository-specific; the user's configured
 trusted publishing identity and `NUGET_USER` secret in the `nuget` environment
 are required before publication. Never republish a version with changed contents.
+
+## CI platform coverage
+
+Both CI and publication validation run on Windows, Ubuntu and `macos-15`
+(ARM64), with .NET 8 and .NET 10. Windows runs the full solution. Linux and
+macOS run portable core admission, issuance, explanation and telemetry tests,
+Workflow unit tests and integration against the published Zhinu runtime.
+All three platforms inspect the six release package/symbol pairs, run fresh
+standalone package consumers and run package-only workflow integration.
+Publication waits for every validation job; it remains an input-free manual
+dispatch from `main`.
+
+macOS additionally runs native Cedar evaluation, portable SQLite authority-store
+tests and the experimental Biscuit suite (including real Cedar/Biscuit evaluation,
+registry evidence and atomic operation-start tests). It restores the same
+hash-pinned BiscuitSharp candidate as Windows; Biscuit is still outside the
+release set. An explicit architecture check rejects non-ARM64 macOS runners.
+The two SQLite Local/Luban read cases and the Biscuit Local/Luban resource-read
+classes stay in the Windows full suite because those providers use Windows
+native profiles. This matrix does not qualify Intel Macs or a macOS Local/Luban
+filesystem provider. A successful macOS run is required before claiming native
+Hufu consumer qualification there.
 
 ## Initial-release recovery
 

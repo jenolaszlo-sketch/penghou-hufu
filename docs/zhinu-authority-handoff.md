@@ -15,6 +15,11 @@ succeeded. WA-1/2/3, ZA-2, and ZA-6 are complete.
 
 For Hufu, HA-0A/B and HA-1 are complete. The public adapter and its host boundary are described in [workflow-authorizer.md](workflow-authorizer.md). The current full suite passed 816 tests total, 408 per framework: core 210, Biscuit 93, IO 19, legacy integration 22, Workflow 52, and workflow integration 12. The bounded request telemetry slice adds 26 cases per framework; see [profile](optional-telemetry.md) and [current qualification](qualification/optional-telemetry.json). The earlier bounded explanation slice adds 32 cases per framework; see [profile](decision-explanations.md) and [explanation qualification](qualification/decision-explanations.json). The independently reviewed core admission/issuance profiles add 73 cases per framework; see [the profile](core-admission-and-issuance.md) and [earlier core evidence](qualification/core-hardening.json). The earlier 554/700/764-case records are preserved as historical evidence. HA-2 passed fresh-cache candidate-package qualification on both frameworks; HA-3 source tooling is ready, with remote CI and user-controlled publication pending. The proposed release set contains six Hufu packages at `0.1.0-preview.1`; no production host is shipped.
 
+CI and release validation now also include `macos-15` ARM64 on .NET 8/10.
+The [release profile](package-release-profile.md#ci-platform-coverage) defines
+portable/native coverage and Windows-only resource exclusions. Record successful
+remote macOS validation before claiming native Hufu consumer qualification.
+
 ## Reading order
 
 1. [Penghou workflow contract ownership/publication plan](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/workflow-abstractions-plan.md), then the [canonical Zhinu plan](https://github.com/jenolaszlo-sketch/penghou-zhinu/blob/main/docs/authority-extension-plan.md) and its current activity queue.
@@ -72,7 +77,7 @@ Bounded request admission and authenticated issuance are implemented and locally
 qualified. They remain optional core compositions, with no Zhinu or other
 integration dependency. Preserve active-capacity accounting through caller
 cancellation, exact command approval and fresh issuer/approval reload after
-operation policy. CI now runs the portable core security subset on Linux as
+operation policy. CI now runs the portable core security subset on Linux and macOS as
 well as the Windows full suite; remote CI has not run for this revision.
 
 The bounded typed-path explanation profile is implemented and locally qualified,
@@ -98,9 +103,9 @@ the new interface types.
 > framework; six package/symbol pairs and standalone fresh-cache consumers
 > are qualified. The earlier qualified Hufu implementation and synchronized
 > Penghou/Zhinu documentation were committed (42a045b/77bac95/a1df6e9); current
-> telemetry changes are local. Review and commit/push the telemetry delivery. Verify both OS CI jobs before
+> telemetry changes are local. Review and commit/push the telemetry delivery. Verify all three OS CI jobs before
 > the user runs the input-free main publication workflow. That workflow also
-> requires both OS validation before publishing the same inspected bytes.
+> requires all three OS validations before publishing the same inspected bytes.
 > Configure this repository's NuGet trusted-publisher identity and NUGET_USER
 > in the nuget environment before dispatch; the environment secret query
 > returned 404 during local review. Never publish the old staging candidates,

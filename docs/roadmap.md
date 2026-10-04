@@ -1,5 +1,14 @@
 # Hufu implementation roadmap
 
+## macOS CI coverage - 2026-10-04
+
+CI and publication validation now include `macos-15` ARM64 with .NET 8/10,
+portable security and workflow tests, native Cedar/Biscuit/SQLite regression,
+and fresh release-package consumers. Windows retains the full filesystem suite.
+See [the platform coverage and qualification boundary](package-release-profile.md#ci-platform-coverage).
+Remote macOS success must be recorded before claiming consumer qualification;
+the existing Windows qualification records remain historical evidence.
+
 ## Optional request telemetry checkpoint - 2026-10-04
 
 The [bounded telemetry profile](optional-telemetry.md) is implemented in core:
@@ -381,7 +390,7 @@ evidence does not replace the Zhinu runtime qualification or authorize effects.
 
 ## Current delivery gates
 
-HA-2 is locally qualified: six fresh-cache package consumers and package-only integration pass on both frameworks. Local HA-3 API/package checks and CI workflow definitions are ready; commit/push, verify both OS CI jobs, then the user runs publication. See [qualification evidence](qualification/workflow-authorization.json). The current full repository suite passed 764 tests total (382 per framework: core 184, Biscuit 93, IO 19, legacy integration 22, Workflow 52, workflow integration 12), including admission/issuance and decision explanations. See [current explanation qualification](qualification/decision-explanations.json); the earlier 554/700-case records remain historical evidence. Preserve the frozen legacy preview.15 adapter and its separate regression suite.
+HA-2 is locally qualified: six fresh-cache package consumers and package-only integration pass on both frameworks. Local HA-3 API/package checks and CI workflow definitions are ready; commit/push, verify all three OS CI jobs, then the user runs publication. See [qualification evidence](qualification/workflow-authorization.json). The current full repository suite passed 764 tests total (382 per framework: core 184, Biscuit 93, IO 19, legacy integration 22, Workflow 52, workflow integration 12), including admission/issuance and decision explanations. See [current explanation qualification](qualification/decision-explanations.json); the earlier 554/700-case records remain historical evidence. Preserve the frozen legacy preview.15 adapter and its separate regression suite.
 ## Historical host gate - separate qualification stream
 
 The optional current-state/evidence store and legacy co-located Hufu/Zhinu start
