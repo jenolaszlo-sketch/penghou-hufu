@@ -1,11 +1,13 @@
 # Hufu package release profile
 
-Current candidate: seven packages at `0.1.0-preview.3`, including the optional
-`Penghou.Hufu.Luban.Sqlite` [single-patch host](single-patch-host.md). Existing
-six packages use published preview.2 for compatibility validation; the new
-adapter has no baseline. Local evidence is [recorded separately](qualification/single-patch-host.json);
-remote CI and user-controlled publication are pending. The following published
-checkpoint remains historical release evidence.
+Current published release: seven packages at `0.1.0-preview.3`, including the optional
+`Penghou.Hufu.Luban.Sqlite` [single-patch host](single-patch-host.md). Remote CI and
+publication validation passed on Windows, Ubuntu and macOS at `3206c44`. Exact
+public package contents match the publication artifacts apart from NuGet signatures;
+fresh NuGet-only consumers and all 80 patch integration cases pass on .NET 8/10
+in [the release checkpoint](qualification/single-patch-public-release.json).
+Local evidence is [recorded separately](qualification/single-patch-host.json).
+Preview.3 is immutable. The following preview.2 checkpoint remains historical evidence.
 
 The published preview.2 set is `Penghou.Hufu`, `Penghou.Hufu.Cedar`,
 `Penghou.Hufu.Sqlite`, `Penghou.Hufu.IO`, `Penghou.Hufu.Luban` and
@@ -32,10 +34,11 @@ packages restore exclusively from public NuGet dependencies. The explicit
 [the reuse review](ha-0a-review.md).
 
 Public API inventories are regenerated from this reviewed source and enforced
-with PublicApiAnalyzers. Published preview.1 and preview.2 APIs are now shipped;
+with PublicApiAnalyzers. Published preview.1/2/3 APIs are now shipped;
 future additions stay in the unshipped inventory until publication. Preview.2
-was validated against preview.1; preview.3 uses published preview.2 for the six
-existing packages. The new adapter has no published baseline. Strict target-framework package validation, package contents and
+was validated against preview.1; the preview.3 release validated the six existing
+packages against preview.2 and introduced the seventh without a baseline.
+All seven packages now use published preview.3 for future compatibility validation. Strict target-framework package validation, package contents and
 dependency checks, isolated fresh-cache consumers and separate integration tests
 qualify the candidate. Local checks do not establish production host identity,
 approval custody, resource enforcement or cross-process admission capacity.
@@ -67,6 +70,10 @@ Workflow unit tests and integration against the published Zhinu runtime,
 plus the portable SQLite patch journal suite.
 All three platforms inspect the seven current release package/symbol pairs, run fresh
 standalone package consumers and run package-only workflow and patch integration.
+Windows also runs the non-packable [local host](local-host-services.md) suite and
+separate-process smoke qualification against exact public preview.3 dependencies.
+Its remote CI for this source addition is pending; it introduces no package or
+version bump. Linux/macOS do not qualify the Windows token/ACL host profile.
 Package-only patch tests exercise the actual controlled Windows writer on Windows;
 Linux/macOS run journal approval/start/recovery against the candidate packages.
 Publication waits for every validation job; it remains an input-free manual

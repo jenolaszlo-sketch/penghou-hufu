@@ -11,22 +11,28 @@ are published at `0.1.0-preview.2`, including explicit
 [Luban v2 read/diff authorization](docs/luban-v2-authorization.md).
 [Public-package and three-platform CI evidence](docs/qualification/hufu-luban-v2-public-release.json)
 records the release; the original preview.1 evidence remains historical.
-The next preview.3 candidate adds optional
+The published preview.3 release adds optional
 [governed single-patch hosting](docs/single-patch-host.md) through the new
 `Penghou.Hufu.Luban.Sqlite` package. It has no workflow-engine dependency;
-local qualification and remote publication are separate gates. See [the authorizer boundary](docs/workflow-authorizer.md),
+all seven packages are available on NuGet. Three-platform CI/publication, exact
+package contents and fresh NuGet-only consumers pass in [the release checkpoint](docs/qualification/single-patch-public-release.json). See [the authorizer boundary](docs/workflow-authorizer.md),
 [ADR 0011](docs/decisions/0011-neutral-zhinu-authority-extension.md), and the
 [current handoff](docs/zhinu-authority-handoff.md).
+The non-packable [local Windows host](docs/local-host-services.md) demonstrates
+real operator identity, protected exact approvals, current authority and durable
+single-patch recovery using those public packages. It is a bounded trusted-console
+profile; product-host integration and remote CI for this source change remain open.
 
 Penghou.Hufu is the proposed reusable authority library and authority-store
 boundary for workflows, delegated agents, and background operations. Its purpose
 is to make execution permissions explicit, durable, and auditable across hosts.
-The project has a narrow M1 implementation: bounded authority snapshot/request
-contracts and a Luban read-language authorizer that requires host-supplied
-current snapshots, an evaluator, and attributable decision recording. This is
-not a production authorization host. An
-optional SQLite prototype now supplies current-state publication, terminal
-revocation, and required durable decision evidence through explicit host gates.
+Published pre-release packages provide authority snapshot/request contracts,
+current-state publication and terminal revocation, mandatory decision evidence,
+Luban read/diff mediation, neutral workflow preflight and governed single-patch
+start/outcome journaling. Each composition requires explicit authenticated host
+services, current snapshots and evaluator capture. The bounded local Windows
+example supplies those services for one operator and exact file; broader production
+application profiles still need their own qualification.
 Hufu remains pre-release; no production workflow host is shipped.
 
 Core also supplies optional bounded request admission and an authenticated
@@ -49,10 +55,11 @@ The optional `Penghou.Hufu.IO` project adapts current Hufu decisions to the
 neutral `IResourceAuthorizer` hook and supplies a request-gated workspace facade.
 It keeps provider-side candidate and mutation-start hooks in the composition and
 has no permissive default. Its conditional `WriteFile` permission is separate
-from patch permission. The separate `Penghou.Hufu.Luban.Sqlite` candidate supplies a governed
+from patch permission. The separate `Penghou.Hufu.Luban.Sqlite` adapter supplies a governed
 single-patch host, co-located exact approval/start and durable outcomes for the
-controlled Windows NTFS conditional writer. Production authentication/custody
-services and broader mutation profiles remain host work. Normal builds consume exact published IO/Luban 0.1.0-preview.1 packages.
+controlled Windows NTFS conditional writer. The [local host example](docs/local-host-services.md)
+adds real operator authentication and protected custody for its exact-file profile;
+product services and broader mutation profiles remain host work. Normal builds consume exact published IO/Luban 0.1.0-preview.1 packages.
 A fresh isolated public-feed restore passes 426 tests across both frameworks.
 See [package adoption](docs/resource-package-adoption.md) and the
 [remaining-work review](docs/completion-review.md).
@@ -84,6 +91,7 @@ The design is recorded in:
 - [Optional bounded authorization telemetry](docs/optional-telemetry.md)
 - [Durable authority store profile](docs/durable-authority-store.md)
 - [Governed single-patch host and recovery](docs/single-patch-host.md)
+- [Local Windows host services and operator commands](docs/local-host-services.md)
 - [Legacy co-located operation-start profile](docs/operation-start-profile.md)
 - [Decision: current authority and evidence transactions](docs/decisions/0008-current-authority-store.md)
 - [Architecture](docs/architecture.md)
@@ -115,8 +123,9 @@ SQLite current-state/evidence storage is implemented as a narrow optional
 prototype. Host-authenticated publication is not a complete issuance, approval,
 or delegation service. An optional Hufu/Zhinu adapter now commits authority
 validation, runtime acquisition and required start evidence in one shared-file
-SQLite transaction. Complete governed mutation hosts, terminal outcome recovery,
-those lifecycles and reusable conformance helpers remain roadmap work.
+SQLite transaction. The independent single-patch adapter and local Windows example now supply
+exact governed mutation start and terminal recovery. Broader host lifecycles,
+delegation and reusable conformance helpers remain roadmap work.
 
 Policy evaluation is selected through `Penghou.Hufu.Cedar`, backed by the
 independent [CedarSharp wrapper](../CedarSharp/README.md) and official Cedar.

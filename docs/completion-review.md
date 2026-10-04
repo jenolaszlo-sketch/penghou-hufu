@@ -6,18 +6,26 @@ Current review: 2026-10-04. Read the [handoff](zhinu-authority-handoff.md),
 They supersede the older repository/host-first queue. Historical qualification
 records remain evidence for their actual revisions.
 
-## Single-patch candidate
+## Single-patch release checkpoint
 
 The new optional [single-patch host](single-patch-host.md) supplies exact semantic
 admission, final resource checks, co-located approved start and durable terminal
 recovery without a workflow-engine dependency. The seven-package preview.3
-candidate has its own [qualification record](qualification/single-patch-host.json).
-Remote CI and publication remain pending; the checkpoint below describes the
-published preview.2 baseline.
+implementation has its own [local qualification record](qualification/single-patch-host.json).
+Remote CI and publication validation passed on all three platforms at `3206c44`.
+All seven exact NuGet packages match publication contents apart from repository
+signatures; fresh NuGet-only consumers and 80 patch tests pass on .NET 8/10
+in [the release checkpoint](qualification/single-patch-public-release.json).
+The checkpoint below describes the separately qualified preview.2 baseline.
 Local regression passes 962 cases (481 per framework), including 40 new cases
 per framework. Seven package/symbol pairs, fresh standalone consumers,
-package-only patch tests (80) and workflow integration (24) pass. Remote CI
-and publication remain separate gates.
+package-only patch tests (80) and workflow integration (24) pass. These local
+results remain historical implementation evidence; the separate public-release
+record closes HOST-PATCH-RELEASE. The bounded HOST-SERVICES-LOCAL delivery is
+implemented in the non-packable [Windows host](local-host-services.md), consuming
+these published packages. All 80 focused .NET 8/10 cases and separate-process CLI
+qualification pass in [the evidence](qualification/local-host-services.json).
+Windows CI is configured; its remote run and product-host integration remain open.
 
 ## Verified checkpoint
 
@@ -66,20 +74,25 @@ counts below describe earlier checkpoints.
 | Luban v2 read/diff | Published preview.2; three-platform CI/publication and fresh public-package consumers passed; governed mutation hosting remains separate |
 | Core explanations | Bounded exact-operation typed-path slice implemented and locally qualified; lineage/requirements and retained historical reconstruction remain future extensions |
 | Optional telemetry | Bounded request slice implemented and locally qualified; broker/approval/revocation metrics and protected correlation remain separate host work |
+| HOST-SERVICES-LOCAL | Concrete Windows identity, protected exact approval/issuer state and bounded custody; 80 local cases and separate-process qualification pass |
+| HOST-SERVICES-CI/PRODUCT | Remote Windows checks pending; select and qualify product tool/management routing and retention next; no package publication required |
 | ZA-5B | Separate replacement/retirement decision preserving the frozen legacy final-start guarantee |
 
 The [Luban v2 read/diff adapter](luban-v2-authorization.md) is now implemented
 in preview.2. The single-patch host/outcome journal is now an independently qualified
-preview.3 candidate, described above. No other old `.tmp/hufu-completion` group was bulk-installed. That
+published preview.3 adapter, described above. No other old `.tmp/hufu-completion` group was bulk-installed. That
 snapshot's 510-case report does not qualify the current release graph.
 
 ## Remaining scope
 
 The new trust-source interface does not authenticate credentials by itself.
-One concrete host still needs authenticated issuer/approval/custody services,
-actual shared capacity and database/workspace custody. The bounded single-patch
-adapter supplies exact resource binding, co-located start and durable outcome
-reconciliation; integrating it with those authenticated services remains host work. Current issuance rechecks after policy
+The [local Windows host](local-host-services.md) now supplies real operator-token
+authentication, exact issuance/approval, protected state and bounded cross-process
+capacity for its one-file profile. Its trusted console is separate from the worker
+API, and it does not contain arbitrary code under the operator account. Product-host
+routing, external credentials, organizational issuers, multiple operators and
+retention remain separate work. The bounded single-patch adapter supplies exact
+resource binding, co-located start and durable outcome reconciliation. Current issuance rechecks after policy
 awaits; it does not order parent revocation and publication across stores.
 Workflow preflight does not supply those effect-boundary guarantees.
 

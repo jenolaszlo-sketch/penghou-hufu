@@ -1,0 +1,517 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "published-and-public-feed-qualified",
+  "version": "0.1.0-preview.3",
+  "sourceCommit": "3206c4447add6ef0821fb70f118b638598d9aac0",
+  "ci": {
+    "runId": 37196404171,
+    "sourceCommit": "3206c4447add6ef0821fb70f118b638598d9aac0",
+    "status": "success",
+    "url": "https://github.com/jenolaszlo-sketch/penghou-hufu/actions/runs/37196404171",
+    "jobs": [
+      {
+        "name": "qualify (windows-latest)",
+        "conclusion": "success",
+        "startedAt": "2026-10-04T10:45:32Z",
+        "completedAt": "2026-10-04T10:52:57Z",
+        "url": "https://github.com/jenolaszlo-sketch/penghou-hufu/actions/runs/37196404171/job/111419091120"
+      },
+      {
+        "name": "qualify (macos-15)",
+        "conclusion": "success",
+        "startedAt": "2026-10-04T10:45:36Z",
+        "completedAt": "2026-10-04T10:48:12Z",
+        "url": "https://github.com/jenolaszlo-sketch/penghou-hufu/actions/runs/37196404171/job/111419091264"
+      },
+      {
+        "name": "qualify (ubuntu-latest)",
+        "conclusion": "success",
+        "startedAt": "2026-10-04T10:45:33Z",
+        "completedAt": "2026-10-04T10:47:30Z",
+        "url": "https://github.com/jenolaszlo-sketch/penghou-hufu/actions/runs/37196404171/job/111419091308"
+      }
+    ]
+  },
+  "publication": {
+    "runId": 37197831939,
+    "sourceCommit": "3206c4447add6ef0821fb70f118b638598d9aac0",
+    "status": "success",
+    "url": "https://github.com/jenolaszlo-sketch/penghou-hufu/actions/runs/37197831939",
+    "jobs": [
+      {
+        "name": "validate (macos-15)",
+        "conclusion": "success",
+        "url": "https://github.com/jenolaszlo-sketch/penghou-hufu/actions/runs/37197831939/job/111423254837"
+      },
+      {
+        "name": "validate (windows-latest)",
+        "conclusion": "success",
+        "url": "https://github.com/jenolaszlo-sketch/penghou-hufu/actions/runs/37197831939/job/111423254976"
+      },
+      {
+        "name": "validate (ubuntu-latest)",
+        "conclusion": "success",
+        "url": "https://github.com/jenolaszlo-sketch/penghou-hufu/actions/runs/37197831939/job/111423254998"
+      },
+      {
+        "name": "publish",
+        "conclusion": "success",
+        "url": "https://github.com/jenolaszlo-sketch/penghou-hufu/actions/runs/37197831939/job/111424426965"
+      }
+    ]
+  },
+  "publicFeed": {
+    "checkedAt": "2026-10-04T19:25:14.215322+08:00",
+    "allSevenExactVersionsDownloadable": true,
+    "note": "Exact flat-container downloads and fresh NuGet restores passed; version-list caching does not override these results."
+  },
+  "freshPublicPackageConsumers": {
+    "standalone": {
+      "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-single-patch\\public-preview3\\standalone\\consumer-5e8244dafed54fc5965af370bcdf9e04\\qualification.json",
+      "sha256": "0fbb8cf17aad330793c4512e84b1337ab083cd6f0551c90105834301215d7fa5",
+      "nugetOnlyRestoreVerified": true,
+      "exactDownloadedPackageHashesVerified": true,
+      "result": {
+        "SchemaVersion": 1,
+        "PackageVersion": "0.1.0-preview.3",
+        "FreshCache": "C:\\Users\\Laszlos\\AppData\\Local\\Temp\\hfc-b1b30033a290444486a1cd3f5ac0aed9",
+        "Packages": [
+          "CedarSharp/1.0.0",
+          "Microsoft.Data.Sqlite/10.0.10",
+          "Microsoft.Data.Sqlite.Core/10.0.10",
+          "Penghou.Hufu/0.1.0-preview.3",
+          "Penghou.Hufu.Cedar/0.1.0-preview.3",
+          "Penghou.Hufu.IO/0.1.0-preview.3",
+          "Penghou.Hufu.Luban/0.1.0-preview.3",
+          "Penghou.Hufu.Luban.Sqlite/0.1.0-preview.3",
+          "Penghou.Hufu.Sqlite/0.1.0-preview.3",
+          "Penghou.Hufu.Workflow/0.1.0-preview.3",
+          "Penghou.IO.Abstractions/0.1.0-preview.1",
+          "Penghou.IO.Protocols/0.1.0-preview.1",
+          "Penghou.Luban/0.1.0-preview.1",
+          "Penghou.Workflow.Abstractions/0.1.0-preview.2",
+          "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+          "SQLitePCLRaw.core/2.1.12",
+          "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+          "SQLitePCLRaw.provider.e_sqlite3/2.1.12"
+        ],
+        "Targets": [
+          {
+            "TargetFramework": "net8.0",
+            "RecordedDenialPassed": true,
+            "CoreAdmissionProbePassed": true,
+            "CoreIssuanceProbePassed": true,
+            "CedarExplanationCapturePassed": true,
+            "RedactedExplanationSummaryPassed": true,
+            "OptionalTelemetryIsolationPassed": true,
+            "ExplicitLubanV2ProbePassed": true,
+            "OptionalPatchJournalProbePassed": true
+          },
+          {
+            "TargetFramework": "net10.0",
+            "RecordedDenialPassed": true,
+            "CoreAdmissionProbePassed": true,
+            "CoreIssuanceProbePassed": true,
+            "CedarExplanationCapturePassed": true,
+            "RedactedExplanationSummaryPassed": true,
+            "OptionalTelemetryIsolationPassed": true,
+            "ExplicitLubanV2ProbePassed": true,
+            "OptionalPatchJournalProbePassed": true
+          }
+        ],
+        "NoProjectReferences": true,
+        "NoZhinuDependencies": true,
+        "Status": "passed"
+      }
+    },
+    "patchIntegration": {
+      "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-single-patch\\public-preview3\\patch\\patch-consumer-42a74535b4bd494494671d6523129b35\\qualification.json",
+      "sha256": "08f796472319dad89be3665b2c1c94054e923f3591887492b1b9a0308e189e60",
+      "nugetOnlyRestoreVerified": true,
+      "exactDownloadedPackageHashesVerified": true,
+      "result": {
+        "SchemaVersion": 1,
+        "PackageVersion": "0.1.0-preview.3",
+        "FreshCache": "C:\\Users\\Laszlos\\AppData\\Local\\Temp\\hpfc-e83e071187f246d3900a22679ab7572c",
+        "Packages": [
+          "CedarSharp/1.0.0",
+          "Microsoft.CodeCoverage/17.14.1",
+          "Microsoft.Data.Sqlite/10.0.10",
+          "Microsoft.Data.Sqlite.Core/10.0.10",
+          "Microsoft.NET.Test.Sdk/17.14.1",
+          "Microsoft.TestPlatform.ObjectModel/17.14.1",
+          "Microsoft.TestPlatform.TestHost/17.14.1",
+          "Newtonsoft.Json/13.0.3",
+          "Penghou.Hufu/0.1.0-preview.3",
+          "Penghou.Hufu.Cedar/0.1.0-preview.3",
+          "Penghou.Hufu.IO/0.1.0-preview.3",
+          "Penghou.Hufu.Luban/0.1.0-preview.3",
+          "Penghou.Hufu.Luban.Sqlite/0.1.0-preview.3",
+          "Penghou.Hufu.Sqlite/0.1.0-preview.3",
+          "Penghou.Hufu.Workflow/0.1.0-preview.3",
+          "Penghou.IO.Abstractions/0.1.0-preview.1",
+          "Penghou.IO.Local/0.1.0-preview.1",
+          "Penghou.IO.Protocols/0.1.0-preview.1",
+          "Penghou.Luban/0.1.0-preview.1",
+          "Penghou.Workflow.Abstractions/0.1.0-preview.2",
+          "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+          "SQLitePCLRaw.core/2.1.12",
+          "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+          "SQLitePCLRaw.provider.e_sqlite3/2.1.12",
+          "xunit/2.9.3",
+          "xunit.abstractions/2.0.3",
+          "xunit.analyzers/1.18.0",
+          "xunit.assert/2.9.3",
+          "xunit.core/2.9.3",
+          "xunit.extensibility.core/2.9.3",
+          "xunit.extensibility.execution/2.9.3",
+          "xunit.runner.visualstudio/3.1.4"
+        ],
+        "Targets": [
+          {
+            "TargetFramework": "net8.0",
+            "PortableJournal": true,
+            "ControlledWindowsWriter": true,
+            "Passed": true
+          },
+          {
+            "TargetFramework": "net10.0",
+            "PortableJournal": true,
+            "ControlledWindowsWriter": true,
+            "Passed": true
+          }
+        ],
+        "NoProjectReferences": true,
+        "NoZhinuDependencies": true,
+        "Status": "passed"
+      }
+    }
+  },
+  "localImplementationEvidence": "single-patch-host.json",
+  "nextChecks": [
+    "HOST-SERVICES: select a concrete host application and define authenticated credentials, issuers, approval custody and protected storage/workspace ownership.",
+    "Future changed package contents require a new version; preview.3 remains immutable."
+  ],
+  "limits": [
+    "All public package entries match the exact publication artifacts; NuGet added repository signatures.",
+    "Windows HostControlled NTFS is the qualified concrete filesystem writer.",
+    "Portable Linux/macOS journal qualification does not qualify a filesystem writer there.",
+    "Production credential, issuer and approval services and database/workspace custody remain HOST-SERVICES work.",
+    "Earlier local/public records remain evidence for their original revisions."
+  ],
+  "packages": [
+    {
+      "id": "Penghou.Hufu",
+      "version": "0.1.0-preview.3",
+      "url": "https://www.nuget.org/packages/Penghou.Hufu/0.1.0-preview.3",
+      "repositoryCommit": "3206c4447add6ef0821fb70f118b638598d9aac0",
+      "sha256": "c1545ba114bfdea1022a1df333d1233127a77dcbcfe1eea8dcd5609fa317dcf1",
+      "publicationArtifactSha256": "178ef61f5950792ed7b01b1a049fc56c65f7240563418b2504bb99ff5744baec",
+      "publicationSymbolSha256": "d4dfbd52fb225f600357cf7f8849388be2e7530b4f410a2bc3b76e6a54c5668e",
+      "matchesPublicationArtifactExceptRepositorySignature": true,
+      "dependencies": {
+        "net10.0": [],
+        "net8.0": []
+      }
+    },
+    {
+      "id": "Penghou.Hufu.Cedar",
+      "version": "0.1.0-preview.3",
+      "url": "https://www.nuget.org/packages/Penghou.Hufu.Cedar/0.1.0-preview.3",
+      "repositoryCommit": "3206c4447add6ef0821fb70f118b638598d9aac0",
+      "sha256": "bbb67c997b158f3a75dd178a757bc14056c3c73261df1f8c0ddad84a6a31307f",
+      "publicationArtifactSha256": "7094704ee32845ecfe4aab6ec5a219febe7b52273a376e5e361b68c010fdaf7d",
+      "publicationSymbolSha256": "863bd8595a5a7b7c02e651a6cd28c8a5a3104839b3721b56638d86d558fe7a1d",
+      "matchesPublicationArtifactExceptRepositorySignature": true,
+      "dependencies": {
+        "net10.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.3",
+            "exclude": "Build,Analyzers"
+          },
+          {
+            "id": "CedarSharp",
+            "version": "[1.0.0]",
+            "exclude": "Build,Analyzers"
+          }
+        ],
+        "net8.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.3",
+            "exclude": "Build,Analyzers"
+          },
+          {
+            "id": "CedarSharp",
+            "version": "[1.0.0]",
+            "exclude": "Build,Analyzers"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Penghou.Hufu.IO",
+      "version": "0.1.0-preview.3",
+      "url": "https://www.nuget.org/packages/Penghou.Hufu.IO/0.1.0-preview.3",
+      "repositoryCommit": "3206c4447add6ef0821fb70f118b638598d9aac0",
+      "sha256": "ae192e694310213b0baa5339414f05f358406f2aecc1a00cbfc084eda2531f53",
+      "publicationArtifactSha256": "62964357dc1f367cf91f5a9eac9c055df60bdeb0aaa3536c03f7d3e819a4dcd5",
+      "publicationSymbolSha256": "9e729898cfb1d9e44a14ad2be3640a3f03e104bfe062618894e33efcc5c61161",
+      "matchesPublicationArtifactExceptRepositorySignature": true,
+      "dependencies": {
+        "net10.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.3",
+            "exclude": "Build,Analyzers"
+          },
+          {
+            "id": "Penghou.IO.Abstractions",
+            "version": "[0.1.0-preview.1]",
+            "exclude": "Build,Analyzers"
+          },
+          {
+            "id": "Penghou.IO.Protocols",
+            "version": "[0.1.0-preview.1]",
+            "exclude": "Build,Analyzers"
+          }
+        ],
+        "net8.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.3",
+            "exclude": "Build,Analyzers"
+          },
+          {
+            "id": "Penghou.IO.Abstractions",
+            "version": "[0.1.0-preview.1]",
+            "exclude": "Build,Analyzers"
+          },
+          {
+            "id": "Penghou.IO.Protocols",
+            "version": "[0.1.0-preview.1]",
+            "exclude": "Build,Analyzers"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Penghou.Hufu.Luban",
+      "version": "0.1.0-preview.3",
+      "url": "https://www.nuget.org/packages/Penghou.Hufu.Luban/0.1.0-preview.3",
+      "repositoryCommit": "3206c4447add6ef0821fb70f118b638598d9aac0",
+      "sha256": "018bcee515dfbbd5fc5d11b6e13d5c23ec3dc683ffd939f482d2562aa9763c03",
+      "publicationArtifactSha256": "a7decac856c2dc9a4428760791229bbf2ac8bf74d456f41a72ac7ea7565fc8aa",
+      "publicationSymbolSha256": "a48a5545f7cc97a3c114087b6d004b0fa938d52e7f6ae95fb2f0f667e1bc0065",
+      "matchesPublicationArtifactExceptRepositorySignature": true,
+      "dependencies": {
+        "net10.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.3",
+            "exclude": "Build,Analyzers"
+          },
+          {
+            "id": "Penghou.Luban",
+            "version": "[0.1.0-preview.1]",
+            "exclude": "Build,Analyzers"
+          }
+        ],
+        "net8.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.3",
+            "exclude": "Build,Analyzers"
+          },
+          {
+            "id": "Penghou.Luban",
+            "version": "[0.1.0-preview.1]",
+            "exclude": "Build,Analyzers"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Penghou.Hufu.Sqlite",
+      "version": "0.1.0-preview.3",
+      "url": "https://www.nuget.org/packages/Penghou.Hufu.Sqlite/0.1.0-preview.3",
+      "repositoryCommit": "3206c4447add6ef0821fb70f118b638598d9aac0",
+      "sha256": "973e8ae397242ca27984b3583bff45dc174da713ea622b85691f89b1b0dfbd1c",
+      "publicationArtifactSha256": "59ae3c21ad430b8024b64c5a6d96970f95b7df0477da6ac50913d33ba4521206",
+      "publicationSymbolSha256": "bd9f0780139573db4f340d60b671fbbd7ea1d6201d0cb79980bc54e50c909e99",
+      "matchesPublicationArtifactExceptRepositorySignature": true,
+      "dependencies": {
+        "net10.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.3",
+            "exclude": "Build,Analyzers"
+          },
+          {
+            "id": "Microsoft.Data.Sqlite",
+            "version": "[10.0.10]",
+            "exclude": "Build,Analyzers"
+          },
+          {
+            "id": "SQLitePCLRaw.bundle_e_sqlite3",
+            "version": "[2.1.12]",
+            "exclude": "Build,Analyzers"
+          }
+        ],
+        "net8.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.3",
+            "exclude": "Build,Analyzers"
+          },
+          {
+            "id": "Microsoft.Data.Sqlite",
+            "version": "[10.0.10]",
+            "exclude": "Build,Analyzers"
+          },
+          {
+            "id": "SQLitePCLRaw.bundle_e_sqlite3",
+            "version": "[2.1.12]",
+            "exclude": "Build,Analyzers"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Penghou.Hufu.Workflow",
+      "version": "0.1.0-preview.3",
+      "url": "https://www.nuget.org/packages/Penghou.Hufu.Workflow/0.1.0-preview.3",
+      "repositoryCommit": "3206c4447add6ef0821fb70f118b638598d9aac0",
+      "sha256": "c9abf0394a0126beb39826fcdab6bb547dcfb2b01418f1a33c895387dd85eb8f",
+      "publicationArtifactSha256": "c9b68fc31b4c981c8dacc1cbbf0c2d01f9ba3df8f716da355480958987f3da88",
+      "publicationSymbolSha256": "a43fb4b848cb286f7ef9eb153043f5641729ca908312a1a5753ab29cd0092537",
+      "matchesPublicationArtifactExceptRepositorySignature": true,
+      "dependencies": {
+        "net10.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.3",
+            "exclude": "Build,Analyzers"
+          },
+          {
+            "id": "Penghou.Workflow.Abstractions",
+            "version": "[0.1.0-preview.2]",
+            "exclude": "Build,Analyzers"
+          }
+        ],
+        "net8.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.3",
+            "exclude": "Build,Analyzers"
+          },
+          {
+            "id": "Penghou.Workflow.Abstractions",
+            "version": "[0.1.0-preview.2]",
+            "exclude": "Build,Analyzers"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Penghou.Hufu.Luban.Sqlite",
+      "version": "0.1.0-preview.3",
+      "url": "https://www.nuget.org/packages/Penghou.Hufu.Luban.Sqlite/0.1.0-preview.3",
+      "repositoryCommit": "3206c4447add6ef0821fb70f118b638598d9aac0",
+      "sha256": "75d751a1f055141190a57b247af5e1e68d76389a114630035acf60f319772cd7",
+      "publicationArtifactSha256": "8ff1136aa6c6e9dc0f71e6e3f5159e4cfacef89d2b248763cb2008801858c9da",
+      "publicationSymbolSha256": "5bb5e9aa8c972666822c7a1a8b376fce410cbbba877dcf178dfce988d1e913f3",
+      "matchesPublicationArtifactExceptRepositorySignature": true,
+      "dependencies": {
+        "net10.0": [
+          {
+            "id": "Penghou.Hufu.Luban",
+            "version": "0.1.0-preview.3",
+            "exclude": "Build,Analyzers"
+          },
+          {
+            "id": "Penghou.Hufu.Sqlite",
+            "version": "0.1.0-preview.3",
+            "exclude": "Build,Analyzers"
+          }
+        ],
+        "net8.0": [
+          {
+            "id": "Penghou.Hufu.Luban",
+            "version": "0.1.0-preview.3",
+            "exclude": "Build,Analyzers"
+          },
+          {
+            "id": "Penghou.Hufu.Sqlite",
+            "version": "0.1.0-preview.3",
+            "exclude": "Build,Analyzers"
+          }
+        ]
+      }
+    }
+  ],
+  "publicPatchIntegrationTests": {
+    "passed": 80,
+    "failed": 0,
+    "skipped": 0,
+    "frameworks": [
+      "net8.0",
+      "net10.0"
+    ],
+    "evidence": [
+      {
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-single-patch\\public-preview3\\patch\\patch-consumer-42a74535b4bd494494671d6523129b35\\tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_19_24_52_net8.0.trx",
+        "sha256": "a48da0e1a58778a919873e41e1f21e3dbb3f6b657b8ea7b66a7b12d97995a070",
+        "counters": {
+          "total": "40",
+          "executed": "40",
+          "passed": "40",
+          "failed": "0",
+          "error": "0",
+          "timeout": "0",
+          "aborted": "0",
+          "inconclusive": "0",
+          "passedButRunAborted": "0",
+          "notRunnable": "0",
+          "notExecuted": "0",
+          "disconnected": "0",
+          "warning": "0",
+          "completed": "0",
+          "inProgress": "0",
+          "pending": "0"
+        }
+      },
+      {
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-single-patch\\public-preview3\\patch\\patch-consumer-42a74535b4bd494494671d6523129b35\\tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_19_25_23_net10.0.trx",
+        "sha256": "9bf2d14766548f474a9336c763437b9ef1d86bca19432a800db34efa14f0d1e0",
+        "counters": {
+          "total": "40",
+          "executed": "40",
+          "passed": "40",
+          "failed": "0",
+          "error": "0",
+          "timeout": "0",
+          "aborted": "0",
+          "inconclusive": "0",
+          "passedButRunAborted": "0",
+          "notRunnable": "0",
+          "notExecuted": "0",
+          "disconnected": "0",
+          "warning": "0",
+          "completed": "0",
+          "inProgress": "0",
+          "pending": "0"
+        }
+      }
+    ]
+  },
+  "postPublicationBookkeeping": {
+    "publishedApiInventory": "Penghou.Hufu.Luban.Sqlite APIs moved to PublicAPI.Shipped.txt",
+    "compatibilityBaseline": "All seven packages use published 0.1.0-preview.3",
+    "validation": "dotnet pack new adapter Release passed on net8.0/net10.0 with package validation and API analyzers",
+    "validationArtifacts": "Local verification only; not published",
+    "runtimeCodeChanged": false
+  }
+}

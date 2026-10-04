@@ -11,7 +11,11 @@
     <Project Path="src/Penghou.Hufu/Penghou.Hufu.csproj" />
     <Project Path="src/Penghou.Hufu.Workflow/Penghou.Hufu.Workflow.csproj" />
   </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/Hufu.LocalHost/Hufu.LocalHost.csproj" />
+  </Folder>
   <Folder Name="/tests/">
+    <Project Path="tests/Hufu.LocalHost.Tests/Hufu.LocalHost.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.Biscuit.Tests/Penghou.Hufu.Biscuit.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.StartWorker.Tests/Penghou.Hufu.StartWorker.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj" />

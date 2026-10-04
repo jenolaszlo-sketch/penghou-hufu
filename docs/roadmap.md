@@ -1,6 +1,6 @@
 # Hufu implementation roadmap
 
-## Governed single-patch candidate - 2026-10-04
+## Governed single-patch release checkpoint - 2026-10-04
 
 The optional seventh package `Penghou.Hufu.Luban.Sqlite` connects the real
 published conditional writer to exact semantic approval, current resource
@@ -11,16 +11,33 @@ No Zhinu or new leaf-package implementation is introduced.
 Local regression passes 962 cases (481 per framework), including 40 new cases
 per framework. Seven package/symbol pairs, fresh standalone consumers,
 package-only patch tests (80) and workflow integration (24) pass. Remote CI
-and publication remain separate gates.
+passed on Windows, Ubuntu and macOS at `3206c44` in [run 37196404171](https://github.com/jenolaszlo-sketch/penghou-hufu/actions/runs/37196404171).
+Publication validation and push passed in [run 37197831939](https://github.com/jenolaszlo-sketch/penghou-hufu/actions/runs/37197831939).
+All seven exact public packages match the publication artifacts apart from NuGet
+repository signatures. Fresh NuGet-only standalone consumers and all 80 patch
+cases pass on .NET 8/10; see [the release checkpoint](qualification/single-patch-public-release.json).
 
 - [x] **HOST-PATCH:** bounded single-target composition, exact locked facts,
   mandatory evidence, approval/revocation writer order and conservative recovery.
-- [ ] **HOST-PATCH-RELEASE:** seven preview.3 package/symbol pairs, remote three-platform
-  CI and user-controlled publication. Existing six packages validate compatibility
-  against published preview.2; the new optional adapter has no published baseline.
-- [ ] **HOST-SERVICES:** production credential/issuer/approval services and database/
-  workspace custody in a concrete application. Batch, revocation drain and VFS
-  simulation remain separate designs.
+- [x] **HOST-PATCH-CI:** seven preview.3 package/symbol pairs and remote three-platform
+  qualification at `3206c44`.
+- [x] **HOST-PATCH-PUBLISH:** successful three-platform publication validation
+  and NuGet push at `3206c44`.
+- [x] **HOST-PATCH-RELEASE:** all seven exact packages inspected, with fresh
+  NuGet-only consumers and 80 patch integration cases passed. Published APIs are
+  shipped inventories; all seven packages now use preview.3 for future compatibility
+  validation. Never republish preview.3 with changed contents.
+- [x] **HOST-SERVICES-LOCAL:** the non-packable [local Windows host](local-host-services.md)
+  consumes published preview.3, authenticates the operator SID, protects issuance/
+  approval/evidence state, bounds capacity, and qualifies exact review, bootstrap
+  recovery, denial and replay. 80 focused cases pass across .NET 8/10; separate-process
+  CLI qualification passes on both. See [evidence](qualification/local-host-services.json).
+- [ ] **HOST-SERVICES-CI:** Windows full-suite and separate-process checks are configured;
+  remote qualification of this source change is pending. No new package is needed.
+- [ ] **HOST-SERVICES-PRODUCT:** choose an actual product host and its authenticated
+  tool/management routing, retention and deployment profile. External credentials,
+  organizational issuance and multiple operators require their own services and proof.
+  Guyabano/Marang are unchanged. Batch, revocation drain and VFS simulation remain separate designs.
 
 ## Luban v2 read/diff checkpoint - 2026-10-04
 
@@ -43,7 +60,7 @@ case added after the 880-case full solution run.
   revocation/evidence gates, zero provider access on initial denial and portable CI tests.
 - [x] **LUBAN-V2-RELEASE:** all six preview.2 packages indexed, CI and publication
   validation passed on Windows/Ubuntu/macOS; fresh public-package consumers passed.
-The next HOST-PATCH delivery is recorded above; read/diff and workflow
+The completed HOST-PATCH release and current HOST-SERVICES gates are recorded above; read/diff and workflow
 preflight retain their separate, narrower guarantees.
 
 
@@ -165,7 +182,7 @@ covered by a separate legacy integration project. It is not a dependency of the
 new workflow adapter. The latter is preflight authorization only and does not
 claim an atomic mutation-start fence. Biscuit remains experimental/unpublished;
 Luban v2 read/diff is published in preview.2; the independent single-patch
-host/journal is a preview.3 candidate qualified separately above. Older completion-snapshot
+host/journal is published and public-feed-qualified at preview.3 as recorded above. Older completion-snapshot
 reviews below document their historical baseline, not the current stage.
 ## Published Zhinu package qualification - 2026-10-03
 
@@ -353,7 +370,7 @@ Gate: durable state never widens authority on replay; inspectable provenance and
 - [x] Connect an independent governed Luban single-patch host, exact semantic
   admission, final resource checks and terminal Completed/NoMutation/Ambiguous
   recovery. Provider/start races and response loss are qualified in the
-  [preview.3 profile](single-patch-host.md); remote release is still pending.
+  [preview.3 profile](single-patch-host.md); remote release and exact public-package qualification are complete.
 - [ ] Bind data-release and exact-effect approvals where the supported operations require them.
 - [ ] Reference existing budget reservations; do not create a second accounting ledger.
 - [ ] Publish typed provider profiles and tests proving supported strict effects, unknown-shell rejection, and no alternate execution route in the configured agent surface.
@@ -454,8 +471,10 @@ committed starts to finish after revocation acknowledgement. The separate
 single-patch candidate qualifies exact approval, locked-object binding,
 final resource checks and durable terminal recovery without an engine dependency.
 Its [separate profile](single-patch-host.md) replaces the older staged proposal.
-Production authentication/custody, batches and stronger revocation-drain
-guarantees remain later gates.
+The bounded [local Windows host services](local-host-services.md) now implement
+operator authentication, protected exact approval/issuance and custody. Product
+hosts, external credentials, organizational services, batches and stronger
+revocation-drain guarantees remain later gates.
 Sequential Hufu lookup followed by standalone Zhinu acquisition is still not
 an atomic substitute. This stream is not the neutral adapter's immediate queue.
 

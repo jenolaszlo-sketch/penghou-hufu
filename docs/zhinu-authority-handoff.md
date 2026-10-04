@@ -2,9 +2,12 @@
 
 Current independent delivery: [single-patch host](single-patch-host.md) in optional
 Hufu.Luban.Sqlite, with [local qualification](qualification/single-patch-host.json).
-It introduces no Zhinu dependency or runtime lease claim. Preview.3 publication
-and remote CI are pending. Preserve the published six preview.2 packages and
-frozen legacy workflow profile as separate evidence.
+It introduces no Zhinu dependency or runtime lease claim. Preview.3 remote CI
+and publication passed on all three platforms at `3206c44`. All seven exact
+public packages, fresh NuGet-only consumers and 80 patch integration cases pass
+in [the release checkpoint](qualification/single-patch-public-release.json).
+Preserve the published six preview.2 packages and frozen legacy workflow profile
+as separate evidence. Do not redispatch publication to finish this checkpoint.
 
 Updated 2026-10-04. Current gate status and evidence supersede the older resume prompts and snapshot inventories below.
 
@@ -74,7 +77,7 @@ current gates above, not that historical prompt.
 - Keep Hufu core, Cedar and Biscuit free of Zhinu dependencies. The optional workflow adapter depends on Hufu and the exact published neutral contract only; no Zhinu runtime/SQL, Luban, IO, Cedar, Biscuit or host UI dependency is allowed.
 - Preserve required aggregate decision evidence, trusted host binding, typed approval outcomes, fail-closed behavior and fresh authorization for each retry or resumed dispatch. Historical permits do not authorize a new dispatch.
 - Keep resource access authorization separate from workflow preflight. Existing resource/Luban/Biscuit profiles remain independently governed.
-- Biscuit remains experimental and unpublished, with its pinned artifact outside the Hufu release set. Luban v2 read/diff is published in preview.2; the separate single-patch host journal is a preview.3 candidate. No production workflow host is included in this release.
+- Biscuit remains experimental and unpublished, with its pinned artifact outside the Hufu release set. Luban v2 read/diff is published in preview.2; the separate single-patch host journal is published and public-feed-qualified at preview.3. No production workflow host is included in this release.
 - HA-2 package-backed qualification passed locally on both frameworks. HA-3 initial publication is complete. Preview.2 three-platform CI and user-controlled publication are complete; future releases require their own qualification.
 
 ## Core checkpoint and next independent work
@@ -95,9 +98,10 @@ telemetry slice](optional-telemetry.md) is also implemented. Preserve its finite
 queue/worker, closed labels and independence from mandatory evidence/results.
 Broader broker/approval/revocation telemetry and protected correlation remain
 host/integration gates; lineage/requirements and historical reconstruction
-remain separate explanation extensions. Broader Luban v2 mappings and concrete
-production authentication/custody services remain separate deliveries. The
-bounded single-patch candidate is qualified independently above. Do not
+remain separate explanation extensions. Broader Luban v2 mappings and product authentication/custody services remain
+separate deliveries. The bounded local Windows application is now implemented
+and qualified independently in [its profile](local-host-services.md). The
+published single-patch adapter is qualified independently above. Do not
 bulk-install the old completion snapshot or infer authenticated services from
 the new interface types.
 
@@ -111,13 +115,24 @@ the new interface types.
 > completion review and package release profile. Preserve v1 defaults, exact
 > v2 input scopes, current state, mandatory evidence and callback evidence limits.
 > HOST-PATCH has an independent preview.3 implementation. Read single-patch-host.md
-> and qualification/single-patch-host.json before continuing with its remote
-> three-platform CI and user-controlled publication. Preserve exact approval,
+> and qualification/single-patch-host.json. Remote three-platform CI and publication
+> passed at 3206c44. All seven exact public packages, fresh NuGet-only consumers
+> and 80 patch cases pass in qualification/single-patch-public-release.json.
+> HOST-PATCH-RELEASE and HOST-SERVICES-LOCAL are complete. Do not republish preview.3.
+> Read local-host-services.md and qualification/local-host-services.json: a non-packable
+> Windows application consumes the exact public packages, with 80 focused cases and
+> separate-process approval/recovery qualification on .NET 8/10. Windows CI is configured
+> but remote evidence is pending (HOST-SERVICES-CI). Next select and qualify product
+> tool/management routing, retention and deployment (HOST-SERVICES-PRODUCT); Guyabano
+> and Marang are unchanged. No new package is required for this host example.
+> The operator console is trusted; never expose management commands to agents or
+> infer isolation against arbitrary code under the same OS account. Preserve exact approval,
 > locked-object start, revocation ordering, mandatory evidence and conservative
-> recovery. The new seventh package has no published compatibility baseline.
+> recovery. The new seventh package now has a published compatibility baseline.
 > Do not infer mutation permission or candidate-object authorization from read/diff.
 > Keep semantic admission separate from concrete resource checks. Never bulk-install
 > older staging candidates, add a workflow-engine dependency to Hufu.Workflow,
 > or replace the frozen legacy atomic-start profile without boundary qualification.
-> Preview.3 is selected, with preview.2 as the compatibility baseline for the
-> six existing packages. Publication remains user-controlled.
+> Published APIs are shipped inventories; preview.3 is the compatibility baseline
+> for all seven packages. Any changed release needs a new version and fresh
+> qualification. Publication remains user-controlled.

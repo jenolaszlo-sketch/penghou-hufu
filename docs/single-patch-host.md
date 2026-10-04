@@ -4,9 +4,11 @@
 `SinglePatchExecutor`. It connects semantic admission, current resource checks,
 exact approval, the provider's locked-object start and durable outcome recovery.
 It depends on Hufu.Luban and Hufu.Sqlite; it has no workflow-engine dependency.
-This is a new preview.3 candidate. Local qualification is recorded in
-[single-patch evidence](qualification/single-patch-host.json); remote CI and
-user-controlled publication are separate gates. Local regression passes 962
+This adapter is published at preview.3. Local qualification is recorded in
+[single-patch evidence](qualification/single-patch-host.json). Three-platform CI
+and publication passed at `3206c44`; all seven exact public packages, fresh
+NuGet-only consumers and 80 patch integration cases pass in
+[the release checkpoint](qualification/single-patch-public-release.json). Local regression passes 962
 cases, including 40 new cases per framework (15 portable journal and 25 actual
 Windows writer cases). Seven package/symbol pairs and fresh package-only
 patch/workflow consumers pass on both frameworks.
@@ -165,3 +167,11 @@ Authentication, production issuer/approval services, filesystem confinement,
 process containment and authenticated database custody remain host obligations.
 The neutral workflow adapter remains preflight-only, and the frozen legacy
 workflow start profile remains independently qualified.
+
+## Concrete local host services
+
+The non-packable [Windows host application](local-host-services.md) consumes this
+published preview.3 adapter and supplies real operator-token authentication,
+protected exact approval/issuance state, bounded namespace custody and separate
+worker/management routing. Its local proof and pending remote CI are recorded
+separately. This does not change the package or qualify broader product services.

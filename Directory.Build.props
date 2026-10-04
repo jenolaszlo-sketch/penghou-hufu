@@ -26,7 +26,7 @@
     <!-- Existing preview APIs have incomplete XML comments; API inventories remain enforced. -->
     <NoWarn>$(NoWarn);CS1591</NoWarn>
     <EnablePackageValidation>true</EnablePackageValidation>
-    <PackageValidationBaselineVersion Condition="'$(MSBuildProjectName)' != 'Penghou.Hufu.Luban.Sqlite'">0.1.0-preview.2</PackageValidationBaselineVersion>
+    <PackageValidationBaselineVersion>0.1.0-preview.3</PackageValidationBaselineVersion>
     <EnableStrictModeForCompatibleTfms>true</EnableStrictModeForCompatibleTfms>
   </PropertyGroup>
   <ItemGroup Condition="'$(IsPackable)' == 'true'">

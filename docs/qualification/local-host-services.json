@@ -1,0 +1,133 @@
+{
+  "SchemaVersion": 1,
+  "Activity": "HOST-SERVICES-LOCAL",
+  "Status": "locally-qualified",
+  "QualifiedAtUtc": "2026-10-04T12:54:56.036365+00:00",
+  "PublishedPackageSourceCommit": "3206c4447add6ef0821fb70f118b638598d9aac0",
+  "LocalHostSource": "working-tree addition; normalized LF SHA-256 inventory below",
+  "Profile": "Single Windows operator, local NTFS, trusted management console and typed worker routing",
+  "PublishedHufuVersion": "0.1.0-preview.3",
+  "PublishedIOLubanVersion": "0.1.0-preview.1",
+  "NewPackageRequired": false,
+  "Sources": {
+    "samples/Hufu.LocalHost/HostServices.cs": "b25b444df4b1fd5c1224b7b63de79d366ef3a4ff9683c09c635245bda5fb6c80",
+    "samples/Hufu.LocalHost/Hufu.LocalHost.csproj": "6167628b1be7885edca2274cb309075c141eabbd456c9aacadbe55b1ae960388",
+    "samples/Hufu.LocalHost/LocalHostApplication.cs": "14b56d2944e63bd011ab84349b8e675ce2d54bf1fb6cbeac60b1aa2fc48cc69e",
+    "samples/Hufu.LocalHost/LocalHostCustody.cs": "a48514e2e0d9048ef9867ef0b963e905a421e28826dbef328c580bae5427c7b5",
+    "samples/Hufu.LocalHost/Program.cs": "a24139e2697c0eb8bb97f77115989e0ec64206a42cb7731d5678342c8b1c793f",
+    "tests/Hufu.LocalHost.Tests/HostServicesTests.cs": "59b0e4c9e94c67202a50d6b3771d39544883bcf181e378491123ab4f6efcab35",
+    "tests/Hufu.LocalHost.Tests/Hufu.LocalHost.Tests.csproj": "14127733a120e197b3a78481f6f75764c408e8a354ce4c199d381e538ae16db4",
+    "tests/Hufu.LocalHost.Tests/LocalHostApplicationTests.cs": "0d95b3e4fe570c15d05cce0a7745eecc19eba430ff827690a5254dd67dcf0ce9",
+    "tests/Hufu.LocalHost.Tests/LocalHostCustodyTests.cs": "50af0b5205b282404c275d83edaed1772393daf7a03965c539b70c321090276d",
+    "eng/Test-LocalHost.ps1": "f97984e9bf2f61f0c16c47f6300304aa85d1653288dc8110e525eba179e289f8"
+  },
+  "PackageOnlySample": {
+    "Status": "passed",
+    "ProjectReferences": [],
+    "Packages": [
+      "CedarSharp/1.0.0",
+      "Microsoft.Data.Sqlite.Core/10.0.10",
+      "Microsoft.Data.Sqlite/10.0.10",
+      "Penghou.Hufu.Cedar/0.1.0-preview.3",
+      "Penghou.Hufu.Luban.Sqlite/0.1.0-preview.3",
+      "Penghou.Hufu.Luban/0.1.0-preview.3",
+      "Penghou.Hufu.Sqlite/0.1.0-preview.3",
+      "Penghou.Hufu/0.1.0-preview.3",
+      "Penghou.IO.Abstractions/0.1.0-preview.1",
+      "Penghou.IO.Local/0.1.0-preview.1",
+      "Penghou.IO.Protocols/0.1.0-preview.1",
+      "Penghou.Luban/0.1.0-preview.1",
+      "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+      "SQLitePCLRaw.core/2.1.12",
+      "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+      "SQLitePCLRaw.provider.e_sqlite3/2.1.12"
+    ],
+    "NoZhinuDependency": true
+  },
+  "Tests": [
+    {
+      "Framework": "net10.0-windows",
+      "Total": 40,
+      "Passed": 40,
+      "Failed": 0,
+      "Skipped": 0,
+      "TrxFile": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_20_51_08_net10.0.trx",
+      "TrxSha256": "6c4a381fd0d556daab69e7e2520edefb9b38e8008f896253cd508b794b82189b"
+    },
+    {
+      "Framework": "net8.0-windows",
+      "Total": 40,
+      "Passed": 40,
+      "Failed": 0,
+      "Skipped": 0,
+      "TrxFile": "Laszlos_LAPTOP-KBD8D8JG_2026-10-04_20_51_08_net8.0.trx",
+      "TrxSha256": "f1de2b7c1f7eb1a132c6b0efe2fdd9ab1706452b0a33f7b07d8dd02b43031fb0"
+    }
+  ],
+  "TotalFocusedPassed": 80,
+  "SeparateProcessQualification": {
+    "SchemaVersion": 1,
+    "Status": "passed",
+    "Profile": "Windows local operator, NTFS",
+    "PublishedHufuVersion": "0.1.0-preview.3",
+    "Runs": [
+      {
+        "Framework": "net8.0-windows",
+        "Status": "passed",
+        "SeparateProcesses": 9,
+        "UnapprovedWriteDenied": true,
+        "CompleteReviewVerified": true,
+        "DurableCompleted": true,
+        "ReplayNeverRedispatched": true
+      },
+      {
+        "Framework": "net10.0-windows",
+        "Status": "passed",
+        "SeparateProcesses": 9,
+        "UnapprovedWriteDenied": true,
+        "CompleteReviewVerified": true,
+        "DurableCompleted": true,
+        "ReplayNeverRedispatched": true
+      }
+    ]
+  },
+  "QualifiedBehavior": [
+    "real Windows SID and impersonation rejection",
+    "worker management and operation isolation",
+    "independent exact issuer ceiling/publication approval reloaded after policy",
+    "exact one-shot scoped patch approvals",
+    "mandatory evaluator-bound decision evidence",
+    "closed ACLs, trusted owners, reparse rejection",
+    "bounded namespace depth/entry count, command lease, control and payload size",
+    "complete escaped operator review and oversized-review refusal",
+    "approval retry retains expiry",
+    "interrupted bootstrap resumes only original exact seed/approval",
+    "lost publication response finalizes without republish",
+    "expired/withdrawn/revoked/stale approval cannot mutate",
+    "durable completed outcome and replay without redispatch"
+  ],
+  "RemoteCI": {
+    "Status": "pending",
+    "Configured": "Windows full solution plus separate-process smoke in CI and publish validation"
+  },
+  "Limitations": [
+    "no arbitrary code containment under the operator/SYSTEM/Administrators accounts",
+    "management console must not be exposed to an agent",
+    "no product host integration or enterprise credential/issuer service",
+    "one exact UTF-8 file in a newly allocated namespace, Windows NTFS only",
+    "complete review limited to 8 KiB per side; no retention cleanup or automatic authority renewal",
+    "no ambiguity override, batch transaction, exactly-once external effect or revocation-drain claim"
+  ],
+  "PriorPublicReleaseEvidence": "single-patch-public-release.json",
+  "FreshNuGetOnlyInstalledRestore": {
+    "Status": "passed",
+    "PackageSources": [
+      "https://api.nuget.org/v3/index.json"
+    ],
+    "Frameworks": [
+      "net8.0-windows",
+      "net10.0-windows"
+    ],
+    "FocusedCasesPassed": 80
+  }
+}

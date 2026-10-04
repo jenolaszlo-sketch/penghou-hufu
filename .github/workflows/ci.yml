@@ -35,6 +35,7 @@ jobs:
           dotnet test Penghou.Hufu.slnx -c Release -m:1 --logger trx --results-directory test-results
           if ($LASTEXITCODE -ne 0) { throw 'Full regression suite failed.' }
           ./eng/Verify-HufuCoreGraph.ps1
+          ./eng/Test-LocalHost.ps1
       - name: Linux and macOS portable core and workflow suites
         if: runner.os == 'Linux' || runner.os == 'macOS'
         shell: pwsh

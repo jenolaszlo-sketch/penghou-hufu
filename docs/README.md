@@ -12,12 +12,14 @@ is the current source for ready work, dependencies, held work and close-out evid
 Read the [Authority-Mediated Language Execution (AMLE) guide](authority-mediated-language-execution.md) for the shared pattern, complementary Luban/Hufu roles, and current implementation limits.
 
 
-Hufu is the reusable authority domain and planned durable authority-store boundary for the Penghou stack. The repository contains a narrow M1 authority-snapshot and Luban read-authorization prototype. An optional SQLite adapter now supplies current-state publication/revocation and durable decision evidence. A separate experimental Hufu/Zhinu SQLite composition supplies an atomic operation-start transaction. Explicit host authentication, issuer/read/evidence policy, and evaluator capture remain required; this is not a production authorization boundary.
+Hufu is a reusable authority library and store boundary. Seven preview.3 packages are public, covering current authority/evidence, Luban read/diff, neutral workflow preflight and governed single-patch start/outcomes. The non-packable local Windows host adds actual operator identity, protected exact approval/issuance and bounded custody for one exact file. Explicit host routing and qualification remain required; broader product and organizational services are open.
 
 | Document | Purpose | Status |
 | --- | --- | --- |
+| [Local Windows host services](local-host-services.md) | Concrete OS identity, protected issuance/approval, bounded custody and operator manual | 80 local cases and separate-process CLI passed; remote CI/product routing pending |
+| [Governed single-patch host](single-patch-host.md) | Exact admission, final resource checks, co-located start and durable recovery | Seventh preview.3 package published and exact-public-package qualified |
 | [Luban v2 read/diff](luban-v2-authorization.md) | Explicit host profile, exact scopes, usage and evidence limits | Published preview.2; governed mutation host remains separate |
-| [Package release profile](package-release-profile.md) | Published baseline, compatibility, CI and input-free publication | Six preview.2 packages published; public-feed and CI evidence recorded |
+| [Package release profile](package-release-profile.md) | Published baseline, compatibility, CI and input-free publication | Seven preview.3 packages published; public-feed and CI evidence recorded |
 | [Optional telemetry](optional-telemetry.md) | Bounded isolated preflight observations, privacy and host export obligations | Implemented request slice; broader broker/approval/revocation instrumentation remains open |
 | [Decision explanations](decision-explanations.md) | Exact evaluator capture and separately authorized summary/details | Bounded typed-path profile; see linked qualification and limits |
 | [Core admission and issuance](core-admission-and-issuance.md) | Shared evaluator capacity, current authenticated issuer ceiling and exact command approval | Implemented; local .NET 8/10 and candidate-package qualification in linked record |

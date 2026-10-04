@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net8.0-windows;net10.0-windows</TargetFrameworks>
+    <IsPackable>false</IsPackable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Penghou.Hufu.Luban.Sqlite" Version="[0.1.0-preview.3]" />
+    <PackageReference Include="Penghou.Hufu.Cedar" Version="[0.1.0-preview.3]" />
+    <PackageReference Include="Penghou.IO.Local" Version="[0.1.0-preview.1]" />
+    <InternalsVisibleTo Include="Hufu.LocalHost.Tests" />
+  </ItemGroup>
+</Project>
