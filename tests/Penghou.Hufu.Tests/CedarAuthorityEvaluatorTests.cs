@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using CedarSharp;
 using Penghou.Hufu;
 using Penghou.Hufu.Cedar;
@@ -36,7 +37,15 @@ public sealed class CedarAuthorityEvaluatorTests
         Assert.Equal("4.13.0", native.SdkVersion);
         Assert.Equal("4.5", native.LanguageVersion);
         Assert.Equal("0.1.0", native.BridgeVersion);
-        Assert.Equal("x86_64-pc-windows-msvc", native.Target);
+        var expectedTarget = (OperatingSystem.IsWindows(), OperatingSystem.IsLinux(),
+            OperatingSystem.IsMacOS(), RuntimeInformation.ProcessArchitecture) switch
+        {
+            (true, false, false, Architecture.X64) => "x86_64-pc-windows-msvc",
+            (false, true, false, Architecture.X64) => "x86_64-unknown-linux-gnu",
+            (false, false, true, Architecture.Arm64) => "aarch64-apple-darwin",
+            _ => throw new PlatformNotSupportedException("The native Cedar test requires a qualified OS/architecture.")
+        };
+        Assert.Equal(expectedTarget, native.Target);
         Assert.Equal(new[] { "datetime", "decimal", "ipaddr" }, native.Features.Order(StringComparer.Ordinal));
         Assert.Matches("^[0-9A-Fa-f]{64}$", native.Sha256);
     }
