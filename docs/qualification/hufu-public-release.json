@@ -1,0 +1,65 @@
+{
+  "schemaVersion": 1,
+  "status": "verified",
+  "version": "0.1.0-preview.1",
+  "publication": {
+    "runId": 37173078830,
+    "sourceCommit": "bdb89d3e03e0759b2716d97ff63ce6a97d52e4f8",
+    "status": "success",
+    "note": "Input-free recovery published original source 3023ddb package bytes."
+  },
+  "threePlatformCi": {
+    "runId": 37174721639,
+    "sourceCommit": "a13121671378ba583e5c9698296ded872d8860eb",
+    "status": "success",
+    "platforms": [
+      "windows-latest",
+      "ubuntu-latest",
+      "macos-15"
+    ],
+    "note": "macOS/Linux passed first attempt; Windows concurrency timeout passed failed-job retry."
+  },
+  "packages": [
+    {
+      "id": "Penghou.Hufu",
+      "version": "0.1.0-preview.1",
+      "repositoryCommit": "3023ddb3fb9d50e01db9a8887f15f02e90cde209",
+      "sha256": "2c64c774d3afdb891258b16cb54b722aa9bb95ec51e4269b89500993f52d5779"
+    },
+    {
+      "id": "Penghou.Hufu.Cedar",
+      "version": "0.1.0-preview.1",
+      "repositoryCommit": "3023ddb3fb9d50e01db9a8887f15f02e90cde209",
+      "sha256": "0f1ac499e2c08e7ddbe9f6df73c62f4851f634afac75f18ba548041e3d448d93"
+    },
+    {
+      "id": "Penghou.Hufu.IO",
+      "version": "0.1.0-preview.1",
+      "repositoryCommit": "3023ddb3fb9d50e01db9a8887f15f02e90cde209",
+      "sha256": "2f7efea33d3a338ce07c5154d56495c3d5e6e11c6fccce49600e6a484a64973e"
+    },
+    {
+      "id": "Penghou.Hufu.Luban",
+      "version": "0.1.0-preview.1",
+      "repositoryCommit": "3023ddb3fb9d50e01db9a8887f15f02e90cde209",
+      "sha256": "b3906960f5dc53c61c575c2ca0f4fe0810d4cd0d6de0cf226cfc077781be2017"
+    },
+    {
+      "id": "Penghou.Hufu.Sqlite",
+      "version": "0.1.0-preview.1",
+      "repositoryCommit": "3023ddb3fb9d50e01db9a8887f15f02e90cde209",
+      "sha256": "a0c5af3f50df5a17e4298c67a026b0c4e36b4dc63da9ed4f805982b7a27dd59c"
+    },
+    {
+      "id": "Penghou.Hufu.Workflow",
+      "version": "0.1.0-preview.1",
+      "repositoryCommit": "3023ddb3fb9d50e01db9a8887f15f02e90cde209",
+      "sha256": "533d280c430b7acff08353ede8927bced221c13b231ef29f6bbb2603eba7785c"
+    }
+  ],
+  "limits": [
+    "Published package hashes include NuGet signing; API baseline matches original released source.",
+    "macOS qualification is ARM64 portable/native/package coverage, not Windows Local filesystem enforcement.",
+    "Biscuit adapters and frozen legacy SQLite start adapter remain outside the public release set."
+  ]
+}

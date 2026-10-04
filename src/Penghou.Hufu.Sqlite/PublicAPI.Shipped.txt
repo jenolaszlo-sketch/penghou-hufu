@@ -1,1 +1,48 @@
 #nullable enable
+override Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions.Equals(object? obj) -> bool
+override Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions.GetHashCode() -> int
+override Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions.ToString() -> string!
+override Penghou.Hufu.Sqlite.SqliteRuntimeStartResult.Equals(object? obj) -> bool
+override Penghou.Hufu.Sqlite.SqliteRuntimeStartResult.GetHashCode() -> int
+override Penghou.Hufu.Sqlite.SqliteRuntimeStartResult.ToString() -> string!
+Penghou.Hufu.Sqlite.IAuthoritySqliteStartParticipant
+Penghou.Hufu.Sqlite.IAuthoritySqliteStartParticipant.ProfileIdentity.get -> string!
+Penghou.Hufu.Sqlite.IAuthoritySqliteStartParticipant.TryStartAsync(Microsoft.Data.Sqlite.SqliteConnection! connection, Microsoft.Data.Sqlite.SqliteTransaction! transaction, Penghou.Hufu.AuthorityOperationStartCommand! command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Sqlite.SqliteRuntimeStartResult!>
+Penghou.Hufu.Sqlite.ISqliteAuthorityDatabase
+Penghou.Hufu.Sqlite.ISqliteAuthorityDatabase.OpenAsync(System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Microsoft.Data.Sqlite.SqliteConnection!>
+Penghou.Hufu.Sqlite.ISqliteAuthorityDatabase.TimeProvider.get -> System.TimeProvider!
+Penghou.Hufu.Sqlite.SqliteAuthorityOperationStartGate
+Penghou.Hufu.Sqlite.SqliteAuthorityOperationStartGate.SqliteAuthorityOperationStartGate(Penghou.Hufu.Sqlite.SqliteAuthorityStore! store, Penghou.Hufu.Sqlite.IAuthoritySqliteStartParticipant! participant) -> void
+Penghou.Hufu.Sqlite.SqliteAuthorityOperationStartGate.StartAsync(Penghou.Hufu.AuthorityOperationStartCommand! command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityOperationStartResult!>
+Penghou.Hufu.Sqlite.SqliteAuthorityStore
+Penghou.Hufu.Sqlite.SqliteAuthorityStore.PublishAsync(Penghou.Hufu.AuthorityPublishCommand! command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityMutationResult!>
+Penghou.Hufu.Sqlite.SqliteAuthorityStore.ReadCurrentAsync(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.AuthenticatedAuthorityContext! context, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityCurrentRead!>
+Penghou.Hufu.Sqlite.SqliteAuthorityStore.ReadDecisionAsync(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.AuthoritySubject! subject, string! commandId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityDecisionRead!>
+Penghou.Hufu.Sqlite.SqliteAuthorityStore.ReadHistoryAsync(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.AuthoritySubject! subject, int maxEntries = 16, long? beforeSequence = null, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityHistoryRead!>
+Penghou.Hufu.Sqlite.SqliteAuthorityStore.RecordDecisionAsync(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.AuthorityDecisionRecord! record, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityEvidenceWrite!>
+Penghou.Hufu.Sqlite.SqliteAuthorityStore.RevokeAsync(Penghou.Hufu.AuthorityRevokeCommand! command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityMutationResult!>
+Penghou.Hufu.Sqlite.SqliteAuthorityStore.SqliteAuthorityStore(Penghou.Hufu.Sqlite.ISqliteAuthorityDatabase! databaseOwner, Penghou.Hufu.IAuthorityStoreAuthorizer! authorizer, Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions? options = null) -> void
+Penghou.Hufu.Sqlite.SqliteAuthorityStore.SqliteAuthorityStore(string! databasePath, Penghou.Hufu.IAuthorityStoreAuthorizer! authorizer, System.TimeProvider? timeProvider = null, Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions? options = null) -> void
+Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions
+Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions.<Clone>$() -> Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions!
+Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions.Equals(Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions? other) -> bool
+Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions.MaxAuthorityEvents.get -> int
+Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions.MaxAuthorityEvents.init -> void
+Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions.MaxDecisionEntries.get -> int
+Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions.MaxDecisionEntries.init -> void
+Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions.MaxStoredBytes.get -> long
+Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions.MaxStoredBytes.init -> void
+Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions.SqliteAuthorityStoreOptions() -> void
+Penghou.Hufu.Sqlite.SqliteRuntimeStartResult
+Penghou.Hufu.Sqlite.SqliteRuntimeStartResult.<Clone>$() -> Penghou.Hufu.Sqlite.SqliteRuntimeStartResult!
+Penghou.Hufu.Sqlite.SqliteRuntimeStartResult.Deconstruct(out Penghou.Hufu.AuthorityStatus Status, out System.DateTimeOffset ValidUntil) -> void
+Penghou.Hufu.Sqlite.SqliteRuntimeStartResult.Equals(Penghou.Hufu.Sqlite.SqliteRuntimeStartResult? other) -> bool
+Penghou.Hufu.Sqlite.SqliteRuntimeStartResult.SqliteRuntimeStartResult(Penghou.Hufu.AuthorityStatus Status, System.DateTimeOffset ValidUntil) -> void
+Penghou.Hufu.Sqlite.SqliteRuntimeStartResult.Status.get -> Penghou.Hufu.AuthorityStatus
+Penghou.Hufu.Sqlite.SqliteRuntimeStartResult.Status.init -> void
+Penghou.Hufu.Sqlite.SqliteRuntimeStartResult.ValidUntil.get -> System.DateTimeOffset
+Penghou.Hufu.Sqlite.SqliteRuntimeStartResult.ValidUntil.init -> void
+static Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions.operator !=(Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions? left, Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions? right) -> bool
+static Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions.operator ==(Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions? left, Penghou.Hufu.Sqlite.SqliteAuthorityStoreOptions? right) -> bool
+static Penghou.Hufu.Sqlite.SqliteRuntimeStartResult.operator !=(Penghou.Hufu.Sqlite.SqliteRuntimeStartResult? left, Penghou.Hufu.Sqlite.SqliteRuntimeStartResult? right) -> bool
+static Penghou.Hufu.Sqlite.SqliteRuntimeStartResult.operator ==(Penghou.Hufu.Sqlite.SqliteRuntimeStartResult? left, Penghou.Hufu.Sqlite.SqliteRuntimeStartResult? right) -> bool

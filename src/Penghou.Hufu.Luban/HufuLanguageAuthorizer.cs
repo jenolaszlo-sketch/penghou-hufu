@@ -7,7 +7,7 @@ using Penghou.Luban.Language;
 namespace Penghou.Hufu.Luban;
 
 /// <summary>
-/// Initial read-profile consumer. Requires host-authenticated current snapshots
+/// Host-selected read/diff consumer. Requires host-authenticated current snapshots
 /// and mandatory decision evidence; it is not an atomic mutation-start service.
 /// </summary>
 public sealed class HufuLanguageAuthorizer : ILanguageAuthorizer
@@ -17,6 +17,7 @@ public sealed class HufuLanguageAuthorizer : ILanguageAuthorizer
     private readonly CompiledDocument _document;
     private readonly IAuthorityRequestAuthorizer _requestAuthorizer;
     private readonly Dictionary<string, CompiledNode> _nodes;
+    private readonly HufuLanguageAuthorityProfile _profile;
 
     public HufuLanguageAuthorizer(AuthenticatedAuthorityContext context, EffectInvocation invocation,
         CompiledDocument document, IAuthoritySnapshotSource source, IAuthorityEvaluator evaluator,
@@ -28,6 +29,13 @@ public sealed class HufuLanguageAuthorizer : ILanguageAuthorizer
     /// <summary>Uses a host-selected asynchronous verifier while preserving exact semantic and resource projection.</summary>
     public HufuLanguageAuthorizer(AuthenticatedAuthorityContext context, EffectInvocation invocation,
         CompiledDocument document, IAuthorityRequestAuthorizer requestAuthorizer)
+        : this(context, invocation, document, HufuLanguageAuthorityProfile.ReadV1, requestAuthorizer)
+    {
+    }
+
+    /// <summary>Explicitly selects a closed profile with a host-selected evidenced request authorizer.</summary>
+    public HufuLanguageAuthorizer(AuthenticatedAuthorityContext context, EffectInvocation invocation,
+        CompiledDocument document, HufuLanguageAuthorityProfile profile, IAuthorityRequestAuthorizer requestAuthorizer)
     {
         if (!AuthorityValidation.ValidContext(context) || invocation is null || invocation.SubjectId != context.SubjectId ||
             !AuthorityValidation.ValidToken(invocation.EffectId) || !AuthorityValidation.ValidToken(invocation.AttemptId))
@@ -35,10 +43,13 @@ public sealed class HufuLanguageAuthorizer : ILanguageAuthorizer
         _context = context; _invocation = invocation;
         _document = document ?? throw new ArgumentNullException(nameof(document));
         _requestAuthorizer = requestAuthorizer ?? throw new ArgumentNullException(nameof(requestAuthorizer));
-        if (document.Versions != new LanguageVersions() || document.Statements.Count > 64 ||
-            document.Statements.Sum(s => (long)s.Count) > 128 || !AuthorityValidation.ValidToken(document.Workspace.Value))
-            throw new ArgumentException("Unsupported compiled read document.");
-        _nodes = document.Statements.SelectMany(s => s).Where(n => n.Stage is ReadStage or FindStage or SearchStage)
+        _profile = profile ?? throw new ArgumentNullException(nameof(profile));
+        if (document.Versions != profile.Versions || document.Statements.Count > 64 ||
+            document.Statements.Sum(s => (long)s.Count) > 128 || !AuthorityValidation.ValidToken(document.Workspace.Value) ||
+            document.Statements.SelectMany(s => s).Any(n => n.Stage is not ReadStage and not FindStage and not SearchStage and
+                not TakeStage and not CountStage && !(profile.AllowDiff && n.Stage is DiffStage)))
+            throw new ArgumentException("Unsupported compiled document for the selected authority profile.");
+        _nodes = document.Statements.SelectMany(s => s).Where(n => n.Stage is ReadStage or FindStage or SearchStage or DiffStage)
             .ToDictionary(n => n.Identity, StringComparer.Ordinal);
     }
 
@@ -55,38 +66,61 @@ public sealed class HufuLanguageAuthorizer : ILanguageAuthorizer
             (request.Action is not null || request.ResourceRequestIdentity is not null))
             return new(LanguageAuthorityStatus.Deny);
         // Dynamic input scopes need their own reviewed mapping, never a root fallback.
-        var root = node.Stage switch { ReadStage r => r.Path, FindStage f => f.Root, SearchStage s => s.Root, _ => null };
-        if (root is null) return new(LanguageAuthorityStatus.Unavailable);
+        string?[] roots = node.Stage switch
+        {
+            ReadStage r => [r.Path], FindStage f => [f.Root], SearchStage s => [s.Root],
+            DiffStage d => [d.BeforePath, d.AfterPath], _ => []
+        };
+        if (roots.Length == 0 || roots.Any(r => r is null)) return new(LanguageAuthorityStatus.Unavailable);
         var concrete = request.Phase == LanguageAuthorizationPhase.ResourceAccess ||
             request.Action is not null || request.ResourceRequestIdentity is not null;
-        if (!concrete && request.ResourcePath is not null && request.ResourcePath != root)
+        if (!concrete && request.ResourcePath is not null &&
+            (node.Stage is DiffStage || request.ResourcePath != roots[0]))
             return new(LanguageAuthorityStatus.Deny);
         List<(AuthorityAction Action, string Path)> requirements;
         try
         {
-            var known = Canonical(root);
+            var known = roots.Select(r => Canonical(r!)).Distinct(StringComparer.Ordinal).ToArray();
             requirements = [];
             if (concrete)
             {
-                if (request.ResourcePath is null || request.Action is null || request.ResourceRequestIdentity is null ||
-                    !AuthorityValidation.ValidToken(request.ResourceRequestIdentity.Value.Value)) return new(LanguageAuthorityStatus.Deny);
+                if (request.ResourcePath is null || request.Action is null) return new(LanguageAuthorityStatus.Deny);
                 var path = Canonical(request.ResourcePath);
-                if (!Within(node.Stage, known, path, request.Action.Value)) return new(LanguageAuthorityStatus.Deny);
+                // Published Luban sends identity-free admission for each fixed diff
+                // input before opening the provider. This is a semantic check, not
+                // concrete I/O evidence. Other concrete callbacks require an ID.
+                if (request.ResourceRequestIdentity is null)
+                {
+                    if (node.Stage is not DiffStage || request.Phase != LanguageAuthorizationPhase.ResourceAccess ||
+                        request.Action != ResourceAction.ReadFile || !known.Contains(path, StringComparer.Ordinal))
+                        return new(LanguageAuthorityStatus.Deny);
+                }
+                else if (!AuthorityValidation.ValidToken(request.ResourceRequestIdentity.Value.Value))
+                    return new(LanguageAuthorityStatus.Deny);
+                if (!known.Any(root => Within(node.Stage, root, path, request.Action.Value))) return new(LanguageAuthorityStatus.Deny);
                 requirements.Add((Map(request.Action.Value), path));
+                if (request.ResourceRequestIdentity is null)
+                {
+                    foreach (var ancestor in Ancestors(path)) requirements.Add((AuthorityAction.ReadMetadata, ancestor));
+                    requirements.Add((AuthorityAction.Release, path));
+                }
                 if (request.Phase == LanguageAuthorizationPhase.Release) requirements.Add((AuthorityAction.Release, path));
             }
             else
             {
                 if (request.Action is not null || request.ResourceRequestIdentity is not null) return new(LanguageAuthorityStatus.Deny);
-                switch (node.Stage)
+                foreach (var root in known)
                 {
-                    case ReadStage: requirements.Add((AuthorityAction.ReadFile, known)); break;
-                    case FindStage: requirements.Add((AuthorityAction.ListDirectory, known)); break;
-                    case SearchStage:
-                        requirements.Add((AuthorityAction.ListDirectory, known)); requirements.Add((AuthorityAction.ReadFile, known)); break;
+                    switch (node.Stage)
+                    {
+                        case ReadStage or DiffStage: requirements.Add((AuthorityAction.ReadFile, root)); break;
+                        case FindStage: requirements.Add((AuthorityAction.ListDirectory, root)); break;
+                        case SearchStage:
+                            requirements.Add((AuthorityAction.ListDirectory, root)); requirements.Add((AuthorityAction.ReadFile, root)); break;
+                    }
+                    foreach (var ancestor in Ancestors(root)) requirements.Add((AuthorityAction.ReadMetadata, ancestor));
+                    requirements.Add((AuthorityAction.Release, root));
                 }
-                foreach (var ancestor in Ancestors(known)) requirements.Add((AuthorityAction.ReadMetadata, ancestor));
-                requirements.Add((AuthorityAction.Release, known));
             }
         }
         catch { return new(LanguageAuthorityStatus.Deny); }
@@ -128,7 +162,7 @@ public sealed class HufuLanguageAuthorizer : ILanguageAuthorizer
         var descendant = root.Length == 0 || path == root || path.StartsWith(root + "/", StringComparison.Ordinal);
         return stage switch
         {
-            ReadStage => action == ResourceAction.ReadFile && path == root || action == ResourceAction.ReadMetadata && ancestor,
+            ReadStage or DiffStage => action == ResourceAction.ReadFile && path == root || action == ResourceAction.ReadMetadata && ancestor,
             FindStage => action == ResourceAction.ListDirectory && descendant || action == ResourceAction.ReadMetadata && (ancestor || descendant),
             SearchStage => action is ResourceAction.ReadFile or ResourceAction.ListDirectory && descendant ||
                 action == ResourceAction.ReadMetadata && (ancestor || descendant),
@@ -142,11 +176,18 @@ public sealed class HufuLanguageAuthorizer : ILanguageAuthorizer
         var parts = path.Split('/'); var current = "";
         foreach (var part in parts) { current = current.Length == 0 ? part : current + "/" + part; yield return current; }
     }
-    private static string Digest(LanguageAuthorizationRequest request, AuthorityAction action, string path)
+    private string Digest(LanguageAuthorizationRequest request, AuthorityAction action, string path)
     {
         using var stream = new MemoryStream();
         using var writer = new BinaryWriter(stream, new UTF8Encoding(false, true), true);
-        Text("Penghou.Hufu.Luban.ReadDecision.v1"); Text(request.Invocation.SubjectId); Text(request.Invocation.EffectId); Text(request.Invocation.AttemptId);
+        Text(_profile.AllowDiff ? "Penghou.Hufu.Luban.ReadAndDiffDecision.v2" : "Penghou.Hufu.Luban.ReadDecision.v1");
+        if (_profile.AllowDiff)
+        {
+            Text(request.Versions.Language); Text(request.Versions.Ir); Text(request.Versions.Catalogue); Text(request.Versions.Provider);
+            Text(request.DescriptorVersion);
+            Text(_context.TenantId); Text(_context.SubjectId); Text(_context.RunId); Text(_context.RevisionId); Text(_context.FenceId);
+        }
+        Text(request.Invocation.SubjectId); Text(request.Invocation.EffectId); Text(request.Invocation.AttemptId);
         Text(request.DocumentIdentity); Text(request.NodeIdentity); Text(request.Descriptor); Text(request.Workspace.Value);
         writer.Write((int)request.Phase); writer.Write((int)action); Text(path); Text(request.ResourceRequestIdentity?.Value ?? "");
         writer.Flush(); return Convert.ToHexString(SHA256.HashData(stream.ToArray())).ToLowerInvariant();

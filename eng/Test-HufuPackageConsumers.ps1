@@ -23,9 +23,13 @@ $config = Join-Path $run 'NuGet.Config'
 Set-Content -LiteralPath $config @"
 <configuration><packageSources><clear/><add key="hufu-local" value="$escapedPackages"/><add key="nuget.org" value="https://api.nuget.org/v3/index.json"/></packageSources><packageSourceMapping><clear/><packageSource key="hufu-local">$mappings</packageSource><packageSource key="nuget.org"><package pattern="*"/></packageSource></packageSourceMapping><fallbackPackageFolders><clear/></fallbackPackageFolders><config><add key="globalPackagesFolder" value="$escapedCache"/></config></configuration>
 "@
-Set-Content -LiteralPath (Join-Path $consumer 'Program.cs') @'
+$program = @'
 using Penghou.Hufu;
 using Penghou.Hufu.Workflow;
+using Penghou.Hufu.Luban;
+using Penghou.IO.Abstractions;
+using Penghou.Luban;
+using Penghou.Luban.Language;
 using Penghou.Workflow.Abstractions;
 using System.Diagnostics.Metrics;
 
@@ -101,6 +105,55 @@ using (var listener = new MeterListener())
 }
 Console.WriteLine("Packaged optional telemetry emits closed categories and preserves fail-closed authorization after shutdown.");
 
+var profile = HufuLanguageAuthorityProfile.ReadAndDiffV2;
+var diff = LanguageCompiler.Compile("diff before.txt after.txt", new WorkspaceId("workspace"),
+    new LanguageCompilerOptions(Versions: profile.Versions));
+if (!diff.Succeeded) throw new Exception("Published Luban must compile the selected v2 profile.");
+var document = diff.Document!;
+var invocation = new EffectInvocation("subject", "consumer-diff", "attempt");
+var diffAuthority = new DiffAuthority();
+var diffAuthorizer = new HufuLanguageAuthorizer(authorityContext, invocation, document, profile, diffAuthority);
+var node = document.Statements[0][0];
+var admission = new LanguageAuthorizationRequest(invocation, document.Identity, node.Identity, node.Descriptor,
+    LanguageProfile.DescriptorVersion, document.Versions, document.Workspace, node.Stage, LanguageAuthorizationPhase.Preflight);
+if ((await diffAuthorizer.AuthorizeAsync(admission)).Status != LanguageAuthorityStatus.Permit)
+    throw new Exception("The evidenced v2 semantic admission must permit.");
+foreach (var input in new[] { "before.txt", "after.txt" })
+    if (!diffAuthority.Requests.Any(r => r.Action == AuthorityAction.ReadFile && r.RelativePath == input) ||
+        !diffAuthority.Requests.Any(r => r.Action == AuthorityAction.Release && r.RelativePath == input))
+        throw new Exception("Diff admission must check both read and release scopes.");
+if (diffAuthority.Requests.Any(r => r.Action is AuthorityAction.PatchFile or AuthorityAction.WriteFile))
+    throw new Exception("Diff must never request mutation permission.");
+var beforeForgery = diffAuthority.Requests.Count;
+if ((await diffAuthorizer.AuthorizeAsync(admission with { Phase = LanguageAuthorizationPhase.ResourceAccess,
+    ResourcePath = "elsewhere.txt", Action = ResourceAction.ReadFile, ResourceRequestIdentity = new RequestIdentity("forged") }))
+    .Status != LanguageAuthorityStatus.Deny || diffAuthority.Requests.Count != beforeForgery)
+    throw new Exception("Out-of-input resource access must deny before authority dispatch.");
+try
+{
+    _ = new HufuLanguageAuthorizer(authorityContext, invocation, document, diffAuthority);
+    throw new Exception("The existing constructor must continue rejecting v2.");
+}
+catch (ArgumentException) { }
+var missingEvidence = new HufuLanguageAuthorizer(authorityContext, invocation, document, profile, new DiffAuthority(false));
+if ((await missingEvidence.AuthorizeAsync(admission)).Status != LanguageAuthorityStatus.Unavailable)
+    throw new Exception("An undocumented permit cannot admit a packaged diff.");
+Console.WriteLine("Packaged explicit v2 profile, both input scopes, v1 compatibility and evidence failure passed.");
+
+sealed class DiffAuthority(bool evidence = true) : IAuthorityRequestAuthorizer
+{
+    public List<AuthorityRequest> Requests { get; } = [];
+    public ValueTask<AuthorityRequestAuthorization> AuthorizeAsync(AuthorityRequest request, CancellationToken cancellationToken = default)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        Requests.Add(request);
+        return ValueTask.FromResult(evidence
+            ? new AuthorityRequestAuthorization(request, AuthorityStatus.Permit,
+                new AuthorityDecision(AuthorityStatus.Permit, "probe.permit", "snapshot", "probe-evaluator", new string('a', 64)), true)
+            : new AuthorityRequestAuthorization(request, AuthorityStatus.Permit));
+    }
+}
+
 // Explicit trusted test fixture, not a production credential authenticator.
 sealed class ProbeExplanationPolicy(AuthorityStoreActor expectedActor, string expectedExplanation) : IAuthorityExplanationAccessPolicy
 {
@@ -146,6 +199,15 @@ sealed class Recorder : IWorkflowAuthorizationRecorder
     { Record = record; return ValueTask.FromResult<string?>("recorded-probe"); }
 }
 '@
+# Preserve qualification of immutable preview.1 recovery artifacts, which do not
+# expose the new opt-in profile. Later candidates must run the v2 API probes.
+if ($Version -eq '0.1.0-preview.1') {
+    $start = $program.IndexOf('var profile = HufuLanguageAuthorityProfile.ReadAndDiffV2;', [StringComparison]::Ordinal)
+    $end = $program.IndexOf('// Explicit trusted test fixture, not a production credential authenticator.', [StringComparison]::Ordinal)
+    if ($start -lt 0 -or $end -le $start) { throw 'V2 probe boundaries must be present.' }
+    $program = $program.Remove($start, $end - $start)
+}
+Set-Content -LiteralPath (Join-Path $consumer 'Program.cs') $program
 $project = Join-Path $consumer 'Consumer.csproj'
 dotnet restore $project --configfile $config --packages $cache --no-cache
 if ($LASTEXITCODE -ne 0) { throw 'Isolated consumer restore failed.' }
@@ -164,7 +226,7 @@ $results = foreach ($tfm in @('net8.0','net10.0')) {
     if ($LASTEXITCODE -ne 0) { throw "Consumer build failed: $tfm" }
     dotnet (Join-Path $consumer "bin/Release/$tfm/Consumer.dll") | Out-Host
     if ($LASTEXITCODE -ne 0) { throw "Consumer execution failed: $tfm" }
-    [ordered]@{ TargetFramework=$tfm; RecordedDenialPassed=$true; CoreAdmissionProbePassed=$true; CoreIssuanceProbePassed=$true; CedarExplanationCapturePassed=$true; RedactedExplanationSummaryPassed=$true; OptionalTelemetryIsolationPassed=$true }
+    [ordered]@{ TargetFramework=$tfm; RecordedDenialPassed=$true; CoreAdmissionProbePassed=$true; CoreIssuanceProbePassed=$true; CedarExplanationCapturePassed=$true; RedactedExplanationSummaryPassed=$true; OptionalTelemetryIsolationPassed=$true; ExplicitLubanV2ProbePassed=($Version -ne '0.1.0-preview.1') }
 }
 ConvertTo-Json -InputObject ([ordered]@{SchemaVersion=1;PackageVersion=$Version;FreshCache=$cache;Packages=@($libraries.Name);Targets=@($results);NoProjectReferences=$true;NoZhinuDependencies=$true;Status='passed'}) -Depth 8 |
     Set-Content -LiteralPath (Join-Path $run 'qualification.json')

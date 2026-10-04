@@ -4,7 +4,8 @@ Status: Experimental implementation, 2026-10-01. This is a narrow M1 foundation
 and Luban read integration, extended by an optional current-state/evidence
 SQLite prototype described in the [store profile](durable-authority-store.md).
 The approval/delegation lifecycle, governed mutation admission, and production
-authority runtime remain pending. These APIs are not a stable package contract.
+authority runtime remain pending. Six preview.1 packages are published; API
+compatibility is checked against that baseline while the library remains prerelease.
 
 The optional [core admission and issuance profiles](core-admission-and-issuance.md)
 now provide shared evaluation capacity and finite typed-scope publication
@@ -85,6 +86,11 @@ six distinct actions per grant, 16 path segments, 512 UTF-16 path code units /
 256 UTF-16 code units / 1024 UTF-8 bytes. A rejected bound does not widen scope.
 
 ## Luban read mapping
+
+Existing constructors select `HufuLanguageAuthorityProfile.ReadV1`. The new
+explicit `ReadAndDiffV2` profile supports v2 bounded reads and static diffs; see
+[usage, mapping and callback limits](luban-v2-authorization.md). The mapping
+below describes v1 and unchanged known-root read/find/search behavior.
 
 The supported catalogue/provider versions are Luban's current
 `windows-read-v1` / `local-windows-read-v1` profile. Static Read, Find, and Search

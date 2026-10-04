@@ -1,0 +1,381 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "locally-qualified-awaiting-remote-ci-and-user-publication",
+  "candidateVersion": "0.1.0-preview.2",
+  "sourceBaseline": "a13121671378ba583e5c9698296ded872d8860eb",
+  "publishedApiBaseline": "0.1.0-preview.1",
+  "profiles": {
+    "ReadV1": "existing-signatures-and-decision-digest-preserved",
+    "ReadAndDiffV2": "explicit-bounded-static-read-diff-only",
+    "governedPatchHost": "separate-not-implemented"
+  },
+  "sourceRegression": {
+    "qualifiedDistinctTotal": 882,
+    "perFramework": 441,
+    "fullSolutionRun": {
+      "total": 880,
+      "reports": [
+        {
+          "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\full-tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_12_19_44_net8.0.trx",
+          "sha256": "135ccadc10445d89e09ad3a0328f1f6db719437d9ffe26695df9dd1d810c7272",
+          "framework": "net8.0",
+          "total": 93,
+          "passed": 93,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\full-tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_12_19_57_net10.0.trx",
+          "sha256": "3d525665021bdbe7d882858f35ec546800958b28c2976f848366d08458e70d71",
+          "framework": "net10.0",
+          "total": 93,
+          "passed": 93,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\full-tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_12_20_10_net8.0.trx",
+          "sha256": "af522ba31fa9d4e7892a47132f34d86d9f3af2bca710963448a3e8974327b0bb",
+          "framework": "net8.0",
+          "total": 19,
+          "passed": 19,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\full-tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_12_20_12_net10.0.trx",
+          "sha256": "b1f56d6f3e978695010ab4e588ce710d42d96fbb29e7fc543eab4615909b5deb",
+          "framework": "net10.0",
+          "total": 19,
+          "passed": 19,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\full-tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_12_20_18_net8.0.trx",
+          "sha256": "4adea00aa2b5f6bcdc591e7e97fa26a74a69eee016428dca2f25c051d7271b7f",
+          "framework": "net8.0",
+          "total": 22,
+          "passed": 22,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\full-tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_12_20_26_net10.0.trx",
+          "sha256": "19e5edf7847ad6c951f380afe56f011f9db2357af103b7b1ab17e16f32a35647",
+          "framework": "net10.0",
+          "total": 22,
+          "passed": 22,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\full-tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_12_20_30_net8.0.trx",
+          "sha256": "a1fbdd8cebc24c76823e883cad0874926afa13cbd937a7d31080f0641bf4bf7b",
+          "framework": "net8.0",
+          "total": 242,
+          "passed": 242,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\full-tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_12_20_35_net10.0.trx",
+          "sha256": "d75b9707eb350aafd3eb47de77c4f58dfd5e79bbefa9069f0f19f708c3b9a46b",
+          "framework": "net10.0",
+          "total": 242,
+          "passed": 242,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\full-tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_12_20_43_net8.0.trx",
+          "sha256": "76917a20bf09adcaeaea9bf1c76bd309a381a6bc56b2ad217782e1376760322e",
+          "framework": "net8.0",
+          "total": 12,
+          "passed": 12,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\full-tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_12_20_48_net10.0.trx",
+          "sha256": "48dab9c5f87eb7f771945f19a0fa1e1acdcdfe3a7535e26dba8d1c3864056161",
+          "framework": "net10.0",
+          "total": 12,
+          "passed": 12,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\full-tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_12_20_53_net8.0.trx",
+          "sha256": "a7fa18ad2fa1e7753a037ca8a4a2cc60d7687aaacfd36ea3bbd9f2fc328c6dbd",
+          "framework": "net8.0",
+          "total": 52,
+          "passed": 52,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\full-tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_12_20_55_net10.0.trx",
+          "sha256": "46c06451018b368ebca88482e3dea1c3a18597b08b0eb0d6535916fe7ddb3193",
+          "framework": "net10.0",
+          "total": 52,
+          "passed": 52,
+          "failed": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    "finalCoreRevalidation": {
+      "total": 486,
+      "reports": [
+        {
+          "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\final-core-tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_12_24_16_net8.0.trx",
+          "sha256": "fa405fd955f7d298c17caafd606e46094a37fa65643a03bb4b2ef68db3488350",
+          "framework": "net8.0",
+          "total": 243,
+          "passed": 243,
+          "failed": 0,
+          "skipped": 0
+        },
+        {
+          "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\final-core-tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_12_24_22_net10.0.trx",
+          "sha256": "4704756b9d786e5f131c9887fa649be214614e19907744ad981272f95397ab73",
+          "framework": "net10.0",
+          "total": 243,
+          "passed": 243,
+          "failed": 0,
+          "skipped": 0
+        }
+      ]
+    },
+    "note": "Final core revalidation replaces the earlier core results and adds one target-admission revocation case per TFM. Other projects are unchanged."
+  },
+  "newV2TestsPerFramework": {
+    "portableAuthorizer": 15,
+    "windowsLocalRuntime": 18
+  },
+  "packagePairs": [
+    {
+      "Id": "Penghou.Hufu",
+      "Version": "0.1.0-preview.2",
+      "Sha256": "EEFF18D0396EA963B6EEEB0D2C5E43A28C10BA629D233BA96D367372FD309710",
+      "SymbolSha256": "CDD026BAD59101605F56401B4BF9C1184FDFECF03118922C211D4B11608877F6"
+    },
+    {
+      "Id": "Penghou.Hufu.Cedar",
+      "Version": "0.1.0-preview.2",
+      "Sha256": "8F07CD77D9EC02BEAFF947154DEB84DDD94DE100EBE8B32C388392056B0D501A",
+      "SymbolSha256": "F2F753807DE1ADFBEBC959136652BC38B51D6066EE262BFE26C1BC80C34440A8"
+    },
+    {
+      "Id": "Penghou.Hufu.IO",
+      "Version": "0.1.0-preview.2",
+      "Sha256": "B0E6B5C88D8B7E6018E042BCAB1A67074288ADC6A2F64599C1FAB8143ED86A0F",
+      "SymbolSha256": "6A2762ABF713BD6E22340F64C6392BE4F0EE25B1F5D01BBE3CE57DA4C620CB20"
+    },
+    {
+      "Id": "Penghou.Hufu.Luban",
+      "Version": "0.1.0-preview.2",
+      "Sha256": "0C8E195108D93DAC36C9BCAC26AC6CABD7DDEC2398D0E145C4438EFA6FCAE69A",
+      "SymbolSha256": "981B7D6E6A1D73D4928F7A582395F57E3FC25A0EE634B0B9A6D6BBC85B28A55F"
+    },
+    {
+      "Id": "Penghou.Hufu.Sqlite",
+      "Version": "0.1.0-preview.2",
+      "Sha256": "4BB12BDE20F94BE81619090E16211115014C3D4ADD807A5B2795846FBC79E6E2",
+      "SymbolSha256": "BD4F75F0A5B6C47ABB69573DE450B3C6351870B009DF7C33422CB53D9BC254E0"
+    },
+    {
+      "Id": "Penghou.Hufu.Workflow",
+      "Version": "0.1.0-preview.2",
+      "Sha256": "D46C3054FDC3D08926F0FB5FC7B7291C8A239BF9441408744D20D2C495B4D27B",
+      "SymbolSha256": "A1D5AB5C13E4F37B70D787F7A014B7D9AD3B357E0E99938135D0B3900BFCEF79"
+    }
+  ],
+  "packageValidation": {
+    "publicFeedRestore": "passed",
+    "strictCompatibleTfms": "passed",
+    "publishedPreview1ApiCompatibility": "passed",
+    "shippedApiInventory": "published-preview1-promoted"
+  },
+  "standaloneConsumer": {
+    "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\final-package-consumers\\consumer-3c6b96a6dea04fd5abf7e0dfc6a6e0f5\\qualification.json",
+    "sha256": "8c326b5d0c5e03f49aaa55401cd9c6507d94ed8f7e707f7275f9455fb2300868",
+    "result": {
+      "SchemaVersion": 1,
+      "PackageVersion": "0.1.0-preview.2",
+      "FreshCache": "C:\\Users\\Laszlos\\AppData\\Local\\Temp\\hfc-352200dafcf643b1bd4d449ec6f6fa56",
+      "Packages": [
+        "CedarSharp/1.0.0",
+        "Microsoft.Data.Sqlite/10.0.10",
+        "Microsoft.Data.Sqlite.Core/10.0.10",
+        "Penghou.Hufu/0.1.0-preview.2",
+        "Penghou.Hufu.Cedar/0.1.0-preview.2",
+        "Penghou.Hufu.IO/0.1.0-preview.2",
+        "Penghou.Hufu.Luban/0.1.0-preview.2",
+        "Penghou.Hufu.Sqlite/0.1.0-preview.2",
+        "Penghou.Hufu.Workflow/0.1.0-preview.2",
+        "Penghou.IO.Abstractions/0.1.0-preview.1",
+        "Penghou.IO.Protocols/0.1.0-preview.1",
+        "Penghou.Luban/0.1.0-preview.1",
+        "Penghou.Workflow.Abstractions/0.1.0-preview.2",
+        "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+        "SQLitePCLRaw.core/2.1.12",
+        "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+        "SQLitePCLRaw.provider.e_sqlite3/2.1.12"
+      ],
+      "Targets": [
+        {
+          "TargetFramework": "net8.0",
+          "RecordedDenialPassed": true,
+          "CoreAdmissionProbePassed": true,
+          "CoreIssuanceProbePassed": true,
+          "CedarExplanationCapturePassed": true,
+          "RedactedExplanationSummaryPassed": true,
+          "OptionalTelemetryIsolationPassed": true,
+          "ExplicitLubanV2ProbePassed": true
+        },
+        {
+          "TargetFramework": "net10.0",
+          "RecordedDenialPassed": true,
+          "CoreAdmissionProbePassed": true,
+          "CoreIssuanceProbePassed": true,
+          "CedarExplanationCapturePassed": true,
+          "RedactedExplanationSummaryPassed": true,
+          "OptionalTelemetryIsolationPassed": true,
+          "ExplicitLubanV2ProbePassed": true
+        }
+      ],
+      "NoProjectReferences": true,
+      "NoZhinuDependencies": true,
+      "Status": "passed"
+    }
+  },
+  "preview1RecoveryConsumer": {
+    "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\baseline-consumers\\consumer-5f0441f817ec46cc88c327a0987fad88\\qualification.json",
+    "sha256": "e828637bd190f96bf07c23e137a5a96f02630166dfa7acd4e88d5291a32359b5",
+    "result": {
+      "SchemaVersion": 1,
+      "PackageVersion": "0.1.0-preview.1",
+      "FreshCache": "C:\\Users\\Laszlos\\AppData\\Local\\Temp\\hfc-7d6a20a6133140cd9f830876608b16d6",
+      "Packages": [
+        "CedarSharp/1.0.0",
+        "Microsoft.Data.Sqlite/10.0.10",
+        "Microsoft.Data.Sqlite.Core/10.0.10",
+        "Penghou.Hufu/0.1.0-preview.1",
+        "Penghou.Hufu.Cedar/0.1.0-preview.1",
+        "Penghou.Hufu.IO/0.1.0-preview.1",
+        "Penghou.Hufu.Luban/0.1.0-preview.1",
+        "Penghou.Hufu.Sqlite/0.1.0-preview.1",
+        "Penghou.Hufu.Workflow/0.1.0-preview.1",
+        "Penghou.IO.Abstractions/0.1.0-preview.1",
+        "Penghou.IO.Protocols/0.1.0-preview.1",
+        "Penghou.Luban/0.1.0-preview.1",
+        "Penghou.Workflow.Abstractions/0.1.0-preview.2",
+        "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+        "SQLitePCLRaw.core/2.1.12",
+        "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+        "SQLitePCLRaw.provider.e_sqlite3/2.1.12"
+      ],
+      "Targets": [
+        {
+          "TargetFramework": "net8.0",
+          "RecordedDenialPassed": true,
+          "CoreAdmissionProbePassed": true,
+          "CoreIssuanceProbePassed": true,
+          "CedarExplanationCapturePassed": true,
+          "RedactedExplanationSummaryPassed": true,
+          "OptionalTelemetryIsolationPassed": true,
+          "ExplicitLubanV2ProbePassed": false
+        },
+        {
+          "TargetFramework": "net10.0",
+          "RecordedDenialPassed": true,
+          "CoreAdmissionProbePassed": true,
+          "CoreIssuanceProbePassed": true,
+          "CedarExplanationCapturePassed": true,
+          "RedactedExplanationSummaryPassed": true,
+          "OptionalTelemetryIsolationPassed": true,
+          "ExplicitLubanV2ProbePassed": false
+        }
+      ],
+      "NoProjectReferences": true,
+      "NoZhinuDependencies": true,
+      "Status": "passed"
+    }
+  },
+  "packageOnlyWorkflowIntegration": {
+    "total": 24,
+    "reports": [
+      {
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\package-integration\\integration-4a9acd96e5f54c7c8dd0ad062009c0e0\\tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_12_25_25_net10.0.trx",
+        "sha256": "9bea810a82bd822db6524e85177cf12dba7b87d029f422d3e0fe68afe870c17a",
+        "framework": "net10.0",
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0
+      },
+      {
+        "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\package-integration\\integration-4a9acd96e5f54c7c8dd0ad062009c0e0\\tests\\Laszlos_LAPTOP-KBD8D8JG_2026-10-04_12_25_25_net8.0.trx",
+        "sha256": "2c7dca724423978aa9eeebbf9a2f77021433ba545132342ad58aeef4dddf9eb6",
+        "framework": "net8.0",
+        "total": 12,
+        "passed": 12,
+        "failed": 0,
+        "skipped": 0
+      }
+    ],
+    "publishedZhinu": "0.2.0-preview.1",
+    "publishedWorkflowContract": "0.1.0-preview.2"
+  },
+  "sourceGraph": "Core/Cedar/Biscuit/Workflow independent from Zhinu, verified by Verify-HufuCoreGraph.ps1",
+  "ci": {
+    "yamlValidation": "passed",
+    "powershellSyntax": "passed",
+    "portableV2TestsIncluded": true,
+    "remoteCandidateRun": "pending"
+  },
+  "review": "Luna read-only mapping review; suggested target-admission revocation case added and qualified",
+  "qualifiedSourceFiles": {
+    ".github/workflows/ci.yml": "a2275317ff1b7456c2c300a170e966e692b80a696b88d3865038647aac568f4b",
+    ".github/workflows/publish.yml": "d4cc133aabb803b8bf775a3f193a26cc8b0c222c498f4c283f9069a5246b8128",
+    "Directory.Build.props": "9d9af2b30e531688e852562e070ca8d72ee09cc94b834368e23326132517df70",
+    "README.md": "4941a7048223c07a521c30f88492e762e45a478bb1936f4114e76c82255ca6a3",
+    "docs/README.md": "423e8e44dc5ed65795da02a9d2f299ed6ed66cadbe5f2c472001d3c89f5b6c0b",
+    "docs/completion-review.md": "437ade966011879396e0b547fd56bd216c3fcc7e42fea60e1856441d8a5575d4",
+    "docs/current-authority-profile.md": "018f767fbb69405130ffbfc97391c5447abe315d900aad67a269decc53027c48",
+    "docs/ha-0a-review.md": "d11ccfff989f3e78d8595ad6219f2eaa0b157669754d19b3c132c7b3384b8e7b",
+    "docs/luban-integration.md": "6ce26ed3995eac694738c82764465cd198a19eda27963b72d3c3d55d651e31c0",
+    "docs/luban-v2-authorization.md": "e415ad4518a96381a7e9cae312dfa3dfb9cee8a9ecf218db52a62732bf8d8a6a",
+    "docs/package-release-profile.md": "889570d138cdde5d18d033bd2eb3486ef4838538e15dfb07a1cf82739e9b4dac",
+    "docs/qualification/hufu-public-release.json": "977575f70c5e43101d2c109536c0cda7f4a9d1bc252ff4500069a5c088a69173",
+    "docs/roadmap.md": "e3f35f78ccf8f5569a014e2af6d01f7ce616fea7fc599d9655235c718a3f7d5a",
+    "docs/zhinu-authority-handoff.md": "fd5151815e2734c21cb0b3902ab53eba957d61d4228fbf0dc032f835dd024988",
+    "eng/Test-HufuPackageConsumers.ps1": "6b09aa9c82c2c61d5c230cc758cde5b5e4dc9a85850b4c31df158081ebfa9143",
+    "src/Penghou.Hufu.Cedar/PublicAPI.Shipped.txt": "405c9afd219e17533e3db230cad0d93aff8ef3cd0d6fc0dfda18304ab0bc2501",
+    "src/Penghou.Hufu.Cedar/PublicAPI.Unshipped.txt": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd",
+    "src/Penghou.Hufu.IO/PublicAPI.Shipped.txt": "9757a4af5688eae51ca70e1e4d4bd8428b825fcc475e11a0a0dac7f7fe735083",
+    "src/Penghou.Hufu.IO/PublicAPI.Unshipped.txt": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd",
+    "src/Penghou.Hufu.Luban/HufuLanguageAuthorityProfile.cs": "325337ff4285b7b280bbf2e5399b807ff2f2b78d217713370a8783d01a608fab",
+    "src/Penghou.Hufu.Luban/HufuLanguageAuthorizer.cs": "b18801baa16e6d117c089795e51b9fd7bfc9844148fa54ad6ad0e7a30db493a8",
+    "src/Penghou.Hufu.Luban/PublicAPI.Shipped.txt": "51093078d9042825534e355e6bad345b03cc7eaec435d06b4e2bc4adb64ea707",
+    "src/Penghou.Hufu.Luban/PublicAPI.Unshipped.txt": "ff93418e9e9cd84ac7f8c72aac2f00b191309cefd07695657aef4c0f72a442d9",
+    "src/Penghou.Hufu.Sqlite/PublicAPI.Shipped.txt": "6ca9a66239cc10a8e4045bee948d7811c597b1b5f5d12f3d0684b8adfe6496f6",
+    "src/Penghou.Hufu.Sqlite/PublicAPI.Unshipped.txt": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd",
+    "src/Penghou.Hufu.Workflow/PublicAPI.Shipped.txt": "6c5f42a411dc5911d6f5f7e7eb93a0118365769dfaec4344c9a6872b2c48c061",
+    "src/Penghou.Hufu.Workflow/PublicAPI.Unshipped.txt": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd",
+    "src/Penghou.Hufu/PublicAPI.Shipped.txt": "b71e68b04deaf2564fa8802db17d4a406f87aeb648c1652c730646507af91a3a",
+    "src/Penghou.Hufu/PublicAPI.Unshipped.txt": "3c3b422dddb1efeb0fc5b228608fd8682452b2a9507d4031894bce3c4dedadbd",
+    "tests/Penghou.Hufu.Tests/HufuLanguageV2AuthorizerTests.cs": "38359cb0963e66a7104dce14d83d8632ca1a337d4d811426ed2d69844c02c4b4",
+    "tests/Penghou.Hufu.Tests/HufuLanguageV2LocalTests.cs": "3983444a01cafc887885c5564bcb16055f6da1fdd669394d85c6c74d4ca61151"
+  },
+  "limits": [
+    "Local qualification host is Windows; no new remote Linux/macOS candidate evidence is implied.",
+    "Read/diff decisions bind compiled semantics and callback paths, not the resulting diff candidate object.",
+    "Mandatory evidence applies to actual callbacks; failure/cancellation may omit per-resource release callbacks in published Luban.",
+    "No merge, dynamic null-scope fallback, mutation host, final-start transaction or durable outcome recovery is supplied.",
+    "These isolated candidates are local qualification artifacts; remote publication must use the workflow-validated bytes."
+  ]
+}

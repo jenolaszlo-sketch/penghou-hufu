@@ -39,7 +39,7 @@ jobs:
         if: runner.os == 'Linux' || runner.os == 'macOS'
         shell: pwsh
         run: |
-          dotnet test tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj -c Release --filter 'FullyQualifiedName~BoundedAuthorityRequestAuthorizerTests|FullyQualifiedName~AuthorityIssuanceProfileTests|FullyQualifiedName~AuthorityIssuanceStoreTests|FullyQualifiedName~AuthorityExplanationReaderTests|FullyQualifiedName~AuthorityExplanationCedarTests|FullyQualifiedName~AuthorityTelemetryTests' --logger trx --results-directory test-results
+          dotnet test tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj -c Release --filter 'FullyQualifiedName~BoundedAuthorityRequestAuthorizerTests|FullyQualifiedName~AuthorityIssuanceProfileTests|FullyQualifiedName~AuthorityIssuanceStoreTests|FullyQualifiedName~AuthorityExplanationReaderTests|FullyQualifiedName~AuthorityExplanationCedarTests|FullyQualifiedName~AuthorityTelemetryTests|FullyQualifiedName~HufuLanguageV2AuthorizerTests' --logger trx --results-directory test-results
           if ($LASTEXITCODE -ne 0) { throw 'Portable core security/explanation/telemetry tests failed.' }
           dotnet test tests/Penghou.Hufu.Workflow.Tests/Penghou.Hufu.Workflow.Tests.csproj -c Release --logger trx --results-directory test-results
           if ($LASTEXITCODE -ne 0) { throw 'Portable adapter tests failed.' }

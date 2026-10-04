@@ -1,13 +1,39 @@
 # Hufu implementation roadmap
 
+## Luban v2 read/diff checkpoint - 2026-10-04
+
+The explicit [read/diff profile](luban-v2-authorization.md) adds bounded v2
+reads and static two-input diff authorization through published Luban/IO packages.
+Both input paths require current read, metadata and release decisions with
+mandatory evidence. Existing constructors and v1 decision digests remain unchanged.
+Merge, dynamic null scopes and mutation stages remain outside this profile.
+Callback evidence binds paths and compiled semantics, not the resulting diff object.
+
+The next release candidate is preview.2; preview.1 remains immutable. Its shipped
+API inventory and package compatibility baseline are retained. Qualification is
+recorded in [v2 evidence](qualification/luban-v2-authorization.json). Candidate
+regression qualifies 882 distinct cases across .NET 8/10, including 33 new
+v2 cases per framework; final core revalidation includes the admission-revocation
+case added after the 880-case full solution run.
+
+- [x] **LUBAN-V2-READ-DIFF:** explicit profile, exact two-input scopes, runtime
+  revocation/evidence gates, zero provider access on initial denial and portable CI tests.
+- [ ] **LUBAN-V2-RELEASE:** candidate package qualification, then user-controlled
+  preview.2 publication; do not treat local success as remote CI or publication.
+- [ ] **HOST-PATCH:** review and qualify a separate single-patch host, exact locked
+  object start, required durable evidence/outcomes and ambiguous-result recovery.
+  This must not be inferred from a successful read/diff or workflow preflight.
+
+
 ## macOS CI coverage - 2026-10-04
 
 CI and publication validation now include `macos-15` ARM64 with .NET 8/10,
 portable security and workflow tests, native Cedar/Biscuit/SQLite regression,
 and fresh release-package consumers. Windows retains the full filesystem suite.
 See [the platform coverage and qualification boundary](package-release-profile.md#ci-platform-coverage).
-Remote macOS success must be recorded before claiming consumer qualification;
-the existing Windows qualification records remain historical evidence.
+All three platform jobs succeeded at `a131216`; exact run and the Windows
+retry limitation are recorded in [public release evidence](qualification/hufu-public-release.json).
+Older qualification records remain historical evidence.
 
 ## Optional request telemetry checkpoint - 2026-10-04
 
@@ -28,7 +54,8 @@ explanation checkpoint below is preserved as historical evidence.
 Broader broker/approval/revocation instrumentation, authorized evidence
 correlation and governed mutation hosting remain separate gates. The earlier
 764-case checkpoint is committed as Hufu 42a045b; this telemetry delivery is
-local. Push/remote CI and user-controlled initial Hufu publication remain open.
+published in preview.1. Initial Hufu publication and three-platform CI are complete;
+see [public release evidence](qualification/hufu-public-release.json).
 
 ## Decision explanation checkpoint - 2026-10-04
 
@@ -89,8 +116,9 @@ HA-0A and HA-0B are complete, and HA-1 is implemented. The
 trusted-host inputs, fail-closed behavior and limits. The earlier workflow phase passed 554 cases, 277 per framework, including
 52 unit and 12 integration cases each. The subsequent core-hardening checkpoint passed 700 cases; current
 explanation qualification passes 764 cases, 382 per framework. HA-2 fresh candidate-package qualification passed on both frameworks;
-HA-3 remote CI and user-controlled publication remain open. The candidate release set contains
-six Hufu packages at `0.1.0-preview.1`; no production host is included.
+HA-3 initial publication is complete: six packages at `0.1.0-preview.1` are
+indexed on NuGet. Three-platform CI is recorded separately in
+[public release evidence](qualification/hufu-public-release.json); no production host is included.
 
 - [x] **ZA-0:** record the source proposal, dependency inventory and revised plan.
 - [x] **HA-0A:** review staged work in bounded deliveries; preserve the qualified
@@ -106,15 +134,15 @@ six Hufu packages at `0.1.0-preview.1`; no production host is included.
 - [ ] **ZA-5B:** any replacement/retirement requires evidence preserving final
   mutation-start guarantees.
 - [x] **ZA-6:** Zhinu `0.2.0-preview.1` CI and publication gates passed.
-- [ ] **HA-3:** qualify the adapter release set, API inventories and CI/consumers,
-  then complete user-controlled Hufu publication.
+- [x] **HA-3, initial preview.1:** release set, API inventories, CI/consumers and
+  user-controlled publication complete; preview.2 requires its own qualification.
 
 Hufu core, Cedar and Biscuit have no Zhinu dependency. The frozen
 `Penghou.Hufu.Zhinu.Sqlite` adapter remains non-packed at exact preview.15 and is
 covered by a separate legacy integration project. It is not a dependency of the
 new workflow adapter. The latter is preflight authorization only and does not
 claim an atomic mutation-start fence. Biscuit remains experimental/unpublished;
-Luban v2 and the host journal remain deferred. Older completion-snapshot
+Luban v2 read/diff is implemented in the next candidate; the host journal remains deferred. Older completion-snapshot
 reviews below document their historical baseline, not the current stage.
 ## Published Zhinu package qualification - 2026-10-03
 
@@ -134,9 +162,10 @@ NuGet.org, with no IO or Luban source projects. All 426 cases pass: 101 core,
 93 Biscuit and 19 IO on each of .NET 8 and .NET 10, with no failures or skips.
 See [public-feed evidence](qualification/public-resource-packages.json) and
 [resource package adoption](resource-package-adoption.md). RA-5C is complete for
-these dependencies; Hufu itself is not released. Explicit source switches remain
-available for development. Luban v2 is deliberately rejected before authority
-access. See the [current completion review](completion-review.md) for open work.
+these dependencies. This paragraph records the pre-Hufu-publication checkpoint;
+the preview.1 release and explicit v2 candidate are described above. Source
+switches remain available for development. Default v1 constructors still reject
+v2 before authority access. See the [current completion review](completion-review.md) for open work.
 
 ## Earlier Luban API consumer qualification — 2026-10-03
 
@@ -144,8 +173,8 @@ The final Luban API candidate is qualified through an exact PackageReference:
 101 Hufu tests pass per framework with a fresh package cache and no Luban source
 project. V1 remains supported; v2 read and diff fail closed before authority access.
 See [consumer qualification](luban-api-consumer-qualification.md).
-Public-feed restoration is now qualified above; Hufu v2 policy support is separate
-future work and does not block completion of the Luban language baseline.
+Public-feed restoration is qualified above. This historical v1 checkpoint is
+extended by the explicit v2 profile at the top of this roadmap; Luban remains an independent package.
 
 ## Current registered Biscuit qualification — 2026-10-03
 
@@ -384,13 +413,13 @@ and [qualification record](https://github.com/jenolaszlo-sketch/penghou/blob/mai
 WA-1/2/3 and Zhinu ZA-2 source adoption are complete, including the fresh
 seven-package consumer graph. ZA-3A/3B/4 and ZA-6 are complete; all seven Zhinu 0.2.0-preview.1 packages
 are public. Hufu HA-0A/B, HA-1 and local HA-2 qualification are complete;
-HA-3 remote CI and user-controlled publication remain. Keep the old snapshot
+HA-3 initial publication is complete; see public release evidence above. Keep the old snapshot
 reviewed by change group and retain the frozen legacy-profile decision. Contract package
 evidence does not replace the Zhinu runtime qualification or authorize effects.
 
 ## Current delivery gates
 
-HA-2 is locally qualified: six fresh-cache package consumers and package-only integration pass on both frameworks. Local HA-3 API/package checks and CI workflow definitions are ready; commit/push, verify all three OS CI jobs, then the user runs publication. See [qualification evidence](qualification/workflow-authorization.json). The current full repository suite passed 764 tests total (382 per framework: core 184, Biscuit 93, IO 19, legacy integration 22, Workflow 52, workflow integration 12), including admission/issuance and decision explanations. See [current explanation qualification](qualification/decision-explanations.json); the earlier 554/700-case records remain historical evidence. Preserve the frozen legacy preview.15 adapter and its separate regression suite.
+HA-2 and initial HA-3 are complete: six fresh-cache package consumers and package-only integration passed, all six preview.1 packages are published, and three-platform CI is recorded above. Preview.2 remains a new candidate requiring its own CI and user-controlled publication. See [qualification evidence](qualification/workflow-authorization.json). The earlier explanation checkpoint passed 764 tests total (382 per framework: core 184, Biscuit 93, IO 19, legacy integration 22, Workflow 52, workflow integration 12), including admission/issuance and decision explanations. See [current explanation qualification](qualification/decision-explanations.json); the earlier 554/700-case records remain historical evidence. Preserve the frozen legacy preview.15 adapter and its separate regression suite.
 ## Historical host gate - separate qualification stream
 
 The optional current-state/evidence store and legacy co-located Hufu/Zhinu start
@@ -403,4 +432,4 @@ host. Batches and stronger revocation-drain guarantees remain later gates.
 Sequential Hufu lookup followed by standalone Zhinu acquisition is still not
 an atomic substitute. This stream is not the neutral adapter's immediate queue.
 
-Current exact-package and isolated consumer evidence is recorded in [resource package adoption](resource-package-adoption.md). Public-feed qualification is complete for IO/Luban; Hufu release remains open.
+Current exact-package and isolated consumer evidence is recorded in [resource package adoption](resource-package-adoption.md). Public-feed qualification is complete for IO/Luban and the initial Hufu preview.1 release; subsequent versions need fresh qualification.

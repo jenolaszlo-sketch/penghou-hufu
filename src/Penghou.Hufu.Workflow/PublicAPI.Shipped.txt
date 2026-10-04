@@ -1,1 +1,61 @@
 #nullable enable
+const Penghou.Hufu.Workflow.WorkflowAuthorityRequirements.SchemaId = "penghou.hufu.resource" -> string!
+const Penghou.Hufu.Workflow.WorkflowAuthorityRequirements.SchemaVersion = 1 -> int
+override Penghou.Hufu.Workflow.WorkflowApprovalResult.Equals(object? obj) -> bool
+override Penghou.Hufu.Workflow.WorkflowApprovalResult.GetHashCode() -> int
+override Penghou.Hufu.Workflow.WorkflowApprovalResult.ToString() -> string!
+override Penghou.Hufu.Workflow.WorkflowAuthorityTarget.Equals(object? obj) -> bool
+override Penghou.Hufu.Workflow.WorkflowAuthorityTarget.GetHashCode() -> int
+override Penghou.Hufu.Workflow.WorkflowAuthorityTarget.ToString() -> string!
+Penghou.Hufu.Workflow.HufuExecutionAuthorizer
+Penghou.Hufu.Workflow.HufuExecutionAuthorizer.AuthorizeAsync(Penghou.Workflow.Abstractions.ExecutionAuthorizationContext! context, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Workflow.Abstractions.ExecutionAuthorizationResult!>
+Penghou.Hufu.Workflow.HufuExecutionAuthorizer.HufuExecutionAuthorizer(string! providerId, string! hostNamespace, string! mappingId, Penghou.Hufu.Workflow.IWorkflowAuthorityBindingSource! bindings, Penghou.Hufu.IAuthorityRequestAuthorizer! authority, Penghou.Hufu.Workflow.IWorkflowApprovalCoordinator! approvals, Penghou.Hufu.Workflow.IWorkflowAuthorizationRecorder! recorder, System.TimeProvider? timeProvider = null, System.TimeSpan? maximumValidity = null) -> void
+Penghou.Hufu.Workflow.IWorkflowApprovalCoordinator
+Penghou.Hufu.Workflow.IWorkflowApprovalCoordinator.EvaluateAsync(Penghou.Hufu.Workflow.WorkflowAuthorityBinding! binding, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Workflow.WorkflowApprovalResult?>
+Penghou.Hufu.Workflow.IWorkflowAuthorityBindingSource
+Penghou.Hufu.Workflow.IWorkflowAuthorityBindingSource.ResolveAsync(Penghou.Workflow.Abstractions.ExecutionAuthorizationContext! context, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Workflow.WorkflowAuthorityBinding?>
+Penghou.Hufu.Workflow.IWorkflowAuthorizationRecorder
+Penghou.Hufu.Workflow.IWorkflowAuthorizationRecorder.RecordAsync(Penghou.Hufu.Workflow.WorkflowAuthorizationRecord! record, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<string?>
+Penghou.Hufu.Workflow.WorkflowApprovalDecision
+Penghou.Hufu.Workflow.WorkflowApprovalDecision.Approved = 3 -> Penghou.Hufu.Workflow.WorkflowApprovalDecision
+Penghou.Hufu.Workflow.WorkflowApprovalDecision.Denied = 4 -> Penghou.Hufu.Workflow.WorkflowApprovalDecision
+Penghou.Hufu.Workflow.WorkflowApprovalDecision.NotRequired = 1 -> Penghou.Hufu.Workflow.WorkflowApprovalDecision
+Penghou.Hufu.Workflow.WorkflowApprovalDecision.Required = 2 -> Penghou.Hufu.Workflow.WorkflowApprovalDecision
+Penghou.Hufu.Workflow.WorkflowApprovalDecision.Unavailable = 0 -> Penghou.Hufu.Workflow.WorkflowApprovalDecision
+Penghou.Hufu.Workflow.WorkflowApprovalResult
+Penghou.Hufu.Workflow.WorkflowApprovalResult.<Clone>$() -> Penghou.Hufu.Workflow.WorkflowApprovalResult!
+Penghou.Hufu.Workflow.WorkflowApprovalResult.ApprovalRequestId.get -> string?
+Penghou.Hufu.Workflow.WorkflowApprovalResult.BindingIdentity.get -> string!
+Penghou.Hufu.Workflow.WorkflowApprovalResult.Decision.get -> Penghou.Hufu.Workflow.WorkflowApprovalDecision
+Penghou.Hufu.Workflow.WorkflowApprovalResult.Equals(Penghou.Hufu.Workflow.WorkflowApprovalResult? other) -> bool
+Penghou.Hufu.Workflow.WorkflowApprovalResult.EvidenceId.get -> string!
+Penghou.Hufu.Workflow.WorkflowApprovalResult.ValidUntil.get -> System.DateTimeOffset
+Penghou.Hufu.Workflow.WorkflowApprovalResult.WorkflowApprovalResult(Penghou.Hufu.Workflow.WorkflowApprovalDecision decision, string! bindingIdentity, string! evidenceId, System.DateTimeOffset validUntil, string? approvalRequestId = null) -> void
+Penghou.Hufu.Workflow.WorkflowAuthorityBinding
+Penghou.Hufu.Workflow.WorkflowAuthorityBinding.AuthorityContext.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.Workflow.WorkflowAuthorityBinding.Context.get -> Penghou.Workflow.Abstractions.ExecutionAuthorizationContext!
+Penghou.Hufu.Workflow.WorkflowAuthorityBinding.HostNamespace.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityBinding.Identity.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityBinding.MappingId.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityBinding.Targets.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.Workflow.WorkflowAuthorityTarget!>!
+Penghou.Hufu.Workflow.WorkflowAuthorityBinding.ValidUntil.get -> System.DateTimeOffset
+Penghou.Hufu.Workflow.WorkflowAuthorityBinding.WorkflowAuthorityBinding(Penghou.Workflow.Abstractions.ExecutionAuthorizationContext! context, string! hostNamespace, string! mappingId, Penghou.Hufu.AuthenticatedAuthorityContext! authorityContext, System.Collections.Generic.IReadOnlyList<Penghou.Hufu.Workflow.WorkflowAuthorityTarget!>! targets, System.DateTimeOffset validUntil) -> void
+Penghou.Hufu.Workflow.WorkflowAuthorityRequirements
+Penghou.Hufu.Workflow.WorkflowAuthorityTarget
+Penghou.Hufu.Workflow.WorkflowAuthorityTarget.<Clone>$() -> Penghou.Hufu.Workflow.WorkflowAuthorityTarget!
+Penghou.Hufu.Workflow.WorkflowAuthorityTarget.Equals(Penghou.Hufu.Workflow.WorkflowAuthorityTarget? other) -> bool
+Penghou.Hufu.Workflow.WorkflowAuthorityTarget.RelativePath.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityTarget.Requirement.get -> Penghou.Workflow.Abstractions.ExecutionRequirement!
+Penghou.Hufu.Workflow.WorkflowAuthorityTarget.WorkflowAuthorityTarget(Penghou.Workflow.Abstractions.ExecutionRequirement! requirement, string! workspaceId, string! relativePath) -> void
+Penghou.Hufu.Workflow.WorkflowAuthorityTarget.WorkspaceId.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorizationRecord
+Penghou.Hufu.Workflow.WorkflowAuthorizationRecord.Approval.get -> Penghou.Hufu.Workflow.WorkflowApprovalResult?
+Penghou.Hufu.Workflow.WorkflowAuthorizationRecord.Binding.get -> Penghou.Hufu.Workflow.WorkflowAuthorityBinding?
+Penghou.Hufu.Workflow.WorkflowAuthorizationRecord.Context.get -> Penghou.Workflow.Abstractions.ExecutionAuthorizationContext!
+Penghou.Hufu.Workflow.WorkflowAuthorizationRecord.RequestAuthorizations.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityRequestAuthorization!>!
+Penghou.Hufu.Workflow.WorkflowAuthorizationRecord.Result.get -> Penghou.Workflow.Abstractions.ExecutionAuthorizationResult!
+static Penghou.Hufu.Workflow.WorkflowApprovalResult.operator !=(Penghou.Hufu.Workflow.WorkflowApprovalResult? left, Penghou.Hufu.Workflow.WorkflowApprovalResult? right) -> bool
+static Penghou.Hufu.Workflow.WorkflowApprovalResult.operator ==(Penghou.Hufu.Workflow.WorkflowApprovalResult? left, Penghou.Hufu.Workflow.WorkflowApprovalResult? right) -> bool
+static Penghou.Hufu.Workflow.WorkflowAuthorityRequirements.TryGetAction(Penghou.Workflow.Abstractions.ExecutionRequirement! requirement, out Penghou.Hufu.AuthorityAction action) -> bool
+static Penghou.Hufu.Workflow.WorkflowAuthorityTarget.operator !=(Penghou.Hufu.Workflow.WorkflowAuthorityTarget? left, Penghou.Hufu.Workflow.WorkflowAuthorityTarget? right) -> bool
+static Penghou.Hufu.Workflow.WorkflowAuthorityTarget.operator ==(Penghou.Hufu.Workflow.WorkflowAuthorityTarget? left, Penghou.Hufu.Workflow.WorkflowAuthorityTarget? right) -> bool

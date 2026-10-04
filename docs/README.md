@@ -16,11 +16,13 @@ Hufu is the reusable authority domain and planned durable authority-store bounda
 
 | Document | Purpose | Status |
 | --- | --- | --- |
+| [Luban v2 read/diff](luban-v2-authorization.md) | Explicit host profile, exact scopes, usage and evidence limits | Implemented preview.2 candidate; governed mutation host remains separate |
+| [Package release profile](package-release-profile.md) | Published baseline, compatibility, CI and input-free publication | Six preview.1 packages published; next candidate preview.2 |
 | [Optional telemetry](optional-telemetry.md) | Bounded isolated preflight observations, privacy and host export obligations | Implemented request slice; broader broker/approval/revocation instrumentation remains open |
 | [Decision explanations](decision-explanations.md) | Exact evaluator capture and separately authorized summary/details | Bounded typed-path profile; see linked qualification and limits |
 | [Core admission and issuance](core-admission-and-issuance.md) | Shared evaluator capacity, current authenticated issuer ceiling and exact command approval | Implemented; local .NET 8/10 and candidate-package qualification in linked record |
 | [Zhinu package adoption](zhinu-package-adoption.md) | Exact public preview.15 dependencies without a source checkout | 426 cases passed across .NET 8/10 |
-| [Current completion review](completion-review.md) | Published dependency adoption and prioritized remaining Hufu gates | IO/Luban public adoption qualified; Hufu host/API/release work remains |
+| [Current completion review](completion-review.md) | Published dependency adoption and prioritized remaining Hufu gates | Initial Hufu packages published; v2 candidate and production host gates tracked separately |
 | [Architecture](architecture.md) | Library boundary, dependencies, store ownership, and integration | Proposed design |
 | [ADR 0001](decisions/0001-hufu-owns-workflow-authority.md) | Decision to establish Hufu as a separate library | Library boundary selected; API/storage details proposed |
 | [ADR 0002](decisions/0002-use-cedarsharp-for-policy-evaluation.md) | Official Cedar through the qualified independent CedarSharp 1.0.0 wrapper and Hufu adapter | Wrapper qualified; Typed Cedar/read profile locally qualified; production authority runtime pending |
@@ -55,4 +57,4 @@ records local evidence without implying real-provider or production enforcement.
 
 Current Biscuit integration resume point: [2026-10-02 recalibration](biscuit-integration-recalibration.md). Its final qualification supersedes historical checkout/build findings and counts above.
 
-The reconciled resource migration and fresh candidate-package checks are recorded at the top of [the recalibration record](biscuit-integration-recalibration.md). IO publication and production mutation-host gates remain open.
+The reconciled resource migration and fresh candidate-package checks are recorded at the top of [the recalibration record](biscuit-integration-recalibration.md). IO and initial Hufu publication are complete; production mutation-host gates remain open.

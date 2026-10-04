@@ -6,8 +6,10 @@ and [runtime plan](https://github.com/jenolaszlo-sketch/penghou-zhinu/blob/main/
 0.2.0-preview.1 passed its remote CI and publication gates; exact evidence is in
 [the qualification record](docs/qualification/zhinu-public-release.json).
 The optional `Penghou.Hufu.Workflow` adapter is implemented against Hufu and the
-neutral contract, without a workflow-engine dependency. The six Hufu release candidates remain unpublished;
-release gates and current qualification evidence are tracked in the handoff. See [the authorizer boundary](docs/workflow-authorizer.md),
+neutral contract, without a workflow-engine dependency. All six Hufu packages are published at `0.1.0-preview.1`;
+[public-feed and three-platform CI evidence](docs/qualification/hufu-public-release.json)
+records that release. The next candidate is `0.1.0-preview.2`, adding explicit
+[Luban v2 read/diff authorization](docs/luban-v2-authorization.md). See [the authorizer boundary](docs/workflow-authorizer.md),
 [ADR 0011](docs/decisions/0011-neutral-zhinu-authority-extension.md), and the
 [current handoff](docs/zhinu-authority-handoff.md).
 
@@ -17,7 +19,7 @@ is to make execution permissions explicit, durable, and auditable across hosts.
 The project has a narrow M1 implementation: bounded authority snapshot/request
 contracts and a Luban read-language authorizer that requires host-supplied
 current snapshots, an evaluator, and attributable decision recording. This is
-not a production authorization host or release-ready security boundary. An
+not a production authorization host. An
 optional SQLite prototype now supplies current-state publication, terminal
 revocation, and required durable decision evidence through explicit host gates.
 Hufu remains pre-release; no production workflow host is shipped.
@@ -82,6 +84,7 @@ The design is recorded in:
 - [Decision: local-first authority runtime](docs/decisions/0003-local-first-authority-runtime.md)
 - [Local-first runtime design](docs/local-first-authority-runtime.md)
 - [Decision: LOP typed effects; no sandbox implementation](docs/decisions/0004-typed-effects-over-sandbox.md)
+- [Luban v2 read/diff authorization and usage](docs/luban-v2-authorization.md)
 - [Penghou.Luban integration](docs/luban-integration.md)
 - [Decision: Luban owns typed effects](docs/decisions/0005-luban-owns-typed-effects.md)
 - [Luban's canonical effect design](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/docs/typed-effect-runtime.md)
@@ -91,7 +94,7 @@ The proposed scope includes requirements, grants, envelopes, approval requests
 and decisions, delegation attenuation, revocation, and durable authority state.
 Hosts supply identity, policy, resource resolution, credentials, and approval UI.
 Hufu does not own workflow scheduling, execution recovery, or budget accounting.
-Integration contracts will be defined through the design before publication.
+Published contracts preserve their API baseline; broader integrations remain explicit roadmap work.
 The local-first direction adds deterministic authority analysis, structured
 execution requirements, host-selected capability brokers, and durable decision
 evidence with optional OpenTelemetry export. The separate Penghou.Luban project
@@ -116,7 +119,7 @@ implementation.
 
 See the [documentation index](docs/README.md) for status and provenance.
 
-Normal builds use exact IO and Luban preview.1 packages. Publication remains pending; see [resource package delivery](docs/resource-package-adoption.md) for candidate/source development and the public-feed qualification command.
+Normal builds use exact published IO and Luban preview.1 packages; see [resource package delivery](docs/resource-package-adoption.md) for candidate/source development and the public-feed qualification command.
 
 Licensed under [Apache License 2.0](LICENSE).
 

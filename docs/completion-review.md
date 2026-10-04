@@ -8,6 +8,13 @@ records remain evidence for their actual revisions.
 
 ## Verified checkpoint
 
+All six preview.1 packages are indexed on NuGet. See [public metadata and CI
+evidence](qualification/hufu-public-release.json). The explicit v2 candidate is
+qualified separately in [v2 evidence](qualification/luban-v2-authorization.json).
+The new candidate qualifies 882 distinct regression cases (441 per framework):
+full solution 880, then the complete final core suite after one new case. The
+counts below describe earlier checkpoints.
+
 - Published dependencies are exact IO/Luban preview.1 and neutral Workflow
   preview.2. Zhinu 0.2.0-preview.1 passed remote CI/publication; seven exact public
   packages are qualified in [the record](qualification/zhinu-public-release.json).
@@ -21,7 +28,7 @@ records remain evidence for their actual revisions.
   are individually reviewed and implemented. Their 73 new cases per framework
   cover actual outstanding source/evidence work, cancellation races, exact
   approvals, containment, policy composition and SQLite publication/replay.
-- Current full regression: 816 passed, 408 per framework;
+- Earlier telemetry regression: 816 passed, 408 per framework;
   zero failed/skipped. 26 new telemetry cases per framework cover
   mandatory recorder failures, exact result/exception/cancellation preservation,
   bounded loss/shutdown and blocked/throwing listener privacy/isolation. See
@@ -42,13 +49,14 @@ records remain evidence for their actual revisions.
 | HA-0A/B, HA-1 | Complete and locally qualified; preserve independent graphs and frozen legacy coverage |
 | HA-2 | Fresh candidate consumers and package-only workflow integration pass on .NET 8/10 |
 | Core admission/issuance | Implemented and locally qualified; actual authenticated services and aggregate host/process capacity remain host gates |
-| HA-3 | Commit/push reviewed source/docs, verify both OS CI jobs, then user-run main publication; initial six Hufu packages remain unpublished |
+| HA-3 | Initial six preview.1 packages published; three-platform CI passed at a131216 with the recorded Windows retry |
+| Luban v2 read/diff | Explicit profile implemented; preview.2 qualification and publication are separate from governed mutation hosting |
 | Core explanations | Bounded exact-operation typed-path slice implemented and locally qualified; lineage/requirements and retained historical reconstruction remain future extensions |
 | Optional telemetry | Bounded request slice implemented and locally qualified; broker/approval/revocation metrics and protected correlation remain separate host work |
 | ZA-5B | Separate replacement/retirement decision preserving the frozen legacy final-start guarantee |
 
-Luban v2 and the single-patch host/outcome journal remain separate deferred
-deliveries. No other old `.tmp/hufu-completion` group was bulk-installed. That
+The [Luban v2 read/diff adapter](luban-v2-authorization.md) is now implemented
+in preview.2. The single-patch host/outcome journal remains a separate delivery. No other old `.tmp/hufu-completion` group was bulk-installed. That
 snapshot's 510-case report does not qualify the current release graph.
 
 ## Remaining scope

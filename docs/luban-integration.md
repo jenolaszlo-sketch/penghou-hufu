@@ -6,7 +6,8 @@ a future optional Hufu.IO resource boundary. The current prototype below is not
 a general resource decorator. HTTP contracts have a separate future domain owner.
 Capture-only WhatIf remains unchanged; overlay execution is deferred VFS-5.
 
-Status: Narrow read-authorization prototype implemented; production governance remains pending, 2026-10-01. The prototype includes optional current-state/evidence SQLite integration; it is not an atomic mutation-start protocol.
+Status: V1 reads and explicit v2 read/diff authorization implemented, 2026-10-04;
+production mutation governance remains pending. See [v2 usage and limits](luban-v2-authorization.md). The prototype includes optional current-state/evidence SQLite integration; it is not an atomic mutation-start protocol.
 [ADR 0005](decisions/0005-luban-owns-typed-effects.md) selects Luban as the separate
 effect-runtime owner. Read its [design](../../Penghou.Luban/docs/typed-effect-runtime.md)
 and [implementation plan](../../Penghou.Luban/docs/implementation-plan.md) for
@@ -42,8 +43,8 @@ prototype and known-root read consumer pass the local Windows x64 qualification.
 The optional [current-state/evidence store](durable-authority-store.md) is implemented; complete authority lifecycle, governed admission, and production integration remain open. Hufu now has a
 read-language `ILanguageAuthorizer`
 prototype over required host-supplied snapshot, evaluator, and decision-recorder
-interfaces. It handles the narrow known-root Read/Find/Search profile and pure
-Take/Count language shape. Dynamic reads and searches with null roots remain
+interfaces. It handles known-root Read/Find/Search and pure Take/Count; the explicit
+`ReadAndDiffV2` profile adds v2 windows/context and fixed two-input diffs. Dynamic reads and searches with null roots remain
 Unavailable until a reviewed static scope ceiling can be bound. The prototype
 does not provide semantic batch admission or serialize revocation with Zhinu's
 operation start; no shared authoritative transaction exists between the Hufu
