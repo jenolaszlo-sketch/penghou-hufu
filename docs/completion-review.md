@@ -8,10 +8,10 @@ records remain evidence for their actual revisions.
 
 ## Verified checkpoint
 
-All six preview.1 packages are indexed on NuGet. See [public metadata and CI
-evidence](qualification/hufu-public-release.json). The explicit v2 candidate is
-qualified separately in [v2 evidence](qualification/luban-v2-authorization.json).
-The new candidate qualifies 882 distinct regression cases (441 per framework):
+All six preview.2 packages are indexed on NuGet. See [public metadata, three-platform
+CI/publication and fresh-consumer evidence](qualification/hufu-luban-v2-public-release.json).
+Earlier preview.1 and [local v2 evidence](qualification/luban-v2-authorization.json)
+remain historical qualification records. The v2 implementation qualifies 882 distinct regression cases (441 per framework):
 full solution 880, then the complete final core suite after one new case. The
 counts below describe earlier checkpoints.
 
@@ -50,7 +50,7 @@ counts below describe earlier checkpoints.
 | HA-2 | Fresh candidate consumers and package-only workflow integration pass on .NET 8/10 |
 | Core admission/issuance | Implemented and locally qualified; actual authenticated services and aggregate host/process capacity remain host gates |
 | HA-3 | Initial six preview.1 packages published; three-platform CI passed at a131216 with the recorded Windows retry |
-| Luban v2 read/diff | Explicit profile implemented; preview.2 qualification and publication are separate from governed mutation hosting |
+| Luban v2 read/diff | Published preview.2; three-platform CI/publication and fresh public-package consumers passed; governed mutation hosting remains separate |
 | Core explanations | Bounded exact-operation typed-path slice implemented and locally qualified; lineage/requirements and retained historical reconstruction remain future extensions |
 | Optional telemetry | Bounded request slice implemented and locally qualified; broker/approval/revocation metrics and protected correlation remain separate host work |
 | ZA-5B | Separate replacement/retirement decision preserving the frozen legacy final-start guarantee |

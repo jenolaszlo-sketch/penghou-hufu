@@ -1,9 +1,11 @@
 # Luban v2 read/diff authorization
 
-Status: implemented in the Hufu `0.1.0-preview.2` candidate. This adapter consumes
+Status: published in Hufu `0.1.0-preview.2`. This adapter consumes
 published Luban and IO `0.1.0-preview.1` packages; it requires no Luban or Zhinu
 source changes. [Qualification evidence](qualification/luban-v2-authorization.json)
-records actual checks. Preview.1 remains the published Hufu baseline.
+records the local implementation checks. [Public release evidence](qualification/hufu-luban-v2-public-release.json)
+confirms all six indexed packages, three-platform CI/publication and fresh .NET 8/10 consumers.
+Preview.1 remains the compatibility baseline used to qualify this release.
 
 ## Host composition
 

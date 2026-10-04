@@ -9,17 +9,18 @@ mandatory evidence. Existing constructors and v1 decision digests remain unchang
 Merge, dynamic null scopes and mutation stages remain outside this profile.
 Callback evidence binds paths and compiled semantics, not the resulting diff object.
 
-The next release candidate is preview.2; preview.1 remains immutable. Its shipped
-API inventory and package compatibility baseline are retained. Qualification is
-recorded in [v2 evidence](qualification/luban-v2-authorization.json). Candidate
+All six preview.2 packages are published and indexed; preview.1 remains immutable.
+The published v2 API is now shipped. Three-platform CI/publication and fresh public-package
+consumers pass in [release evidence](qualification/hufu-luban-v2-public-release.json).
+The earlier local qualification is preserved in [v2 evidence](qualification/luban-v2-authorization.json). Local
 regression qualifies 882 distinct cases across .NET 8/10, including 33 new
 v2 cases per framework; final core revalidation includes the admission-revocation
 case added after the 880-case full solution run.
 
 - [x] **LUBAN-V2-READ-DIFF:** explicit profile, exact two-input scopes, runtime
   revocation/evidence gates, zero provider access on initial denial and portable CI tests.
-- [ ] **LUBAN-V2-RELEASE:** candidate package qualification, then user-controlled
-  preview.2 publication; do not treat local success as remote CI or publication.
+- [x] **LUBAN-V2-RELEASE:** all six preview.2 packages indexed, CI and publication
+  validation passed on Windows/Ubuntu/macOS; fresh public-package consumers passed.
 - [ ] **HOST-PATCH:** review and qualify a separate single-patch host, exact locked
   object start, required durable evidence/outcomes and ambiguous-result recovery.
   This must not be inferred from a successful read/diff or workflow preflight.
@@ -142,7 +143,7 @@ Hufu core, Cedar and Biscuit have no Zhinu dependency. The frozen
 covered by a separate legacy integration project. It is not a dependency of the
 new workflow adapter. The latter is preflight authorization only and does not
 claim an atomic mutation-start fence. Biscuit remains experimental/unpublished;
-Luban v2 read/diff is implemented in the next candidate; the host journal remains deferred. Older completion-snapshot
+Luban v2 read/diff is published in preview.2; the host journal remains deferred. Older completion-snapshot
 reviews below document their historical baseline, not the current stage.
 ## Published Zhinu package qualification - 2026-10-03
 
@@ -163,7 +164,7 @@ NuGet.org, with no IO or Luban source projects. All 426 cases pass: 101 core,
 See [public-feed evidence](qualification/public-resource-packages.json) and
 [resource package adoption](resource-package-adoption.md). RA-5C is complete for
 these dependencies. This paragraph records the pre-Hufu-publication checkpoint;
-the preview.1 release and explicit v2 candidate are described above. Source
+the preview.1 and explicit v2 releases are described above. Source
 switches remain available for development. Default v1 constructors still reject
 v2 before authority access. See the [current completion review](completion-review.md) for open work.
 
@@ -419,7 +420,7 @@ evidence does not replace the Zhinu runtime qualification or authorize effects.
 
 ## Current delivery gates
 
-HA-2 and initial HA-3 are complete: six fresh-cache package consumers and package-only integration passed, all six preview.1 packages are published, and three-platform CI is recorded above. Preview.2 remains a new candidate requiring its own CI and user-controlled publication. See [qualification evidence](qualification/workflow-authorization.json). The earlier explanation checkpoint passed 764 tests total (382 per framework: core 184, Biscuit 93, IO 19, legacy integration 22, Workflow 52, workflow integration 12), including admission/issuance and decision explanations. See [current explanation qualification](qualification/decision-explanations.json); the earlier 554/700-case records remain historical evidence. Preserve the frozen legacy preview.15 adapter and its separate regression suite.
+HA-2 and initial HA-3 are complete: six fresh-cache package consumers and package-only integration passed, all six preview.1 packages are published, and three-platform CI is recorded above. Preview.2 has also passed its own three-platform CI and user-controlled publication, with exact public-package evidence above. See [qualification evidence](qualification/workflow-authorization.json). The earlier explanation checkpoint passed 764 tests total (382 per framework: core 184, Biscuit 93, IO 19, legacy integration 22, Workflow 52, workflow integration 12), including admission/issuance and decision explanations. See [current explanation qualification](qualification/decision-explanations.json); the earlier 554/700-case records remain historical evidence. Preserve the frozen legacy preview.15 adapter and its separate regression suite.
 ## Historical host gate - separate qualification stream
 
 The optional current-state/evidence store and legacy co-located Hufu/Zhinu start

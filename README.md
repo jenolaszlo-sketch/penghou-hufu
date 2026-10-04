@@ -6,10 +6,11 @@ and [runtime plan](https://github.com/jenolaszlo-sketch/penghou-zhinu/blob/main/
 0.2.0-preview.1 passed its remote CI and publication gates; exact evidence is in
 [the qualification record](docs/qualification/zhinu-public-release.json).
 The optional `Penghou.Hufu.Workflow` adapter is implemented against Hufu and the
-neutral contract, without a workflow-engine dependency. All six Hufu packages are published at `0.1.0-preview.1`;
-[public-feed and three-platform CI evidence](docs/qualification/hufu-public-release.json)
-records that release. The next candidate is `0.1.0-preview.2`, adding explicit
-[Luban v2 read/diff authorization](docs/luban-v2-authorization.md). See [the authorizer boundary](docs/workflow-authorizer.md),
+neutral contract, without a workflow-engine dependency. All six Hufu packages
+are published at `0.1.0-preview.2`, including explicit
+[Luban v2 read/diff authorization](docs/luban-v2-authorization.md).
+[Public-package and three-platform CI evidence](docs/qualification/hufu-luban-v2-public-release.json)
+records the release; the original preview.1 evidence remains historical. See [the authorizer boundary](docs/workflow-authorizer.md),
 [ADR 0011](docs/decisions/0011-neutral-zhinu-authority-extension.md), and the
 [current handoff](docs/zhinu-authority-handoff.md).
 

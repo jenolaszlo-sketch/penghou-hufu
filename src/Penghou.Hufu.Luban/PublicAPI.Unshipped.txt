@@ -1,6 +1,1 @@
 #nullable enable
-Penghou.Hufu.Luban.HufuLanguageAuthorityProfile
-Penghou.Hufu.Luban.HufuLanguageAuthorityProfile.Versions.get -> Penghou.Luban.Language.LanguageVersions!
-Penghou.Hufu.Luban.HufuLanguageAuthorizer.HufuLanguageAuthorizer(Penghou.Hufu.AuthenticatedAuthorityContext! context, Penghou.Luban.EffectInvocation! invocation, Penghou.Luban.Language.CompiledDocument! document, Penghou.Hufu.Luban.HufuLanguageAuthorityProfile! profile, Penghou.Hufu.IAuthorityRequestAuthorizer! requestAuthorizer) -> void
-static Penghou.Hufu.Luban.HufuLanguageAuthorityProfile.ReadAndDiffV2.get -> Penghou.Hufu.Luban.HufuLanguageAuthorityProfile!
-static Penghou.Hufu.Luban.HufuLanguageAuthorityProfile.ReadV1.get -> Penghou.Hufu.Luban.HufuLanguageAuthorityProfile!

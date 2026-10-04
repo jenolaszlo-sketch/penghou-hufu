@@ -3,10 +3,10 @@
 The reviewed release set is `Penghou.Hufu`, `Penghou.Hufu.Cedar`,
 `Penghou.Hufu.Sqlite`, `Penghou.Hufu.IO`, `Penghou.Hufu.Luban` and
 `Penghou.Hufu.Workflow`. Each targets .NET 8 and .NET 10. The checked-in version
-is `0.1.0-preview.2`. All six preview.1 packages are already published and
-indexed; [public release evidence](qualification/hufu-public-release.json) records
-their exact metadata and hashes. The user publishes the next six-package version
-together from `main` after qualification.
+is `0.1.0-preview.2`. All six are published and indexed; [public release evidence](qualification/hufu-luban-v2-public-release.json)
+records exact metadata/hashes, three-platform CI/publication and fresh consumers.
+The original preview.1 record remains historical. Each future release needs a new
+version and qualification, then user-controlled publication from `main`.
 
 The workflow adapter references only Hufu and exact
 `Penghou.Workflow.Abstractions` `0.1.0-preview.2`. Published Zhinu
@@ -20,14 +20,14 @@ Biscuit and Biscuit.Sqlite remain experimental and outside this release set.
 Their regression tests require the hash-pinned unpublished BiscuitSharp
 preview.2 artifact through `eng/Restore-BiscuitCandidate.ps1`; released Hufu
 packages restore exclusively from public NuGet dependencies. The explicit
-[Luban v2 read/diff profile](luban-v2-authorization.md) is implemented in the next
-candidate. The older single-patch host/journal remains deferred under
+[Luban v2 read/diff profile](luban-v2-authorization.md) is published in preview.2. The older single-patch host/journal remains deferred under
 [the reuse review](ha-0a-review.md).
 
 Public API inventories are regenerated from this reviewed source and enforced
-with PublicApiAnalyzers. Preview.1 inventories are now shipped; new API stays
-in the unshipped inventory. Package compatibility validation uses the published
-preview.1 baseline. Strict target-framework package validation, package contents and
+with PublicApiAnalyzers. Published preview.1 and preview.2 APIs are now shipped;
+future additions stay in the unshipped inventory until publication. This release
+was validated against preview.1. Before the next implementation release, bump
+the version and set preview.2 as the package compatibility baseline. Strict target-framework package validation, package contents and
 dependency checks, isolated fresh-cache consumers and separate integration tests
 qualify the candidate. Local checks do not establish production host identity,
 approval custody, resource enforcement or cross-process admission capacity.

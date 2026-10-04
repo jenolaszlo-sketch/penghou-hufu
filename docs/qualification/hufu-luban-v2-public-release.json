@@ -1,0 +1,256 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-04",
+  "status": "published-and-public-feed-qualified",
+  "version": "0.1.0-preview.2",
+  "sourceCommit": "a08fe6453acbcb09382e0749f895bbec07465dd2",
+  "ci": {
+    "runId": 37178994425,
+    "status": "success",
+    "url": "https://github.com/jenolaszlo-sketch/penghou-hufu/actions/runs/37178994425",
+    "platforms": [
+      "windows-latest",
+      "ubuntu-latest",
+      "macos-15"
+    ]
+  },
+  "publication": {
+    "runId": 37179308135,
+    "status": "success",
+    "url": "https://github.com/jenolaszlo-sketch/penghou-hufu/actions/runs/37179308135",
+    "validationJobs": [
+      "macos-15",
+      "windows-latest",
+      "ubuntu-latest"
+    ],
+    "publishJob": "success"
+  },
+  "packages": [
+    {
+      "id": "Penghou.Hufu",
+      "version": "0.1.0-preview.2",
+      "repositoryCommit": "a08fe6453acbcb09382e0749f895bbec07465dd2",
+      "sha256": "a2a10d05a95286da49def43eb1a240f0689c19b16c5de96aa84fc3b085366a6d",
+      "dependencies": {
+        "net10.0": [],
+        "net8.0": []
+      }
+    },
+    {
+      "id": "Penghou.Hufu.Cedar",
+      "version": "0.1.0-preview.2",
+      "repositoryCommit": "a08fe6453acbcb09382e0749f895bbec07465dd2",
+      "sha256": "c5e86633a3adac736d7f9107af39ad5063ebd493c467cd149def5e09a9407797",
+      "dependencies": {
+        "net10.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.2"
+          },
+          {
+            "id": "CedarSharp",
+            "version": "[1.0.0]"
+          }
+        ],
+        "net8.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.2"
+          },
+          {
+            "id": "CedarSharp",
+            "version": "[1.0.0]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Penghou.Hufu.IO",
+      "version": "0.1.0-preview.2",
+      "repositoryCommit": "a08fe6453acbcb09382e0749f895bbec07465dd2",
+      "sha256": "2e4cbbf6fc3809044d7833984186f7f4bbbd6207c3053d715ebfa7f78f53f9b3",
+      "dependencies": {
+        "net10.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.2"
+          },
+          {
+            "id": "Penghou.IO.Abstractions",
+            "version": "[0.1.0-preview.1]"
+          },
+          {
+            "id": "Penghou.IO.Protocols",
+            "version": "[0.1.0-preview.1]"
+          }
+        ],
+        "net8.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.2"
+          },
+          {
+            "id": "Penghou.IO.Abstractions",
+            "version": "[0.1.0-preview.1]"
+          },
+          {
+            "id": "Penghou.IO.Protocols",
+            "version": "[0.1.0-preview.1]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Penghou.Hufu.Luban",
+      "version": "0.1.0-preview.2",
+      "repositoryCommit": "a08fe6453acbcb09382e0749f895bbec07465dd2",
+      "sha256": "93ef2866d0c1ace5461a224c53724a3d97c5cb789219f6840f82a058e538f238",
+      "dependencies": {
+        "net10.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.2"
+          },
+          {
+            "id": "Penghou.Luban",
+            "version": "[0.1.0-preview.1]"
+          }
+        ],
+        "net8.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.2"
+          },
+          {
+            "id": "Penghou.Luban",
+            "version": "[0.1.0-preview.1]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Penghou.Hufu.Sqlite",
+      "version": "0.1.0-preview.2",
+      "repositoryCommit": "a08fe6453acbcb09382e0749f895bbec07465dd2",
+      "sha256": "73259304377b19f00f5bae2649588a468cf6893742b91e5f934132bae8b40a46",
+      "dependencies": {
+        "net10.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.2"
+          },
+          {
+            "id": "Microsoft.Data.Sqlite",
+            "version": "[10.0.10]"
+          },
+          {
+            "id": "SQLitePCLRaw.bundle_e_sqlite3",
+            "version": "[2.1.12]"
+          }
+        ],
+        "net8.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.2"
+          },
+          {
+            "id": "Microsoft.Data.Sqlite",
+            "version": "[10.0.10]"
+          },
+          {
+            "id": "SQLitePCLRaw.bundle_e_sqlite3",
+            "version": "[2.1.12]"
+          }
+        ]
+      }
+    },
+    {
+      "id": "Penghou.Hufu.Workflow",
+      "version": "0.1.0-preview.2",
+      "repositoryCommit": "a08fe6453acbcb09382e0749f895bbec07465dd2",
+      "sha256": "20848af46853228e1e63ecb42eaa5a3ee9290846f7ef79a4fd862d28b0eb8bcb",
+      "dependencies": {
+        "net10.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.2"
+          },
+          {
+            "id": "Penghou.Workflow.Abstractions",
+            "version": "[0.1.0-preview.2]"
+          }
+        ],
+        "net8.0": [
+          {
+            "id": "Penghou.Hufu",
+            "version": "0.1.0-preview.2"
+          },
+          {
+            "id": "Penghou.Workflow.Abstractions",
+            "version": "[0.1.0-preview.2]"
+          }
+        ]
+      }
+    }
+  ],
+  "freshPublicPackageConsumer": {
+    "path": "C:\\Users\\Laszlos\\source\\repos\\Solo\\.tmp\\hufu-luban-v2\\public-preview2-consumers\\consumer-a017faeb1a9b4f7cb1e6ae93a5a6e8bf\\qualification.json",
+    "sha256": "740daa30d63a729cf049703d595c12c3f485f85f5ca721a38cd6aa0560afc725",
+    "result": {
+      "SchemaVersion": 1,
+      "PackageVersion": "0.1.0-preview.2",
+      "FreshCache": "C:\\Users\\Laszlos\\AppData\\Local\\Temp\\hfc-fa81d49297934d9d93cff1f02b7561fe",
+      "Packages": [
+        "CedarSharp/1.0.0",
+        "Microsoft.Data.Sqlite/10.0.10",
+        "Microsoft.Data.Sqlite.Core/10.0.10",
+        "Penghou.Hufu/0.1.0-preview.2",
+        "Penghou.Hufu.Cedar/0.1.0-preview.2",
+        "Penghou.Hufu.IO/0.1.0-preview.2",
+        "Penghou.Hufu.Luban/0.1.0-preview.2",
+        "Penghou.Hufu.Sqlite/0.1.0-preview.2",
+        "Penghou.Hufu.Workflow/0.1.0-preview.2",
+        "Penghou.IO.Abstractions/0.1.0-preview.1",
+        "Penghou.IO.Protocols/0.1.0-preview.1",
+        "Penghou.Luban/0.1.0-preview.1",
+        "Penghou.Workflow.Abstractions/0.1.0-preview.2",
+        "SQLitePCLRaw.bundle_e_sqlite3/2.1.12",
+        "SQLitePCLRaw.core/2.1.12",
+        "SQLitePCLRaw.lib.e_sqlite3/2.1.12",
+        "SQLitePCLRaw.provider.e_sqlite3/2.1.12"
+      ],
+      "Targets": [
+        {
+          "TargetFramework": "net8.0",
+          "RecordedDenialPassed": true,
+          "CoreAdmissionProbePassed": true,
+          "CoreIssuanceProbePassed": true,
+          "CedarExplanationCapturePassed": true,
+          "RedactedExplanationSummaryPassed": true,
+          "OptionalTelemetryIsolationPassed": true,
+          "ExplicitLubanV2ProbePassed": true
+        },
+        {
+          "TargetFramework": "net10.0",
+          "RecordedDenialPassed": true,
+          "CoreAdmissionProbePassed": true,
+          "CoreIssuanceProbePassed": true,
+          "CedarExplanationCapturePassed": true,
+          "RedactedExplanationSummaryPassed": true,
+          "OptionalTelemetryIsolationPassed": true,
+          "ExplicitLubanV2ProbePassed": true
+        }
+      ],
+      "NoProjectReferences": true,
+      "NoZhinuDependencies": true,
+      "Status": "passed"
+    }
+  },
+  "localImplementationEvidence": "luban-v2-authorization.json",
+  "limits": [
+    "Downloaded package hashes include NuGet repository signing.",
+    "Portable macOS/Linux mapping and native backend qualification do not qualify Windows Local filesystem enforcement on those platforms.",
+    "No governed mutation host, candidate-object permission or durable outcome recovery is implied.",
+    "The earlier local qualification record is preserved for its original source/files; this release record supersedes its pending CI/publication status."
+  ]
+}

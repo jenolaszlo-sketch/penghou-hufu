@@ -13,7 +13,7 @@ and publication run
 [37138352675](https://github.com/jenolaszlo-sketch/penghou-zhinu/actions/runs/37138352675)
 succeeded. WA-1/2/3, ZA-2, and ZA-6 are complete.
 
-For Hufu, HA-0A/B and HA-1 are complete. The public adapter and its host boundary are described in [workflow-authorizer.md](workflow-authorizer.md). The earlier telemetry checkpoint passed 816 tests total, 408 per framework: core 210, Biscuit 93, IO 19, legacy integration 22, Workflow 52, and workflow integration 12. The bounded request telemetry slice adds 26 cases per framework; see [profile](optional-telemetry.md) and [current qualification](qualification/optional-telemetry.json). The earlier bounded explanation slice adds 32 cases per framework; see [profile](decision-explanations.md) and [explanation qualification](qualification/decision-explanations.json). The independently reviewed core admission/issuance profiles add 73 cases per framework; see [the profile](core-admission-and-issuance.md) and [earlier core evidence](qualification/core-hardening.json). The earlier 554/700/764-case records are preserved as historical evidence. HA-2 passed fresh-cache candidate-package qualification on both frameworks; HA-3 is complete for the six published `0.1.0-preview.1` packages; [public release and three-platform CI evidence](qualification/hufu-public-release.json) records the exact source and Windows retry. The next candidate is preview.2 with explicit [Luban v2 read/diff support](luban-v2-authorization.md); no production host is shipped.
+For Hufu, HA-0A/B and HA-1 are complete. The public adapter and its host boundary are described in [workflow-authorizer.md](workflow-authorizer.md). The earlier telemetry checkpoint passed 816 tests total, 408 per framework: core 210, Biscuit 93, IO 19, legacy integration 22, Workflow 52, and workflow integration 12. The bounded request telemetry slice adds 26 cases per framework; see [profile](optional-telemetry.md) and [current qualification](qualification/optional-telemetry.json). The earlier bounded explanation slice adds 32 cases per framework; see [profile](decision-explanations.md) and [explanation qualification](qualification/decision-explanations.json). The independently reviewed core admission/issuance profiles add 73 cases per framework; see [the profile](core-admission-and-issuance.md) and [earlier core evidence](qualification/core-hardening.json). The earlier 554/700/764-case records are preserved as historical evidence. HA-2 passed fresh-cache candidate-package qualification on both frameworks; HA-3 is complete for the six published `0.1.0-preview.1` packages; [public release and three-platform CI evidence](qualification/hufu-public-release.json) records the exact source and Windows retry. Preview.2 is now published with explicit [Luban v2 read/diff support](luban-v2-authorization.md); [public release evidence](qualification/hufu-luban-v2-public-release.json) confirms exact package metadata and successful three-platform CI/publication; no production host is shipped.
 
 CI and release validation now also include `macos-15` ARM64 on .NET 8/10.
 The [release profile](package-release-profile.md#ci-platform-coverage) defines
@@ -68,8 +68,8 @@ current gates above, not that historical prompt.
 - Keep Hufu core, Cedar and Biscuit free of Zhinu dependencies. The optional workflow adapter depends on Hufu and the exact published neutral contract only; no Zhinu runtime/SQL, Luban, IO, Cedar, Biscuit or host UI dependency is allowed.
 - Preserve required aggregate decision evidence, trusted host binding, typed approval outcomes, fail-closed behavior and fresh authorization for each retry or resumed dispatch. Historical permits do not authorize a new dispatch.
 - Keep resource access authorization separate from workflow preflight. Existing resource/Luban/Biscuit profiles remain independently governed.
-- Biscuit remains experimental and unpublished, with its pinned artifact outside the Hufu release set. Luban v2 read/diff is implemented in the next candidate; the single-patch host journal remains deferred. No production workflow host is included in this release.
-- HA-2 package-backed qualification passed locally on both frameworks. HA-3 initial publication is complete. Preview.2 requires fresh CI and user-controlled publication; local tests do not publish a package.
+- Biscuit remains experimental and unpublished, with its pinned artifact outside the Hufu release set. Luban v2 read/diff is published in preview.2; the single-patch host journal remains deferred. No production workflow host is included in this release.
+- HA-2 package-backed qualification passed locally on both frameworks. HA-3 initial publication is complete. Preview.2 three-platform CI and user-controlled publication are complete; future releases require their own qualification.
 
 ## Core checkpoint and next independent work
 
@@ -79,7 +79,8 @@ integration dependency. Preserve active-capacity accounting through caller
 cancellation, exact command approval and fresh issuer/approval reload after
 operation policy. CI now runs the portable core security subset on Linux and macOS as
 well as the Windows full suite. Initial three-platform qualification is
-recorded in public release evidence; preview.2 still requires fresh remote CI.
+recorded in public release evidence. Preview.2 also passed all three CI and
+publication-validation jobs at `a08fe64`; its six public packages are qualified.
 
 The bounded typed-path explanation profile is implemented and locally qualified,
 with exact capture and separately authenticated/redacted disclosure. Preserve
@@ -93,22 +94,21 @@ and outcome journal are still held in separate qualified deliveries. Do not
 bulk-install the old completion snapshot or infer authenticated services from
 the new interface types.
 
-## Ready-to-use preview.2 resume prompt
+## Ready-to-use post-publication resume prompt
 
-> Initial HA-0A/B, HA-1, HA-2 and HA-3 are complete. All six Hufu preview.1
-> packages are published; public release evidence records their exact source and
-> three-platform CI. Read luban-v2-authorization.md and its qualification record,
-> then package-release-profile.md, the roadmap and completion review. The explicit
-> ReadAndDiffV2 adapter is the preview.2 candidate; existing v1 constructors and
-> decision digest bytes remain unchanged. Preserve exact input scopes, current
-> state and mandatory evidence, the narrow identity-free target-admission shape,
-> and the documented lack of result-object binding. Candidate regression qualifies
-> 882 distinct cases across .NET 8/10 (full 880-case run plus revalidated final core
-> with the new admission-revocation case). Package-only workflow integration still
-> uses published Zhinu. Review/commit/push this delivery, verify all three CI jobs,
-> then the user runs input-free main publication. Never dispatch publication on
-> the user's behalf or treat read/diff as mutation permission. The next independent
-> work is the governed single-patch host/outcome journal; review its exact locked
-> object start and recovery gates before implementing it. Do not bulk-install the
-> older staging candidates, add an engine dependency to Hufu.Workflow, or replace
-> the legacy atomic-start profile without separate effect-boundary qualification.
+> Initial HA-0A/B, HA-1, HA-2 and HA-3 and LUBAN-V2-READ-DIFF/RELEASE are complete.
+> All six Hufu preview.2 packages are published and indexed. Read
+> qualification/hufu-luban-v2-public-release.json for source a08fe64, successful
+> three-platform CI/publication and fresh public-package consumers; the earlier
+> local proof remains historical. Read luban-v2-authorization.md, the roadmap,
+> completion review and package release profile. Preserve v1 defaults, exact
+> v2 input scopes, current state, mandatory evidence and callback evidence limits.
+> The next independent delivery is HOST-PATCH: review the single-patch host/outcome
+> journal proposal against actual locked-object start, revocation ordering,
+> mandatory durable evidence, outcome recovery and ambiguous-result handling.
+> Do not infer mutation permission or candidate-object authorization from read/diff.
+> Keep semantic admission separate from concrete resource checks. Never bulk-install
+> older staging candidates, add a workflow-engine dependency to Hufu.Workflow,
+> or replace the frozen legacy atomic-start profile without boundary qualification.
+> Before changing released implementation, choose a new package version and use
+> preview.2 as the compatibility baseline. Publication remains user-controlled.
