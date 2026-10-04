@@ -41,7 +41,18 @@ internal sealed class BiscuitIntegrationFixture : IDisposable, IBiscuitAuthority
     internal BiscuitIntegrationFixture()
     {
         Directory.CreateDirectory(_directory);
-        DatabasePath = Path.Combine(_directory,"authority.db");
+        var configuredPath = Path.Combine(_directory,"authority.db");
+        // Bind the registry to SQLite's physical filename. macOS temp paths can
+        // use a symlink spelling, which is not the strict physical-path contract.
+        using (var connection = new SqliteConnection(new SqliteConnectionStringBuilder
+            { DataSource = configuredPath, Pooling = false }.ToString()))
+        {
+            connection.Open();
+            using var command = connection.CreateCommand();
+            command.CommandText = "SELECT file FROM pragma_database_list WHERE name='main'";
+            DatabasePath = Assert.IsType<string>(command.ExecuteScalar());
+            Assert.True(Path.IsPathFullyQualified(DatabasePath));
+        }
         Keys.AddSigningKey(Realm,"key-1",BiscuitPrivateKey.Generate());
         Store = new(this,this);
         Registry = new(this,DatabasePath,this);
@@ -73,17 +84,6 @@ internal sealed class BiscuitIntegrationFixture : IDisposable, IBiscuitAuthority
         new(Context,action,"workspace",path,Guid.NewGuid().ToString("N"));
     internal async Task<BiscuitEnvelope> IssueAsync()
     {
-        var current = await Store.ReadCurrentAsync(Actor, Context);
-        if (current.Status != AuthorityReadStatus.Active)
-        {
-            using var connection = await OpenAsync();
-            using var command = connection.CreateCommand();
-            command.CommandText = "PRAGMA database_list";
-            using var reader = await command.ExecuteReaderAsync();
-            var databases = new List<string>();
-            while (await reader.ReadAsync()) databases.Add(reader.GetString(1) + "=" + reader.GetString(2));
-            Assert.Fail($"Current authority fixture status={current.Status}; configured={DatabasePath}; source={connection.DataSource}; databases={string.Join(';', databases)}; now={Clock.GetUtcNow():O}");
-        }
         var result = await Service.IssueAsync(new(Context,"workflow","grant"));
         Assert.True(result.IsSuccess,result.FailureCode.ToString());
         return result.Envelope!;
