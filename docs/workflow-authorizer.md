@@ -53,6 +53,7 @@ capability vocabulary maps directly to Hufu actions:
 | `patch-file` | `PatchFile` |
 | `release` | `Release` |
 | `write-file` | `WriteFile` |
+| `process.execute` | `ExecuteProcess` |
 
 Empty declarations, unknown schemas/versions/capabilities and unscoped
 requirements return a recorded denial before activating the binding source.

@@ -1,1 +1,2 @@
 #nullable enable
+Penghou.Hufu.AuthorityAction.ExecuteProcess = 6 -> Penghou.Hufu.AuthorityAction

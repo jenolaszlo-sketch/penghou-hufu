@@ -4,7 +4,10 @@ using System.Text;
 namespace Penghou.Hufu;
 
 // Append new actions to preserve the persisted numeric values of existing actions.
-public enum AuthorityAction { ReadFile, ListDirectory, ReadMetadata, PatchFile, Release, WriteFile }
+// ExecuteProcess authorizes starting a process whose executable is the request's
+// scoped resource (workspace + canonical relative path). It does not by itself
+// contain the process; the host selects and records an external execution provider.
+public enum AuthorityAction { ReadFile, ListDirectory, ReadMetadata, PatchFile, Release, WriteFile, ExecuteProcess }
 public enum AuthorityScopeKind { Exact, Subtree }
 public enum AuthorityStatus { Unavailable, Deny, Permit }
 public sealed record AuthenticatedAuthorityContext(string TenantId, string SubjectId, string RunId,
@@ -45,7 +48,7 @@ public sealed class AuthoritySnapshot
             {
                 var grant = layer.Grants[i];
                 if (grant is null || !AuthorityValidation.ValidToken(grant.Id) || !grantIds.Add(grant.Id) ||
-                    grant.Actions is null || grant.Actions.Count is < 1 or > 6 || grant.Exclusions is null ||
+                    grant.Actions is null || grant.Actions.Count is < 1 || grant.Actions.Count > AuthorityValidation.KnownActionCount || grant.Exclusions is null ||
                     grant.Exclusions.Count > 128 - exclusionCount || grant.NotBefore >= grant.ExpiresAt)
                     throw new ArgumentException("Invalid or excessive grant.");
                 grantCount++; exclusionCount += grant.Exclusions.Count;
@@ -143,6 +146,8 @@ public interface IAuthorityDecisionRecorder
 public static class AuthorityValidation
 {
     internal static readonly UTF8Encoding StrictUtf8 = new(false, true);
+    /// <summary>Distinct AuthorityAction values; a grant may carry at most one of each.</summary>
+    internal static int KnownActionCount { get; } = Enum.GetValues<AuthorityAction>().Length;
     public static bool ValidToken(string? value)
     {
         if (string.IsNullOrWhiteSpace(value) || value.Length > 256 || value.Any(char.IsControl)) return false;

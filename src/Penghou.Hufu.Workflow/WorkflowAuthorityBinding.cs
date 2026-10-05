@@ -21,6 +21,7 @@ public static class WorkflowAuthorityRequirements
             "patch-file" => AuthorityAction.PatchFile,
             "release" => AuthorityAction.Release,
             "write-file" => AuthorityAction.WriteFile,
+            "process.execute" => AuthorityAction.ExecuteProcess,
             _ => (AuthorityAction)(-1)
         };
         return requirement.SchemaId == SchemaId && requirement.SchemaVersion == SchemaVersion &&

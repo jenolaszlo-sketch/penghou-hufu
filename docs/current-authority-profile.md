@@ -63,8 +63,7 @@ overridden by any grant. They apply to all six current actions.
   Neither an old permit nor successful preflight is a capability
   for subsequent I/O.
 
-The action set is ReadFile, ListDirectory, ReadMetadata, PatchFile, Release, and
-WriteFile. PatchFile is available for policy evaluation only: this integration
+The action set is ReadFile, ListDirectory, ReadMetadata, PatchFile, Release, WriteFile, and ExecuteProcess. ExecuteProcess authorizes starting a process whose executable is the request's scoped resource; the host selects and records an external execution provider (e.g. Penghou.Hufu.Sandbox over Gagamba) and no confinement is implied by the action alone. PatchFile is available for policy evaluation only: this integration
 does not admit or execute patches. WriteFile is reserved for the optional Hufu.IO
 conditional byte-write profile; it does not imply PatchFile authority or operation
 start ordering.
@@ -81,7 +80,7 @@ Unicode case aliases and DOS short names fail closed. This is not confinement.
 
 Snapshots defensively copy caller collections. Current ceilings are eight
 layers, 128 grants and 128 exclusions across the snapshot, 128 mandatory denials,
-six distinct actions per grant, 16 path segments, 512 UTF-16 path code units /
+seven distinct actions per grant, 16 path segments, 512 UTF-16 path code units /
 2048 UTF-8 bytes, and a one MiB canonical snapshot encoding. Tokens are at most
 256 UTF-16 code units / 1024 UTF-8 bytes. A rejected bound does not widen scope.
 

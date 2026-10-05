@@ -58,6 +58,7 @@ public sealed class CedarAuthorityEvaluator : IAuthorityEvaluator
           action PatchFile appliesTo { principal: [Subject], resource: [Resource], context: {} };
           action Release appliesTo { principal: [Subject], resource: [Resource], context: {} };
           action WriteFile appliesTo { principal: [Subject], resource: [Resource], context: {} };
+          action ExecuteProcess appliesTo { principal: [Subject], resource: [Resource], context: {} };
         }
         """;
     private static readonly CedarSchema Schema = CedarSchema.FromText(SchemaText);
@@ -314,6 +315,7 @@ public sealed class CedarAuthorityEvaluator : IAuthorityEvaluator
         AuthorityAction.PatchFile => "PatchFile",
         AuthorityAction.Release => "Release",
         AuthorityAction.WriteFile => "WriteFile",
+        AuthorityAction.ExecuteProcess => "ExecuteProcess",
         _ => throw new ArgumentOutOfRangeException(nameof(action))
     });
 

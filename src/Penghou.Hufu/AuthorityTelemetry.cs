@@ -132,7 +132,8 @@ public sealed class AuthorityTelemetry : IDisposable
     {
         AuthorityAction.ReadFile => "read_file", AuthorityAction.ListDirectory => "list_directory",
         AuthorityAction.ReadMetadata => "read_metadata", AuthorityAction.PatchFile => "patch_file",
-        AuthorityAction.Release => "release", AuthorityAction.WriteFile => "write_file", _ => "unknown"
+        AuthorityAction.Release => "release", AuthorityAction.WriteFile => "write_file",
+        AuthorityAction.ExecuteProcess => "execute_process", _ => "unknown"
     };
     private static string OutcomeName(Outcome outcome) => outcome switch
     {
