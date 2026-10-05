@@ -54,8 +54,9 @@ $report = foreach ($id in $dependencies.Keys | Sort-Object) {
             if ($null -eq $symbolArchive.GetEntry("lib/$tfm/$id.pdb")) { throw "Missing symbol PDB: $id/$tfm" }
         }
     } finally { $symbolArchive.Dispose() }
+    & (Join-Path $PSScriptRoot 'Verify-HufuPackageSymbols.ps1') -PackagePath $package -SymbolPath $symbol | Out-Null
     [ordered]@{ Id=$id; Version=$Version; Sha256=(Get-FileHash -LiteralPath $package -Algorithm SHA256).Hash; SymbolSha256=(Get-FileHash -LiteralPath $symbol -Algorithm SHA256).Hash }
 }
-ConvertTo-Json -InputObject ([ordered]@{SchemaVersion=1;Packages=@($report);NoZhinuDependencies=$true;Status='passed'}) -Depth 8 |
+ConvertTo-Json -InputObject ([ordered]@{SchemaVersion=1;Packages=@($report);NoZhinuDependencies=$true;PortableSymbolsMatchAssemblies=$true;Status='passed'}) -Depth 8 |
     Set-Content -LiteralPath (Join-Path $directory 'package-inspection.json')
 Write-Output 'Seven package/symbol pairs, target frameworks and exact dependency inventories verified.'

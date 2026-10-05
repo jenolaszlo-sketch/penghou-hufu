@@ -25,3 +25,4 @@ foreach ($id in @('Penghou.Hufu','Penghou.Hufu.Cedar','Penghou.Hufu.IO','Penghou
     if ($LASTEXITCODE -ne 0) { throw "Pack failed: $id" }
 }
 & (Join-Path $PSScriptRoot 'Verify-HufuPackageSet.ps1') -PackageDirectory $output -Version $Version
+& (Join-Path $PSScriptRoot 'Test-HufuSymbolValidation.ps1') -PackageDirectory $output -Version $Version

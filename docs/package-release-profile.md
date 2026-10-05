@@ -110,8 +110,9 @@ the primary package and the workflow uploaded the same symbols a second time.
 The remaining five packages were not reached.
 
 Primary uploads now use `--no-symbols`; each symbol package is uploaded explicitly
-once, after its hash check. Both uploads use `--skip-duplicate` for retryable 409
-responses. Other failures still fail publication.
+once, after its hash check. Symbols use `--skip-duplicate` for retryable 409 responses. Existing primary
+packages are skipped only after exact public-content verification; an unexpected
+primary-package collision fails before symbols are sent.
 
 For `0.1.0-preview.1`, an input-free main dispatch downloads the original six-package
 artifact from that pinned run/source `3023ddb3fb9d50e01db9a8887f15f02e90cde209`
@@ -120,3 +121,36 @@ Recovery cannot replace the already-published core or pair it with rebuilt symbo
 The artifact must remain available; recovery fails if it has expired. Future versions
 use their own current, validated artifacts. Increment the version before changing
 released code; the preview.1 recovery deliberately stays on its original release.
+
+## Preview.3 symbols recovery (2026-10-05)
+
+The first preview.3 publication, run 37197831939 at `3206c44`, is the immutable
+release. A later dispatch at `cabb1c9` rebuilt preview.3, skipped the existing
+primary packages and uploaded different PDBs. NuGet subsequently rejected the
+symbols because their identities did not match the original DLLs. Successful
+CLI upload does not establish asynchronous symbol-server validation success.
+
+The original seven package/symbol pairs are still available as
+`release-packages-3206c4447add6ef0821fb70f118b638598d9aac0` in
+[the original publication](https://github.com/jenolaszlo-sketch/penghou-hufu/actions/runs/37197831939).
+All seven original package contents match the public NuGet packages, excluding
+NuGet's signature entry. All 14 original portable PDB identities and SHA-256
+checksums match those DLLs. The later rebuilt core symbols reproduce the rejection
+against the public DLLs.
+
+An input-free **Publish to NuGet** dispatch from `main` now recovers the original
+preview.3 artifact, requalifies it, compares its entries to public NuGet, skips
+the already-published primary packages and uploads only their original matching
+symbols. The user controls this dispatch. No version bump or package-code change
+is required for restoring those symbols. If original artifacts expire, fail closed;
+use a newly qualified version rather than guess or rebuild old symbols.
+
+`Verify-HufuPackageSymbols.ps1` checks every PDB against its DLL's CodeView
+identity and portable PDB checksum, and rejects extra or missing PDBs.
+`Test-HufuSymbolValidation.ps1` exercises correct, swapped-framework, extra, missing and
+altered PDB fixtures during release packing. `Verify-HufuPublishedPackages.ps1`
+checks immutable public contents and validates symbols against public DLLs before
+any upload. Publication is serialized, and primary-package conflicts do not use
+`--skip-duplicate` to proceed with unverified symbols. Future changed release
+contents still need a new version. This tooling change does not claim NuGet has
+accepted the recovered symbols; confirm its asynchronous validation after dispatch.

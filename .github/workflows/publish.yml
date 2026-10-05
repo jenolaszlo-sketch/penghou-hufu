@@ -4,6 +4,9 @@ on:
 permissions:
   contents: read
   actions: read
+concurrency:
+  group: hufu-nuget-publication
+  cancel-in-progress: false
 jobs:
   validate:
     strategy:
@@ -110,7 +113,7 @@ jobs:
         with:
           name: release-packages-${{ github.sha }}
           path: artifacts/packages
-      - name: Select immutable initial-release recovery
+      - name: Select immutable release recovery
         id: release
         shell: pwsh
         run: |
@@ -118,23 +121,40 @@ jobs:
           if ($report.Status -ne 'passed' -or $report.Packages.Count -ne 7) { throw 'Invalid package qualification manifest.' }
           $versions = @($report.Packages.Version | Select-Object -Unique)
           if ($versions.Count -ne 1) { throw 'Release versions must agree.' }
-          $recover = if ($versions[0] -eq '0.1.0-preview.1') { 'true' } else { 'false' }
+          $originals = @{
+            '0.1.0-preview.1' = @{ Run = '37171589215'; Artifact = 'release-packages-3023ddb3fb9d50e01db9a8887f15f02e90cde209' }
+            '0.1.0-preview.3' = @{ Run = '37197831939'; Artifact = 'release-packages-3206c4447add6ef0821fb70f118b638598d9aac0' }
+          }
+          $recover = if ($originals.ContainsKey($versions[0])) { 'true' } else { 'false' }
           "recover=$recover" >> $env:GITHUB_OUTPUT
-      - name: Recover original partially published release bytes
+          "version=$($versions[0])" >> $env:GITHUB_OUTPUT
+          if ($recover -eq 'true') {
+            "run=$($originals[$versions[0]].Run)" >> $env:GITHUB_OUTPUT
+            "artifact=$($originals[$versions[0]].Artifact)" >> $env:GITHUB_OUTPUT
+          }
+      - name: Recover original published release bytes
         if: steps.release.outputs.recover == 'true'
         uses: actions/download-artifact@v4
         with:
           github-token: ${{ github.token }}
-          run-id: 37171589215
-          name: release-packages-3023ddb3fb9d50e01db9a8887f15f02e90cde209
+          run-id: ${{ steps.release.outputs.run }}
+          name: ${{ steps.release.outputs.artifact }}
           path: artifacts/packages
       - name: Requalify recovered package bytes
         if: steps.release.outputs.recover == 'true'
         shell: pwsh
         run: |
-          ./eng/Verify-HufuPackageSet.ps1 -PackageDirectory artifacts/packages -Version 0.1.0-preview.1
-          ./eng/Test-HufuPackageConsumers.ps1 -PackageDirectory artifacts/packages -Version 0.1.0-preview.1
-          ./eng/Test-PackagedWorkflowIntegration.ps1 -PackageDirectory artifacts/packages -Version 0.1.0-preview.1
+          $version = '${{ steps.release.outputs.version }}'
+          ./eng/Verify-HufuPackageSet.ps1 -PackageDirectory artifacts/packages -Version $version
+          ./eng/Test-HufuSymbolValidation.ps1 -PackageDirectory artifacts/packages -Version $version
+          ./eng/Test-HufuPackageConsumers.ps1 -PackageDirectory artifacts/packages -Version $version
+          ./eng/Test-PackagedWorkflowIntegration.ps1 -PackageDirectory artifacts/packages -Version $version
+          if ($version -ne '0.1.0-preview.1') { ./eng/Test-PackagedPatchIntegration.ps1 -PackageDirectory artifacts/packages -Version $version }
+      - name: Verify immutable public packages before any upload
+        shell: pwsh
+        run: |
+          ./eng/Verify-HufuPublishedPackages.ps1 -PackageDirectory artifacts/packages |
+            ConvertTo-Json -Depth 8 | Set-Content artifacts/packages/public-package-inspection.json
       - name: Require repository publishing identity
         shell: pwsh
         env:
@@ -154,13 +174,17 @@ jobs:
           $report = Get-Content artifacts/packages/package-inspection.json -Raw | ConvertFrom-Json
           $expectedCount = if (@($report.Packages.Version | Select-Object -Unique) -eq '0.1.0-preview.1') { 6 } else { 7 }
           if ($report.Status -ne 'passed' -or $report.Packages.Count -ne $expectedCount) { throw 'Invalid package qualification manifest.' }
+          $public = Get-Content artifacts/packages/public-package-inspection.json -Raw | ConvertFrom-Json
+          if ($public.Status -ne 'passed') { throw 'Immutable public package checks did not pass.' }
           foreach ($package in $report.Packages) {
-            foreach ($extension in @('nupkg','snupkg')) {
+            $extensions = if ($package.Id -in @($public.ExistingPackages)) { @('snupkg') } else { @('nupkg','snupkg') }
+            foreach ($extension in $extensions) {
               $path = "artifacts/packages/$($package.Id).$($package.Version).$extension"
               $expected = if ($extension -eq 'nupkg') { $package.Sha256 } else { $package.SymbolSha256 }
               if ((Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash -cne $expected) { throw "Validated artifact hash changed: $path" }
-              $pushOptions = @('--skip-duplicate')
-              if ($extension -eq 'nupkg') { $pushOptions += '--no-symbols' }
+              # A primary-package collision must fail before symbols are sent.
+              # Existing releases are skipped only after public-byte verification above.
+              $pushOptions = if ($extension -eq 'nupkg') { @('--no-symbols') } else { @('--skip-duplicate') }
               dotnet nuget push $path --source https://api.nuget.org/v3/index.json --api-key $env:NUGET_API_KEY @pushOptions
               if ($LASTEXITCODE -ne 0) { throw "Publication failed: $path" }
             }

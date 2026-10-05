@@ -1,0 +1,73 @@
+{
+  "schemaVersion": 1,
+  "date": "2026-10-05",
+  "status": "original-matching-symbols-prepared-not-reuploaded",
+  "version": "0.1.0-preview.3",
+  "originalSourceCommit": "3206c4447add6ef0821fb70f118b638598d9aac0",
+  "originalPublicationRun": 37197831939,
+  "rebuiltSourceCommit": "cabb1c9ae667cbbc8f021e7bddb15c6203b92c53",
+  "rebuiltPublicationRun": 37207705221,
+  "cause": "Repeated immutable version with rebuilt DLL/PDB identities: primary packages remained original, later symbols did not match",
+  "originalPublicPackageContentsMatch": true,
+  "matchedPackages": 7,
+  "matchedPortablePdbs": 14,
+  "symbolIdentityAndChecksumVerified": true,
+  "sameVersionRebuildRejectedBeforeUpload": true,
+  "adversarialSymbolFixtures": [
+    "wrong-framework",
+    "extra-pdb",
+    "missing-pdb",
+    "altered-pdb"
+  ],
+  "recoveredStandaloneConsumers": [
+    "net8.0",
+    "net10.0"
+  ],
+  "recoveryArchiveSha256": "6EBDC7EAE2D28E35CD307D816AA461F9C2DC3E03B3C15FDC08CC0B9BA019CA71",
+  "packages": [
+    {
+      "Id": "Penghou.Hufu",
+      "Version": "0.1.0-preview.3",
+      "Sha256": "178EF61F5950792ED7B01B1A049FC56C65F7240563418B2504BB99FF5744BAEC",
+      "SymbolSha256": "D4DFBD52FB225F600357CF7F8849388BE2E7530B4F410A2BC3B76E6A54C5668E"
+    },
+    {
+      "Id": "Penghou.Hufu.Cedar",
+      "Version": "0.1.0-preview.3",
+      "Sha256": "7094704EE32845ECFE4AAB6EC5A219FEBE7B52273A376E5E361B68C010FDAF7D",
+      "SymbolSha256": "863BD8595A5A7B7C02E651A6CD28C8A5A3104839B3721B56638D86D558FE7A1D"
+    },
+    {
+      "Id": "Penghou.Hufu.IO",
+      "Version": "0.1.0-preview.3",
+      "Sha256": "62964357DC1F367CF91F5A9EAC9C055DF60BDEB0AAA3536C03F7D3E819A4DCD5",
+      "SymbolSha256": "9E729898CFB1D9E44A14AD2BE3640A3F03E104BFE062618894E33EFCC5C61161"
+    },
+    {
+      "Id": "Penghou.Hufu.Luban",
+      "Version": "0.1.0-preview.3",
+      "Sha256": "A7DECAC856C2DC9A4428760791229BBF2AC8BF74D456F41A72AC7EA7565FC8AA",
+      "SymbolSha256": "A48A5545F7CC97A3C114087B6D004B0FA938D52E7F6AE95FB2F0F667E1BC0065"
+    },
+    {
+      "Id": "Penghou.Hufu.Luban.Sqlite",
+      "Version": "0.1.0-preview.3",
+      "Sha256": "8FF1136AA6C6E9DC0F71E6E3F5159E4CFACEF89D2B248763CB2008801858C9DA",
+      "SymbolSha256": "5BB5E9AA8C972666822C7A1A8B376FCE410CBBBA877DCF178DFCE988D1E913F3"
+    },
+    {
+      "Id": "Penghou.Hufu.Sqlite",
+      "Version": "0.1.0-preview.3",
+      "Sha256": "59AE3C21AD430B8024B64C5A6D96970F95B7DF0477DA6AC50913D33BA4521206",
+      "SymbolSha256": "BD9F0780139573DB4F340D60B671FBBD7EA1D6201D0CB79980BC54E50C909E99"
+    },
+    {
+      "Id": "Penghou.Hufu.Workflow",
+      "Version": "0.1.0-preview.3",
+      "Sha256": "C9B68FC31B4C981C8DACC1CBBF0C2D01F9BA3DF8F716DA355480958987F3DA88",
+      "SymbolSha256": "A43FB4B848CB286F7EF9EB153043F5641729CA908312A1A5753AB29CD0092537"
+    }
+  ],
+  "nextAction": "User dispatches Publish to NuGet from main; workflow recovers original artifacts and submits only matching symbols for existing packages",
+  "symbolServerValidation": "pending re-upload and asynchronous NuGet validation"
+}
