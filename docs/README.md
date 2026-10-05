@@ -32,7 +32,7 @@ Hufu is a reusable authority library and store boundary. Seven preview.3 package
 | [ADR 0004](decisions/0004-typed-effects-over-sandbox.md) | LOP typed effects; no owned sandbox; refines ADR 0003 | Direction selected; implementation pending |
 | [ADR 0005](decisions/0005-luban-owns-typed-effects.md) | Separate Penghou.Luban ownership and documentation migration | Name/boundary selected; runtime integration pending |
 | [Luban integration](luban-integration.md) | Hufu authority mapping, admission/start boundary, evidence and joint gates | Read authorizer and separate runtime start prototype; governed mutation host pending |
-| [Authority-mediated execution (HG-1)](sandbox-execution.md) | Adapter joining Hufu authority (ExecuteProcess) to an external execution provider (Gagamba) | Implementation slice; not qualified or published |
+| [Authority-mediated execution (HG-1)](sandbox-execution.md) | Adapter joining Hufu authority (ExecuteProcess) to an external execution provider (Gagamba) | HG-1 frozen (tag `arch-hg-1`); not qualified or published |
 | [Typed effect runtime](../../Penghou.Luban/docs/typed-effect-runtime.md) | Luban's canonical catalogue, modes, providers, replay and conformance design | Moved to Luban; old Hufu path forwards |
 | [Local-first runtime design](local-first-authority-runtime.md) | Store/lineage, deterministic analysis, execution contracts, brokers, credentials, evidence, and conformance | Broad design remains proposed; see the limited current-authority prototype above |
 | [Authority specification](workflow-authority-spec.md) | Security invariants, behavior, UX, and acceptance gates | Normative design; only a narrow prototype is implemented |

@@ -1,9 +1,10 @@
 # Authority-mediated execution (HG-1)
 
-Status: implementation slice, 2026-10-05. `Penghou.Hufu.Sandbox` joins Hufu
-authority to an external execution provider (Gagamba). Not qualified, not
-published, and not a security boundary. This names the seam and its limits; the
-authority profile and validation baseline remain separate review gates.
+Status: implementation slice, 2026-10-05. HG-1 is frozen (tag `arch-hg-1`);
+`Penghou.Hufu.Sandbox` joins Hufu authority to an external execution provider
+(Gagamba). Not qualified, not published, and not a security boundary. This
+names the seam and its limits; the authority profile and validation baseline
+remain separate review gates.
 
 ## What was added to Hufu core
 
@@ -140,6 +141,13 @@ The adapter references the amended `Gagamba.Runtime` preview that carries
 `Discard`; the first published preview predates the amendment.
 
 ## Next
+
+**HZ-1 (workflow-authorized execution)** is the next pressure: a durable
+workflow activity consumes this adapter so activity identity, authority
+revision and profile revision survive orchestration, retries, cancellation and
+recovery — proving fresh authority per retry, workflow-cancellation and
+independent-revocation termination, and recovery that neither resurrects an
+authorization nor reuses a consumed preparation. It adds no sandbox capability.
 
 HG-2 (filesystem authority broker), HG-3 (process/tool authority), HG-4
 (network/outbound HTTP authority) follow only when a real consumer needs them.
