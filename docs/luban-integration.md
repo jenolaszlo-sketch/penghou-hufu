@@ -1,5 +1,12 @@
 # Hufu and Penghou.Luban integration
 
+> Update 2026-10-06: Penghou.Luban is deferred/parked per
+> [Fuwen ADR 0012](../../Penghou.Fuwen/docs/decisions/0012-defer-luban-decouple-hufu-from-command-language.md).
+> Implemented read/read-diff/single-patch profiles below are preserved as
+> historical evidence. No new Hufu work may depend on Luban syntax; future
+> authority work binds neutral execution abstractions, with native execution
+> delegated to Gagamba.
+
 Architecture update: [resource abstractions](../../Penghou/docs/resource-abstractions-architecture.md)
 and [RA-1/RA-4 roadmap](roadmap.md) distinguish Hufu.Luban semantic admission from
 a future optional Hufu.IO resource boundary. The current prototype below is not

@@ -1,5 +1,28 @@
 # Hufu implementation roadmap
 
+## Architecture amendment — Luban deferred, Hufu stays language-neutral - 2026-10-06
+
+Penghou.Luban is **deferred/parked** and is not on the critical path. See
+[Fuwen ADR 0012](../../Penghou.Fuwen/docs/decisions/0012-defer-luban-decouple-hufu-from-command-language.md):
+safe execution comes from explicit authority, semantic operations, and
+contained native execution (Hufu + Gagamba), not from a constrained language.
+
+What this means for this roadmap:
+
+- Completed Luban checkpoints below (Hufu.Luban read authorizer, v2 read/diff,
+  single-patch host) are preserved as historical evidence. Nothing shipped is
+  rewritten.
+- No new Hufu work may depend on Luban syntax, commands, cmdlets, or language
+  semantics. Hufu authorizes neutral execution requests and resolved resource
+  operations (`filesystem.read`, `http.request`, `process.execute`, ...).
+- Native process execution stays first-class: Hufu authorizes it, Gagamba
+  contains it. Luban is never a required layer between Hufu and execution.
+- A future Luban MAY return as a frontend producing the same neutral execution
+  requests. Re-entry only on concrete observed pressure per the ADR.
+- Forward-looking Luban-coupled bullets below are marked **parked** and do not
+  block Hufu, Fuwen, Zhinu, Gagamba, Baize, adapter, sandbox, debugger, or
+  audit work.
+
 ## Governed single-patch release checkpoint - 2026-10-04
 
 The optional seventh package `Penghou.Hufu.Luban.Sqlite` connects the real
@@ -207,7 +230,7 @@ the preview.1 and explicit v2 releases are described above. Source
 switches remain available for development. Default v1 constructors still reject
 v2 before authority access. See the [current completion review](completion-review.md) for open work.
 
-## Earlier Luban API consumer qualification — 2026-10-03
+## Earlier Luban API consumer qualification — 2026-10-03 (historical; no follow-up while Luban is parked)
 
 The final Luban API candidate is qualified through an exact PackageReference:
 101 Hufu tests pass per framework with a fresh package cache and no Luban source
@@ -267,7 +290,8 @@ and lineage contracts, deterministic explanations, execution requirements, and
 one local filesystem broker. [ADR 0004](decisions/0004-typed-effects-over-sandbox.md)
 selects LOP. [ADR 0005](decisions/0005-luban-owns-typed-effects.md) establishes
 [Penghou.Luban](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/README.md) as the separate effect-runtime
-owner. Its [roadmap](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/ROADMAP.md) and
+owner. **Update 2026-10-06: Luban is deferred/parked per the amendment above;**
+no new Hufu work depends on it. Its [roadmap](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/ROADMAP.md) and
 [implementation plan](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/docs/implementation-plan.md) own
 effect-provider delivery, while Penghou owns shared resource I/O providers.
 Hufu tracks [authority integration](luban-integration.md).
@@ -317,8 +341,8 @@ are not a substitute for these production integration gates. See the
 - [x] Implement the bounded exact-operation typed-path explanation and separately authorized projections; see [profile](decision-explanations.md).
 - [ ] Extend explanations to authenticated lineage, missing execution requirements and historical reconstruction with retained pinned evidence.
 - [ ] Design decision/start/receipt evidence identities and failure semantics together with store and broker contracts.
-- [ ] Review Luban's neutral descriptor/provider contract and define Hufu's trusted authority mapping, version bindings, and integration adapter; keep workflow-specific IDs outside both cores.
-- [ ] Implement a Hufu-backed replacement for Luban's required neutral effect checker after Hufu's authority contracts exist; bind exact invocation and recheck every traversed resource, not just a root grant.
+- [ ] Review Luban's neutral descriptor/provider contract and define Hufu's trusted authority mapping, version bindings, and integration adapter; keep workflow-specific IDs outside both cores. **Parked 2026-10-06 (Luban deferred): no new Luban coupling; Hufu proceeds on neutral execution abstractions.**
+- [ ] Implement a Hufu-backed replacement for Luban's required neutral effect checker after Hufu's authority contracts exist; bind exact invocation and recheck every traversed resource, not just a root grant. **Parked 2026-10-06 (Luban deferred).**
 - [ ] Define StrictEffects default composition and explicit ApprovedTools boundaries; unknown effects and shell/process payloads reject without fallback.
 
 Gate: deterministic evaluator tests plus a real host/broker consumer; no arbitrary-process security claims.
@@ -348,7 +372,7 @@ Gate: durable state never widens authority on replay; inspectable provenance and
 
 ## M3: complete protected-operation boundary
 
-- [ ] Integrate Luban's planned authorized preview resolution and immutable ResolvedEffectPlan under [ADR 0007](decisions/0007-preview-resolution-commit-barrier.md), distinct from static preflight and effect-free policy simulation.
+- [ ] Integrate Luban's planned authorized preview resolution and immutable ResolvedEffectPlan under [ADR 0007](decisions/0007-preview-resolution-commit-barrier.md), distinct from static preflight and effect-free policy simulation. **Parked 2026-10-06 (Luban deferred).**
 - [ ] Admit the complete known mutation set before the executor commit barrier; pin exact targets, payloads, versions, dependencies and coverage. Prove any known denied mutation or required incomplete coverage gives zero proposed writes, with no partial-grant prefix or silent lazy downgrade.
 - [ ] Prove WhatIf never invokes requested mutations or opaque/lazy tools, frozen manifests cannot expand at commit, and changed observations or state-dependent later segments require new resolution/admission.
 - [ ] Revalidate authority/revision/fence and available batch preconditions at the barrier, then every actual I/O. Qualify restart and post-start partial/ambiguous outcomes without claiming a multi-file transaction.
@@ -357,12 +381,12 @@ Gate: durable state never widens authority on replay; inspectable provenance and
 - [ ] Preflight complete pipelines against known targets/authority before upstream work; test denied downstream writes block early and stale previews never bypass final revocation/resource checks. Bound and cancel intermediate production for dynamic targets.
 
 - [ ] Integrate one trusted resource broker with authenticated execution context and final I/O checks.
-- [ ] Integrate Luban's qualified Read/Find/SearchText/ApplyPatch slice with real Hufu grants, exclusions, execution requirements, and evidence; effect handlers stay in Luban and shared resource I/O providers stay in Penghou.
+- [ ] Integrate Luban's qualified Read/Find/SearchText/ApplyPatch slice with real Hufu grants, exclusions, execution requirements, and evidence; effect handlers stay in Luban and shared resource I/O providers stay in Penghou. **Parked 2026-10-06 (Luban deferred): future semantic adapters, if any, bind neutral execution abstractions, not Luban syntax.**
 - [ ] Prove root-allowed/child-excluded search and find results never disclose the child path or content, and denied or unavailable checkers perform no unauthorized protected I/O.
-- [ ] Admit Git inspection only after Luban's helper/network/output qualification passes, and prove Hufu read exclusions apply across both Git and file effects.
-- [ ] Bind Luban's limits, preconditions, and platform/recovery guarantees to admission; reject unsupported guarantees rather than recreating provider logic here.
-- [ ] Integrate Luban's planned versioned typed IR when available: pin semantic identity, trusted compiler/catalogue/schema/provider versions, payloads, limits, and workspace bindings; prove aliases cannot widen exact approval and every pipeline effect/discovered target is authorized.
-- [ ] Coordinate mutation outcomes with Luban receipts and the runtime journal; neither a hash nor ReplaySafe flag proves safe retry.
+- [ ] Admit Git inspection only after Luban's helper/network/output qualification passes, and prove Hufu read exclusions apply across both Git and file effects. **Parked 2026-10-06 (Luban deferred).**
+- [ ] Bind Luban's limits, preconditions, and platform/recovery guarantees to admission; reject unsupported guarantees rather than recreating provider logic here. **Parked 2026-10-06 (Luban deferred).**
+- [ ] Integrate Luban's planned versioned typed IR when available: pin semantic identity, trusted compiler/catalogue/schema/provider versions, payloads, limits, and workspace bindings; prove aliases cannot widen exact approval and every pipeline effect/discovered target is authorized. **Parked 2026-10-06 (Luban deferred).**
+- [ ] Coordinate mutation outcomes with Luban receipts and the runtime journal; neither a hash nor ReplaySafe flag proves safe retry. **Parked 2026-10-06 (Luban deferred): journal/receipt work proceeds on neutral operations.**
 - [ ] Test canonical paths, aliases, case rules, links/junctions, and changed-resource races against the actual object used.
 - [ ] Enforce structured requirements and report the exact handler versions/evidence; reject unsupported guarantees without dispatch.
 - [ ] Add local opaque credential-use bindings as required by the first credentialed operation; keep raw secrets outside authority records and agent context.
@@ -415,8 +439,8 @@ Gate: the end-to-end migration example in the specification survives restart, pa
 - [ ] Optional Hongxian/Siming projections and improved operator explanations.
 - [ ] Automatic review within deterministic eligibility rules; learned suggestions never self-install policy.
 - [ ] Evaluate optional CedarSharp.Analysis containment proofs with explicit assumptions and fail-closed handling of unsupported/unknown/timeout results.
-- [ ] Integrate later Luban effect families only as its qualified providers become available, with explicit Hufu authority and broader native-tool admission where applicable.
-- [ ] Reuse Luban provider conformance results and maintain Hufu-specific authority/revocation integration tests; avoid duplicating its package or implementation roadmap.
+- [ ] Integrate later Luban effect families only as its qualified providers become available, with explicit Hufu authority and broader native-tool admission where applicable. **Parked 2026-10-06 (Luban deferred); native-tool admission proceeds via neutral `process.execute` + Gagamba regardless.**
+- [ ] Reuse Luban provider conformance results and maintain Hufu-specific authority/revocation integration tests; avoid duplicating its package or implementation roadmap. **Parked 2026-10-06 (Luban deferred).**
 - [ ] Evaluate graph storage, SPIFFE/Vault host adapters, multi-person/separation-of-duties approvals, and signed or externally anchored evidence only with a concrete use case.
 - [ ] Add optional AI explanations over authorized deterministic projections without changing decisions or installing policy.
 - [x] Finalize the optional Hufu/BiscuitSharp integration specification and
@@ -437,8 +461,9 @@ BiscuitSharp.
 Independent old-revision branch continuation and deployment as a network service remain optional. They must not delay the first complete protected-operation integration.
 
 Luban owns the planned [surface language](https://github.com/jenolaszlo-sketch/penghou-luban/blob/main/docs/language-syntax-spec.md),
-including bounded typed pipelines and closed pure filters. Hufu consumes its
-trusted lowered requirements and does not implement a second parser or executor.
+including bounded typed pipelines and closed pure filters. **Update 2026-10-06:
+that language is deferred/parked;** Hufu consumes trusted lowered requirements
+(neutral execution requests) and does not implement a second parser or executor.
 
 Out of scope: implementing OS/container sandboxes, arbitrary scripting, shell
 byte-stream pipelines, interactive shells, or PTYs. Any future UnrestrictedProcess route is
