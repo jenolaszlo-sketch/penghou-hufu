@@ -29,7 +29,7 @@ public sealed class BiscuitValidityTests
     public void MappingIdentityIncludesProfileAndEveryCapabilityMapping()
     {
         var payload = string.Join("\n", BiscuitProfile.Identity, "registered-typed-grants-v1", BiscuitProfile.Policy,
-            "ReadFile=fs.read\nListDirectory=fs.list\nReadMetadata=fs.metadata\nPatchFile=fs.patch\nRelease=data.release\nWriteFile=fs.write");
+            "ReadFile=fs.read\nListDirectory=fs.list\nReadMetadata=fs.metadata\nPatchFile=fs.patch\nRelease=data.release\nWriteFile=fs.write\nExecuteProcess=proc.execute");
         Assert.Equal("hufu-biscuit-mapping-v2:" + BiscuitProfile.Hash(BiscuitProfile.Utf8.GetBytes(payload)),
             BiscuitProfile.MappingIdentity);
         Assert.NotEqual("hufu-biscuit-mapping-v1:" + BiscuitProfile.Hash(BiscuitProfile.Utf8.GetBytes(BiscuitProfile.Policy)),
