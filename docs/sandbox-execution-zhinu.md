@@ -81,22 +81,39 @@ completion handle crosses an attempt boundary.
 
 - **GP-3 Amendment 2 was required** (see `execution-domain` in Gagamba): the
   workflow needed to observe execution completion, which the frozen SPI lacked.
-- **Zhinu's external-operation journal models `Cancelled` but exposes no
-  transition to it.** HZ-1A therefore records cancellation/revocation as
-  `Failed` with the reason in the durable operation evidence, rather than
-  extending Zhinu core. A future `Cancelled` transition is a Zhinu decision.
+- **Zhinu's external-operation journal modeled `Cancelled` but exposed no
+  transition to it.** The consumer proved the need for the state Zhinu already
+  modeled, so Zhinu added a minimal first-class
+  `IWorkflowExternalOperationRepository.CancelAsync(operationId, reason)`:
+  idempotent, terminal, never overwriting `Completed`, never turning a terminal
+  `Failed` into `Cancelled`, preserving an opaque neutral reason. HZ-1A records
+  **`Status = Cancelled`** with the reason (`WorkflowCancelled` or
+  `AuthorityRevoked`) in the durable operation evidence. Zhinu knows the
+  operation was cancelled; HZ evidence preserves why. (Package
+  `Penghou.Zhinu 0.2.0-preview.2`.)
 - **The two authorization layers are distinct**; neither substitutes for the
   other.
 
-## Acceptance coverage (`tests/Penghou.Hufu.Zhinu.Tests`)
+## Acceptance coverage
 
-normal completion; non-zero exit becomes execution failure with code preserved;
-workflow cancellation terminates and awaits completion; authority revocation
-terminates independently; cancellation vs revocation distinguishable in durable
-evidence; fresh authorization per retry; profile/authority revisions correlated
-durably; recovery follows `OwnerDeathCleanup` for `Requested` and `Running`;
-terminal operations not recovered; no provider handle in the correlation. The
-uncertain `Requested -> launched -> crash` window is treated by the same rule.
+- **Composition unit tests** (`SandboxExecutionStepTests`, 12): normal
+  completion; non-zero exit becomes execution failure with code preserved;
+  workflow cancellation terminates and awaits completion; authority revocation
+  terminates independently; cancellation vs revocation distinguishable in
+  durable evidence; fresh authorization per retry; profile/authority revisions
+  correlated durably; recovery follows `OwnerDeathCleanup` for `Requested` and
+  `Running`; terminal operations not recovered; no provider handle in the
+  correlation.
+- **Engine E2E** (`SandboxWorkflowEndToEndTests`, 5): a real `WorkflowEngine`
+  drives the activity — (A) normal run completes; (B) workflow cancellation
+  terminates the domain and records `Cancelled`/`WorkflowCancelled`; (C)
+  authority revocation terminates independently and records
+  `Cancelled`/`AuthorityRevoked`; (E) crash while `Running`, after reopen,
+  follows the recorded granted `OwnerDeathCleanup` (`RetryFreshAttempt` vs
+  `Abandon`) with no recovered provider handle, preparation, or authorization
+  capability in durable state.
+- The uncertain `Requested -> launched -> crash` window (D) uses the same
+  capability rule and is covered at the recovery-planner level.
 
 ## Non-claims
 
