@@ -10,6 +10,9 @@
     <Project Path="src/Penghou.Hufu.Zhinu/Penghou.Hufu.Zhinu.csproj" />
     <Project Path="src/Penghou.Hufu.Fuwen/Penghou.Hufu.Fuwen.csproj" />
   </Folder>
+  <Folder Name="/samples/">
+    <Project Path="samples/Hufu.SandboxRunner/Hufu.SandboxRunner.csproj" />
+  </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.IO.Tests/Penghou.Hufu.IO.Tests.csproj" />

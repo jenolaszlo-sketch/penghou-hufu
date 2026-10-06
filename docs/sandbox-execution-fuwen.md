@@ -109,6 +109,14 @@ so the chain is reconstructable without reopening the plan.
 (`0.2.0-preview.2`), plus the local `Penghou.Hufu.Sandbox`. Gagamba stays frozen
 at `0.1.0-preview.3`; Zhinu core and Fuwen core gained no cross-dependency.
 
+## First consumer
+
+`samples/Hufu.SandboxRunner` is the first runnable consumer of this frozen
+chain: one admitted plan (neutral intent `diagnostic.whoami`, requiring
+`execution.unit-termination` at Partial) runs through a real Zhinu engine,
+per-attempt pinned authorization, and a genuine Gagamba domain, printing one
+JSON audit record. It adds no infrastructure and takes no Luban dependency.
+
 ## Non-claims
 
 No filesystem authority, VFS/WhatIf, network controls, quotas, or richer

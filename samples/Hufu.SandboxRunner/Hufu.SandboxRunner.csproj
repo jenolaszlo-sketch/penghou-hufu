@@ -1,23 +1,18 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
+    <OutputType>Exe</OutputType>
     <TargetFramework>net10.0</TargetFramework>
+    <!-- Consumer sample for the frozen FZ-1 chain; not packed or published. -->
     <IsPackable>false</IsPackable>
-    <IsTestProject>true</IsTestProject>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+    <Description>Governed sandbox-runner sample: one admitted Fuwen plan executed through Zhinu, Hufu authority, and a real Gagamba domain.</Description>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
-    <PackageReference Include="xunit" Version="2.9.3" />
-    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <ProjectReference Include="..\..\src\Penghou.Hufu.Fuwen\Penghou.Hufu.Fuwen.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="../../src/Penghou.Hufu.Fuwen/Penghou.Hufu.Fuwen.csproj" />
-    <ProjectReference Include="../../samples/Hufu.SandboxRunner/Hufu.SandboxRunner.csproj" />
-  </ItemGroup>
-
   <ItemGroup>
     <PackageReference Include="Penghou.Fuwen.Compiler" Version="[0.1.0-preview.12]" />
     <PackageReference Include="Penghou.Fuwen.Zhinu" Version="[0.1.0-preview.12]" />
     <PackageReference Include="Penghou.Zhinu.Sqlite" Version="[0.2.0-preview.2]" />
   </ItemGroup>
 </Project>
-
