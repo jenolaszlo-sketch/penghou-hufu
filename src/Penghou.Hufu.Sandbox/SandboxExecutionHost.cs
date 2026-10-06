@@ -193,6 +193,42 @@ public sealed class SandboxExecutionHost : IAsyncDisposable
         return _execution.DisposeAsync();
     }
 
+    /// <summary>
+    /// Wait until the execution's domain reaches its terminal state and
+    /// reclaim the handle. The token cancels the wait only; terminate
+    /// explicitly to interrupt a running domain.
+    /// </summary>
+    public async ValueTask<SandboxCompletionResult> WaitForCompletionAsync(SandboxExecutionHandle handle,
+        CancellationToken cancellationToken = default)
+    {
+        ObjectDisposedException.ThrowIf(_disposed, this);
+        ArgumentNullException.ThrowIfNull(handle);
+        Entry? entry;
+        lock (_gate)
+        {
+            if (!_byHandle.TryGetValue(handle.ExecutionId, out entry))
+                return new(SandboxCompletionStatus.Failed, Reasons: new[] { "unknown execution" });
+        }
+        var completion = await _execution.WaitForCompletionAsync(entry.GagambaHandle, cancellationToken)
+            .ConfigureAwait(false);
+        lock (_gate)
+        {
+            _byHandle.Remove(handle.ExecutionId);
+            if (_byActivity.TryGetValue(entry.Binding.Activity.ActivityId, out var list))
+            {
+                list.RemoveAll(candidate => candidate.Handle.ExecutionId == handle.ExecutionId);
+                if (list.Count == 0) _byActivity.Remove(entry.Binding.Activity.ActivityId);
+            }
+        }
+        return completion switch
+        {
+            CompletionResult.NaturalExit natural => new(SandboxCompletionStatus.NaturalExit, natural.RootExitCode),
+            CompletionResult.Terminated => new(SandboxCompletionStatus.Terminated),
+            CompletionResult.Failed failed => new(SandboxCompletionStatus.Failed, Reasons: failed.Reasons),
+            _ => new(SandboxCompletionStatus.Failed, Reasons: new[] { "unexpected completion" }),
+        };
+    }
+
     private ValueTask<AuthorityRequestAuthorization> AuthorizeAsync(SandboxExecutionRequest request,
         SandboxApprovedInvocation invocation, string profileId, string profileRevision, string phase,
         CancellationToken cancellationToken)

@@ -52,3 +52,18 @@ public enum SandboxTerminateStatus
 
 public sealed record SandboxTerminateResult(SandboxTerminateStatus Status,
     string? ReasonCode = null, IReadOnlyList<string>? Reasons = null);
+
+/// <summary>How a sandbox execution reached its terminal state (mirrors the
+/// provider completion, without leaking provider handles).</summary>
+public enum SandboxCompletionStatus
+{
+    /// <summary>The root exited on its own; the domain is empty.</summary>
+    NaturalExit,
+    /// <summary>The execution was terminated and the domain reached its terminal state.</summary>
+    Terminated,
+    /// <summary>Unknown/stale handle or wait fault. Fail closed.</summary>
+    Failed,
+}
+
+public sealed record SandboxCompletionResult(SandboxCompletionStatus Status,
+    int? RootExitCode = null, IReadOnlyList<string>? Reasons = null);

@@ -152,6 +152,8 @@ public sealed class SandboxExecutionEndToEndTests
             return _inner.Launch(prepared, process);
         }
         public TerminateResult Terminate(ExecutionHandle execution) => _inner.Terminate(execution);
+        public ValueTask<CompletionResult> WaitForCompletionAsync(ExecutionHandle execution,
+            CancellationToken cancellationToken = default) => _inner.WaitForCompletionAsync(execution, cancellationToken);
         public ValueTask DisposeAsync() => _inner.DisposeAsync();
     }
 }

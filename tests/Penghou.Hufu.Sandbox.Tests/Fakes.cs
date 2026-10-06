@@ -107,6 +107,16 @@ internal sealed class FakeProvider : IExecutionProvider
         return new TerminateResult.Terminated(execution);
     }
 
+    public CompletionResult CompletionResult { get; set; } = new CompletionResult.NaturalExit(0);
+    public int WaitCalls { get; private set; }
+
+    public ValueTask<CompletionResult> WaitForCompletionAsync(ExecutionHandle execution,
+        CancellationToken cancellationToken = default)
+    {
+        WaitCalls++;
+        return ValueTask.FromResult(CompletionResult);
+    }
+
     public ValueTask DisposeAsync()
     {
         DisposeCalls++;
