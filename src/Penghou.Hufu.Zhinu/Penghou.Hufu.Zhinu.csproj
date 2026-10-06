@@ -6,6 +6,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Penghou.Hufu.Sandbox\Penghou.Hufu.Sandbox.csproj" />
-    <PackageReference Include="Penghou.Zhinu" Version="[0.2.0-preview.1]" />
+    <PackageReference Include="Penghou.Zhinu" Version="[0.2.0-preview.2]" />
   </ItemGroup>
 </Project>

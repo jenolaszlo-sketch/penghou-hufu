@@ -147,8 +147,7 @@ public sealed class SandboxExecutionStep :
             await _host.TerminateAsync(activityId, cleanup.Token).ConfigureAwait(false);
             await ObserveQuietlyAsync(waitTask).ConfigureAwait(false);
             var reason = _revoked.ContainsKey(activityId) ? "AuthorityRevoked" : "WorkflowCancelled";
-            await SafeFailAsync(operation.OperationId, ownerId,
-                running with { Outcome = "Cancelled", TerminationReason = reason }).ConfigureAwait(false);
+            await SafeCancelAsync(operation.OperationId, reason).ConfigureAwait(false);
             throw new OperationCanceledException("sandbox execution cancelled", cancellationToken);
         }
 
@@ -172,8 +171,7 @@ public sealed class SandboxExecutionStep :
 
             case SandboxCompletionStatus.Terminated:
                 var terminalReason = _revoked.ContainsKey(activityId) ? "AuthorityRevoked" : "WorkflowCancelled";
-                await SafeFailAsync(operation.OperationId, ownerId,
-                    running with { Outcome = "Cancelled", TerminationReason = terminalReason }).ConfigureAwait(false);
+                await SafeCancelAsync(operation.OperationId, terminalReason).ConfigureAwait(false);
                 return new SandboxActivityOutcome(
                     terminalReason == "AuthorityRevoked" ? SandboxActivityStatus.Revoked : SandboxActivityStatus.WorkflowCancelled,
                     null, terminalReason);
@@ -234,6 +232,15 @@ public sealed class SandboxExecutionStep :
                 CancellationToken.None).ConfigureAwait(false);
         }
         catch { /* the durable record remains Requested/Running for reconciliation */ }
+    }
+
+    private async Task SafeCancelAsync(Guid operationId, string reason)
+    {
+        try
+        {
+            await _operations.CancelAsync(operationId, reason, CancellationToken.None).ConfigureAwait(false);
+        }
+        catch { /* the durable record remains for reconciliation */ }
     }
 
     private static async Task ObserveQuietlyAsync(ValueTask<SandboxCompletionResult> wait)

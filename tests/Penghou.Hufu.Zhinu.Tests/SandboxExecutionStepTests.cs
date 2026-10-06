@@ -73,7 +73,7 @@ public sealed class SandboxExecutionStepTests
             await Assert.ThrowsAnyAsync<OperationCanceledException>(() => task);
             Assert.Equal(1, provider.TerminateCalls); // terminated
             var operation = Assert.Single(await store.ListAsync(runId, cancellationToken: Ct));
-            Assert.Equal(ExternalOperationStatus.Failed, operation.Status);
+            Assert.Equal(ExternalOperationStatus.Cancelled, operation.Status);
             Assert.Contains("WorkflowCancelled", operation.Error, StringComparison.Ordinal);
             Assert.DoesNotContain("AuthorityRevoked", operation.Error, StringComparison.Ordinal);
         }
@@ -98,6 +98,7 @@ public sealed class SandboxExecutionStepTests
             var outcome = await task;
             Assert.Equal(SandboxActivityStatus.Revoked, outcome.Status);
             var operation = Assert.Single(await store.ListAsync(runId, cancellationToken: Ct));
+            Assert.Equal(ExternalOperationStatus.Cancelled, operation.Status);
             Assert.Contains("AuthorityRevoked", operation.Error, StringComparison.Ordinal);
             Assert.DoesNotContain("WorkflowCancelled", operation.Error, StringComparison.Ordinal);
         }
