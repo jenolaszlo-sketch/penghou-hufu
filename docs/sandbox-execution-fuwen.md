@@ -1,8 +1,34 @@
 # Plan-authored execution intent (FZ-1)
 
-Status: implementation slice, 2026-10-05. `Penghou.Hufu.Fuwen` composes a Fuwen
-plan activity with the frozen HZ-1/HG-1 authority path. Not qualified, not
-published, not a security boundary.
+Status: implementation slice, 2026-10-05. **FZ-1 frozen (tag `arch-fz-1`)**;
+`Penghou.Hufu.Fuwen` composes a Fuwen plan activity with the frozen HZ-1/HG-1
+authority path. Not qualified, not published, not a security boundary.
+
+## Architectural checkpoint
+
+The agent-to-effect authority chain is proven end to end, and each layer owns a
+distinct question:
+
+```text
+agent-authored intent           Fuwen: what does the plan intend?
+        |
+Fuwen admission + identity      (immutable plan + fingerprint)
+        |
+Zhinu durable execution         Zhinu: what durable activity/attempt is running?
+        |
+Hufu contextual authority       Hufu: is this subject/activity authorized?
+        |
+trusted invocation profile      Sandbox profile: what exact invocation shape is permitted?
+        |
+Gagamba negotiated guarantees   Gagamba: can this host provide the guarantees?
+        |
+native execution domain
+```
+
+The plan never acquires authority merely by describing an effect. FZ-1, HG-1,
+and HZ-1 are frozen together; the next pressure should come from a real
+constrained tool consumer (Luban) that requires filesystem/process/HTTP
+authority, not from another infrastructure milestone.
 
 ## Chain
 
