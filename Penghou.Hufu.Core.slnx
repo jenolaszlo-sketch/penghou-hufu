@@ -8,6 +8,7 @@
     <Project Path="src/Penghou.Hufu.Workflow/Penghou.Hufu.Workflow.csproj" />
     <Project Path="src/Penghou.Hufu.Sandbox/Penghou.Hufu.Sandbox.csproj" />
     <Project Path="src/Penghou.Hufu.Zhinu/Penghou.Hufu.Zhinu.csproj" />
+    <Project Path="src/Penghou.Hufu.Fuwen/Penghou.Hufu.Fuwen.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj" />
@@ -15,5 +16,6 @@
     <Project Path="tests/Penghou.Hufu.Workflow.Tests/Penghou.Hufu.Workflow.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.Sandbox.Tests/Penghou.Hufu.Sandbox.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.Zhinu.Tests/Penghou.Hufu.Zhinu.Tests.csproj" />
+    <Project Path="tests/Penghou.Hufu.Fuwen.Tests/Penghou.Hufu.Fuwen.Tests.csproj" />
   </Folder>
 </Solution>
