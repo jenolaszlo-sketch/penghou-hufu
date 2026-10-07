@@ -119,5 +119,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: hufu-frozen-chain-${{ matrix.os }}
-          path: test-results/*.trx
+          path: |
+            test-results/*.trx
+            test-results/**/*.dmp
           if-no-files-found: warn
