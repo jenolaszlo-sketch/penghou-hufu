@@ -1,1 +1,3 @@
 #nullable enable
+Penghou.Hufu.Sqlite.SqliteAuthorityStore.DeriveAsync(Penghou.Hufu.AuthorityDerivationCommand! command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityGrantDerivationResult!>
+Penghou.Hufu.Sqlite.SqliteAuthorityStore.GetLineageAsync(string! childGrantId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityGrantLineage?>

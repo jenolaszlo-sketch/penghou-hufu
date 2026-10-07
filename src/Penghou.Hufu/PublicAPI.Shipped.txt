@@ -336,8 +336,6 @@ Penghou.Hufu.AuthorityGrant
 Penghou.Hufu.AuthorityGrant.<Clone>$() -> Penghou.Hufu.AuthorityGrant!
 Penghou.Hufu.AuthorityGrant.Actions.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityAction>!
 Penghou.Hufu.AuthorityGrant.Actions.init -> void
-Penghou.Hufu.AuthorityGrant.AuthorityGrant(string! Id, System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityAction>! Actions, Penghou.Hufu.AuthorityScope! Scope, System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>! Exclusions, System.DateTimeOffset NotBefore, System.DateTimeOffset ExpiresAt) -> void
-Penghou.Hufu.AuthorityGrant.Deconstruct(out string! Id, out System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityAction>! Actions, out Penghou.Hufu.AuthorityScope! Scope, out System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>! Exclusions, out System.DateTimeOffset NotBefore, out System.DateTimeOffset ExpiresAt) -> void
 Penghou.Hufu.AuthorityGrant.Equals(Penghou.Hufu.AuthorityGrant? other) -> bool
 Penghou.Hufu.AuthorityGrant.Exclusions.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>!
 Penghou.Hufu.AuthorityGrant.Exclusions.init -> void
@@ -662,7 +660,6 @@ Penghou.Hufu.BoundedAuthorityRequestAuthorizer.AuthorizeAsync(Penghou.Hufu.Autho
 Penghou.Hufu.BoundedAuthorityRequestAuthorizer.BoundedAuthorityRequestAuthorizer(Penghou.Hufu.IAuthorityRequestAuthorizer! inner, int maxExecuting, int maxQueued, System.TimeSpan admissionTimeout, System.TimeProvider? timeProvider = null) -> void
 Penghou.Hufu.CurrentAuthorityRequestAuthorizer
 Penghou.Hufu.CurrentAuthorityRequestAuthorizer.AuthorizeAsync(Penghou.Hufu.AuthorityRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityRequestAuthorization!>
-Penghou.Hufu.CurrentAuthorityRequestAuthorizer.CurrentAuthorityRequestAuthorizer(Penghou.Hufu.IAuthoritySnapshotSource! source, Penghou.Hufu.IAuthorityEvaluator! evaluator, Penghou.Hufu.IAuthorityDecisionRecorder! recorder, System.TimeProvider? clock = null) -> void
 Penghou.Hufu.IAuthorityDecisionRecorder
 Penghou.Hufu.IAuthorityDecisionRecorder.RecordAsync(Penghou.Hufu.AuthorityRequest! request, Penghou.Hufu.AuthorityDecision! decision, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<bool>
 Penghou.Hufu.IAuthorityDecisionRecordFactory
@@ -760,3 +757,4 @@ static Penghou.Hufu.AuthorityValidation.NormalizePath(string! path) -> string!
 static Penghou.Hufu.AuthorityValidation.ValidContext(Penghou.Hufu.AuthenticatedAuthorityContext? context) -> bool
 static Penghou.Hufu.AuthorityValidation.ValidToken(string? value) -> bool
 static readonly Penghou.Hufu.BoundedAuthorityRequestAuthorizer.MaximumAdmissionTimeout -> System.TimeSpan
+

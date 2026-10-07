@@ -1,2 +1,108 @@
 #nullable enable
 Penghou.Hufu.AuthorityAction.ExecuteProcess = 6 -> Penghou.Hufu.AuthorityAction
+
+override Penghou.Hufu.AuthorityDerivationCommand.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityDerivationCommand.GetHashCode() -> int
+override Penghou.Hufu.AuthorityDerivationCommand.ToString() -> string!
+override Penghou.Hufu.AuthorityGrantDerivationRequest.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityGrantDerivationRequest.GetHashCode() -> int
+override Penghou.Hufu.AuthorityGrantDerivationRequest.ToString() -> string!
+override Penghou.Hufu.AuthorityGrantDerivationResult.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityGrantDerivationResult.GetHashCode() -> int
+override Penghou.Hufu.AuthorityGrantDerivationResult.ToString() -> string!
+override Penghou.Hufu.AuthorityGrantLineage.Equals(object? obj) -> bool
+override Penghou.Hufu.AuthorityGrantLineage.GetHashCode() -> int
+override Penghou.Hufu.AuthorityGrantLineage.ToString() -> string!
+override Penghou.Hufu.RequestedAuthority.Equals(object? obj) -> bool
+override Penghou.Hufu.RequestedAuthority.GetHashCode() -> int
+override Penghou.Hufu.RequestedAuthority.ToString() -> string!
+Penghou.Hufu.AncestorLivenessVerdict
+Penghou.Hufu.AncestorLivenessVerdict.AncestorRevoked = 1 -> Penghou.Hufu.AncestorLivenessVerdict
+Penghou.Hufu.AncestorLivenessVerdict.LineageUnavailable = 2 -> Penghou.Hufu.AncestorLivenessVerdict
+Penghou.Hufu.AncestorLivenessVerdict.Live = 0 -> Penghou.Hufu.AncestorLivenessVerdict
+Penghou.Hufu.AuthorityDerivation
+Penghou.Hufu.AuthorityDerivation.LineageAncestorLiveness
+Penghou.Hufu.AuthorityDerivation.LineageAncestorLiveness.CheckAsync(Penghou.Hufu.AuthoritySnapshot! snapshot, Penghou.Hufu.AuthorityRequest! request, System.DateTimeOffset evaluatedAt, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AncestorLivenessVerdict>
+Penghou.Hufu.AuthorityDerivation.LineageAncestorLiveness.LineageAncestorLiveness(Penghou.Hufu.IAuthoritySnapshotSource! source, Penghou.Hufu.IAuthorityDerivationStore! derivations) -> void
+Penghou.Hufu.AuthorityDerivationCommand
+Penghou.Hufu.AuthorityDerivationCommand.<Clone>$() -> Penghou.Hufu.AuthorityDerivationCommand!
+Penghou.Hufu.AuthorityDerivationCommand.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.AuthorityDerivationCommand.AuthorityDerivationCommand(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.AuthenticatedAuthorityContext! parentContext, string! parentGrantId, Penghou.Hufu.AuthenticatedAuthorityContext! childContext, string! delegationId, string! generation, Penghou.Hufu.RequestedAuthority! requested, string! requestIdentity) -> void
+Penghou.Hufu.AuthorityDerivationCommand.ChildContext.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.AuthorityDerivationCommand.DelegationId.get -> string!
+Penghou.Hufu.AuthorityDerivationCommand.Equals(Penghou.Hufu.AuthorityDerivationCommand? other) -> bool
+Penghou.Hufu.AuthorityDerivationCommand.Generation.get -> string!
+Penghou.Hufu.AuthorityDerivationCommand.ParentContext.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.AuthorityDerivationCommand.ParentGrantId.get -> string!
+Penghou.Hufu.AuthorityDerivationCommand.Requested.get -> Penghou.Hufu.RequestedAuthority!
+Penghou.Hufu.AuthorityDerivationCommand.RequestIdentity.get -> string!
+Penghou.Hufu.AuthorityGrant.AuthorityGrant(string! Id, System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityAction>! Actions, Penghou.Hufu.AuthorityScope! Scope, System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>! Exclusions, System.DateTimeOffset NotBefore, System.DateTimeOffset ExpiresAt, string? ParentGrantId = null) -> void
+Penghou.Hufu.AuthorityGrant.Deconstruct(out string! Id, out System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityAction>! Actions, out Penghou.Hufu.AuthorityScope! Scope, out System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>! Exclusions, out System.DateTimeOffset NotBefore, out System.DateTimeOffset ExpiresAt, out string? ParentGrantId) -> void
+Penghou.Hufu.AuthorityGrant.ParentGrantId.get -> string?
+Penghou.Hufu.AuthorityGrant.ParentGrantId.init -> void
+Penghou.Hufu.AuthorityGrantDerivationRequest
+Penghou.Hufu.AuthorityGrantDerivationRequest.<Clone>$() -> Penghou.Hufu.AuthorityGrantDerivationRequest!
+Penghou.Hufu.AuthorityGrantDerivationRequest.AuthorityGrantDerivationRequest(string! parentGrantId, Penghou.Hufu.AuthenticatedAuthorityContext! childContext, string! delegationId, string! generation, Penghou.Hufu.RequestedAuthority! requested, string! requestIdentity) -> void
+Penghou.Hufu.AuthorityGrantDerivationRequest.ChildContext.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.AuthorityGrantDerivationRequest.DelegationId.get -> string!
+Penghou.Hufu.AuthorityGrantDerivationRequest.Equals(Penghou.Hufu.AuthorityGrantDerivationRequest? other) -> bool
+Penghou.Hufu.AuthorityGrantDerivationRequest.Generation.get -> string!
+Penghou.Hufu.AuthorityGrantDerivationRequest.ParentGrantId.get -> string!
+Penghou.Hufu.AuthorityGrantDerivationRequest.Requested.get -> Penghou.Hufu.RequestedAuthority!
+Penghou.Hufu.AuthorityGrantDerivationRequest.RequestIdentity.get -> string!
+Penghou.Hufu.AuthorityGrantDerivationResult
+Penghou.Hufu.AuthorityGrantDerivationResult.<Clone>$() -> Penghou.Hufu.AuthorityGrantDerivationResult!
+Penghou.Hufu.AuthorityGrantDerivationResult.AuthorityGrantDerivationResult(Penghou.Hufu.AuthorityStatus Status, Penghou.Hufu.AuthorityGrant? Grant, string! ParentGrantId, string! DerivationIdentity, string? ReasonCode) -> void
+Penghou.Hufu.AuthorityGrantDerivationResult.Deconstruct(out Penghou.Hufu.AuthorityStatus Status, out Penghou.Hufu.AuthorityGrant? Grant, out string! ParentGrantId, out string! DerivationIdentity, out string? ReasonCode) -> void
+Penghou.Hufu.AuthorityGrantDerivationResult.DerivationIdentity.get -> string!
+Penghou.Hufu.AuthorityGrantDerivationResult.DerivationIdentity.init -> void
+Penghou.Hufu.AuthorityGrantDerivationResult.Equals(Penghou.Hufu.AuthorityGrantDerivationResult? other) -> bool
+Penghou.Hufu.AuthorityGrantDerivationResult.Grant.get -> Penghou.Hufu.AuthorityGrant?
+Penghou.Hufu.AuthorityGrantDerivationResult.Grant.init -> void
+Penghou.Hufu.AuthorityGrantDerivationResult.ParentGrantId.get -> string!
+Penghou.Hufu.AuthorityGrantDerivationResult.ParentGrantId.init -> void
+Penghou.Hufu.AuthorityGrantDerivationResult.ReasonCode.get -> string?
+Penghou.Hufu.AuthorityGrantDerivationResult.ReasonCode.init -> void
+Penghou.Hufu.AuthorityGrantDerivationResult.Status.get -> Penghou.Hufu.AuthorityStatus
+Penghou.Hufu.AuthorityGrantDerivationResult.Status.init -> void
+Penghou.Hufu.AuthorityGrantLineage
+Penghou.Hufu.AuthorityGrantLineage.<Clone>$() -> Penghou.Hufu.AuthorityGrantLineage!
+Penghou.Hufu.AuthorityGrantLineage.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.AuthorityGrantLineage.AuthorityGrantLineage(string! derivationIdentity, string! childGrantId, Penghou.Hufu.AuthenticatedAuthorityContext! childContext, string! parentGrantId, Penghou.Hufu.AuthenticatedAuthorityContext! parentContext, string! delegationId, string! generation, Penghou.Hufu.RequestedAuthority! requested, Penghou.Hufu.AuthorityStoreActor! actor, System.DateTimeOffset issuedAt) -> void
+Penghou.Hufu.AuthorityGrantLineage.ChildContext.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.AuthorityGrantLineage.ChildGrantId.get -> string!
+Penghou.Hufu.AuthorityGrantLineage.DelegationId.get -> string!
+Penghou.Hufu.AuthorityGrantLineage.DerivationIdentity.get -> string!
+Penghou.Hufu.AuthorityGrantLineage.Equals(Penghou.Hufu.AuthorityGrantLineage? other) -> bool
+Penghou.Hufu.AuthorityGrantLineage.Generation.get -> string!
+Penghou.Hufu.AuthorityGrantLineage.IssuedAt.get -> System.DateTimeOffset
+Penghou.Hufu.AuthorityGrantLineage.ParentContext.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.AuthorityGrantLineage.ParentGrantId.get -> string!
+Penghou.Hufu.AuthorityGrantLineage.Requested.get -> Penghou.Hufu.RequestedAuthority!
+Penghou.Hufu.CurrentAuthorityRequestAuthorizer.CurrentAuthorityRequestAuthorizer(Penghou.Hufu.IAuthoritySnapshotSource! source, Penghou.Hufu.IAuthorityEvaluator! evaluator, Penghou.Hufu.IAuthorityDecisionRecorder! recorder, System.TimeProvider? clock = null, Penghou.Hufu.IAncestorLiveness? ancestorLiveness = null) -> void
+Penghou.Hufu.IAncestorLiveness
+Penghou.Hufu.IAncestorLiveness.CheckAsync(Penghou.Hufu.AuthoritySnapshot! snapshot, Penghou.Hufu.AuthorityRequest! request, System.DateTimeOffset evaluatedAt, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AncestorLivenessVerdict>
+Penghou.Hufu.IAuthorityDerivationStore
+Penghou.Hufu.IAuthorityDerivationStore.DeriveAsync(Penghou.Hufu.AuthorityDerivationCommand! command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityGrantDerivationResult!>
+Penghou.Hufu.IAuthorityDerivationStore.GetLineageAsync(string! childGrantId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityGrantLineage?>
+Penghou.Hufu.RequestedAuthority
+Penghou.Hufu.RequestedAuthority.<Clone>$() -> Penghou.Hufu.RequestedAuthority!
+Penghou.Hufu.RequestedAuthority.Actions.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityAction>!
+Penghou.Hufu.RequestedAuthority.Equals(Penghou.Hufu.RequestedAuthority? other) -> bool
+Penghou.Hufu.RequestedAuthority.Exclusions.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>!
+Penghou.Hufu.RequestedAuthority.ExpiresAt.get -> System.DateTimeOffset
+Penghou.Hufu.RequestedAuthority.NotBefore.get -> System.DateTimeOffset
+Penghou.Hufu.RequestedAuthority.RequestedAuthority(System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityAction>! actions, Penghou.Hufu.AuthorityScope! scope, System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>! exclusions, System.DateTimeOffset notBefore, System.DateTimeOffset expiresAt) -> void
+Penghou.Hufu.RequestedAuthority.Scope.get -> Penghou.Hufu.AuthorityScope!
+static Penghou.Hufu.AuthorityDerivation.DerivationIdentity(string! parentGrantId, string! delegationId, string! generation, Penghou.Hufu.RequestedAuthority! requested) -> string!
+static Penghou.Hufu.AuthorityDerivation.IsContainedBy(Penghou.Hufu.RequestedAuthority! child, Penghou.Hufu.AuthorityGrant! parent) -> bool
+static Penghou.Hufu.AuthorityDerivationCommand.operator !=(Penghou.Hufu.AuthorityDerivationCommand? left, Penghou.Hufu.AuthorityDerivationCommand? right) -> bool
+static Penghou.Hufu.AuthorityDerivationCommand.operator ==(Penghou.Hufu.AuthorityDerivationCommand? left, Penghou.Hufu.AuthorityDerivationCommand? right) -> bool
+static Penghou.Hufu.AuthorityGrantDerivationRequest.operator !=(Penghou.Hufu.AuthorityGrantDerivationRequest? left, Penghou.Hufu.AuthorityGrantDerivationRequest? right) -> bool
+static Penghou.Hufu.AuthorityGrantDerivationRequest.operator ==(Penghou.Hufu.AuthorityGrantDerivationRequest? left, Penghou.Hufu.AuthorityGrantDerivationRequest? right) -> bool
+static Penghou.Hufu.AuthorityGrantDerivationResult.operator !=(Penghou.Hufu.AuthorityGrantDerivationResult? left, Penghou.Hufu.AuthorityGrantDerivationResult? right) -> bool
+static Penghou.Hufu.AuthorityGrantDerivationResult.operator ==(Penghou.Hufu.AuthorityGrantDerivationResult? left, Penghou.Hufu.AuthorityGrantDerivationResult? right) -> bool
+static Penghou.Hufu.AuthorityGrantLineage.operator !=(Penghou.Hufu.AuthorityGrantLineage? left, Penghou.Hufu.AuthorityGrantLineage? right) -> bool
+static Penghou.Hufu.AuthorityGrantLineage.operator ==(Penghou.Hufu.AuthorityGrantLineage? left, Penghou.Hufu.AuthorityGrantLineage? right) -> bool
+static Penghou.Hufu.RequestedAuthority.operator !=(Penghou.Hufu.RequestedAuthority? left, Penghou.Hufu.RequestedAuthority? right) -> bool
+static Penghou.Hufu.RequestedAuthority.operator ==(Penghou.Hufu.RequestedAuthority? left, Penghou.Hufu.RequestedAuthority? right) -> bool

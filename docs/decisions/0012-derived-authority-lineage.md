@@ -158,3 +158,20 @@ term but acquires a migration direction toward core subset logic. Qingniao
 gains a design target for its requested-authority and parent-linkage fields
 without writing them yet. The Marang adapter pattern (fresh admission per
 operation) transfers unchanged; only the grant behind it becomes derived.
+
+## Implementation notes (proof slice)
+
+Two deliberate limitations, recorded so they read as deferred decisions
+rather than oversights:
+
+- **Derivation authorization is not integrated with issuance approval.**
+  Containment is always proven and the issuing actor is always recorded, but
+  nothing here decides whether possession of authority implies authority to
+  delegate it. A grant permitting `read src/**` does not necessarily permit
+  deriving a child carrying it for another subject. That delegability
+  question is the next integration pressure point (likely Qingniao's), not
+  part of this proof.
+- **Requested child validity is explicit; inheritance is unsupported.**
+  Callers supply `NotBefore`/`ExpiresAt`, which must already fit inside the
+  parent window. There is no "inherit the parent bounds" semantics, keeping
+  the derivation identity complete and free of hidden defaults.

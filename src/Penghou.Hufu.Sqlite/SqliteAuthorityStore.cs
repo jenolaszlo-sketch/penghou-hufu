@@ -13,7 +13,7 @@ public sealed record SqliteAuthorityStoreOptions
 public sealed partial class SqliteAuthorityStore : IAuthorityStore
 {
     private const long ApplicationId = 0x48554655;
-    private const int SchemaVersion = 1;
+    private const int SchemaVersion = 2;
     private readonly string? _connectionString;
     private readonly ISqliteAuthorityDatabase? _databaseOwner;
     private readonly IAuthorityStoreAuthorizer _authorizer;
@@ -566,6 +566,9 @@ public sealed partial class SqliteAuthorityStore : IAuthorityStore
         CREATE TABLE hufu_commands(tenant_id TEXT NOT NULL,command_id TEXT NOT NULL,kind INTEGER NOT NULL CHECK(kind BETWEEN 1 AND 3),intent_hash TEXT NOT NULL,subject_key TEXT NOT NULL,sequence INTEGER NOT NULL,PRIMARY KEY(tenant_id,command_id));
         CREATE TABLE hufu_usage(id INTEGER PRIMARY KEY CHECK(id=1),event_count INTEGER NOT NULL CHECK(event_count>=0),decision_count INTEGER NOT NULL CHECK(decision_count>=0),stored_bytes INTEGER NOT NULL CHECK(stored_bytes>=0));
         INSERT INTO hufu_usage VALUES(1,0,0,0);
+        CREATE TABLE hufu_derivations(derivation_identity TEXT PRIMARY KEY,child_grant_id TEXT NOT NULL UNIQUE,child_tenant TEXT NOT NULL,child_subject TEXT NOT NULL,child_run TEXT NOT NULL,body BLOB NOT NULL,body_hash TEXT NOT NULL,issued_at TEXT NOT NULL);
+        CREATE INDEX hufu_derivations_child_grant ON hufu_derivations(child_grant_id);
+        CREATE INDEX hufu_derivations_child_subject ON hufu_derivations(child_tenant,child_subject,child_run);
         """;
-    private const string Schema = NamespaceSchema + "PRAGMA application_id=1213548117; PRAGMA user_version=1;";
+    private const string Schema = NamespaceSchema + "PRAGMA application_id=1213548117; PRAGMA user_version=2;";
 }

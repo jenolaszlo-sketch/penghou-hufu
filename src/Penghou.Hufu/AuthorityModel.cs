@@ -14,7 +14,8 @@ public sealed record AuthenticatedAuthorityContext(string TenantId, string Subje
     string RevisionId, string FenceId);
 public sealed record AuthorityScope(string WorkspaceId, string RelativePath, AuthorityScopeKind Kind);
 public sealed record AuthorityGrant(string Id, IReadOnlyList<AuthorityAction> Actions, AuthorityScope Scope,
-    IReadOnlyList<AuthorityScope> Exclusions, DateTimeOffset NotBefore, DateTimeOffset ExpiresAt);
+    IReadOnlyList<AuthorityScope> Exclusions, DateTimeOffset NotBefore, DateTimeOffset ExpiresAt,
+    string? ParentGrantId = null);
 public sealed record AuthorityLayer(string Id, IReadOnlyList<AuthorityGrant> Grants);
 public sealed record AuthorityRequest(AuthenticatedAuthorityContext Context, AuthorityAction Action,
     string WorkspaceId, string RelativePath, string RequestIdentity);
@@ -49,7 +50,8 @@ public sealed class AuthoritySnapshot
                 var grant = layer.Grants[i];
                 if (grant is null || !AuthorityValidation.ValidToken(grant.Id) || !grantIds.Add(grant.Id) ||
                     grant.Actions is null || grant.Actions.Count is < 1 || grant.Actions.Count > AuthorityValidation.KnownActionCount || grant.Exclusions is null ||
-                    grant.Exclusions.Count > 128 - exclusionCount || grant.NotBefore >= grant.ExpiresAt)
+                    grant.Exclusions.Count > 128 - exclusionCount || grant.NotBefore >= grant.ExpiresAt ||
+                    (grant.ParentGrantId is not null && !AuthorityValidation.ValidToken(grant.ParentGrantId)))
                     throw new ArgumentException("Invalid or excessive grant.");
                 grantCount++; exclusionCount += grant.Exclusions.Count;
                 var scope = AuthorityValidation.FreezeScope(grant.Scope);
@@ -64,7 +66,7 @@ public sealed class AuthoritySnapshot
                         throw new ArgumentException("Exclusions must remain within their grant scope.");
                 }
                 grants.Add(new(grant.Id, Array.AsReadOnly(actions), scope, Array.AsReadOnly(exclusions),
-                    grant.NotBefore.ToUniversalTime(), grant.ExpiresAt.ToUniversalTime()));
+                    grant.NotBefore.ToUniversalTime(), grant.ExpiresAt.ToUniversalTime(), grant.ParentGrantId));
             }
             frozen.Add(new(layer.Id, Array.AsReadOnly(grants.ToArray())));
         }
@@ -105,6 +107,11 @@ public sealed class AuthoritySnapshot
                 Text(grant.Id); Int(grant.Actions.Count);
                 foreach (var action in grant.Actions) Int((int)action);
                 Scope(grant.Scope); Long(grant.NotBefore.UtcTicks); Long(grant.ExpiresAt.UtcTicks);
+                // Parent lineage participates in identity only when present, so
+                // pre-lineage snapshots keep their exact historical identity
+                // while derived grants are tamper-evident. Empty is rejected at
+                // validation, so absent and present can never collide.
+                if (grant.ParentGrantId is string parent) Text(parent);
                 Int(grant.Exclusions.Count); foreach (var exclusion in grant.Exclusions) Scope(exclusion);
             }
         }
