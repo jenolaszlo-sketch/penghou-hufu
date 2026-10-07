@@ -154,3 +154,31 @@ any upload. Publication is serialized, and primary-package conflicts do not use
 `--skip-duplicate` to proceed with unverified symbols. Future changed release
 contents still need a new version. This tooling change does not claim NuGet has
 accepted the recovered symbols; confirm its asynchronous validation after dispatch.
+
+## Preview.4 candidate (prepared, not yet published)
+
+`Directory.Build.props` is at `0.1.0-preview.4`; publication remains the separate
+manual `main` dispatch. Preview.4 adds first-class derived authority: child grants
+with parent lineage, a Hufu-owned containment proof, an atomic derive-and-publish
+store operation, an exact-tuple delegability approval (`DerivedAuthorityApproval`)
+behind a new `AuthorityStoreOperation.Derive`, and ancestor-liveness gating at
+admission. The child's effectiveness depends on ancestor liveness at use time;
+delegability is an issuance-time right. See
+[ADR 0012](decisions/0012-derived-authority-lineage.md) and
+[ADR 0013](decisions/0013-delegability-of-derived-authority.md).
+
+The feature extends the primary constructors of `AuthorityGrant`,
+`AuthorityIssuancePrincipal`, `AuthorityStoreAccessRequest` and
+`CurrentAuthorityRequestAuthorizer` (and their `Deconstruct` methods). Package
+validation against the published preview.3 baseline reports these as intentional
+preview breaking changes, recorded in
+`src/Penghou.Hufu/CompatibilitySuppressions.xml` (seven members across both
+target frameworks). No public API is removed; the change is additive but replaces
+the previous record constructors.
+
+Local validation: all seven packages pack against the preview.3 baseline, and a
+fresh package-only consumer exercises the full lifecycle — derive a child, read
+allowed in scope, read denied out of scope, revoke the parent, read denied as
+ancestor-revoked, and issuance history preserved. The three-platform CI plus
+symbol, package-set, and fresh-consumer qualification run in the manual publish
+workflow before any upload.
