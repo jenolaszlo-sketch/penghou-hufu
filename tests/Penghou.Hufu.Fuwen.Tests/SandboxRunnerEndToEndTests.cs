@@ -18,7 +18,7 @@ namespace Penghou.Hufu.Fuwen.Tests;
 /// </summary>
 public sealed class SandboxRunnerEndToEndTests
 {
-    [Fact]
+    [SkippableFact]
     public async Task RunnerExecutesPinnedWhoamiThroughTheRealChain()
     {
         if (!(OperatingSystem.IsWindows() || OperatingSystem.IsLinux() || OperatingSystem.IsMacOS()))
