@@ -184,8 +184,14 @@ jobs:
               if ((Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash -cne $expected) { throw "Validated artifact hash changed: $path" }
               # A primary-package collision must fail before symbols are sent.
               # Existing releases are skipped only after public-byte verification above.
-              $pushOptions = if ($extension -eq 'nupkg') { @('--no-symbols') } else { @('--skip-duplicate') }
-              dotnet nuget push $path --source https://api.nuget.org/v3/index.json --api-key $env:NUGET_API_KEY @pushOptions
+              # Push options are written inline, not splatted: a single-element
+              # if-expression unwraps to a scalar string, and PowerShell splats a
+              # string character-by-character, injecting a bogus '-' file argument.
+              if ($extension -eq 'nupkg') {
+                dotnet nuget push $path --source https://api.nuget.org/v3/index.json --api-key $env:NUGET_API_KEY --no-symbols
+              } else {
+                dotnet nuget push $path --source https://api.nuget.org/v3/index.json --api-key $env:NUGET_API_KEY --skip-duplicate
+              }
               if ($LASTEXITCODE -ne 0) { throw "Publication failed: $path" }
             }
           }
