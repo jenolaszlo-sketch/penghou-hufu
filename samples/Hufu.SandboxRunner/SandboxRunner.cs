@@ -43,6 +43,31 @@ public static class SandboxRunner
     public const string WorkspaceId = "diagnostic";
     public const string ExecutableRelativePath = "tools/whoami";
 
+    /// <summary>
+    /// The exact provider requirements the consumer will request. The hosting
+    /// probe and the trusted profile ceiling both use this single definition,
+    /// so a probe success means the consumer's negotiation will succeed too.
+    /// </summary>
+    public static ExecutionRequirements BuildRequirements() => new(
+        new[] { ExecutionRequirement.Require(ExecutionCapability.UnitTermination, CapabilityLevel.Partial) });
+
+    /// <summary>
+    /// Structured hosting check on the frozen SPI: can this host prepare the
+    /// diagnostic domain? A refusal is an expected environmental outcome with
+    /// exact reasons; it never executes anything.
+    /// </summary>
+    public static async Task<(bool CanRun, IReadOnlyList<string> Reasons)> ProbeHostingAbilityAsync()
+    {
+        await using var runtime = ExecutionRuntime.Create();
+        if (!runtime.HasProvider)
+            return (false, new[] { runtime.RefusalReason });
+        var prepared = runtime.Prepare(BuildRequirements());
+        if (prepared is PrepareResult.Rejected rejected)
+            return (false, rejected.Reasons);
+        runtime.Discard(((PrepareResult.Accepted)prepared).Prepared);
+        return (true, Array.Empty<string>());
+    }
+
     public static async Task<SandboxRunRecord> RunAsync(string workspaceRoot)
     {
         if (string.IsNullOrWhiteSpace(workspaceRoot))
@@ -68,8 +93,7 @@ public static class SandboxRunner
             }
             : new Dictionary<string, string> { ["PATH"] = "/usr/bin:/bin" };
         var invocation = new SandboxApprovedInvocation(InvocationId, WorkspaceId, ExecutableRelativePath,
-            executable, "", workspaceRoot, Array.Empty<string>(),
-            [ExecutionRequirement.Require(ExecutionCapability.UnitTermination, CapabilityLevel.Partial)]);
+            executable, "", workspaceRoot, Array.Empty<string>(), BuildRequirements().Required);
         var profile = new SandboxExecutionProfile(ProfileId, ProfileRevision, platformEnvironment, new[] { invocation });
         var authorizer = new PinnedExecutionAuthorizer(WorkspaceId, ExecutableRelativePath,
             Sha256Hex($"{ProfileId}|{ProfileRevision}|{executable}"));

@@ -9,11 +9,18 @@ internal static class Program
         if (args.Length == 0 || args[0] == "help")
         {
             Console.WriteLine("Hufu.SandboxRunner (cross-platform governed execution sample). Commands:");
+            Console.WriteLine("probe (report whether this host can prepare the diagnostic domain; prints JSON)");
             Console.WriteLine("run [WORKSPACE] (execute the pinned whoami plan; prints the audit record as JSON)");
             return 0;
         }
         try
         {
+            if (args[0] == "probe" && args.Length == 1)
+            {
+                var (canRun, reasons) = await SandboxRunner.ProbeHostingAbilityAsync();
+                Console.WriteLine(JsonSerializer.Serialize(new { hostCanRun = canRun, reasons }));
+                return 0;
+            }
             if (args[0] != "run" || args.Length > 2)
                 throw new ArgumentException("Unknown command or arguments.");
             bool temporary = args.Length == 1;

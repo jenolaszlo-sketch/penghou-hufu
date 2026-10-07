@@ -1,3 +1,5 @@
+using Gagamba.Execution;
+using Gagamba.Runtime;
 using Hufu.SandboxRunner;
 using Xunit;
 
@@ -7,8 +9,12 @@ namespace Penghou.Hufu.Fuwen.Tests;
 /// The first consumer E2E over the real chain: the sample runner admits its
 /// fixed plan, drives it with a real Zhinu engine, authorizes against the
 /// pinned host profile, and launches <c>whoami</c> in a genuine Gagamba
-/// domain. On a host that cannot host a domain the provider refuses with a
-/// classified status and the test yields, following the HG-1 E2E convention.
+/// domain. Hosting ability is probed structurally on the frozen SPI before
+/// the consumer runs: a pre-acceptance refusal (no provider, unsatisfiable
+/// negotiation, or unpreparable domain) skips with the exact classified
+/// reasons. Anything after a successful Prepare — launch, completion,
+/// admission, engine behavior — must succeed; post-acceptance failure is a
+/// FAIL, never a skip.
 /// </summary>
 public sealed class SandboxRunnerEndToEndTests
 {
@@ -17,14 +23,15 @@ public sealed class SandboxRunnerEndToEndTests
     {
         if (!(OperatingSystem.IsWindows() || OperatingSystem.IsLinux() || OperatingSystem.IsMacOS()))
             return;
+        await ProbeHostingAbility();
+
         string workspace = Path.Combine(Path.GetTempPath(), "sandbox-runner-" + Guid.NewGuid().ToString("N"));
         Directory.CreateDirectory(workspace);
         try
         {
             var record = await SandboxRunner.RunAsync(workspace);
-            if (!string.Equals(record.Status, "Succeeded", StringComparison.Ordinal) && IsHostRefusal(record.Reason))
-                return; // classified provider refusal; the host cannot host a domain here.
-            Assert.True(string.Equals(record.Status, "Succeeded", StringComparison.Ordinal), record.Reason);
+            Assert.True(string.Equals(record.Status, "Succeeded", StringComparison.Ordinal),
+                record.Status + ": " + record.Reason);
             Assert.Equal(SandboxRunner.InvocationId, record.Invocation);
             Assert.Equal(0, record.RootExitCode);
             Assert.NotEqual(Guid.Empty, Guid.Parse(record.RunId));
@@ -38,7 +45,15 @@ public sealed class SandboxRunnerEndToEndTests
         }
     }
 
-    private static bool IsHostRefusal(string reason) =>
-        reason.Contains("Guarantee unavailable", StringComparison.Ordinal) ||
-        reason.Contains("Sandbox failed", StringComparison.Ordinal);
+    private static async Task ProbeHostingAbility()
+    {
+        await using var runtime = ExecutionRuntime.Create();
+        Skip.If(!runtime.HasProvider,
+            "Host cannot host the diagnostic domain: " + runtime.RefusalReason);
+        var prepared = runtime.Prepare(SandboxRunner.BuildRequirements());
+        if (prepared is PrepareResult.Rejected rejected)
+            Skip.If(true, "Host cannot host the diagnostic domain: " +
+                string.Join("; ", rejected.Reasons));
+        runtime.Discard(((PrepareResult.Accepted)prepared).Prepared);
+    }
 }

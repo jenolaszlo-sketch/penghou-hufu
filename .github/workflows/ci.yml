@@ -79,3 +79,45 @@ jobs:
             qualification/**/qualification.json
             qualification/**/tests/*.trx
           if-no-files-found: warn
+  integration-frozen-chain:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-15]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: |
+            8.0.x
+            10.0.x
+      - name: Frozen-chain integration suites
+        shell: pwsh
+        run: |
+          dotnet test tests/Penghou.Hufu.Sandbox.Tests/Penghou.Hufu.Sandbox.Tests.csproj -c Release --logger trx --results-directory test-results
+          if ($LASTEXITCODE -ne 0) { throw 'Sandbox integration suite failed.' }
+          dotnet test tests/Penghou.Hufu.Zhinu.Tests/Penghou.Hufu.Zhinu.Tests.csproj -c Release --logger trx --results-directory test-results
+          if ($LASTEXITCODE -ne 0) { throw 'Zhinu integration suite failed.' }
+          dotnet test tests/Penghou.Hufu.Fuwen.Tests/Penghou.Hufu.Fuwen.Tests.csproj -c Release --logger trx --results-directory test-results
+          if ($LASTEXITCODE -ne 0) { throw 'Fuwen integration suite failed.' }
+      - name: Governed runner host probe and execution
+        shell: pwsh
+        run: |
+          dotnet build samples/Hufu.SandboxRunner/Hufu.SandboxRunner.csproj -c Release
+          if ($LASTEXITCODE -ne 0) { throw 'SandboxRunner build failed.' }
+          $dll = 'samples/Hufu.SandboxRunner/bin/Release/net10.0/Hufu.SandboxRunner.dll'
+          $probe = dotnet $dll probe | ConvertFrom-Json
+          if ($probe.hostCanRun) {
+            dotnet $dll run
+            if ($LASTEXITCODE -ne 0) { throw 'SandboxRunner execution failed on a capable host.' }
+          } else {
+            Write-Host "Host cannot host the diagnostic domain; execution step skipped: $($probe.reasons -join '; ')"
+          }
+      - name: Retain integration evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: hufu-frozen-chain-${{ matrix.os }}
+          path: test-results/*.trx
+          if-no-files-found: warn

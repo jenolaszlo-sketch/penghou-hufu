@@ -13,13 +13,18 @@ each attempt against a pinned workspace/executable pair, and launches it in a
 real Gagamba execution domain via `ExecutionRuntime.Create()`.
 
 ```powershell
+dotnet run --project samples/Hufu.SandboxRunner/Hufu.SandboxRunner.csproj -c Release -- probe
 dotnet run --project samples/Hufu.SandboxRunner/Hufu.SandboxRunner.csproj -c Release -- run
 ```
 
 `run` prints one JSON audit record: status, exit code, invocation, run id,
 authority request id, profile id/revision, and platform. Exit `0` on success,
-`2` otherwise. Pass a `WORKSPACE` path to keep the SQLite database for
-inspection; otherwise a temporary workspace is used and removed.
+`2` otherwise. `probe` prints whether this host can prepare the diagnostic
+domain (`hostCanRun` plus exact reasons) without executing anything; it
+shares the consumer's exact requirement definition, so a runnable probe means
+the consumer's negotiation will succeed. Pass a `WORKSPACE` path to keep the
+SQLite database for inspection; otherwise a temporary workspace is used and
+removed.
 
 What this proves: an admitted plan executes end to end through durable
 orchestration, per-attempt authority, and a negotiated native domain, with the
