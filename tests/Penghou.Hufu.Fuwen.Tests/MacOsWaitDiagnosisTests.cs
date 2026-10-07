@@ -80,18 +80,29 @@ public sealed class MacOsWaitDiagnosisTests
         {
             string uid = RunCapture("id", "-u").Trim();
             string output = RunCapture("launchctl", $"print gui/{uid}");
-            if (output.Length > 6000)
+            var kept = new StringBuilder();
+            var labels = new List<string>();
+            foreach (string line in output.Split('\n'))
             {
-                var kept = new StringBuilder();
-                foreach (string line in output.Split('\n'))
-                    if (line.Contains("gagamba", StringComparison.OrdinalIgnoreCase) ||
-                        line.Contains("state =", StringComparison.Ordinal) ||
-                        line.Contains("exit code", StringComparison.OrdinalIgnoreCase) ||
-                        line.Contains("pid =", StringComparison.Ordinal))
-                        kept.AppendLine(line.Trim());
-                return kept.ToString();
+                if (line.Contains("org.gagamba.exec", StringComparison.Ordinal))
+                {
+                    kept.AppendLine(line.Trim());
+                    foreach (string part in line.Split([' ', '\t'], StringSplitOptions.RemoveEmptyEntries))
+                        if (part.StartsWith("org.gagamba.exec", StringComparison.Ordinal))
+                            labels.Add(part.Trim());
+                }
+                else if (line.Contains("state =", StringComparison.Ordinal) ||
+                    line.Contains("exit code", StringComparison.OrdinalIgnoreCase) ||
+                    line.Contains("pid =", StringComparison.Ordinal))
+                    kept.AppendLine(line.Trim());
             }
-            return output;
+            foreach (string label in labels.Distinct(StringComparer.Ordinal).Take(3))
+            {
+                kept.AppendLine($"--- service print gui/{uid}/{label} ---");
+                string service = RunCapture("launchctl", $"print gui/{uid}/{label}");
+                kept.AppendLine(service.Length > 3000 ? service[..3000] : service);
+            }
+            return kept.ToString();
         }
         catch (Exception ex)
         {
