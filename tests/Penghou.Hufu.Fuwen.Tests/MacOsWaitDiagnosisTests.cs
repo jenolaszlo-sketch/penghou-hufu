@@ -63,7 +63,7 @@ public sealed class MacOsWaitDiagnosisTests
             var completion = await host.WaitForCompletionAsync(start.Handle!, cts.Token);
             return completion.Status switch
             {
-                SandboxCompletionStatus.NaturalExit => new Attempt(true, "", completion.RootExitCode),
+                SandboxCompletionStatus.NaturalExit => new Attempt(true, "", completion.RootExitCode ?? -1),
                 _ => new Attempt(false, "Completion: " + completion.Status, -1),
             };
         }
