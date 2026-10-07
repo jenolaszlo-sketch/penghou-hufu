@@ -7,6 +7,16 @@ baseline (`PackageValidationBaselineVersion` stays `0.1.0-preview.3`) and adds
 ancestor-liveness authorizer overload **without** changing the preview.3
 constructors, `Deconstruct` overloads, or positional contract.
 
+Published from `e207b29` (tag `v0.1.0-preview.5`) via
+[publication run 37664251201](https://github.com/jenolaszlo-sketch/penghou-hufu/actions/runs/37664251201)
+(validation green on Windows/Ubuntu/macOS, then all seven nupkg/snupkg pushed).
+All seven published packages were verified to match the qualified CI artifacts
+entry-by-entry (ignoring the NuGet signature), and a fresh-cache restore from
+nuget.org confirms the additive surface: `AuthorityGrant` keeps the six-argument
+constructor plus a `ParentGrantId` init property, and
+`CurrentAuthorityRequestAuthorizer` keeps the four-argument constructor plus a
+five-argument overload.
+
 ### Incident: preview.4 was a failed partial release — do not use it
 
 `0.1.0-preview.4` is **not** a completed release:
@@ -18,8 +28,11 @@ constructors, `Deconstruct` overloads, or positional contract.
   API** (the widened `AuthorityGrant`/`AuthorityIssuancePrincipal`/
   `AuthorityStoreAccessRequest` constructors), not the additive surface.
 - The other six packages were never published at preview.4.
-- NuGet versions are immutable, so the package was **unlisted** rather than
-  overwritten, and was **not** adopted as the compatibility baseline.
+- NuGet versions are immutable, so the package cannot be overwritten. It was
+  **not** adopted as the compatibility baseline and **must be unlisted**
+  (pending: unlisting requires a nuget.org operator credential, which the CI
+  trusted-publisher flow does not hold; it must be done manually via the
+  package page or an API key).
 - The strict verifier (`eng/Verify-HufuPublishedPackages.ps1`) refuses to
   publish preview.4 bytes that differ from what is already public, so the
   correct recovery was to bump the version (preview.5), not to revert the fix.
