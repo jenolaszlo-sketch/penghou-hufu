@@ -23,6 +23,61 @@ What this means for this roadmap:
   block Hufu, Fuwen, Zhinu, Gagamba, Baize, adapter, sandbox, debugger, or
   audit work.
 
+## Proposed frontend stress-test — Hufu.Ps (PowerShell-syntax, parked scope) - 2026-10-07
+
+`Hufu.Ps` (`Penghou.Hufu.Ps`) is a **proposed only** restricted
+PowerShell-syntax frontend and Hufu stress test. It is not committed, not on
+the critical path, and does not unblock or delay HOST-PATCH, HOST-SERVICES-CI/
+PRODUCT, ZA-5B, or the workflow/neutral-contract gates. Luban remains
+**deferred/parked** per the amendment above; this proposal is not a Luban
+implementation and creates no Luban re-entry commitment.
+
+What is proposed:
+
+- Parse PowerShell-shaped source with
+  `System.Management.Automation.Language.Parser` for syntax only (no runspace,
+  no `pwsh`, no providers/modules, no execution semantics).
+- Canonicalize a fixed, versioned alias/command/parameter registry before
+  compilation; mutable aliases (`Set-Alias`/`New-Alias`/`Remove-Alias`/
+  `Import-Alias`/`Export-Alias`) and dynamic command names (`& $cmd`, computed
+  names) are rejected before any Hufu operation exists.
+- Accept only a small subset initially (command invocation, literal positional/
+  named arguments, simple pipelines; `Get-ChildItem`/`Get-Content`/`Set-Content`/
+  `Select-String`); reject variables, assignment, functions, loops,
+  conditionals, script blocks, subexpressions, expandable strings, member
+  access, reflection, call operator, redirection, jobs, modules, and native
+  execution.
+- Compile accepted source into a canonical operation plan with source-span
+  correlation, then authorize through the existing neutral boundaries only
+  (`filesystem.read`/`list`/`write` via Hufu.IO resource checks, workflow
+  preflight semantics, single-patch governed start where applicable).
+
+Boundary conditions for any future work:
+
+- Hufu core never depends on `System.Management.Automation` and never receives
+  AST/alias/source text as permission. If Hufu needs language-specific
+  knowledge to authorize, the boundary is leaking and the work stops (spec
+  Outcome C).
+- The plan's preflight is not an atomic commit or an irrevocable execution
+  capability: every operation (including runtime-discovered paths from
+  enumeration) gets fresh current-authority checks, revocation applies between
+  operations, data flow never confers authority, replay re-authorizes, and
+  execution failure stays distinguishable from authority denial.
+- Existing filesystem canonicalization/policy ordering (aliases, case rules,
+  links/junctions, changed-resource races against the actual object) and the
+  real mutation-start boundary remain authoritative; an outer Hufu.Ps check
+  alone proves nothing. Capture-only preview and simulated execution stay
+  distinct modes.
+- Source text, spans, and frontend diagnostics are host-only supporting
+  context: never enqueued in bounded telemetry (closed scalar labels only),
+  never in the default Summary explanation projection; Detailed disclosure
+  needs the independent viewer/explanation/expiry policy with raw capture
+  kept host-only.
+- Any future Luban reuse of this frontend (`Hufu.Ps` -> Luban compiler -> IR ->
+  Hufu) requires its own ADR and concrete observed pressure; until then the
+  governing test is frontend replaceability without changing Hufu's authority
+  semantics.
+
 ## Governed single-patch release checkpoint - 2026-10-04
 
 The optional seventh package `Penghou.Hufu.Luban.Sqlite` connects the real
