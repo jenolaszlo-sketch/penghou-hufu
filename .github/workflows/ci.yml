@@ -95,11 +95,11 @@ jobs:
       - name: Frozen-chain integration suites
         shell: pwsh
         run: |
-          dotnet test tests/Penghou.Hufu.Sandbox.Tests/Penghou.Hufu.Sandbox.Tests.csproj -c Release --logger trx --results-directory test-results
+          dotnet test tests/Penghou.Hufu.Sandbox.Tests/Penghou.Hufu.Sandbox.Tests.csproj -c Release --logger trx --results-directory test-results --blame-hang --blame-hang-timeout 10m
           if ($LASTEXITCODE -ne 0) { throw 'Sandbox integration suite failed.' }
-          dotnet test tests/Penghou.Hufu.Zhinu.Tests/Penghou.Hufu.Zhinu.Tests.csproj -c Release --logger trx --results-directory test-results
+          dotnet test tests/Penghou.Hufu.Zhinu.Tests/Penghou.Hufu.Zhinu.Tests.csproj -c Release --logger trx --results-directory test-results --blame-hang --blame-hang-timeout 10m
           if ($LASTEXITCODE -ne 0) { throw 'Zhinu integration suite failed.' }
-          dotnet test tests/Penghou.Hufu.Fuwen.Tests/Penghou.Hufu.Fuwen.Tests.csproj -c Release --logger trx --results-directory test-results
+          dotnet test tests/Penghou.Hufu.Fuwen.Tests/Penghou.Hufu.Fuwen.Tests.csproj -c Release --logger trx --results-directory test-results --blame-hang --blame-hang-timeout 10m
           if ($LASTEXITCODE -ne 0) { throw 'Fuwen integration suite failed.' }
       - name: Governed runner host probe and execution
         shell: pwsh
