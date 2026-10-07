@@ -38,6 +38,34 @@ with PublicApiAnalyzers. Published preview.1/2/3 APIs are now shipped;
 future additions stay in the unshipped inventory until publication. Preview.2
 was validated against preview.1; the preview.3 release validated the six existing
 packages against preview.2 and introduced the seventh without a baseline.
+
+## Public API evolution rule (earned at preview.4)
+
+For positional public records, adding an **optional primary-constructor
+parameter is still a compatibility break**: it replaces the primary
+constructor and the compiler-generated `Deconstruct`, changing the binary and
+source surface even though the new parameter has a default. Prefer **additive
+body properties** when the new state does not need to redefine the positional
+contract:
+
+```csharp
+public sealed record AuthorityGrant(/* original positional members */)
+{
+    public string? ParentGrantId { get; init; }   // additive, not positional
+}
+```
+
+This preserves the previously shipped constructor and `Deconstruct`,
+positional matching, `with { ... }`, and source/binary consumers, while the
+new member stays additive (a body-level `init` property still participates in
+record equality). For a construction-time dependency on a class, prefer an
+**additional constructor overload** over widening the existing one, keeping
+only the widest overload carrying optional parameters (PublicApiAnalyzers
+RS0026/RS0027), so the original constructor signature survives.
+
+Compatibility suppressions are a last resort. Each should mark a deliberate,
+reasoned incompatibility, not a mechanical fix for avoidable signature drift;
+removing the drift is preferred before publishing.
 All seven packages now use published preview.3 for future compatibility validation. Strict target-framework package validation, package contents and
 dependency checks, isolated fresh-cache consumers and separate integration tests
 qualify the candidate. Local checks do not establish production host identity,
