@@ -1,4 +1,5 @@
 using Gagamba.Execution;
+using Penghou.Fuwen;
 
 namespace Penghou.Hufu.Fuwen.Tests;
 
@@ -6,6 +7,18 @@ internal sealed class FixedAuthority : IActivityAuthorityContextSource
 {
     public AuthenticatedAuthorityContext ContextFor(Penghou.Fuwen.ActivityExecutionRequest request) =>
         new("tenant-1", "subject-1", "run-1", "arev-1", "fence-1");
+}
+
+internal sealed class UnusedContext : IContextProvider
+{
+    public ValueTask<ContextExecutionResult> ExecuteAsync(ContextExecutionRequest request,
+        CancellationToken cancellationToken = default) => throw new NotSupportedException();
+}
+
+internal sealed class UnusedInference : IInferenceExecutor
+{
+    public ValueTask<InferenceExecutionResult> ExecuteAsync(InferenceExecutionRequest request,
+        CancellationToken cancellationToken = default) => throw new NotSupportedException();
 }
 
 internal sealed class FakeAuthorizer : IAuthorityRequestAuthorizer

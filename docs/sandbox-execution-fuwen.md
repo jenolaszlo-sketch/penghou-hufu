@@ -133,6 +133,56 @@ Stated simply: Penghou's existing architecture is the default platform.
 Build useful things on it. Change infrastructure only when a useful thing
 proves it cannot be built correctly with what exists.
 
+## Admitted-plan start (consumer #9)
+
+`AdmittedPlanStarter` closes the operator workflow's `start` gap: the
+smallest trustworthy way to create a Zhinu run from an admitted Fuwen plan.
+It composes existing public surfaces only:
+
+1. `WorkflowDefinitionDocument.LoadVerified` verifies the presented canonical
+   bytes against the claimed execution fingerprint (integrity, not approval);
+2. `WorkflowAdmissionService` re-admits the plan against the **host's own**
+   trusted catalogue and policy, producing a fresh in-process receipt;
+3. the fresh receipt's claims are compared, ordinally, to the presented
+   claims (catalogue revision, resolved-descriptor fingerprint, policy
+   revision, grant fingerprint) — any difference refuses;
+4. `FuwenZhinuWorkflowFactory` registers the definition through the frozen
+   Fuwen-Zhinu boundary (it independently re-verifies the definition
+   fingerprint and binds the provider-runtime identity);
+5. a Zhinu run is created with `PlanStartProvenance` metadata binding it to
+   the execution fingerprint, plan revision, receipt fingerprint, catalogue
+   revision, resolved-descriptor fingerprint, and policy/grant fingerprints.
+
+Fail-closed, with stable reason codes: `integrity-failed`,
+`admission-failed`, `catalogue-mismatch`, `descriptor-mismatch`,
+`policy-mismatch`, `grant-mismatch`, `unsupported-node`, `missing-intent`,
+`registration-failed`, `invalid-input`, `start-failed`. No fallback to a
+"best available" catalogue revision.
+
+### The security distinction this preserves
+
+```text
+plan                 declares intent and descriptor references
+admission            proves that exact plan was accepted against trusted revisions
+catalogue-owning host supplies the actual trusted activity definitions
+Zhinu                receives the resulting executable workflow definition
+```
+
+The plan never becomes authority or executable definition by being
+submitted: the host re-admits against its own catalogue and refuses on any
+revision mismatch, and it never deserializes executable behavior from the
+plan. The start operation is a **host** capability, not a generic CLI
+command — a catalogue-free CLI cannot own trusted definitions, which is
+exactly the boundary that kept `runs start` unbuilt. Starting returns a run
+ID and provenance; execution belongs to workers. Started runs then flow
+through the existing `wait`/`show`/`external-ops`/`evidence`/`cancel`/
+`restart` operator surfaces unchanged.
+
+The execution slice this host starts is activity-with-intent plus returns;
+plans using context, inference, conditionals, fan-out, repetition,
+checkpoints, or waits are refused before a run is created rather than
+failing mid-execution.
+
 ## Non-claims
 
 No filesystem authority, VFS/WhatIf, network controls, quotas, or richer
