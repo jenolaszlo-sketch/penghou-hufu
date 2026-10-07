@@ -30,7 +30,10 @@ public sealed partial class SqliteAuthorityStore : IAuthorityDerivationStore
             // may finish, and later approval changes block only new attempts.
             var access = new AuthorityStoreAccessRequest(
                 command.Actor, AuthorityStoreOperation.Derive, AuthoritySubject.From(command.ChildContext),
-                command.ChildContext, DerivationCommand: command);
+                command.ChildContext)
+            {
+                DerivationCommand = command
+            };
             var authorization = await AuthorizeAsync(access, ct).ConfigureAwait(false);
             if (authorization.Status != AuthorityStatus.Permit)
             {
@@ -116,8 +119,10 @@ public sealed partial class SqliteAuthorityStore : IAuthorityDerivationStore
             command.Requested.Scope,
             command.Requested.Exclusions,
             command.Requested.NotBefore,
-            command.Requested.ExpiresAt,
-            command.ParentGrantId);
+            command.Requested.ExpiresAt)
+        {
+            ParentGrantId = command.ParentGrantId
+        };
         var childSnapshot = new AuthoritySnapshot(
             command.ChildContext,
             "derived-" + key.Substring(0, 8),
@@ -196,8 +201,10 @@ public sealed partial class SqliteAuthorityStore : IAuthorityDerivationStore
 
     private static AuthorityGrant RebuildGrant(AuthorityGrantLineage lineage) =>
         new(lineage.ChildGrantId, lineage.Requested.Actions, lineage.Requested.Scope,
-            lineage.Requested.Exclusions, lineage.Requested.NotBefore, lineage.Requested.ExpiresAt,
-            lineage.ParentGrantId);
+            lineage.Requested.Exclusions, lineage.Requested.NotBefore, lineage.Requested.ExpiresAt)
+        {
+            ParentGrantId = lineage.ParentGrantId
+        };
 
     private static async ValueTask<AuthorityGrantLineage?> LoadDerivationAsync(
         SqliteConnection connection,

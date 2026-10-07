@@ -36,8 +36,6 @@ Penghou.Hufu.AuthorityDerivationCommand.ParentContext.get -> Penghou.Hufu.Authen
 Penghou.Hufu.AuthorityDerivationCommand.ParentGrantId.get -> string!
 Penghou.Hufu.AuthorityDerivationCommand.Requested.get -> Penghou.Hufu.RequestedAuthority!
 Penghou.Hufu.AuthorityDerivationCommand.RequestIdentity.get -> string!
-Penghou.Hufu.AuthorityGrant.AuthorityGrant(string! Id, System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityAction>! Actions, Penghou.Hufu.AuthorityScope! Scope, System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>! Exclusions, System.DateTimeOffset NotBefore, System.DateTimeOffset ExpiresAt, string? ParentGrantId = null) -> void
-Penghou.Hufu.AuthorityGrant.Deconstruct(out string! Id, out System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityAction>! Actions, out Penghou.Hufu.AuthorityScope! Scope, out System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>! Exclusions, out System.DateTimeOffset NotBefore, out System.DateTimeOffset ExpiresAt, out string? ParentGrantId) -> void
 Penghou.Hufu.AuthorityGrant.ParentGrantId.get -> string?
 Penghou.Hufu.AuthorityGrant.ParentGrantId.init -> void
 Penghou.Hufu.AuthorityGrantDerivationRequest
@@ -111,10 +109,6 @@ override Penghou.Hufu.DerivedAuthorityApproval.GetHashCode() -> int
 override Penghou.Hufu.DerivedAuthorityApproval.ToString() -> string!
 Penghou.Hufu.AuthorityIssuancePrincipal.ApprovedDerivation.get -> Penghou.Hufu.DerivedAuthorityApproval?
 Penghou.Hufu.AuthorityIssuancePrincipal.ApprovedDerivation.init -> void
-Penghou.Hufu.AuthorityIssuancePrincipal.AuthorityIssuancePrincipal(Penghou.Hufu.AuthorityStoreActor! Actor, Penghou.Hufu.AuthoritySnapshot? IssuerCeiling = null, string? ApprovedSnapshotIdentity = null, long? ApprovedExpectedSequence = null, string? ApprovedCommandId = null, System.DateTimeOffset? ApprovalValidUntil = null, Penghou.Hufu.DerivedAuthorityApproval? ApprovedDerivation = null) -> void
-Penghou.Hufu.AuthorityIssuancePrincipal.Deconstruct(out Penghou.Hufu.AuthorityStoreActor! Actor, out Penghou.Hufu.AuthoritySnapshot? IssuerCeiling, out string? ApprovedSnapshotIdentity, out long? ApprovedExpectedSequence, out string? ApprovedCommandId, out System.DateTimeOffset? ApprovalValidUntil, out Penghou.Hufu.DerivedAuthorityApproval? ApprovedDerivation) -> void
-Penghou.Hufu.AuthorityStoreAccessRequest.AuthorityStoreAccessRequest(Penghou.Hufu.AuthorityStoreActor! Actor, Penghou.Hufu.AuthorityStoreOperation Operation, Penghou.Hufu.AuthoritySubject! Subject, Penghou.Hufu.AuthenticatedAuthorityContext? Context = null, string? CommandId = null, long? ExpectedSequence = null, Penghou.Hufu.AuthoritySnapshot? ProposedSnapshot = null, string? ReasonCode = null, Penghou.Hufu.AuthorityDecisionRecord? DecisionRecord = null, Penghou.Hufu.AuthorityOperationStartCommand? StartCommand = null, Penghou.Hufu.AuthorityDerivationCommand? DerivationCommand = null) -> void
-Penghou.Hufu.AuthorityStoreAccessRequest.Deconstruct(out Penghou.Hufu.AuthorityStoreActor! Actor, out Penghou.Hufu.AuthorityStoreOperation Operation, out Penghou.Hufu.AuthoritySubject! Subject, out Penghou.Hufu.AuthenticatedAuthorityContext? Context, out string? CommandId, out long? ExpectedSequence, out Penghou.Hufu.AuthoritySnapshot? ProposedSnapshot, out string? ReasonCode, out Penghou.Hufu.AuthorityDecisionRecord? DecisionRecord, out Penghou.Hufu.AuthorityOperationStartCommand? StartCommand, out Penghou.Hufu.AuthorityDerivationCommand? DerivationCommand) -> void
 Penghou.Hufu.AuthorityStoreAccessRequest.DerivationCommand.get -> Penghou.Hufu.AuthorityDerivationCommand?
 Penghou.Hufu.AuthorityStoreAccessRequest.DerivationCommand.init -> void
 Penghou.Hufu.AuthorityStoreOperation.Derive = 7 -> Penghou.Hufu.AuthorityStoreOperation

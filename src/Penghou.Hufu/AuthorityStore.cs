@@ -36,7 +36,11 @@ public sealed record AuthorityStoreAccessRequest(AuthorityStoreActor Actor, Auth
     AuthoritySubject Subject, AuthenticatedAuthorityContext? Context = null,
     string? CommandId = null, long? ExpectedSequence = null, AuthoritySnapshot? ProposedSnapshot = null,
     string? ReasonCode = null, AuthorityDecisionRecord? DecisionRecord = null,
-    AuthorityOperationStartCommand? StartCommand = null, AuthorityDerivationCommand? DerivationCommand = null);
+    AuthorityOperationStartCommand? StartCommand = null)
+{
+    /// <summary>Exact derivation command when <see cref="Operation"/> is <see cref="AuthorityStoreOperation.Derive"/>.</summary>
+    public AuthorityDerivationCommand? DerivationCommand { get; init; }
+}
 public sealed record AuthorityStoreAuthorization(AuthorityStatus Status, AuthorityStoreActor? Actor = null);
 
 /// <summary>

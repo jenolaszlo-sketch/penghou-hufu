@@ -29,6 +29,13 @@ public sealed class CurrentAuthorityRequestAuthorizer : IAuthorityRequestAuthori
     private readonly TimeProvider _clock;
     private readonly IAncestorLiveness? _ancestorLiveness;
     public CurrentAuthorityRequestAuthorizer(IAuthoritySnapshotSource source, IAuthorityEvaluator evaluator,
+        IAuthorityDecisionRecorder recorder, TimeProvider? clock)
+        : this(source, evaluator, recorder, clock, ancestorLiveness: null)
+    {
+    }
+
+    /// <summary>Composes the current snapshot, evaluator, and recorder with an optional ancestor-liveness check.</summary>
+    public CurrentAuthorityRequestAuthorizer(IAuthoritySnapshotSource source, IAuthorityEvaluator evaluator,
         IAuthorityDecisionRecorder recorder, TimeProvider? clock = null, IAncestorLiveness? ancestorLiveness = null)
     {
         _source = source ?? throw new ArgumentNullException(nameof(source));

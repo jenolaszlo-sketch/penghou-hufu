@@ -236,7 +236,7 @@ public sealed class AuthorityDerivationTests
             [new AuthorityLayer("forged", [
                 new AuthorityGrant("grant-forged", [AuthorityAction.ReadFile],
                     new AuthorityScope("workspace", "src/service", AuthorityScopeKind.Subtree), [],
-                    Now.AddMinutes(-1), Now.AddDays(1), "grant-parent")])],
+                    Now.AddMinutes(-1), Now.AddDays(1)) { ParentGrantId = "grant-parent" }])],
             [], Now.AddDays(1));
         var published = await store.PublishAsync(
             new AuthorityPublishCommand("publish-forged", Actor, forged, 0),

@@ -131,7 +131,7 @@ public sealed class DeriveAdmissionTests
         var time = new MutableTimeProvider(Now);
         await PublishParentAsync(database, time);
         var expired = new AuthorityIssuancePrincipal(
-            Actor, ApprovalValidUntil: Now.AddMinutes(-1), ApprovedDerivation: Approval());
+            Actor, ApprovalValidUntil: Now.AddMinutes(-1)) { ApprovedDerivation = Approval() };
         var store = database.Open(time, new BoundedAuthorityIssuanceAuthorizer(
             new TestTrustSource(expired), new AllowAllPolicy(), time));
 
@@ -191,7 +191,7 @@ public sealed class DeriveAdmissionTests
             AuthorityDerivation.RequestedAuthorityHash(requested ?? Authority()));
 
     private static AuthorityIssuancePrincipal Principal(DerivedAuthorityApproval approval) =>
-        new(Actor, ApprovalValidUntil: Now.AddHours(1), ApprovedDerivation: approval);
+        new(Actor, ApprovalValidUntil: Now.AddHours(1)) { ApprovedDerivation = approval };
 
     private static async Task PublishParentAsync(TemporaryDatabase database, TimeProvider time)
     {

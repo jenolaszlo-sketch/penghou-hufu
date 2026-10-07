@@ -15,7 +15,11 @@ public sealed record DerivedAuthorityApproval(
 public sealed record AuthorityIssuancePrincipal(AuthorityStoreActor Actor,
     AuthoritySnapshot? IssuerCeiling = null, string? ApprovedSnapshotIdentity = null,
     long? ApprovedExpectedSequence = null, string? ApprovedCommandId = null,
-    DateTimeOffset? ApprovalValidUntil = null, DerivedAuthorityApproval? ApprovedDerivation = null);
+    DateTimeOffset? ApprovalValidUntil = null)
+{
+    /// <summary>Exact derivation approval when authorizing <see cref="AuthorityStoreOperation.Derive"/>.</summary>
+    public DerivedAuthorityApproval? ApprovedDerivation { get; init; }
+}
 
 /// <summary>Authenticate the presented session and resolve current issuer authority and approval from trusted host state.</summary>
 /// <remarks>

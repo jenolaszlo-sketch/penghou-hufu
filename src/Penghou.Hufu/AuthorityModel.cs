@@ -14,8 +14,11 @@ public sealed record AuthenticatedAuthorityContext(string TenantId, string Subje
     string RevisionId, string FenceId);
 public sealed record AuthorityScope(string WorkspaceId, string RelativePath, AuthorityScopeKind Kind);
 public sealed record AuthorityGrant(string Id, IReadOnlyList<AuthorityAction> Actions, AuthorityScope Scope,
-    IReadOnlyList<AuthorityScope> Exclusions, DateTimeOffset NotBefore, DateTimeOffset ExpiresAt,
-    string? ParentGrantId = null);
+    IReadOnlyList<AuthorityScope> Exclusions, DateTimeOffset NotBefore, DateTimeOffset ExpiresAt)
+{
+    /// <summary>Parent grant identity when this grant is derived; null for root grants.</summary>
+    public string? ParentGrantId { get; init; }
+}
 public sealed record AuthorityLayer(string Id, IReadOnlyList<AuthorityGrant> Grants);
 public sealed record AuthorityRequest(AuthenticatedAuthorityContext Context, AuthorityAction Action,
     string WorkspaceId, string RelativePath, string RequestIdentity);
@@ -66,7 +69,10 @@ public sealed class AuthoritySnapshot
                         throw new ArgumentException("Exclusions must remain within their grant scope.");
                 }
                 grants.Add(new(grant.Id, Array.AsReadOnly(actions), scope, Array.AsReadOnly(exclusions),
-                    grant.NotBefore.ToUniversalTime(), grant.ExpiresAt.ToUniversalTime(), grant.ParentGrantId));
+                    grant.NotBefore.ToUniversalTime(), grant.ExpiresAt.ToUniversalTime())
+                {
+                    ParentGrantId = grant.ParentGrantId
+                });
             }
             frozen.Add(new(layer.Id, Array.AsReadOnly(grants.ToArray())));
         }
