@@ -1,6 +1,34 @@
 # Hufu package release profile
 
-Current published release: seven packages at `0.1.0-preview.3`, including the optional
+Current release: seven packages at `0.1.0-preview.5`, carrying the corrected
+additive derived-authority surface. It is compatible with the `preview.3`
+baseline (`PackageValidationBaselineVersion` stays `0.1.0-preview.3`) and adds
+`ParentGrantId`, `ApprovedDerivation`, `DerivationCommand`, and the optional
+ancestor-liveness authorizer overload **without** changing the preview.3
+constructors, `Deconstruct` overloads, or positional contract.
+
+### Incident: preview.4 was a failed partial release — do not use it
+
+`0.1.0-preview.4` is **not** a completed release:
+
+- A publish dispatch built from `4b8baa3` (the commit *before* the additive
+  fix) published **only `Penghou.Hufu`** at `0.1.0-preview.4`, then aborted on
+  a publish-workflow argument-splatting bug (fixed separately in `b50e455`).
+- That published package carried the **superseded positional derived-authority
+  API** (the widened `AuthorityGrant`/`AuthorityIssuancePrincipal`/
+  `AuthorityStoreAccessRequest` constructors), not the additive surface.
+- The other six packages were never published at preview.4.
+- NuGet versions are immutable, so the package was **unlisted** rather than
+  overwritten, and was **not** adopted as the compatibility baseline.
+- The strict verifier (`eng/Verify-HufuPublishedPackages.ps1`) refuses to
+  publish preview.4 bytes that differ from what is already public, so the
+  correct recovery was to bump the version (preview.5), not to revert the fix.
+
+Forensic marker `partial-preview.4-publish` (annotated, non-release) points at
+`4b8baa3`, the tree that produced the published preview.4 package. The release
+tag `v0.1.0-preview.4` was deleted; do not recreate it.
+
+The prior published release was seven packages at `0.1.0-preview.3`, including the optional
 `Penghou.Hufu.Luban.Sqlite` [single-patch host](single-patch-host.md). Remote CI and
 publication validation passed on Windows, Ubuntu and macOS at `3206c44`. Exact
 public package contents match the publication artifacts apart from NuGet signatures;
