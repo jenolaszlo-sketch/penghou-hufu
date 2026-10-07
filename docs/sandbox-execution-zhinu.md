@@ -17,7 +17,7 @@ Penghou.Hufu.Zhinu   (this composition)
 Penghou.Hufu.Sandbox  ->  Gagamba.ExecutionRuntime  ->  native provider
 ```
 
-Zhinu core stays Hufu-free; Gagamba is frozen at `0.1.0-preview.3`. The
+Zhinu core stays Hufu-free; Gagamba is frozen at `0.1.0-preview.4`. The
 composition references `Penghou.Zhinu` and `Penghou.Hufu.Sandbox` and adds
 nothing to either core.
 

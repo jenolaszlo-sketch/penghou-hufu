@@ -7,6 +7,6 @@
   </PropertyGroup>
   <ItemGroup>
     <ProjectReference Include="..\Penghou.Hufu\Penghou.Hufu.csproj" />
-    <PackageReference Include="Gagamba.Runtime" Version="0.1.0-preview.3" />
+    <PackageReference Include="Gagamba.Runtime" Version="0.1.0-preview.4" />
   </ItemGroup>
 </Project>

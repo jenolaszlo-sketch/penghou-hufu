@@ -107,7 +107,9 @@ so the chain is reconstructable without reopening the plan.
 `Penghou.Fuwen`, `Penghou.Fuwen.Compiler`, `Penghou.Fuwen.Zhinu`
 (`0.1.0-preview.12`) and `Penghou.Zhinu`/`Penghou.Zhinu.Sqlite`
 (`0.2.0-preview.2`), plus the local `Penghou.Hufu.Sandbox`. Gagamba stays frozen
-at `0.1.0-preview.3`; Zhinu core and Fuwen core gained no cross-dependency.
+at `0.1.0-preview.4` (preview.4 carries the macOS `not running` completion
+fix proven by this consumer); Zhinu core and Fuwen core gained no
+cross-dependency.
 
 ## First consumer
 
