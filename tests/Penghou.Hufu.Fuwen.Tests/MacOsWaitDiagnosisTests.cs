@@ -26,7 +26,8 @@ public sealed class MacOsWaitDiagnosisTests
 
         // Control first: the GM-2-proven shape through the same host stack.
         var shResult = await RunOnce("/bin/sh", "-c \"exit 0\"");
-        Assert.True(shResult.Completed, "sh exit 0 did not complete: " + shResult.Detail);
+        Assert.True(shResult.Completed,
+            $"sh exit 0 did not complete: {shResult.Detail} Domain state:\n{PrintDomain()}");
 
         // Suspect: whoami with empty args through the same stack.
         var whoamiResult = await RunOnce("/usr/bin/whoami", "");
