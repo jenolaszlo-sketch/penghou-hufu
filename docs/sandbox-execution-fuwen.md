@@ -119,6 +119,16 @@ chain: one admitted plan (neutral intent `diagnostic.whoami`, requiring
 per-attempt pinned authorization, and a genuine Gagamba domain, printing one
 JSON audit record. It adds no infrastructure and takes no Luban dependency.
 
+## Default platform
+
+After four independent consumers with zero architectural expansion, the
+frozen chain is no longer awaiting validation: it is the default platform.
+New work assumes the existing abstractions are sufficient until a real
+feature proves otherwise. Consumer selection optimizes for usefulness
+first — removing a real manual or debugging step, usable today, built
+mostly from existing public surfaces, connecting capabilities into a more
+complete workflow — and only then for whether a boundary is pressured.
+
 ## Non-claims
 
 No filesystem authority, VFS/WhatIf, network controls, quotas, or richer
