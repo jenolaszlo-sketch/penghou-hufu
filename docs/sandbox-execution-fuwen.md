@@ -129,6 +129,10 @@ first — removing a real manual or debugging step, usable today, built
 mostly from existing public surfaces, connecting capabilities into a more
 complete workflow — and only then for whether a boundary is pressured.
 
+Stated simply: Penghou's existing architecture is the default platform.
+Build useful things on it. Change infrastructure only when a useful thing
+proves it cannot be built correctly with what exists.
+
 ## Non-claims
 
 No filesystem authority, VFS/WhatIf, network controls, quotas, or richer
