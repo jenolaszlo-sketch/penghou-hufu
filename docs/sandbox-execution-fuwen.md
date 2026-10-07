@@ -183,6 +183,17 @@ plans using context, inference, conditionals, fan-out, repetition,
 checkpoints, or waits are refused before a run is created rather than
 failing mid-execution.
 
+### Durable conclusion
+
+A missing operator workflow does not necessarily imply a missing platform
+capability. Before extending infrastructure, first test whether the trusted
+host can compose the existing boundaries into the required workflow.
+Consumer #9 assumed plan-start needed a new engine or store primitive; the
+survey showed the frozen admission and Fuwen-Zhinu boundaries already held
+the needed invariants, and the only missing piece was host composition. The
+capability boundary was real (start cannot be a catalogue-free CLI), but it
+was a boundary in the *host*, not in the platform.
+
 ## Non-claims
 
 No filesystem authority, VFS/WhatIf, network controls, quotas, or richer
