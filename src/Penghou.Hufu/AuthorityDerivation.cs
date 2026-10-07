@@ -274,36 +274,56 @@ public static class AuthorityDerivation
         ArgumentNullException.ThrowIfNull(requested);
         using var stream = new MemoryStream();
         using var writer = new BinaryWriter(stream, AuthorityValidation.StrictUtf8, true);
-        Text("Penghou.Hufu.DerivationIdentity.v1");
-        Text(parentGrantId);
-        Text(delegationId);
-        Text(generation);
-        foreach (var action in requested.Actions.OrderBy(action => action)) Int((int)action);
-        Scope(requested.Scope);
+        WriteText(writer, "Penghou.Hufu.DerivationIdentity.v1");
+        WriteText(writer, parentGrantId);
+        WriteText(writer, delegationId);
+        WriteText(writer, generation);
+        WriteAuthority(writer, requested);
+        writer.Flush();
+        return Convert.ToHexString(SHA256.HashData(stream.GetBuffer().AsSpan(0, (int)stream.Length))).ToLowerInvariant();
+    }
+
+    /// <summary>
+    /// Computes the canonical hash of requested authority alone. Delegability
+    /// approval binds this hash, so an approval for one authority envelope can
+    /// never match a materially different one.
+    /// </summary>
+    public static string RequestedAuthorityHash(RequestedAuthority requested)
+    {
+        ArgumentNullException.ThrowIfNull(requested);
+        using var stream = new MemoryStream();
+        using var writer = new BinaryWriter(stream, AuthorityValidation.StrictUtf8, true);
+        WriteText(writer, "Penghou.Hufu.RequestedAuthority.v1");
+        WriteAuthority(writer, requested);
+        writer.Flush();
+        return Convert.ToHexString(SHA256.HashData(stream.GetBuffer().AsSpan(0, (int)stream.Length))).ToLowerInvariant();
+    }
+
+    private static void WriteAuthority(BinaryWriter writer, RequestedAuthority requested)
+    {
+        foreach (var action in requested.Actions.OrderBy(action => action)) writer.Write((int)action);
+        WriteScope(writer, requested.Scope);
         foreach (var exclusion in requested.Exclusions
                      .OrderBy(exclusion => exclusion.WorkspaceId, StringComparer.Ordinal)
                      .ThenBy(exclusion => exclusion.RelativePath, StringComparer.Ordinal)
                      .ThenBy(exclusion => exclusion.Kind))
-            Scope(exclusion);
-        Long(requested.NotBefore.UtcTicks);
-        Long(requested.ExpiresAt.UtcTicks);
-        writer.Flush();
-        return Convert.ToHexString(SHA256.HashData(stream.GetBuffer().AsSpan(0, (int)stream.Length))).ToLowerInvariant();
+            WriteScope(writer, exclusion);
+        writer.Write(requested.NotBefore.UtcTicks);
+        writer.Write(requested.ExpiresAt.UtcTicks);
+    }
 
-        void Int(int value) => writer.Write(value);
-        void Long(long value) => writer.Write(value);
-        void Text(string value)
-        {
-            var bytes = AuthorityValidation.StrictUtf8.GetBytes(value);
-            writer.Write(bytes.Length);
-            writer.Write(bytes);
-        }
-        void Scope(AuthorityScope scope)
-        {
-            Text(scope.WorkspaceId);
-            Text(scope.RelativePath);
-            Int((int)scope.Kind);
-        }
+    private static void WriteText(BinaryWriter writer, string value)
+    {
+        var bytes = AuthorityValidation.StrictUtf8.GetBytes(value);
+        writer.Write(bytes.Length);
+        writer.Write(bytes);
+    }
+
+    private static void WriteScope(BinaryWriter writer, AuthorityScope scope)
+    {
+        WriteText(writer, scope.WorkspaceId);
+        WriteText(writer, scope.RelativePath);
+        writer.Write((int)scope.Kind);
     }
 
     /// <summary>

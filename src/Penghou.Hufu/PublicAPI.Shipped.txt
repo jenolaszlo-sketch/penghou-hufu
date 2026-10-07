@@ -383,8 +383,6 @@ Penghou.Hufu.AuthorityIssuancePrincipal.ApprovedExpectedSequence.get -> long?
 Penghou.Hufu.AuthorityIssuancePrincipal.ApprovedExpectedSequence.init -> void
 Penghou.Hufu.AuthorityIssuancePrincipal.ApprovedSnapshotIdentity.get -> string?
 Penghou.Hufu.AuthorityIssuancePrincipal.ApprovedSnapshotIdentity.init -> void
-Penghou.Hufu.AuthorityIssuancePrincipal.AuthorityIssuancePrincipal(Penghou.Hufu.AuthorityStoreActor! Actor, Penghou.Hufu.AuthoritySnapshot? IssuerCeiling = null, string? ApprovedSnapshotIdentity = null, long? ApprovedExpectedSequence = null, string? ApprovedCommandId = null, System.DateTimeOffset? ApprovalValidUntil = null) -> void
-Penghou.Hufu.AuthorityIssuancePrincipal.Deconstruct(out Penghou.Hufu.AuthorityStoreActor! Actor, out Penghou.Hufu.AuthoritySnapshot? IssuerCeiling, out string? ApprovedSnapshotIdentity, out long? ApprovedExpectedSequence, out string? ApprovedCommandId, out System.DateTimeOffset? ApprovalValidUntil) -> void
 Penghou.Hufu.AuthorityIssuancePrincipal.Equals(Penghou.Hufu.AuthorityIssuancePrincipal? other) -> bool
 Penghou.Hufu.AuthorityIssuancePrincipal.IssuerCeiling.get -> Penghou.Hufu.AuthoritySnapshot?
 Penghou.Hufu.AuthorityIssuancePrincipal.IssuerCeiling.init -> void
@@ -579,14 +577,12 @@ Penghou.Hufu.AuthorityStoreAccessRequest
 Penghou.Hufu.AuthorityStoreAccessRequest.<Clone>$() -> Penghou.Hufu.AuthorityStoreAccessRequest!
 Penghou.Hufu.AuthorityStoreAccessRequest.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
 Penghou.Hufu.AuthorityStoreAccessRequest.Actor.init -> void
-Penghou.Hufu.AuthorityStoreAccessRequest.AuthorityStoreAccessRequest(Penghou.Hufu.AuthorityStoreActor! Actor, Penghou.Hufu.AuthorityStoreOperation Operation, Penghou.Hufu.AuthoritySubject! Subject, Penghou.Hufu.AuthenticatedAuthorityContext? Context = null, string? CommandId = null, long? ExpectedSequence = null, Penghou.Hufu.AuthoritySnapshot? ProposedSnapshot = null, string? ReasonCode = null, Penghou.Hufu.AuthorityDecisionRecord? DecisionRecord = null, Penghou.Hufu.AuthorityOperationStartCommand? StartCommand = null) -> void
 Penghou.Hufu.AuthorityStoreAccessRequest.CommandId.get -> string?
 Penghou.Hufu.AuthorityStoreAccessRequest.CommandId.init -> void
 Penghou.Hufu.AuthorityStoreAccessRequest.Context.get -> Penghou.Hufu.AuthenticatedAuthorityContext?
 Penghou.Hufu.AuthorityStoreAccessRequest.Context.init -> void
 Penghou.Hufu.AuthorityStoreAccessRequest.DecisionRecord.get -> Penghou.Hufu.AuthorityDecisionRecord?
 Penghou.Hufu.AuthorityStoreAccessRequest.DecisionRecord.init -> void
-Penghou.Hufu.AuthorityStoreAccessRequest.Deconstruct(out Penghou.Hufu.AuthorityStoreActor! Actor, out Penghou.Hufu.AuthorityStoreOperation Operation, out Penghou.Hufu.AuthoritySubject! Subject, out Penghou.Hufu.AuthenticatedAuthorityContext? Context, out string? CommandId, out long? ExpectedSequence, out Penghou.Hufu.AuthoritySnapshot? ProposedSnapshot, out string? ReasonCode, out Penghou.Hufu.AuthorityDecisionRecord? DecisionRecord, out Penghou.Hufu.AuthorityOperationStartCommand? StartCommand) -> void
 Penghou.Hufu.AuthorityStoreAccessRequest.Equals(Penghou.Hufu.AuthorityStoreAccessRequest? other) -> bool
 Penghou.Hufu.AuthorityStoreAccessRequest.ExpectedSequence.get -> long?
 Penghou.Hufu.AuthorityStoreAccessRequest.ExpectedSequence.init -> void

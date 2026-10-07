@@ -7,7 +7,7 @@ public sealed record AuthoritySubject(string TenantId, string SubjectId, string 
     public static AuthoritySubject From(AuthenticatedAuthorityContext context) =>
         new(context.TenantId, context.SubjectId, context.RunId);
 }
-public enum AuthorityStoreOperation { ReadCurrent, Publish, Revoke, RecordDecision, ReadHistory, ReadDecisions, StartOperation }
+public enum AuthorityStoreOperation { ReadCurrent, Publish, Revoke, RecordDecision, ReadHistory, ReadDecisions, StartOperation, Derive }
 public enum AuthorityChangeKind { Published, Revoked }
 public enum AuthorityMutationStatus { Unavailable, Denied, InvalidRequest, Conflict, Applied, Replayed, CapacityExceeded }
 public enum AuthorityReadStatus { Unavailable, Denied, InvalidRequest, NotFound, Active, Expired, Revoked, StaleContext }
@@ -36,7 +36,7 @@ public sealed record AuthorityStoreAccessRequest(AuthorityStoreActor Actor, Auth
     AuthoritySubject Subject, AuthenticatedAuthorityContext? Context = null,
     string? CommandId = null, long? ExpectedSequence = null, AuthoritySnapshot? ProposedSnapshot = null,
     string? ReasonCode = null, AuthorityDecisionRecord? DecisionRecord = null,
-    AuthorityOperationStartCommand? StartCommand = null);
+    AuthorityOperationStartCommand? StartCommand = null, AuthorityDerivationCommand? DerivationCommand = null);
 public sealed record AuthorityStoreAuthorization(AuthorityStatus Status, AuthorityStoreActor? Actor = null);
 
 /// <summary>

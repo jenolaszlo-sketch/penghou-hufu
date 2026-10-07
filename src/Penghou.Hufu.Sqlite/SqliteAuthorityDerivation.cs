@@ -22,6 +22,21 @@ public sealed partial class SqliteAuthorityStore : IAuthorityDerivationStore
             command.ParentGrantId, command.DelegationId, command.Generation, command.Requested);
         try
         {
+            // Permission to attempt issuance is established by the trusted
+            // authorizer before any state is touched; the store operation then
+            // protects authority integrity (parent liveness, containment) at
+            // commit. The duplication is intentional.
+            var access = new AuthorityStoreAccessRequest(
+                command.Actor, AuthorityStoreOperation.Derive, AuthoritySubject.From(command.ChildContext),
+                command.ChildContext, DerivationCommand: command);
+            var authorization = await AuthorizeAsync(access, ct).ConfigureAwait(false);
+            if (authorization.Status != AuthorityStatus.Permit)
+            {
+                return authorization.Status == AuthorityStatus.Deny
+                    ? new AuthorityGrantDerivationResult(AuthorityStatus.Deny, null, command.ParentGrantId, key, "authority.derivation-not-authorized")
+                    : new AuthorityGrantDerivationResult(AuthorityStatus.Unavailable, null, command.ParentGrantId, key, "authority.store-unavailable");
+            }
+
             using var connection = await OpenAsync(ct).ConfigureAwait(false);
             using var transaction = connection.BeginTransaction(deferred: false);
             var replayed = await LoadDerivationAsync(connection, transaction, key, ct).ConfigureAwait(false);
