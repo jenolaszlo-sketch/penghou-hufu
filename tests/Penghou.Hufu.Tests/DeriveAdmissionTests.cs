@@ -141,6 +141,33 @@ public sealed class DeriveAdmissionTests
         Assert.Null(result.Grant);
     }
 
+    [Fact]
+    public async Task Issued_child_survives_later_approval_removal()
+    {
+        using var database = new TemporaryDatabase();
+        var time = new MutableTimeProvider(Now);
+        await PublishParentAsync(database, time);
+        var trust = new TestTrustSource(Principal(Approval()));
+        var store = database.Open(time, new BoundedAuthorityIssuanceAuthorizer(trust, new AllowAllPolicy(), time));
+
+        var issued = await store.DeriveAsync(Command(generation: "gen-1"), CancellationToken.None);
+        Assert.Equal(AuthorityStatus.Permit, issued.Status);
+        Assert.NotNull(issued.Grant);
+
+        // Delegability is an issuance-time right. Withdrawing the approval
+        // blocks new derivations but never rescinds an already-issued child;
+        // the child's effectiveness is governed by ancestor liveness, not by
+        // the approval that authorized its creation.
+        trust.Fallback = new AuthorityIssuancePrincipal(Actor);
+
+        var later = await store.DeriveAsync(Command(generation: "gen-2"), CancellationToken.None);
+        Assert.Equal(AuthorityStatus.Deny, later.Status);
+        Assert.Null(later.Grant);
+
+        var state = await store.ReadCurrentAsync(Actor, Child, CancellationToken.None);
+        Assert.Equal(AuthorityReadStatus.Active, state.Status);
+    }
+
     private static RequestedAuthority Authority() => AuthorityAt("src/service");
 
     private static RequestedAuthority AuthorityAt(string path) => new(

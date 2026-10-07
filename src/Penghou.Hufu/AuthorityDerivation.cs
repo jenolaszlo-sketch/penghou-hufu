@@ -189,6 +189,15 @@ public interface IAncestorLiveness
 /// Atomic derived-authority persistence: lineage, child snapshot, and
 /// idempotency record become visible together or not at all.
 /// </summary>
+/// <remarks>
+/// Delegability is an issuance-time right checked at the start boundary, not
+/// a continuous property of the child. A derivation that has passed its fresh
+/// approval check may commit even if that approval changes immediately after;
+/// revocation blocks new derivations that have not yet passed their start
+/// gate, and never retroactively invalidates an already-issued child. An
+/// issued child's effectiveness depends on ancestor liveness, evaluated at
+/// use time, not on the delegability approval that authorized its creation.
+/// </remarks>
 public interface IAuthorityDerivationStore
 {
     ValueTask<AuthorityGrantDerivationResult> DeriveAsync(

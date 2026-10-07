@@ -31,7 +31,15 @@ public interface IAuthorityIssuanceTrustSource
 }
 
 /// <summary>Finite typed-scope publication and derivation policy composed with mandatory host operation policy.</summary>
-/// <remarks>Requires fresh host authentication, exact approval and conservative containment in every issuer layer. Derivation approval is exact-tuple and separate from publication approval.</remarks>
+/// <remarks>
+/// Requires fresh host authentication, exact approval and conservative containment in every issuer layer.
+/// Derivation approval is exact-tuple and separate from publication approval.
+/// The reload after operation policy is the freshness boundary: a fresh
+/// authorization immediately preceding the protected operation authorizes that
+/// operation to start. An issuance that has passed this gate may finish even if
+/// approval changes immediately afterward; revocation blocks operations that
+/// have not yet passed it.
+/// </remarks>
 public sealed class BoundedAuthorityIssuanceAuthorizer : IAuthorityStoreAuthorizer
 {
     private readonly IAuthorityIssuanceTrustSource trust;

@@ -143,3 +143,42 @@ supervisor, delegation, generation, parent, and requested authority without
 deciding anything. Until then, derivation remains available only through
 the existing proof-slice mechanics, and no consumer may infer a right to
 delegate from mere possession of authority.
+
+## Implementation notes (gate landed)
+
+The `Derive` operation and `DerivedAuthorityApproval` are implemented in
+`BoundedAuthorityIssuanceAuthorizer`, and `SqliteAuthorityDerivation`
+routes derivation through that gate before its transaction.
+
+### Delegability is an issuance-time right (start-boundary semantics)
+
+The authorizer's reload-after-policy is the start boundary: a fresh
+authorization immediately preceding the protected operation authorizes that
+operation to start. This follows Hufu's existing block-new-starts
+philosophy and matches its revocation semantics for already-started
+operations.
+
+```text
+revocation blocks Derive operations that have not yet passed their start gate
+an already-admitted issuance may finish
+```
+
+Consequences, made explicit rather than left as an accidental TOCTOU window:
+
+- An approval revoked after the gate returned Permit but before the
+  transaction commits does not abort that issuance. If the implementation
+  ever needs "approval must still be current at commit", the gate must
+  return a versioned/fenced authorization the mutation validates, not just
+  `Permit`; that is deferred until a consumer requires it.
+- Revoking the ability to delegate never retroactively invalidates an
+  already-issued child. An issued child's effectiveness depends on ancestor
+  liveness, evaluated at use time, not on the delegability approval that
+  authorized its creation.
+
+The three questions are enforced independently:
+
+```text
+May this actor derive?          -> authenticated actor vs operation policy
+May this exact authority be delegated?  -> exact derivation approval
+Does the requested child fit within the parent?  -> IsContainedBy
+```

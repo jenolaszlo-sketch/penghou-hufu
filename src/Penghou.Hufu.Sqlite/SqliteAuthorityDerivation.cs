@@ -25,7 +25,9 @@ public sealed partial class SqliteAuthorityStore : IAuthorityDerivationStore
             // Permission to attempt issuance is established by the trusted
             // authorizer before any state is touched; the store operation then
             // protects authority integrity (parent liveness, containment) at
-            // commit. The duplication is intentional.
+            // commit. The duplication is intentional. The authorizer's fresh
+            // approval check is the start boundary: an issuance that passes it
+            // may finish, and later approval changes block only new attempts.
             var access = new AuthorityStoreAccessRequest(
                 command.Actor, AuthorityStoreOperation.Derive, AuthoritySubject.From(command.ChildContext),
                 command.ChildContext, DerivationCommand: command);
