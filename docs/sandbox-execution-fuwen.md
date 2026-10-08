@@ -205,6 +205,18 @@ the needed invariants, and the only missing piece was host composition. The
 capability boundary was real (start cannot be a catalogue-free CLI), but it
 was a boundary in the *host*, not in the platform.
 
+Two conclusions are now durable:
+
+- **Start belongs to a catalogue-owning host, not a generic Zhinu CLI.** A
+  catalogue-free CLI cannot reconstruct trusted definitions from a database,
+  so `runs start` is intentionally absent (see `Penghou.Zhinu`
+  `docs/operator-cli.md`). The start operation lives in the host:
+  `AdmittedPlanStarter` and the runnable `samples/Hufu.PlanHost`.
+- **Composition can close major product gaps without new infrastructure.**
+  `AdmittedPlanStarter` plus the existing engine/operator surfaces were
+  sufficient to complete `inspect -> admit -> start -> run ID -> operate`;
+  no new engine or store primitive was required.
+
 ## Non-claims
 
 No filesystem authority, VFS/WhatIf, network controls, quotas, or richer
