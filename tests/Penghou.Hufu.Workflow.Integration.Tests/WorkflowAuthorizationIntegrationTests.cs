@@ -239,7 +239,7 @@ public sealed class WorkflowAuthorizationIntegrationTests : IAsyncLifetime
         var runId = await engine.StartAsync("protected", "1", "input");
 
         var execution = engine.ExecuteAsync(runId);
-        var firstRecord = await gate.Entered.WaitAsync(TimeSpan.FromSeconds(10));
+        var firstRecord = await gate.Entered.WaitAsync(TimeSpan.FromSeconds(60));
         Assert.Equal(ExecutionAuthorizationDecision.Allowed, firstRecord.Result.Decision);
         Assert.Single(host.Policy.Requests);
 
@@ -295,21 +295,21 @@ public sealed class WorkflowAuthorizationIntegrationTests : IAsyncLifetime
             var authority = new CurrentAuthorityRequestAuthorizer(Policy, Policy, Policy);
             authorizer = new HufuExecutionAuthorizer("hufu-provider-v1", "test-host-v1", "test-mapping-v1",
                 new TestBindingSource(), authority, Approvals, WorkflowRecorder,
-                maximumValidity: TimeSpan.FromSeconds(20));
+                maximumValidity: TimeSpan.FromMinutes(5));
         }
 
         public SqliteWorkflowStore CreateStore() => new(new ZhinuSqliteOptions
         {
             DatabasePath = Path.Combine(databasePath, "workflow.db"), Pooling = false,
-            BusyTimeout = TimeSpan.FromSeconds(3)
+            BusyTimeout = TimeSpan.FromSeconds(15)
         });
 
         public WorkflowEngine CreateEngine(IWorkflow<string, string> workflow) => CreateEngine(CreateStore(), workflow);
         public WorkflowEngine CreateEngine(SqliteWorkflowStore store, IWorkflow<string, string> workflow) =>
             new(store, new WorkflowRegistry().Register("protected", "1", workflow), new ZhinuOptions
             {
-                PollInterval = TimeSpan.FromMilliseconds(10), LeaseDuration = TimeSpan.FromSeconds(3),
-                LeaseRenewalInterval = TimeSpan.FromMilliseconds(500),
+                PollInterval = TimeSpan.FromMilliseconds(10), LeaseDuration = TimeSpan.FromSeconds(30),
+                LeaseRenewalInterval = TimeSpan.FromSeconds(2),
                 ExecutionAuthorization = new WorkflowExecutionAuthorizationOptions("hufu-provider-v1", "test-host-v1", authorizer)
             });
     }
@@ -335,7 +335,7 @@ public sealed class WorkflowAuthorizationIntegrationTests : IAsyncLifetime
                 return new WorkflowAuthorityTarget(requirement, "workspace-test", path);
             }).ToArray();
             return ValueTask.FromResult<WorkflowAuthorityBinding?>(new(context, "test-host-v1", "test-mapping-v1",
-                authorityContext, targets, DateTimeOffset.UtcNow.AddSeconds(15)));
+                authorityContext, targets, DateTimeOffset.UtcNow.AddMinutes(5)));
         }
     }
 
@@ -400,7 +400,7 @@ public sealed class WorkflowAuthorizationIntegrationTests : IAsyncLifetime
                 var approvalId = "approval-" + Guid.NewGuid().ToString("N");
                 approvalsByExecution[key] = approvalId;
                 return ValueTask.FromResult<WorkflowApprovalResult?>(new(WorkflowApprovalDecision.Required,
-                    binding.Identity, "approval-evidence-pending", DateTimeOffset.UtcNow.AddSeconds(15), approvalId));
+                    binding.Identity, "approval-evidence-pending", DateTimeOffset.UtcNow.AddMinutes(5), approvalId));
             }
             var decision = !RequireFirst ? WorkflowApprovalDecision.NotRequired :
                 existingApproval is not null && acceptedApprovals.Contains(existingApproval)
@@ -408,10 +408,10 @@ public sealed class WorkflowAuthorizationIntegrationTests : IAsyncLifetime
             if (decision == WorkflowApprovalDecision.Required)
             {
                 return ValueTask.FromResult<WorkflowApprovalResult?>(existingApproval is null ? null : new(decision, binding.Identity,
-                    "approval-evidence-pending", DateTimeOffset.UtcNow.AddSeconds(15), existingApproval));
+                    "approval-evidence-pending", DateTimeOffset.UtcNow.AddMinutes(5), existingApproval));
             }
             return ValueTask.FromResult<WorkflowApprovalResult?>(new(decision, binding.Identity,
-                "approval-evidence-current", DateTimeOffset.UtcNow.AddSeconds(15)));
+                "approval-evidence-current", DateTimeOffset.UtcNow.AddMinutes(5)));
         }
 
         private static string RevisionIdentity(string value)

@@ -110,8 +110,19 @@ cases pass on .NET 8/10; see [the release checkpoint](qualification/single-patch
   approval/evidence state, bounds capacity, and qualifies exact review, bootstrap
   recovery, denial and replay. 80 focused cases pass across .NET 8/10; separate-process
   CLI qualification passes on both. See [evidence](qualification/local-host-services.json).
-- [ ] **HOST-SERVICES-CI:** Windows full-suite and separate-process checks are configured;
-  remote qualification of this source change is pending. No new package is needed.
+- [ ] **HOST-SERVICES-CI:** Windows full-suite and separate-process checks are configured.
+  Test-only timing margins in `Penghou.Hufu.Workflow.Integration.Tests` were widened so
+  scheduler stalls cannot cancel an authorization: the `HufuExecutionAuthorizer`
+  maximum-validity budget (20s -> its 5-minute cap), the workflow lease/renewal and SQLite
+  busy timeout, and the binding/approval validity windows are test fixtures and safety
+  valves, not asserted behavior. Remote qualification of this change is pending; no new
+  package is needed. Recorded residual: `AuthorityDerivationTests.ConcurrentSameDerivation_
+  ProducesExactlyOneChild` runs four concurrent writers against the standalone
+  `SqliteAuthorityStore`, whose 1-second SQLite busy timeout under `synchronous=FULL` can be
+  exceeded on a loaded runner (`authority.store-unavailable`). A durable fix needs either a
+  longer production busy timeout or a test-visible store option; both change a published
+  package's behavior, so this is left for an explicit reliability decision rather than
+  silently retried.
 - [ ] **HOST-SERVICES-PRODUCT:** choose an actual product host and its authenticated
   tool/management routing, retention and deployment profile. External credentials,
   organizational issuance and multiple operators require their own services and proof.
