@@ -183,6 +183,17 @@ plans using context, inference, conditionals, fan-out, repetition,
 checkpoints, or waits are refused before a run is created rather than
 failing mid-execution.
 
+### Runnable host (consumer #10)
+
+`samples/Hufu.PlanHost` is the runnable form of the start operation. It owns
+a trusted catalogue and capability policy, admits a submitted plan against
+them, and starts a durable Zhinu run through `AdmittedPlanStarter`, returning
+the run id and full provenance. It is **start-only**: the run is left
+`Pending` for a worker, then inspected through the ordinary operator surfaces
+(`runs show`/`wait`/`evidence`/`cancel`/`restart`). Registered descriptors
+alone do not make a plan executable here — a descriptor absent from the host
+catalogue is refused before any run is created.
+
 ### Durable conclusion
 
 A missing operator workflow does not necessarily imply a missing platform

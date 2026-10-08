@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="../../src/Penghou.Hufu.Fuwen/Penghou.Hufu.Fuwen.csproj" />
     <ProjectReference Include="../../samples/Hufu.SandboxRunner/Hufu.SandboxRunner.csproj" />
+    <ProjectReference Include="../../samples/Hufu.PlanHost/Hufu.PlanHost.csproj" />
   </ItemGroup>
 
   <ItemGroup>

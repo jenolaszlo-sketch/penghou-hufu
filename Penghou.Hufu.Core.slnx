@@ -12,6 +12,7 @@
   </Folder>
   <Folder Name="/samples/">
     <Project Path="samples/Hufu.SandboxRunner/Hufu.SandboxRunner.csproj" />
+    <Project Path="samples/Hufu.PlanHost/Hufu.PlanHost.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj" />
