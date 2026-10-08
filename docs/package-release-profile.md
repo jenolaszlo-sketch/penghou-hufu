@@ -29,10 +29,10 @@ five-argument overload.
   `AuthorityStoreAccessRequest` constructors), not the additive surface.
 - The other six packages were never published at preview.4.
 - NuGet versions are immutable, so the package cannot be overwritten. It was
-  **not** adopted as the compatibility baseline and **must be unlisted**
-  (pending: unlisting requires a nuget.org operator credential, which the CI
-  trusted-publisher flow does not hold; it must be done manually via the
-  package page or an API key).
+  **not** adopted as the compatibility baseline. It **remains published and is
+  not being unlisted** (a deliberate decision): it is superseded by preview.5
+  and must not be used. Retrieving it by exact version is possible but
+  unsupported; new consumers must pin `0.1.0-preview.5` or later.
 - The strict verifier (`eng/Verify-HufuPublishedPackages.ps1`) refuses to
   publish preview.4 bytes that differ from what is already public, so the
   correct recovery was to bump the version (preview.5), not to revert the fix.
