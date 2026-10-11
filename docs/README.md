@@ -7,6 +7,8 @@ New to Hufu? Read the [project README](../README.md) for the goal, then [the ove
 | Document | Use it for |
 | --- | --- |
 | [Overview](overview.md) | Plain-language execution flow, ownership and current scope. |
+| [Authority, delegation and enforcement](authority-delegation-enforcement.md) | Canonical ownership model, execution lifetime, future Biscuit use and gateway boundaries. |
+| [Model reconciliation](authority-model-review.md) | Resolved contradictions, source gaps and decisions still required before implementation. |
 | [Architecture](architecture.md) | Detailed library boundaries, authority store and integration design. |
 | [Workflow authority specification](workflow-authority-spec.md) | Intended security invariants, behavior and acceptance gates. |
 | [Roadmap](roadmap.md) | Delivery order, open gates and the language-neutral direction. |

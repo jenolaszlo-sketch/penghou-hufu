@@ -6,6 +6,15 @@ Status: **Proposed.** No implementation until the Qingniao proof requires it.
 In particular: no Qingniao request fields yet, no `Derive` store operation
 yet, no approval-tuple changes yet, no Biscuit changes.
 
+## Reading update, 2026-10-11
+
+The proposal status above is historical; the implemented gate is described under
+"Implementation notes (gate landed)" below and carried by preview.5.
+[ADR 0014](0014-authority-delegation-enforcement.md) preserves the issuance-time
+semantics: withdrawing delegability affects new derivations, while issued-child
+use depends on current validity/ancestor restrictions. Credential attenuation
+and process termination do not replace either decision.
+
 ## Context
 
 ADR 0012 established derived authority lineage: Hufu creates child grants,

@@ -7,6 +7,17 @@ slice below. In particular: no parent pointers in Qingniao, no Biscuit types
 in Qingniao, no cascading descendant mutation, no generic authority DAG, no
 nested delegation, no new activity identity, no Guihua changes.
 
+## Reading update, 2026-10-11
+
+The proposal status above and the proof notes below record successive historical
+checkpoints. Core lineage/containment and SQLite derive-and-publish are now in the
+preview.5 release; [ADR 0013](0013-delegability-of-derived-authority.md) subsequently
+added the separate Derive approval gate. [ADR 0014](0014-authority-delegation-enforcement.md)
+preserves same-generation retry reuse while requiring fresh use authorization.
+The [source review](../authority-model-review.md) records optional ancestor-check
+composition and the remaining current-parent-policy gate. Biscuit migration to
+core semantics remains later work; this record does not establish it.
+
 ## Context
 
 The Marang fs.read slice proved a real consumer can use Hufu admission with

@@ -4,6 +4,15 @@ Date: 2026-10-02.
 
 Status: **Experimental implementation selected; consumer qualification pending.**
 
+## Clarification, 2026-10-11
+
+[ADR 0014](0014-authority-delegation-enforcement.md) retains this registered online
+prototype and distinguishes it from future portable delegation. The selected
+later proof is worker → host broker. Before extension, reconcile token attenuation
+and registry lineage with core child-grant semantics; subject/audience rebinding
+and offline descendants are not implied by this decision. The original evidence
+and limits below remain historical facts.
+
 ## Context
 
 Hufu's reviewed [Biscuit integration specification](../../../biscuit-sharp/docs/hufu-integration-spec.md)

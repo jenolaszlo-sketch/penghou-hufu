@@ -7,6 +7,12 @@ The approval/delegation lifecycle, governed mutation admission, and production
 authority runtime remain pending. Six preview.1 packages are published; API
 compatibility is checked against that baseline while the library remains prerelease.
 
+Reading update, 2026-10-11: the opening status describes the original checkpoint.
+The [release profile](package-release-profile.md) records preview.5 and its
+derived-authority additions. The [canonical model](authority-delegation-enforcement.md)
+and [source review](authority-model-review.md) describe current composition limits,
+including optional ancestor checking and separately gated enforcement profiles.
+
 The optional [core admission and issuance profiles](core-admission-and-issuance.md)
 now provide shared evaluation capacity and finite typed-scope publication
 checks. Their exact limits and current evidence are documented separately.

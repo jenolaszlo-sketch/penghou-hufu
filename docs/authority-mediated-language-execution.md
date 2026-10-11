@@ -5,6 +5,11 @@ user-supplied AMLE proposal. This names the architectural direction; it does not
 expand qualified profiles or establish new security guarantees. Existing
 implementation and qualification profiles remain the source of truth.
 
+Current interpretation (2026-10-11): AMLE is one optional frontend pattern.
+The language-neutral roadmap and [authority/delegation model](authority-delegation-enforcement.md)
+also support direct broker calls and separately qualified native execution.
+Neither a constrained language nor a Biscuit credential is a mandatory Hufu layer.
+
 See [Luban](../../Penghou.Luban/README.md) and its complementary
 [AMLE guide](../../Penghou.Luban/docs/authority-mediated-language-execution.md).
 

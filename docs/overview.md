@@ -2,6 +2,14 @@
 
 Hufu is the authority layer in a larger system. It decides whether a specific operation is covered by current, authenticated authority and records the decision. A caller's intent, a plan's structure, or an old approval is never sufficient on its own.
 
+For changing authority, child grants and execution lifetimes, read the
+[authority and delegation model](authority-delegation-enforcement.md). Hufu owns
+authority state; a workflow runtime owns workflow state. A trusted host binds
+the two. Each activity can use 0..N executions or only mediated operations.
+The first execution policy is immutable; a broader grant never silently widens
+an existing execution. Biscuit is an optional credential carrier, with a later
+worker-to-broker proof in the [roadmap](roadmap.md).
+
 ## The problem
 
 A workflow can restart, an agent can propose new actions, and permissions can change while work is in progress. A one-time "allow" at plan submission cannot safely stand in for a check at the moment a file is opened or a process starts. The system also needs durable evidence of *which* subject, operation, resource, policy result, and authority version justified an action.

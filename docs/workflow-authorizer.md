@@ -6,6 +6,15 @@ contract and Hufu core. Zhinu 0.2.0-preview.1 is one tested consumer; another
 engine can supply the same neutral context. The six-package Hufu release
 candidate is described in the [release profile](package-release-profile.md).
 
+## State and enforcement boundary
+
+Hufu owns authority state; the runtime owns activity state, attempts and fences.
+The host authenticates their binding. A resume/retry requires fresh authorization
+but does not itself grant rights; host policy decides whether workflow events
+invalidate an existing delegation. Activity preflight does not isolate multiple
+activities in the host process or serialize a concrete effect with revocation.
+See the [authority/delegation model](authority-delegation-enforcement.md).
+
 ## Trusted host composition
 
 Construct `HufuExecutionAuthorizer` with a provider ID, host namespace, mapping

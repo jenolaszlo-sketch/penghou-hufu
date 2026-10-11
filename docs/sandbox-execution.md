@@ -6,6 +6,20 @@ Status: implementation slice, 2026-10-05. HG-1 is frozen (tag `arch-hg-1`);
 names the seam and its limits; the authority profile and validation baseline
 remain separate review gates.
 
+## Authority and execution lifetime
+
+Under [ADR 0014](decisions/0014-authority-delegation-enforcement.md), an activity
+can have 0..N executions. This host already retains multiple handles per activity.
+Each start captures an immutable invocation/profile binding. It does not issue
+a child grant, carry Biscuit or translate Hufu read/write/network permissions into
+OS policy. Binding labels alone are not proof of an approved delegation.
+
+The published Gagamba provider used here is a lifecycle provider. Future restricted
+execution must qualify exact manifest authorization and release/stop ordering;
+it is a separate adapter/profile gate. A fresh pre-launch check here is followed
+by a provider launch and handle registration, with no common revocation transaction.
+Do not describe this interval as atomic or as an immediate revocation guarantee.
+
 ## What was added to Hufu core
 
 - `AuthorityAction.ExecuteProcess` (appended; existing numeric values unchanged).
@@ -88,8 +102,10 @@ identity is otherwise extremely broad.
    identity) — authority must still be valid where effects become possible.
 7. Gagamba `Launch`; the opaque handle is associated with the exact
    activity/grant revision.
-8. Grant revocation calls the adapter's `TerminateAsync`, which terminates the
-   associated execution domain.
+8. After recording authority invalidation, the trusted host must route its stop
+   policy to `TerminateAsync`, which requests termination of associated domains.
+   There is no automatic subscription to the Hufu store; observe stop failures
+   and completion under the provider's actual guarantees.
 9. Completion disposes the handle; host disposal tears down remaining domains.
 
 ### Prepared-domain reclamation (GP-3 amendment)

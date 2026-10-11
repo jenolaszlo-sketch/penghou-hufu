@@ -1,10 +1,23 @@
 # Penghou.Hufu: workflow authority, delegation, and re-admission
 
-Status: **Normative proposed architecture; narrow current-snapshot/read-authorizer and optional SQLite prototypes implemented, updated 2026-10-02.**
+Status: normative design with bounded implemented profiles. The
+[release profile](package-release-profile.md) records the current packages;
+normative MUST/SHOULD/MAY statements below can extend beyond implemented scope.
+API names and broad capability examples are illustrative unless a linked
+profile supplies them.
 
-Authority home: **Penghou.Hufu**. Integrates with Penghou.Fuwen, Penghou.Zhinu, Penghou.Guihua, and Penghou.Qingniao. Host consumers include Marang, Guyabano, and other applications. Hongxian/Siming integration remains optional.
+Authority home: Penghou.Hufu. The [authority/delegation model](authority-delegation-enforcement.md)
+and [ADR 0014](decisions/0014-authority-delegation-enforcement.md) clarify state
+ownership, immutable execution policy, current checks and optional credentials.
+They govern interpretation where this older design is ambiguous. Hufu owns
+authority state; Zhinu owns workflow state; host-authenticated bindings connect
+them. No activity lifecycle event alone grants rights or creates OS isolation.
 
-This is the normative behavioral specification for Penghou.Hufu. The library boundary is recorded in ADR 0001. A narrow prototype implements bounded authority snapshot contracts and a Luban known-root read authorizer; most behavior below remains a proposed contract, and the optional [store profile](durable-authority-store.md) supplies current-state/evidence persistence, and the experimental [co-located operation-start profile](operation-start-profile.md) supplies an atomic Hufu/Zhinu start boundary. Complete grant issuance, governed mutation hosts and terminal-outcome recovery remain pending. The original proposal is retained in docs/archive/original-proposal.md, and the original attachment is unchanged. Normative MUST/SHOULD/MAY statements below describe the proposed contract. API names are illustrative.
+The [current-authority profile](current-authority-profile.md), [store](durable-authority-store.md),
+[single-patch host](single-patch-host.md), [workflow authorizer](workflow-authorizer.md)
+and experimental [native execution profile](sandbox-execution.md) define their
+own supported guarantees. The original design input remains in
+[the archive](archive/original-proposal.md).
 
 ## Review verdict
 
@@ -48,7 +61,7 @@ The selected policy-backend direction is [ADR 0002](decisions/0002-use-cedarshar
 
 > Agents propose work and request authority. Hosts grant authority and approve governed effects. Runtimes and resource boundaries enforce it. Delegation, replay, and replanning never create authority.
 
-Authority is scoped to a tenant and workflow run, narrowed for each activity and delegation, and checked against current host policy at use time. Human interaction is required only where host policy requires a new decision. Existing standing authorization can cover many revisions and operations.
+Authority is scoped to a tenant and authenticated execution subject, which may be a workflow run or a standalone operation. Workflow bindings narrow it for activities and delegations, and current host policy is checked at use time. Human interaction is required only where host policy requires a new decision. Existing standing authorization can cover many revisions and operations.
 
 Four questions remain distinct:
 
@@ -248,7 +261,7 @@ Keep three distinct records:
 
 The envelope MUST NOT carry an independently mutable “current plan fingerprint.” The receipt binds plan to envelope; the runtime's fenced activation record identifies the active receipt.
 
-A grant records issuer, tenant, beneficiary/run, capability and evaluator version, concrete resource binding, scope, validity interval, constraints, delegatability, provenance, and revocation identity. Host policy MUST verify that its issuer or approving actor has authority to grant the requested rights. A workflow MUST NOT choose an arbitrary credential principal to expand its permissions.
+A grant records issuer, tenant, beneficiary/run, capability and evaluator version, concrete resource binding, scope, validity interval, constraints, provenance, and revocation identity. Delegability is a separate authenticated issuance rule under [ADR 0013](decisions/0013-delegability-of-derived-authority.md), not a right implied by a resource grant. Host policy MUST verify that its issuer or approving actor has authority to grant the requested rights. A workflow MUST NOT choose an arbitrary credential principal to expand its permissions.
 
 An admission binds at least tenant/run, plan revision/fingerprint, envelope ID/version/digest, catalogue and resource-binding digests, policy/evaluator versions, selected execution profile, approved intent/effect policy, and budget-account references. Runtime attempts additionally bind node identity/generation, fan-out item identity, attempt, operation, and execution fence.
 
@@ -270,6 +283,16 @@ At use time, an operation must satisfy the intersection of current valid run gra
 An admission receipt pins the meaning of prior approval, but cannot freeze out later revocation or mandatory policy restriction. Incompatible policy/evaluator changes require re-admission before further affected I/O. Existing history remains attributable to the original versions.
 
 ## 8. Process, tool, and provider execution
+
+The initial enforcement policy is immutable per execution. An activity MAY use
+0..N executions with different approved subsets; a retry creates a fresh
+execution with fresh authorization. Changed authority never silently changes a
+running execution's policy. Gagamba's lifecycle providers do not establish
+filesystem/network isolation; a confinement-required profile MUST refuse an
+unqualified provider. The [canonical model](authority-delegation-enforcement.md)
+also distinguishes online broker checks from execution stop/drain guarantees.
+The language-neutral roadmap permits independently qualified native execution;
+the StrictEffects constraints below apply only to that named profile.
 
 Consumer libraries SHOULD use small Hufu-independent capability interfaces with
 ordinary local implementations. A governed host selects Hufu-bound brokers and
@@ -392,9 +415,22 @@ Denial records its scope: this request, this resource/effect, or a host policy r
 
 Qingniao MUST validate delegation before provider submission. Its context binds the parent run/activity/generation/item, envelope version, execution fence, selected provider/profile, restricted grants, budget reservation, and expiry. The provider is selected through host policy; Qingniao resolves and enforces that selection.
 
-Delegation requires both `CanUse` and `CanDelegate`. Child rights MUST be contained by current parent rights, the child declaration, provider trust rules, and any depth/fan-out restrictions. Every broker request authenticates that context. Caller-supplied parent IDs are not sufficient proof.
+Derivation requires both authority containment and an independent authenticated
+right to derive, with exact approval under ADR 0013. These are conceptual use
+and delegation checks, not new `CanUse`/`CanDelegate` public methods. An issued
+child is checked against its fixed ceiling, current applicable parent/child
+authority, provider trust rules and supported depth/fan-out restrictions.
+Withdrawing the actor's right to derive blocks new issuance; it does not itself
+revoke an existing child. Every broker request authenticates the context;
+caller-supplied parent IDs are not sufficient proof.
 
-Parent revocation, expiry, cancellation, or supersession blocks new descendant operations. Regranting the parent does not automatically revive a cancelled or stale child. Continuing or restarting delegated work requires explicit revalidation and a new valid binding when identities changed.
+Biscuit attenuation is a credential restriction, not implicit Hufu grant issuance.
+The initial later worker-to-broker profile remains online and registered. New
+subject/audience bindings need approved issuance or exchange. Third-party A2A/MCP
+services need not understand Hufu; a trusted gateway may translate supported
+authority into their own controls without forwarding internal credentials.
+
+Parent revocation or expiry blocks new descendant operations under the selected ordering profile. A host MUST bind workflow cancellation or supersession to explicit context invalidation/revocation when it requires the same effect; the runtime event alone does not update Hufu state. Regranting the parent does not automatically revive a cancelled or stale child. Continuing or restarting delegated work requires explicit revalidation and a new valid binding when identities changed.
 
 Handles, environment variables, mounts, MCP connections, artifacts, and callback endpoints are part of delegation review. Shared mutable workspaces need per-operation attribution or isolation; sharing a directory does not share authority. Fan-out children cannot borrow sibling credentials or reservations.
 

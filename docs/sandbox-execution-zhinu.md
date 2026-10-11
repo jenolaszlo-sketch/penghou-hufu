@@ -60,6 +60,13 @@ where the platform guarantees the prior domain is gone after owner death.
 
 ## Cleanup, cancellation and revocation
 
+Workflow state remains Zhinu-owned; current authority remains Hufu/host-owned.
+The host decides how suspension, cancellation and completion invalidate authority.
+`RevokeAndTerminateAsync` only marks local revocation and requests domain stop;
+it does not persist a Hufu-store revocation. A broader profile must coordinate
+the durable authority transition, in-flight start ordering and acknowledged
+termination/recovery. See the [model](authority-delegation-enforcement.md).
+
 Cleanup uses a **separate bounded token**; the workflow cancellation token stops
 normal work but never aborts termination or completion (`Terminate` then
 `WaitForCompletionAsync` on the cleanup token). Workflow cancellation throws
@@ -73,9 +80,12 @@ normal work but never aborts termination or completion (`Terminate` then
 The step uses two distinct checks that are never collapsed: the sandbox host's
 profile-scoped preflight authorization and its immediate pre-launch
 re-authorization (TOCTOU). A prior admit is never reused as the launch
-authority. A retry is new authority: fresh `AuthorizationRequestId`, fresh
+authority. A retry needs a fresh authority decision: fresh `AuthorizationRequestId`, fresh
 preparation, fresh execution — no previous binding, authorization request, or
-completion handle crosses an attempt boundary.
+completion handle crosses an attempt boundary. This does not mean each retry
+must issue another child grant: ADR 0012 permits same-delegation/same-generation
+grant reuse when still valid. An activity may have multiple concrete executions;
+each new execution gets its own binding and immutable policy.
 
 ## Findings (consumer pressure on the ecosystem)
 

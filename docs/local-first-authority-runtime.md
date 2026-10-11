@@ -8,8 +8,11 @@ names below are illustrative, not published contracts.
 
 [ADR 0004](decisions/0004-typed-effects-over-sandbox.md) and the
 [typed-effect design](typed-effect-runtime.md) refine the capability boundary:
-use LOP with strict typed operations, and do not implement a sandbox. Any earlier
-proposal to build an isolation provider is superseded.
+use bounded typed operations for that consumer profile, and do not implement
+an OS sandbox in Hufu. The later language-neutral roadmap makes Luban optional;
+independently qualified native execution is another valid path. The
+[authority/delegation model](authority-delegation-enforcement.md) governs changing
+authority, immutable execution policies and current-state ownership.
 
 ## Authority store and lineage
 
@@ -134,8 +137,8 @@ whether an execution profile offers trusted mediation or tested containment.
 Never report descendant effects as broker-covered merely because process start
 was authorized.
 
-The initial agent surface is StrictEffects: no arbitrary process, shell, script,
-or project-code execution. ApprovedTools is a separate opt-in mode; typed names
+The historical StrictEffects surface excludes arbitrary process, shell, script
+and project-code execution within that profile. It is not a mandatory Hufu mode. ApprovedTools is a separate opt-in mode; typed names
 do not contain the code such tools execute. Hufu and Luban will not build an
 OS/container sandbox or an isolation provider. Existing external providers may
 satisfy separately requested guarantees, or hosts may explicitly accept broader
@@ -219,18 +222,24 @@ required alongside successful operations.
 
 ## Deferred portable delegation
 
-Biscuit remains a candidate optional transport, not a selected dependency or a
-second source of grants. Before adoption, specify a restricted versioned Hufu
-token profile derived from existing authority, provable attenuation mapping,
-issuer/key trust, tenant/subject/audience binding, replay controls, and bounded
-size/depth. Unknown token logic or unsupported mappings must reject use.
+An optional [registered online Biscuit prototype](biscuit-integration-profile.md)
+now exists under ADR 0010; generalized portable delegation remains later work.
+Core authority is independent of the credential format. The first selected
+proof is worker → host broker, after the broker already enforces the same
+bounded read using ordinary authenticated context/reference bindings.
 
-Any token check must remain within authority issued by Hufu and applicable
-mandatory policy. Bearer-token risks need workload binding or an equivalent
-protected mechanism. Online checks are required for immediate revocation;
-offline verification is a separate, explicitly bounded-staleness mode. Tokens
-must not silently make stale grants usable. This design does not claim complete
-Cedar-to-Biscuit semantic translation or approve a transport implementation.
+Use the [canonical model](authority-delegation-enforcement.md) for the distinction
+between deriving a Hufu child, restricting a credential, and preparing an
+execution policy. The current token profile preserves its subject/execution
+binding, accepts only registered descendants and requires current Hufu/Cedar
+checks. AE-3 must reconcile its containment/registry lineage with core before
+general child transport or audience exchange.
+
+Bearer-token custody, trusted issuer selection, authenticated workload/audience,
+replay/start rules, bounds and required evidence remain host obligations. Online
+lookup alone is not atomic start ordering or immediate termination. Disconnected
+verification requires an explicit staleness profile and is excluded from the
+first proof. No full Cedar-to-Biscuit policy translation is assumed.
 
 ## Provenance
 

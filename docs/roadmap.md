@@ -1,5 +1,87 @@
 # Hufu implementation roadmap
 
+## Authority, delegation and enforcement - 2026-10-11
+
+The [canonical model](authority-delegation-enforcement.md),
+[ADR 0014](decisions/0014-authority-delegation-enforcement.md) and
+[source/document review](authority-model-review.md) reconcile the supplied
+proposal. This section governs the authority/enforcement terminology and the
+new work below. Earlier checklists and release checkpoints retain their original
+evidence; they do not establish a broader guarantee. Current packages remain
+the seven `0.1.0-preview.5` packages in the [release profile](package-release-profile.md).
+
+Hufu owns authority; Zhinu owns workflow state; a broker checks actual operations;
+Gagamba enforces only its qualified execution profile. Biscuit is an optional
+carrier. Activity authority is not OS permission, and one activity can use 0..N
+executions. The first restricted-execution policy is immutable. Wider authority
+needs a new approved binding; a changed OS policy needs a new execution. Online
+revocation can reject an existing delegation without creating a replacement token.
+
+### Delivery order and acceptance
+
+- [x] **AE-0 — Reconcile the design.** Preserve the proposal, publish the layered
+  model and ADR, identify source gaps, and distinguish current lifecycle execution
+  from future isolation. Documentation only; no new enforcement qualification.
+- [ ] **AE-1 — Qualify current derived authority.** Preserve existing core
+  containment, exact Derive approval and idempotency. Define authenticated
+  workflow-event/fence binding and host policy for invalidation. Require ancestor
+  checks for derived-grant consumers and prove applicable current parent-policy
+  restrictions, not merely ancestor presence. Cover scope/policy-only narrowing,
+  parent revocation, expiry, unavailable lineage, parent expansion without child
+  expansion, retry reuse, new generations and invalidated-context non-revival.
+  Record the selected version/re-evaluation rule before claiming general
+  delegation. Existing delegability-approval start semantics in ADR 0013 remain.
+- [ ] **AE-2 — Prove one worker → host broker path.** This is the selected first
+  consumer. Use one bounded resource read with existing Hufu contracts and a
+  host-bound context/reference first. Authenticate the worker on one protected
+  transport; bind tenant, subject, audience, delegation/generation and exact
+  operation. Preserve metadata/traversal/discovered-target/content/release checks.
+  Specify revocation/start ordering, permitted in-flight completion, partitions,
+  replay/retry and evidence failures. Test two workers cannot exchange authority,
+  the child cannot use the parent's extra rights, and a current denial reaches
+  the actual I/O boundary. A cooperative-worker test proves the protocol only;
+  hostile-worker bypass closure requires a separately qualified provider.
+- [ ] **AE-3 — Evaluate an optional Biscuit carrier on that same path.** Depends
+  on AE-1/2, not on a new sandbox. Reconcile the older adapter's subset logic and
+  registration chain with core grant lineage; define versioned child-grant,
+  authenticated worker, audience and operation bindings. Preserve online current
+  checks, registered descendants, bounded verification and mandatory evidence.
+  Reject wrong audiences, stolen/replayed bindings, expired/revoked ancestry,
+  unregistered attenuation, unknown mappings, unavailable authority and missing
+  evidence. Compare with the opaque-reference route. Adopt only for a demonstrated
+  portability/attenuation benefit; no automatic package publication. Offline
+  verification, new-subject exchange and arbitrary onward delegation remain
+  separate profiles.
+- [ ] **AE-4 — Integrate qualified restricted execution when available.** Depends
+  on Gagamba's [restricted-provider gates](../../Gagamba/docs/adr/0003-ar7-linux-first-restricted-execution.md)
+  and AE-1; it can progress independently of Biscuit. Authorize bounded preparation,
+  then the exact immutable effective manifest, then a single-use release. Prove
+  launch/revocation/cancellation ordering, 0..N execution bindings, fresh execution
+  after changed policy, explicit stop success/failure, uncertain recovery and
+  output-release checks. A lifecycle provider must refuse a confinement-required
+  profile. A broker-enabled restricted profile needs an explicitly qualified
+  channel and bypass closure; it cannot silently relax the offline profile.
+- [ ] **AE-5 — Add one real A2A or MCP gateway profile under consumer pressure.**
+  Reuse AE-1/2; use AE-3 only if its value is demonstrated and AE-4 where local
+  untrusted code needs containment. Define actual tools/actions, exact resource and
+  destination mapping, provider-internal capabilities, credentials, retries and
+  result disclosure. Do not infer "shell denied" from a hidden tool. Hufu-unaware
+  services receive authorized requests/scoped downstream credentials. Preserve
+  Marang/Qingniao's existing protocol ownership and refuse unsupported restrictions.
+
+The next authority-design work is AE-1, followed by the broker proof. Biscuit
+comes later. Existing HOST-SERVICES, neutral workflow and legacy-profile gates
+remain separate obligations; Luban and Hufu.Ps stay parked/proposed as recorded
+below. The portable-resources amendment is retained: provider mapping prepares
+enforceable facts, while the trusted caller still authorizes the exact effective
+manifest. Its remote-placement proposal is not required for a local worker/broker
+proof. HM model/HTTP work and future gateways must reuse the same authority rules.
+
+Remaining implementation choices (event policy, parent-version semantics,
+transport, freshness/acknowledgement and provider mapping) are recorded with
+recommended defaults in the [review](authority-model-review.md). They are not
+new APIs or permission to advertise an unqualified security boundary.
+
 ## Architecture amendment — Luban deferred, Hufu stays language-neutral - 2026-10-06
 
 Penghou.Luban is **deferred/parked** and is not on the critical path. See
@@ -77,6 +159,78 @@ Boundary conditions for any future work:
   Hufu) requires its own ADR and concrete observed pressure; until then the
   governing test is frontend replaceability without changing Hufu's authority
   semantics.
+
+### Portable resources and location-transparent execution (amendment, proposed only) - 2026-10-08
+
+This records a proposed amendment to the `Hufu.Ps` stress test and the deferred
+Luban design (submitted as `Hufen.Ps`, read here as the same `Hufu.Ps`
+proposal). It changes no commitment: `Hufu.Ps` stays proposed-only and
+non-blocking, Luban stays parked, and remote execution stays out of scope.
+It clarifies the boundaries a future portable frontend must respect so it does
+not bake in local-host assumptions.
+
+- Logical workspace over physical host: admitted commands (`Get-Content`,
+  `Set-Content`, `Get-ChildItem`, `Select-String`; any wider set such as
+  `Test-Path`/`Copy-Item`/`Move-Item`/`Remove-Item`/`New-Item` remains subject
+  to the original admission subset, not an expansion) resolve through
+  Penghou-owned workspace/resource abstractions (`Hufu.Ps` -> canonical
+  resource operation -> workspace abstraction -> provider: local, Gagamba
+  sandbox, S3, Azure Blob, GCS, remote worker). A `workspace:` provider name
+  is an adapter detail, not the canonical abstraction; `PSProvider`/`PSDrive`/
+  `PSObject`/`System.Management.Automation` stay inside `Hufu.Ps`, never in
+  Penghou core contracts.
+- Deliberately partial filesystem semantics: the logical workspace promises
+  only the portable semantics its admitted operations need. Atomic rename,
+  append, locking, links, watchers, memory mapping, seek/write behavior,
+  native ACLs, and path-independent directory identity may be absent on
+  object-store/remote backends; unsupported semantics fail explicitly rather
+  than being silently approximated. Vocabulary may be PowerShell-compatible;
+  semantics are Penghou-defined.
+- Durable `/workspace` versus ephemeral `/scratch`: a remote worker may
+  materialize workspace inputs to scratch, run native tools against the real
+  local filesystem, then publish authorized outputs back. Materialize/execute/
+  publish each pass the existing gates: Hufu.IO discovered-resource checks,
+  final per-access re-checks, the real mutation-start boundary, and
+  RA-G1/RA-G4 ordering. An outer check alone proves nothing. Capture-only
+  preview and simulated execution stay distinct modes under RA-G6/VFS-5.
+- Location-neutral authority: permissions stay in Penghou terms
+  (`workspace.read`/`workspace.write`, plus existing `http`/`process`/`secret`
+  style capabilities mapped through the current finite vocabulary and
+  separately qualified adapters). Provider-specific enforcement (sandbox
+  policy, scoped S3/Blob/GCS capabilities) is derived by the provider layer
+  only — never in Hufu core, workflow definitions, `Hufu.Ps` scripts, or
+  Luban. Placement must never broaden authority; a provider that cannot
+  enforce the declared logical authority rejects the placement.
+- Parse, authorize, and execute may separate across process, machine, trust
+  domain, and time. Any future execution envelope must carry enough
+  information for the worker to independently verify authority; replay and
+  resumed dispatch need fresh authorization with exact command, sequence,
+  snapshot, and expiry approval reloaded after asynchronous policy, and
+  evidence preserved across recovery and replay. `Hufu.Workflow` remains
+  preflight only; the frozen legacy atomic-start profile is unchanged.
+- Canonical operations remain the boundary (`Hufu.Ps`/`Luban` -> canonical
+  operations -> Hufu -> providers). No second authority, filesystem, cloud
+  permission, or remote execution stack is introduced for Luban. `RemoteExecutionRequest`/
+  `RemoteExecutionResult` and provider types (`Local`/`Gagamba`/`Aws`/`Azure`/
+  `GoogleCloud`/`Kubernetes`) belong to future Zhinu/provider placement work
+  and are not defined here; serverless is one substrate, not the abstraction.
+- Luban resume test (unchanged): only on evidence that PowerShell semantics
+  are too broad, nondeterministic, host-coupled, or unsuitable for portable
+  workspace and location-transparent execution — and then only against the
+  same canonical resource, effect, authority, and execution contracts.
+- First validation stays small: same script, same logical authority, different
+  workspace provider (local versus one object-store-backed workspace), same
+  observable result — testing portable mapping, policy reuse, provider-behavior
+  leakage, unrepresentable operations, scratch sufficiency for native tools,
+  and whether limits strengthen the Luban case.
+- Invariant: activity behavior, declared authority, and resource intent must
+  not depend on the executing machine or provider, except where the activity
+  explicitly declares an execution-specific requirement. Command semantics are
+  not host-machine semantics; logical authority is not provider credentials.
+  Source spans and frontend diagnostics stay host-only supporting context
+  under the existing telemetry (finite scalar queue, closed labels) and
+  explanation (Summary outcome-only default, separately authorized Detailed)
+  profiles.
 
 ## Governed single-patch release checkpoint - 2026-10-04
 
@@ -366,6 +520,11 @@ its exact supported surface and limits.
 Neither project will build a sandbox. StrictEffects rejects arbitrary native
 execution; broader tool/provider modes are explicit.
 
+The M0–M5 breakdown below retains the original delivery history and broad
+backlog. AE-1–AE-5 above govern the new authority/delegation work; a historical
+unchecked item is not a claim that later published work is absent. Historical
+StrictEffects gates apply to their named profile, not all Hufu native execution.
+
 ## M0: project and design home
 
 - [x] Select the name Penghou.Hufu and separate library boundary.
@@ -464,7 +623,7 @@ Gate: durable state never widens authority on replay; inspectable provenance and
 - [ ] Bind data-release and exact-effect approvals where the supported operations require them.
 - [ ] Reference existing budget reservations; do not create a second accounting ledger.
 - [ ] Publish typed provider profiles and tests proving supported strict effects, unknown-shell rejection, and no alternate execution route in the configured agent surface.
-- [ ] Reject unsupported execution guarantees; sandbox construction and arbitrary-process execution are outside this milestone and the Hufu implementation roadmap.
+- [ ] Reject unsupported execution guarantees. OS sandbox construction remains external to Hufu; native execution integration follows the separate AE-4 provider/authority gate.
 
 Gate: demonstrate permitted I/O, denied zero unauthorized I/O, revocation, stale-context rejection, and crash-safe reconciliation through the actual boundary. Earlier milestones alone are not a secure execution release.
 

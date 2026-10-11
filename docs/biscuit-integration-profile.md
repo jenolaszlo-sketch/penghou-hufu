@@ -6,6 +6,22 @@ not reference BiscuitSharp. Corrected Hufu.IO and real Local/Luban read consumer
 are locally qualified on Windows x64 with candidate packages. Production host
 and mutation guarantees, published IO adoption and adapter release remain open.
 See the [current qualification](biscuit-integration-qualification.md).
+## Scope of portable delegation
+
+The [authority/delegation model](authority-delegation-enforcement.md) distinguishes
+Hufu child-grant issuance from credential attenuation and process enforcement.
+This prototype narrows a credential while retaining its root subject/execution
+and audience bindings. It does not independently derive another Hufu child or
+support arbitrary worker/audience exchange. Both its subset routine and registry
+lineage need reconciliation with core before such an extension (roadmap AE-3).
+
+The selected later proof is one worker calling a host broker, after the broker's
+current-authority boundary is proved without Biscuit. Online registration and
+current Hufu checks remain required; Biscuit's general offline attenuation
+capability does not make unregistered descendants usable here. No token can
+remove a process's direct OS access. See the [review](authority-model-review.md)
+for source evidence and the [roadmap](roadmap.md) for acceptance gates.
+
 ## Purpose and decision rule
 
 The adapter carries one registered Biscuit credential derived from one

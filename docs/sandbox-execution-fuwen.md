@@ -4,6 +4,12 @@ Status: implementation slice, 2026-10-05. **FZ-1 frozen (tag `arch-fz-1`)**;
 `Penghou.Hufu.Fuwen` composes a Fuwen plan activity with the frozen HZ-1/HG-1
 authority path. Not qualified, not published, not a security boundary.
 
+The [authority/delegation model](authority-delegation-enforcement.md) governs
+the terms below. Plan/activity authority is logical; the current Gagamba path
+supplies lifecycle guarantees. One activity can use 0..N executions. This slice
+does not derive per-execution child grants or establish filesystem/network
+isolation, and the word "sandbox" in existing type names does not imply either.
+
 ## Architectural checkpoint
 
 The agent-to-effect authority chain is proven end to end, and each layer owns a

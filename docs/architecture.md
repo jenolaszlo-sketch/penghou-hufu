@@ -3,6 +3,29 @@
 This is the detailed design record for Hufu's library boundaries, authority store and integrations. It includes proposed capabilities and older prototype descriptions. For a concise explanation of the current system, start with the [overview](overview.md); for published versions and exact evidence, use the [release profile](package-release-profile.md).
 
 As of the current release, seven Hufu packages are published at `0.1.0-preview.5`. The neutral workflow adapter depends on Penghou.Workflow.Abstractions, not Zhinu; the governed single-patch adapter and local Windows host have narrower, separately documented profiles. The Fuwen/Zhinu/Gagamba native-execution compositions are unpublished experiments. Future Hufu integrations are language-neutral; the existing Luban adapters remain available. See [ADR 0011](decisions/0011-neutral-zhinu-authority-extension.md), the [single-patch profile](single-patch-host.md), and the [roadmap amendment](roadmap.md).
+
+## Authority and enforcement boundaries
+
+The [authority, delegation and enforcement model](authority-delegation-enforcement.md)
+and [ADR 0014](decisions/0014-authority-delegation-enforcement.md) clarify the
+relationships used throughout this design. Hufu owns authority state; Zhinu owns
+workflow state. Authenticated workflow events may trigger re-evaluation or an
+explicit host policy transition, but do not themselves grant rights.
+
+An activity may use 0..N executions or operate through brokers alone. A child
+grant has an approved ceiling; current authority can deny its later use without
+minting another credential. A wider parent grant never widens an existing child.
+Retry can reuse a still-valid same-generation grant but requires fresh operation
+authorization. Changed OS policy requires a newly prepared execution.
+
+Trusted brokers check concrete operations. Gagamba enforces only the guarantees
+of its selected, qualified profile: published native providers currently manage
+process lifecycle; the separate restricted-execution profile remains gated.
+An exact prepared enforcement manifest needs caller authorization before release.
+Biscuit can carry constrained delegation but cannot replace either current Hufu
+checks or OS enforcement. See the model for the canonical diagram and examples,
+and the [review](authority-model-review.md) for current implementation gaps.
+
 ## Purpose
 
 Hufu decides, records, and validates what authority an execution may exercise. It provides reusable grant, request, decision, attenuation, revocation, and authority-store mechanics. It is embedded by a host initially; a separately deployed authorization service is optional future infrastructure.
@@ -98,7 +121,7 @@ Unsupported requirements block execution. Deterministic analysis explains actual
 decisions and bounded hypothetical changes; unknown analysis cannot prove wider
 scope coverage. An optional AI summary cannot alter authority.
 
-StrictEffects is the default planned agent mode: a finite registered vocabulary,
+StrictEffects is one optional bounded-operation profile: a finite registered vocabulary,
 trusted authority mappings, bounded handlers, and rejection of arbitrary shell,
 scripts, and process requests. Fuwen supplies control flow; Zhinu journals effects
 and reconciles retries. ApprovedTools is an explicit host choice with the actual
@@ -118,7 +141,7 @@ official Cedar engine through the independent CedarSharp wrapper. CedarSharp
 backend-neutral; it does not reference CedarSharp or expose Cedar types. The
 Hufu.Cedar `CedarAuthorityEvaluator` and fixed mapping prototype are implemented,
 and pass local Windows x64 Cedar/read integration tests. Required durable recording is available through the optional store and a host capture factory. Complete Cedar evidence format/provenance and operation-start integration remain host qualification gates.
-Production Hufu authority enforcement is not implemented. The read authorizer
+General production host enforcement remains separately qualified; bounded delivered profiles do not establish it. The read authorizer
 consumes an injected evaluator and a host source that authenticates and returns
 current authority; the source is not supplied by a default implementation.
 
@@ -235,11 +258,11 @@ and external anchoring are deferred.
 
 Prove one local host with a small set of brokered repository operations. Cover admission, a permitted operation, an out-of-scope denial, durable restart, revocation, and a raced stale context. Include deterministic explanations, enforced execution requirements, opaque credential-use boundaries where applicable, durable evidence failures, and optional telemetry. Then bind that path into Zhinu and Fuwen; introduce Qingniao when delegation is actually confined.
 
-Prove the StrictEffects source-inspect/patch scenario first, including unknown
-shell rejection, exact preconditions, result bounds, Git helper restrictions if
-Git is supported, and durable local/supervisor completion. Broader native work
-requires explicit host/provider admission. No sandbox construction is planned;
-any externally claimed confinement needs evidence for that actual boundary.
+The earlier StrictEffects source-inspect/patch scenario remains a bounded
+consumer profile. Current delivery follows the language-neutral roadmap and
+AE-1/2 broker proof; no language frontend is required. Native work requires
+explicit host/provider admission and qualification of the exact restrictions.
+Hufu does not implement an OS sandbox.
 
 See the [behavioral specification](workflow-authority-spec.md) for the full invariants and the [roadmap](roadmap.md) for delivery gates.
 
@@ -261,7 +284,11 @@ transaction as the Hufu/Zhinu start. This orders new starts against revocation
 and key retirement; an earlier committed start may complete. AlreadyStarted is
 a receipt and cannot dispatch again.
 
-Neither adapter is required by Hufu core. These components provide no real
-resource consumer, provider confinement, mutation outcome recovery, production
-key custody, or default host authorization. See the
-[qualification record](biscuit-integration-qualification.md).
+Neither adapter is required by Hufu core. The qualification records a narrow
+real read composition; provider confinement, mutation recovery and production
+host/key custody remain open. The token chain preserves its root subject and
+execution bindings. It is not yet a general worker/service delegation carrier.
+The later worker-to-broker proof must reconcile the adapter's containment and
+registry chain with core grant lineage before broader use. See the
+[qualification record](biscuit-integration-qualification.md) and
+[Biscuit role](authority-delegation-enforcement.md#biscuits-useful-role-later).

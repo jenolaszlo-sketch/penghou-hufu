@@ -6,6 +6,15 @@ and final public API design remain pending. The canonical cross-project
 [original proposal](../../../Penghou.Zhinu/docs/proposals/2026-10-03-authority-extension.md)
 govern this migration, subject to the later product-neutral ownership/naming and sequential publication clarification in the Penghou plan.
 
+## Clarification, 2026-10-11
+
+[ADR 0014](0014-authority-delegation-enforcement.md) preserves this separation:
+workflow state belongs to the runtime and authority state to Hufu. Workflow events
+are authenticated inputs, not grants or automatic store revocations. One logical
+activity may use 0..N executions, and activity preflight remains distinct from
+each concrete operation's enforcement and start ordering. Current publication
+status is recorded in the [release profile](../package-release-profile.md).
+
 ## Decision
 
 Penghou defines `IExecutionAuthorizer` and neutral execution context/result/

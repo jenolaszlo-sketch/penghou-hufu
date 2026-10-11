@@ -6,6 +6,22 @@ host authentication, operation policy and mandatory decision evidence. See
 [qualification](qualification/core-hardening.json) and the
 [release handoff](zhinu-authority-handoff.md) for the tested tree and release gates.
 
+## Derived-grant composition
+
+The examples below demonstrate capacity and issuance, not complete child-grant
+enforcement. A consumer admitting derived grants must compose and qualify the
+ancestor-liveness check; the ordinary four-argument
+`CurrentAuthorityRequestAuthorizer` constructor alone does not supply it.
+The existing liveness helper also does not re-evaluate every ancestor policy
+layer. See [the source review](authority-model-review.md) and roadmap AE-1 before
+claiming general current-parent-policy containment.
+
+Deriving authority and authorizing its use are separate decisions. The exact
+Derive approval is an issuance-time right under [ADR 0013](decisions/0013-delegability-of-derived-authority.md);
+withdrawing it does not itself revoke an issued child. Child validity and ancestor
+liveness still govern later use. The [canonical model](authority-delegation-enforcement.md)
+keeps these semantics separate from credential attenuation and execution policy.
+
 ## Bound a shared authority evaluator
 
 Wrap the host's current-snapshot authorizer once for the evaluator/store owner:

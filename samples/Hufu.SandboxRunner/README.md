@@ -33,6 +33,11 @@ network controls, quotas, richer isolation, or a production host, approval
 surface, or evidence store. The child performs no I/O beyond its own stdout;
 `whoami` is a containment diagnostic, not a workload.
 
+The [authority/delegation model](../../docs/authority-delegation-enforcement.md)
+distinguishes this lifecycle demonstration from restricted execution. The sample
+does not derive a child grant or transport a Biscuit. Its one activity/one command
+shape is an example; the architecture permits 0..N executions per activity.
+
 This sample is not packed or published and takes no dependency on
 Penghou.Luban. See [the FZ-1 composition](../../docs/sandbox-execution-fuwen.md)
 for the architecture and its frozen boundaries.

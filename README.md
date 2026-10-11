@@ -13,6 +13,13 @@ flowchart LR
     P --> R[File, process, or other resource]
 ```
 
+The [authority and delegation model](docs/authority-delegation-enforcement.md)
+explains how live authority, child grants, broker checks and execution policies
+fit together. One activity can use zero or many executions. Biscuit is an optional
+future carrier across those boundaries; the first selected proof is a worker
+calling a host broker. Published Gagamba providers currently supply process
+lifecycle guarantees; restricted execution remains separately gated.
+
 ## What this repository provides
 
 - **Core authority contracts:** bounded requests, grants, current snapshots, decisions, revocation, authenticated issuance, derived-grant lineage, and required decision evidence.
@@ -39,7 +46,7 @@ The [single-patch host](docs/single-patch-host.md) and [local Windows host examp
 | Check published versions and evidence | [Package release profile](docs/package-release-profile.md) |
 | See planned and unfinished work | [Roadmap](docs/roadmap.md) |
 
-To explore the source, install the .NET 8 or .NET 10 SDK and run from the repository root:
+To explore the source, install the .NET 10 SDK and the .NET 8 runtime (for the .NET 8 test targets) and run from the repository root:
 
 ```powershell
 dotnet build Penghou.Hufu.Core.slnx -c Release
