@@ -1,29 +1,8 @@
 # Hufu architecture and ownership
 
-Current integration direction (2026-10-03): [ADR 0011](decisions/0011-neutral-zhinu-authority-extension.md)
-and the [neutral authority-extension plan](https://github.com/jenolaszlo-sketch/penghou-zhinu/blob/main/docs/authority-extension-plan.md)
-supersede earlier coupling and delivery order below. The
-[Penghou-owned workflow contracts](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/workflow-abstractions-plan.md)
-live in Penghou.Workflow.Abstractions. Zhinu implements execution and Hufu implements authorization in an optional
-adapter depending only on that contract package and Hufu core. Concrete SQLite
-start coordination remains a separately qualified legacy integration until ZA-5
-resolves its disposition. Resource enforcement and Hufu policy stay independent
-of workflow execution. Zhinu 0.2.0-preview.1 is published; the optional
-Hufu.Workflow adapter and its package-backed integration are locally qualified.
-Remote Hufu CI and user-controlled publication remain separate release gates.
-The optional core [decision explanation profile](decision-explanations.md)
-keeps capture and disclosure independent of execution authorization.
+This is the detailed design record for Hufu's library boundaries, authority store and integrations. It includes proposed capabilities and older prototype descriptions. For a concise explanation of the current system, start with the [overview](overview.md); for published versions and exact evidence, use the [release profile](package-release-profile.md).
 
-[Authority-Mediated Language Execution (AMLE)](authority-mediated-language-execution.md)
-names this shared architectural direction: Luban expresses and executes bounded
-semantic operations, Hufu mediates contextual authority, and trusted resource
-providers perform access. Semantic admission, concrete resource/start checks and
-result release remain distinct obligations. The guide links both products and
-separates the proposed pattern from current qualified profiles.
-
-
-Status: Design plus narrow M1, optional current-state SQLite and co-located operation-start prototypes, updated 2026-10-02. The separate library and name **Penghou.Hufu** were selected by the user. The current bounded snapshot contracts and Luban read authorizer are prototype APIs; the broader boundaries below remain design unless called out explicitly.
-
+As of the current release, seven Hufu packages are published at `0.1.0-preview.5`. The neutral workflow adapter depends on Penghou.Workflow.Abstractions, not Zhinu; the governed single-patch adapter and local Windows host have narrower, separately documented profiles. The Fuwen/Zhinu/Gagamba native-execution compositions are unpublished experiments. Future Hufu integrations are language-neutral; the existing Luban adapters remain available. See [ADR 0011](decisions/0011-neutral-zhinu-authority-extension.md), the [single-patch profile](single-patch-host.md), and the [roadmap amendment](roadmap.md).
 ## Purpose
 
 Hufu decides, records, and validates what authority an execution may exercise. It provides reusable grant, request, decision, attenuation, revocation, and authority-store mechanics. It is embedded by a host initially; a separately deployed authorization service is optional future infrastructure.
