@@ -89,6 +89,12 @@ implementation pressure forces it.
   identity conflicts; a read may be repeated only as an explicitly reauthorized
   attempt, never through an old Permit.
 
+`OperationId` is an **idempotency/correlation identity, not an authorization
+capability**. Reusing it with changed intent is `Conflict`; replaying an
+identical read still requires fresh authority and fresh release authorization.
+A previous successful response must never be replayed as though it were a new
+resource observation.
+
 ## Broker-local start ordering
 
 A concrete, broker-local ordering point — **not** a general public
@@ -106,6 +112,32 @@ start admission wins first              -> bounded read may finish internally
   ordering guarantee. Direct, unmediated writers are out of scope.
 - Do not reuse activity preflight as an atomic boundary or copy legacy workflow
   SQL into core.
+
+Start order:
+
+```text
+acquire binding arbiter
+resolve session-bound reference
+perform final AE-1 authorization
+commit mandatory start evidence
+mark start admitted
+release arbiter
+perform provider read
+perform independent release authorization
+commit release evidence
+return response
+```
+
+Mutation order (same binding arbiter):
+
+```text
+acquire same binding arbiter
+commit revocation/lifecycle transition
+release arbiter
+```
+
+This gives the guarantee a precise meaning without pretending to provide
+transactional ordering with arbitrary external store writers.
 
 ## Start and release are separate decisions
 
@@ -175,10 +207,45 @@ restricted execution (AE-4); A2A/MCP (AE-5); mutation API; remote placement;
 general RPC framework; sandbox dependency; general public ordering interface;
 a second workflow event store; any dependency from Hufu core on the broker.
 
-## Freeze checklist before code
+## Frozen values (locked 2026-10-12)
 
-1. Exact protocol version and message/concurrency/deadline bounds.
-2. Bootstrap channel and session-binding fields; reference-resolvable facts.
-3. Broker-local ordering key and the mutation set that participates.
-4. Start/release evidence schemas and the minimum external failure disclosure.
-5. Closed DTO schema and canonical-request mapping.
+**Protocol and bounds.** Protocol `v1`; one request per message; bounded request
+body 16 KiB; bounded read result 64 KiB; bounded connections/sessions per worker
+and bounded concurrent reads per session; explicit request deadline supplied by
+the host with a hard maximum. Oversized, unknown-version, or unknown-field
+requests fail before authority resolution. No streaming in AE-2.
+
+**Bootstrap and session.** The host creates a short-lived, single-use,
+high-entropy bootstrap secret through a protected out-of-band launch/bootstrap
+path. A successful handshake consumes it and establishes a broker session
+containing at least `SessionId`, tenant, subject, logical worker identity,
+broker audience, created/expiry times, protocol version, and authenticated
+connection binding. PID is not identity. Session IDs may appear in protected
+evidence; bootstrap secrets never do.
+
+**Ordering key and participating mutations.** Key the arbiter by the narrow
+execution-authority binding (tenant + subject + delegation + generation/fence),
+not by path and not globally. Participating mutations are the lifecycle/
+revocation operations that can invalidate that binding and that pass through the
+qualified broker/host composition; a store write outside this path is explicitly
+outside the ordering guarantee. Start admission includes the final AE-1 decision
+plus committed start evidence before releasing the arbiter.
+
+**Evidence and disclosure.** Separate typed `BrokerStartEvidence` and
+`BrokerReleaseEvidence`, both bound to operation ID, authenticated
+session/recipient, opaque-reference identity or protected digest, authority
+binding, exact canonical operation digest, timestamp and outcome. Start evidence
+records admission, not result; release evidence records disclosure
+authorization, not delivery. Never log file content automatically. External
+failures stay coarse: `InvalidRequest`, `Unauthorized`, `Unavailable`,
+`DeadlineExceeded`, `CapacityExceeded`, `OperationFailed`. On denial disclose no
+path existence, canonical path, policy reason, parent identity, content,
+candidate metadata or internal store state.
+
+**DTO schema.** One closed `ReadFile` request only. Fields: `ProtocolVersion`,
+`OperationId`, `AuthorityReference`, `WorkspaceId`, `RelativePath`, `MaxBytes`,
+`Deadline`. Tenant, subject, worker identity, audience, delegation and generation
+come from authenticated session/reference resolution, never caller-supplied
+fields. No arbitrary headers/options, no search/list/glob, no absolute path, no
+provider selection, no evaluator selection. `MaxBytes` is `1..65536`; reject
+trailing/unknown semantic fields deterministically.
