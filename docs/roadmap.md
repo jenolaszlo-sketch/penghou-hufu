@@ -82,7 +82,8 @@ qualify during implementation, not new delivered guarantees or closed CI gates.
     start/release evidence. Spec frozen in the [AE-2.2 implementation spec](broker-ae22-implementation-spec.md);
     vertical implemented and locally validated (35 focused tests).
   - [ ] **AE-2.3** — Cross-process adversarial/restart/response-loss race corpus
-    that closes AE-2.
+    that closes AE-2. Spec frozen in the [AE-2.3 qualification spec](broker-ae23-qualification-spec.md);
+    corpus pending.
 - [ ] **AE-3 — Evaluate an optional Biscuit carrier on that same path.** Depends
   on AE-1/2, not on a new sandbox. Reconcile the older adapter's subset logic and
   registration chain with core grant lineage; define versioned child-grant,

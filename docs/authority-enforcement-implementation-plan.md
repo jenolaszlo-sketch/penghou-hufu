@@ -400,6 +400,11 @@ rights or treating a read receipt as a future mutation receipt.
 
 ### AE-2.3 — Qualify the real consumption boundary
 
+**Spec 2026-10-12: [AE-2.3 qualification spec](broker-ae23-qualification-spec.md).**
+Cross-process/race/restart/lost-response/saturation/malformed-traffic corpus
+that closes AE-2. Qualification only; no new architecture. No code is claimed by
+this spec.
+
 Use separate worker/broker processes and a real qualified resource provider.
 Prove A cannot use B's reference, a child cannot borrow parent-only scope/actions,
 wrong tenant/audience/generation fails, stale/replayed bindings do not revive,
