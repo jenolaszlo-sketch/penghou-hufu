@@ -293,6 +293,16 @@ must not conceal retry or manufacture permission from cached state.
 
 ## AE-2: one worker to one host broker
 
+**Spec 2026-10-12: scope frozen before implementation.** The AE-2
+[broker authority profile](broker-authority-profile.md) records the frozen
+shape: a new experimental, unpublished `Penghou.Hufu.Broker` project; a local
+Windows named-pipe transport with host-issued worker-session bootstrap; an
+opaque session-bound reference (not a signed token); a closed bounded DTO;
+a concrete broker-local start ordering (not a general public interface);
+AE-1 qualified authorization composed through `Penghou.Hufu.IO`; and distinct
+start vs result-release evidence. No runtime change, qualification or
+publication is claimed by the spec.
+
 ### AE-2.0 — Freeze the smallest useful profile
 
 Planned default: a local Windows broker over one protected named-pipe transport,
