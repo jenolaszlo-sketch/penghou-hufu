@@ -13,6 +13,9 @@ override Penghou.Hufu.AuthorityGrantDerivationResult.ToString() -> string!
 override Penghou.Hufu.AuthorityGrantLineage.Equals(object? obj) -> bool
 override Penghou.Hufu.AuthorityGrantLineage.GetHashCode() -> int
 override Penghou.Hufu.AuthorityGrantLineage.ToString() -> string!
+override Penghou.Hufu.CurrentParentPolicyResult.Equals(object? obj) -> bool
+override Penghou.Hufu.CurrentParentPolicyResult.GetHashCode() -> int
+override Penghou.Hufu.CurrentParentPolicyResult.ToString() -> string!
 override Penghou.Hufu.RequestedAuthority.Equals(object? obj) -> bool
 override Penghou.Hufu.RequestedAuthority.GetHashCode() -> int
 override Penghou.Hufu.RequestedAuthority.ToString() -> string!
@@ -24,6 +27,9 @@ Penghou.Hufu.AuthorityDerivation
 Penghou.Hufu.AuthorityDerivation.LineageAncestorLiveness
 Penghou.Hufu.AuthorityDerivation.LineageAncestorLiveness.CheckAsync(Penghou.Hufu.AuthoritySnapshot! snapshot, Penghou.Hufu.AuthorityRequest! request, System.DateTimeOffset evaluatedAt, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AncestorLivenessVerdict>
 Penghou.Hufu.AuthorityDerivation.LineageAncestorLiveness.LineageAncestorLiveness(Penghou.Hufu.IAuthoritySnapshotSource! source, Penghou.Hufu.IAuthorityDerivationStore! derivations) -> void
+Penghou.Hufu.AuthorityDerivation.LineageCurrentParentPolicy
+Penghou.Hufu.AuthorityDerivation.LineageCurrentParentPolicy.CheckAsync(Penghou.Hufu.AuthoritySnapshot! snapshot, Penghou.Hufu.AuthorityRequest! request, System.DateTimeOffset evaluatedAt, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.CurrentParentPolicyResult!>
+Penghou.Hufu.AuthorityDerivation.LineageCurrentParentPolicy.LineageCurrentParentPolicy(Penghou.Hufu.IAuthoritySnapshotSource! source, Penghou.Hufu.IAuthorityDerivationStore! derivations, Penghou.Hufu.IAuthorityEvaluator! evaluator) -> void
 Penghou.Hufu.AuthorityDerivationCommand
 Penghou.Hufu.AuthorityDerivationCommand.<Clone>$() -> Penghou.Hufu.AuthorityDerivationCommand!
 Penghou.Hufu.AuthorityDerivationCommand.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
@@ -77,7 +83,42 @@ Penghou.Hufu.AuthorityGrantLineage.IssuedAt.get -> System.DateTimeOffset
 Penghou.Hufu.AuthorityGrantLineage.ParentContext.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
 Penghou.Hufu.AuthorityGrantLineage.ParentGrantId.get -> string!
 Penghou.Hufu.AuthorityGrantLineage.Requested.get -> Penghou.Hufu.RequestedAuthority!
-Penghou.Hufu.CurrentAuthorityRequestAuthorizer.CurrentAuthorityRequestAuthorizer(Penghou.Hufu.IAuthoritySnapshotSource! source, Penghou.Hufu.IAuthorityEvaluator! evaluator, Penghou.Hufu.IAuthorityDecisionRecorder! recorder, System.TimeProvider? clock = null, Penghou.Hufu.IAncestorLiveness? ancestorLiveness = null) -> void
+Penghou.Hufu.CurrentAuthorityRequestAuthorizer.CurrentAuthorityRequestAuthorizer(Penghou.Hufu.IAuthoritySnapshotSource! source, Penghou.Hufu.IAuthorityEvaluator! evaluator, Penghou.Hufu.IAuthorityDecisionRecorder! recorder, System.TimeProvider? clock = null, Penghou.Hufu.IAncestorLiveness? ancestorLiveness = null, Penghou.Hufu.ICurrentParentPolicy? parentPolicy = null) -> void
+Penghou.Hufu.CurrentParentPolicyResult
+Penghou.Hufu.CurrentParentPolicyResult.<Clone>$() -> Penghou.Hufu.CurrentParentPolicyResult!
+Penghou.Hufu.CurrentParentPolicyResult.CurrentParentPolicyResult(Penghou.Hufu.CurrentParentPolicyVerdict Verdict, Penghou.Hufu.AuthorityRequest? ParentRequest, Penghou.Hufu.AuthorityDecision? ParentDecision, string? ParentGrantId, string? ParentSnapshotVersion, string? ParentSnapshotIdentity, string? ParentEvaluatorIdentity, System.DateTimeOffset EvaluatedAt) -> void
+Penghou.Hufu.CurrentParentPolicyResult.Deconstruct(out Penghou.Hufu.CurrentParentPolicyVerdict Verdict, out Penghou.Hufu.AuthorityRequest? ParentRequest, out Penghou.Hufu.AuthorityDecision? ParentDecision, out string? ParentGrantId, out string? ParentSnapshotVersion, out string? ParentSnapshotIdentity, out string? ParentEvaluatorIdentity, out System.DateTimeOffset EvaluatedAt) -> void
+Penghou.Hufu.CurrentParentPolicyResult.Equals(Penghou.Hufu.CurrentParentPolicyResult? other) -> bool
+Penghou.Hufu.CurrentParentPolicyResult.EvaluatedAt.get -> System.DateTimeOffset
+Penghou.Hufu.CurrentParentPolicyResult.EvaluatedAt.init -> void
+Penghou.Hufu.CurrentParentPolicyResult.ParentDecision.get -> Penghou.Hufu.AuthorityDecision?
+Penghou.Hufu.CurrentParentPolicyResult.ParentDecision.init -> void
+Penghou.Hufu.CurrentParentPolicyResult.ParentEvaluatorIdentity.get -> string?
+Penghou.Hufu.CurrentParentPolicyResult.ParentEvaluatorIdentity.init -> void
+Penghou.Hufu.CurrentParentPolicyResult.ParentGrantId.get -> string?
+Penghou.Hufu.CurrentParentPolicyResult.ParentGrantId.init -> void
+Penghou.Hufu.CurrentParentPolicyResult.ParentRequest.get -> Penghou.Hufu.AuthorityRequest?
+Penghou.Hufu.CurrentParentPolicyResult.ParentRequest.init -> void
+Penghou.Hufu.CurrentParentPolicyResult.ParentSnapshotIdentity.get -> string?
+Penghou.Hufu.CurrentParentPolicyResult.ParentSnapshotIdentity.init -> void
+Penghou.Hufu.CurrentParentPolicyResult.ParentSnapshotVersion.get -> string?
+Penghou.Hufu.CurrentParentPolicyResult.ParentSnapshotVersion.init -> void
+Penghou.Hufu.CurrentParentPolicyResult.Verdict.get -> Penghou.Hufu.CurrentParentPolicyVerdict
+Penghou.Hufu.CurrentParentPolicyResult.Verdict.init -> void
+Penghou.Hufu.CurrentParentPolicyVerdict
+Penghou.Hufu.CurrentParentPolicyVerdict.AncestorRevoked = 2 -> Penghou.Hufu.CurrentParentPolicyVerdict
+Penghou.Hufu.CurrentParentPolicyVerdict.EvaluationUnavailable = 6 -> Penghou.Hufu.CurrentParentPolicyVerdict
+Penghou.Hufu.CurrentParentPolicyVerdict.LineageUnavailable = 3 -> Penghou.Hufu.CurrentParentPolicyVerdict
+Penghou.Hufu.CurrentParentPolicyVerdict.MalformedLineage = 4 -> Penghou.Hufu.CurrentParentPolicyVerdict
+Penghou.Hufu.CurrentParentPolicyVerdict.ParentDenied = 1 -> Penghou.Hufu.CurrentParentPolicyVerdict
+Penghou.Hufu.CurrentParentPolicyVerdict.Permit = 0 -> Penghou.Hufu.CurrentParentPolicyVerdict
+Penghou.Hufu.CurrentParentPolicyVerdict.UnsupportedLineage = 5 -> Penghou.Hufu.CurrentParentPolicyVerdict
+Penghou.Hufu.DerivedAuthorityRequestAuthorizer
+Penghou.Hufu.ICurrentParentPolicy
+Penghou.Hufu.ICurrentParentPolicy.CheckAsync(Penghou.Hufu.AuthoritySnapshot! snapshot, Penghou.Hufu.AuthorityRequest! request, System.DateTimeOffset evaluatedAt, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.CurrentParentPolicyResult!>
+static Penghou.Hufu.CurrentParentPolicyResult.operator !=(Penghou.Hufu.CurrentParentPolicyResult? left, Penghou.Hufu.CurrentParentPolicyResult? right) -> bool
+static Penghou.Hufu.CurrentParentPolicyResult.operator ==(Penghou.Hufu.CurrentParentPolicyResult? left, Penghou.Hufu.CurrentParentPolicyResult? right) -> bool
+static Penghou.Hufu.DerivedAuthorityRequestAuthorizer.Create(Penghou.Hufu.IAuthoritySnapshotSource! source, Penghou.Hufu.IAuthorityEvaluator! evaluator, Penghou.Hufu.IAuthorityDecisionRecorder! recorder, Penghou.Hufu.IAuthorityDerivationStore! derivations, System.TimeProvider? clock = null) -> Penghou.Hufu.CurrentAuthorityRequestAuthorizer!
 Penghou.Hufu.IAncestorLiveness
 Penghou.Hufu.IAncestorLiveness.CheckAsync(Penghou.Hufu.AuthoritySnapshot! snapshot, Penghou.Hufu.AuthorityRequest! request, System.DateTimeOffset evaluatedAt, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AncestorLivenessVerdict>
 Penghou.Hufu.IAuthorityDerivationStore

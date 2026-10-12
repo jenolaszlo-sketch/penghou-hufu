@@ -12,6 +12,7 @@ New to Hufu? Read the [project README](../README.md) for the goal, then [the ove
 | [Architecture](architecture.md) | Detailed library boundaries, authority store and integration design. |
 | [Workflow authority specification](workflow-authority-spec.md) | Intended security invariants, behavior and acceptance gates. |
 | [Roadmap](roadmap.md) | Delivery order, open gates and the language-neutral direction. |
+| [Authority/enforcement implementation plan](authority-enforcement-implementation-plan.md) | Concrete AE-1–AE-5 slices, HUFU-R1 contention/CI closure, dependencies and acceptance cases. Planning document; no new runtime qualification. |
 | [Local-first runtime design](local-first-authority-runtime.md) | Longer-term analysis, brokers and evidence design. |
 | [Decision records](decisions/) | Why the project chose its major boundaries. Start with [ADR 0001](decisions/0001-hufu-owns-workflow-authority.md), [ADR 0011](decisions/0011-neutral-zhinu-authority-extension.md), and the [derived-authority decisions](decisions/0012-derived-authority-lineage.md). |
 

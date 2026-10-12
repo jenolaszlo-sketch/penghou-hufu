@@ -44,7 +44,7 @@ The [single-patch host](docs/single-patch-host.md) and [local Windows host examp
 | Govern concrete resource access | [Resource adapter](docs/resource-package-adoption.md) and [single-patch host](docs/single-patch-host.md) |
 | Run the bounded operator example | [Local host README](samples/Hufu.LocalHost/README.md) |
 | Check published versions and evidence | [Package release profile](docs/package-release-profile.md) |
-| See planned and unfinished work | [Roadmap](docs/roadmap.md) |
+| See planned and unfinished work | [Roadmap](docs/roadmap.md) and [authority/enforcement implementation plan](docs/authority-enforcement-implementation-plan.md) |
 
 To explore the source, install the .NET 10 SDK and the .NET 8 runtime (for the .NET 8 test targets) and run from the repository root:
 

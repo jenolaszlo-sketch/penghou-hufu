@@ -8,13 +8,37 @@ host authentication, operation policy and mandatory decision evidence. See
 
 ## Derived-grant composition
 
-The examples below demonstrate capacity and issuance, not complete child-grant
-enforcement. A consumer admitting derived grants must compose and qualify the
-ancestor-liveness check; the ordinary four-argument
-`CurrentAuthorityRequestAuthorizer` constructor alone does not supply it.
-The existing liveness helper also does not re-evaluate every ancestor policy
-layer. See [the source review](authority-model-review.md) and roadmap AE-1 before
-claiming general current-parent-policy containment.
+A consumer admitting derived grants must use the qualified composition,
+which requires ancestor liveness and the current-parent-policy checker. The
+ordinary four-argument `CurrentAuthorityRequestAuthorizer` constructor keeps
+its exact root-only behavior, but a known derived grant reaching it (or any
+composition without the checker) now denies with
+`authority.derived-checker-missing` instead of silently skipping the
+current-parent check:
+
+```csharp
+IAuthorityRequestAuthorizer qualified = DerivedAuthorityRequestAuthorizer.Create(
+    snapshotSource, evaluator, decisionRecorder, derivationStore, timeProvider);
+```
+
+The factory wires `AuthorityDerivation.LineageAncestorLiveness` and
+`AuthorityDerivation.LineageCurrentParentPolicy` over the same snapshot
+source, derivation store, and evaluator as the child path. The checker
+evaluates the exact requested operation against the current applicable
+policy layers of the single bound root parent resolved from trusted stored
+lineage; both the child and the parent must permit. See the
+[ADR 0014 amendment](decisions/0014-authority-delegation-enforcement.md#amendment-2026-10-12-ae-10-current-derived-authority-use-time-rule)
+and the [current authority profile](current-authority-profile.md) for the
+frozen rule, the qualified lineage shape, and the typed outcomes.
+
+Existing public constructor signatures are preserved where they can remain
+safe; a construction path that silently claims derived-authority support
+while omitting the required checker is not preserved. The shipped
+four-argument constructor is byte-identical. The unshipped overload gained an
+optional `ICurrentParentPolicy` parameter instead of a new overload because
+API back-compat rules forbid multiple overloads with optional parameters.
+No new package family, broker, Biscuit, Gagamba, workflow-engine, or Zhinu
+storage dependency was introduced for this slice.
 
 Deriving authority and authorizing its use are separate decisions. The exact
 Derive approval is an issuance-time right under [ADR 0013](decisions/0013-delegability-of-derived-authority.md);

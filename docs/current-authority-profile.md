@@ -151,6 +151,88 @@ evaluation at a hard timeout. Consumer qualification is currently local Windows
 x64 on .NET 8 and .NET 10; wrapper CI coverage is not Hufu consumer qualification
 on other operating systems. See the [qualification record](authority-profile-qualification.md).
 
+## Derived authority: current use-time rule (AE-1.0/AE-1.1)
+
+Implemented 2026-10-12. The rule is frozen in the
+[ADR 0014 amendment](decisions/0014-authority-delegation-enforcement.md#amendment-2026-10-12-ae-10-current-derived-authority-use-time-rule);
+this section records the qualified consumption profile. Lifecycle binding
+(AE-1.2) and freshness/consumption qualification (AE-1.3) remain open, as do
+general nested delegation, DAGs, Biscuit transport, brokers, and gateways.
+
+The qualified rule: evaluate the exact requested operation independently
+against the child's own fixed issued authority and against every applicable
+current restriction from the authority lineage that contributed to that
+child. Both must permit. A parent Permit never substitutes for the child's
+Permit. A child Permit never bypasses a current applicable parent denial.
+
+- **Fixed child ceiling.** The child ceiling is fixed at issuance by the
+  existing containment proof. Later parent expansion never widens an existing
+  child; no re-derivation follows a parent gaining authority.
+- **Applicable current parent restriction.** The current policy/authority
+  layers belonging to the lineage and authority profile that contributed to
+  the child's derivation and that govern the requested operation — not every
+  arbitrary policy attached to the parent subject. For the first qualified
+  shape (root grant, then one direct derived child) that is the current
+  applicable policy layers of the bound root parent.
+- **Version semantics.** Use-time current policy is authoritative. The parent
+  version/sequence observed at derivation is provenance, not a cached
+  permission snapshot. A replacement parent context/grant never silently
+  substitutes for the bound ancestor.
+- **Qualified lineage shape.** Exactly one direct root parent per derived
+  grant. Grandchild nesting, multiple distinct parents, cross-tenant
+  ancestry, self-parenting, missing or mismatched lineage, and deeper or DAG
+  shapes fail closed (`authority.lineage-unsupported`,
+  `authority.lineage-malformed`, `authority.lineage-unavailable`,
+  `authority.ancestor-revoked`). Shared references to the one bound root are
+  not cycles: evaluation stops at the root parent by construction, with
+  deterministic single-hop work under existing cancellation/capacity
+  ownership. A missing checker never downgrades a known derived grant into a
+  root grant.
+- **Qualified composition.** `DerivedAuthorityRequestAuthorizer.Create`
+  wires ancestor liveness plus the required current-parent-policy checker
+  (`AuthorityDerivation.LineageCurrentParentPolicy`) over the same snapshot
+  source, derivation store, and evaluator as the child path. Existing public
+  constructor signatures are preserved where safe: the shipped four-argument
+  composition is unchanged for root authority, while a known derived grant
+  reaching any composition without the checker denies with
+  `authority.derived-checker-missing`. The unshipped overload was extended
+  with an optional checker parameter because API back-compat rules forbid a
+  second overload with optional parameters; no shipped signature changed.
+- **Parent-context projection.** The exact requested action, workspace, path,
+  and request identity are evaluated under the trusted stored parent context
+  from lineage and the current parent snapshot. Caller-controlled child input
+  never selects parent identity, context, tenant, evaluator, or lineage.
+- **Evaluation ordering.** Authenticate and bind the request; resolve the
+  trusted child origin; load child current state; resolve required lineage;
+  load current applicable parent state/policy; evaluate the exact operation
+  against the child, then against the required parent layer(s); enforce the
+  fixed child ceiling; record required evidence; then Permit, Deny, or
+  Unavailable. This remains authorization qualification, not atomic
+  provider-I/O start ordering; that ordering belongs to AE-2/provider work.
+- **Evidence.** A qualified Permit records two evidence entries through the
+  mandatory recorder: the parent evaluation (parent request, parent decision
+  with parent snapshot version/identity and evaluator identity) and then the
+  child decision. Parent grant identity is additionally bound by the durable
+  stored lineage row. If mandatory recording fails, no usable Permit is
+  returned. Evaluation is captured once, never re-run to manufacture
+  evidence. Protected context stays out of telemetry and default explanation
+  output.
+- **Typed outcomes.** Policy denial (`authority.parent-policy-denied`),
+  revoked ancestry (`authority.ancestor-revoked`), missing lineage
+  (`authority.lineage-unavailable`), malformed lineage
+  (`authority.lineage-malformed`), unsupported lineage
+  (`authority.lineage-unsupported`), unavailable lineage store or parent
+  evaluation (`Unavailable`), mandatory evidence failure (`Unavailable`),
+  and cancellation/capacity failure (`Unavailable`) stay distinct in internal
+  evidence. All fail closed.
+- **Preserved semantics.** Exact Derive/delegability approval stays an
+  issuance-time gate: withdrawing it blocks new derivation without
+  retroactively revoking an issued child, which still needs its own Permit,
+  live ancestry, and current parent resource restrictions. Same-generation
+  retry may reuse the idempotent child identity with a fresh per-use
+  decision. Visibility (Observe/Cancel/Intervene) authority stays distinct
+  from resource/execution authority.
+
 ## Next protected-operation gate
 
 Fetching Hufu state and subsequently acquiring a Zhinu operation handle is not

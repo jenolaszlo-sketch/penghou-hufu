@@ -19,6 +19,14 @@ revocation can reject an existing delegation without creating a replacement toke
 
 ### Delivery order and acceptance
 
+The [implementation plan](authority-enforcement-implementation-plan.md), added
+2026-10-12 against source `c0ef75a`, breaks these gates into reviewable changes
+and qualification cases. Start with AE-1.0/1.1; HUFU-R1 reconciles SQLite contention
+and HOST-SERVICES-CI as a bounded side track. The plan retains the newer delegation
+visibility work, fixed child ceilings and optional language-neutral consumers.
+Its parent-policy/transport/timeout choices are planned defaults to record and
+qualify during implementation, not new delivered guarantees or closed CI gates.
+
 - [x] **AE-0 — Reconcile the design.** Preserve the proposal, publish the layered
   model and ADR, identify source gaps, and distinguish current lifecycle execution
   from future isolation. Documentation only; no new enforcement qualification.
@@ -31,6 +39,17 @@ revocation can reject an existing delegation without creating a replacement toke
   expansion, retry reuse, new generations and invalidated-context non-revival.
   Record the selected version/re-evaluation rule before claiming general
   delegation. Existing delegability-approval start semantics in ADR 0013 remain.
+  - [x] **AE-1.0** — Use-time rule frozen and documented (ADR 0014 amendment;
+    current-authority profile; authority model). Parent version is provenance,
+    not a cached permission snapshot.
+  - [x] **AE-1.1** — Qualified consumption requires the current-parent checker:
+    `DerivedAuthorityRequestAuthorizer.Create` composes ancestor liveness plus
+    `LineageCurrentParentPolicy`; incomplete compositions deny a known derived
+    grant. Policy-only parent narrowing, parent expansion, unavailable/unsupported
+    lineage and root-only regression qualified locally; see the [profile
+    qualification](authority-profile-qualification.md).
+  - [ ] **AE-1.2** — Trusted lifecycle-event/fence binding.
+  - [ ] **AE-1.3** — Freshness and consumption qualification over the full case table.
 - [ ] **AE-2 — Prove one worker → host broker path.** This is the selected first
   consumer. Use one bounded resource read with existing Hufu contracts and a
   host-bound context/reference first. Authenticate the worker on one protected

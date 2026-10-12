@@ -82,9 +82,17 @@ must also satisfy the delegation's fixed ceiling, current child/ancestor validit
 applicable current policy, exact resource and audience bindings, and any required
 workflow fence or effect approval. A later parent expansion never enlarges an
 existing child. A parent restriction or revocation must not be bypassed through a
-stale child. Full current parent-policy composition is a qualification gate, not
-a claim that the existing ancestor-liveness helper implements arbitrary policy
-inheritance; see the [source review](authority-model-review.md).
+stale child. The qualified use-time rule is frozen in the
+[ADR 0014 amendment](decisions/0014-authority-delegation-enforcement.md#amendment-2026-10-12-ae-10-current-derived-authority-use-time-rule):
+the exact operation needs both the child's own Permit and a Permit under every
+applicable current parent restriction. "Applicable current parent restriction"
+means the current restrictions from the authority lineage and profile that
+contributed to the child's authority and that govern the requested operation,
+not every arbitrary policy associated with the parent subject. Full current
+parent-policy composition is qualified only for the first root-then-direct-child
+profile; the ancestor-liveness helper alone does not implement it, and
+unsupported lineage shapes fail closed rather than joining the qualified
+contract; see the [source review](authority-model-review.md).
 
 ## Authority changes and execution lifetime
 

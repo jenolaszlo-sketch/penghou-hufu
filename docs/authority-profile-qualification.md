@@ -106,3 +106,54 @@ not confinement guarantees. Case-sensitive-directory enablement remains
 unverified on this host. UNC shares, non-Windows Hufu consumers, other native
 targets, synchronous native interruption, and general filesystem confinement
 are not qualified by these local results.
+
+## AE-1.0/AE-1.1 current derived-authority qualification (2026-10-12)
+
+Local qualification of the frozen use-time rule and the required
+current-parent checker. Source revision and results recorded here; this is a
+focused slice, not a general nested-delegation or broker qualification. The
+rule is frozen in the [ADR 0014 amendment](decisions/0014-authority-delegation-enforcement.md#amendment-2026-10-12-ae-10-current-derived-authority-use-time-rule)
+and described in the [current authority profile](current-authority-profile.md).
+
+Environment: Windows x64, .NET SDK 10.0.401, .NET 8 and .NET 10 test targets,
+published CedarSharp 1.0.0 for the Cedar regression. Focused suite:
+`CurrentDerivedAuthorityTests` plus the existing derivation/derivation-admission
+suites.
+
+| Suite (focused filter) | .NET 8 | .NET 10 |
+| --- | --- | --- |
+| CurrentDerivedAuthorityTests + AuthorityDerivationTests + DeriveAdmissionTests + CurrentAuthorityRequestAuthorizerTests | 46 passed, 0 failed, 0 skipped | 46 passed, 0 failed, 0 skipped |
+
+Qualified observations:
+
+- A child read permitted under a live, identity-stable parent is denied after a
+  policy-only parent narrowing that keeps the parent grant live with unchanged
+  identity and validity dates (`authority.parent-policy-denied`). The child
+  snapshot is byte-identical before and after.
+- The same narrowing is proved through the real Cedar policy layer; the
+  captured parent evaluation binds the stored parent version/identity and the
+  real `hufu-cedar-v1` evaluator identity, and is projected into the stored
+  parent context rather than the child context.
+- Parent expansion does not widen the existing child: scope newly added to the
+  parent is denied by the child's fixed ceiling before any parent check.
+- A known derived grant through an incomplete composition (ancestor liveness
+  without the parent-policy checker, or the root-only constructors) denies with
+  `authority.derived-checker-missing`; root-only use through the same
+  composition is unchanged.
+- Revoked ancestry denies (`authority.ancestor-revoked`); unavailable lineage
+  store or current parent evaluation yields typed `Unavailable` with no
+  recording; missing, mismatched, self-parenting, cross-tenant, grandchild, and
+  multiple-distinct-parent lineage all deny with the corresponding typed reason
+  and no parent-state lookup where unsupported.
+- A qualified Permit records both the parent and child evaluations through the
+  mandatory recorder; failed mandatory recording yields no usable Permit and
+  `Unavailable`.
+- Derive approval withdrawal blocks new issuance while the already-issued
+  child remains usable only while it and current parent policy still permit;
+  same-generation retry reuses the idempotent child identity and re-authorizes
+  each use, so a new parent denial applies to the retry.
+
+Unqualified by this record: general nested delegation, DAG ancestry, mixed
+root/derived contributor snapshots, lifecycle-event binding (AE-1.2),
+freshness/consumption qualification (AE-1.3), worker/broker transport (AE-2),
+Biscuit, Gagamba, and gateways.

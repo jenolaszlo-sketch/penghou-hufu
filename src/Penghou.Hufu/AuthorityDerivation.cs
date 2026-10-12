@@ -451,4 +451,138 @@ public static class AuthorityDerivation
                 .ConfigureAwait(false);
         }
     }
+
+    /// <summary>
+    /// Current-policy evaluation over trusted derivation lineage and the same
+    /// snapshot source the authorizer uses, so the parent check shares the
+    /// admission's view of current state. Snapshots without derived grants
+    /// return <see cref="CurrentParentPolicyVerdict.Permit"/> with no parent
+    /// observation and no I/O.
+    /// </summary>
+    /// <remarks>
+    /// The qualified shape is exactly one direct root parent for every derived
+    /// grant in the evaluated snapshot: root grant, then direct derived child.
+    /// Grandchild nesting, multiple distinct parents, cross-tenant ancestry,
+    /// self-parenting, and lineage that does not match the evaluated grant all
+    /// fail closed. Shared references to the one bound root are not cycles and
+    /// need no traversal: evaluation stops at the root parent by construction.
+    /// The exact requested action, workspace, and path are projected into the
+    /// trusted stored parent context; caller input never selects the parent
+    /// identity, context, tenant, evaluator, or lineage.
+    /// </remarks>
+    public sealed class LineageCurrentParentPolicy(
+        IAuthoritySnapshotSource source,
+        IAuthorityDerivationStore derivations,
+        IAuthorityEvaluator evaluator) : ICurrentParentPolicy
+    {
+        public async ValueTask<CurrentParentPolicyResult> CheckAsync(
+            AuthoritySnapshot snapshot,
+            AuthorityRequest request,
+            DateTimeOffset evaluatedAt,
+            CancellationToken cancellationToken = default)
+        {
+            ArgumentNullException.ThrowIfNull(snapshot);
+            ArgumentNullException.ThrowIfNull(request);
+            var derived = snapshot.Layers
+                .SelectMany(layer => layer.Grants)
+                .Where(grant => grant.ParentGrantId is not null)
+                .ToArray();
+            if (derived.Length == 0)
+                return new(CurrentParentPolicyVerdict.Permit, null, null, null, null, null, null, evaluatedAt);
+
+            try
+            {
+                var lineages = new AuthorityGrantLineage[derived.Length];
+                for (var i = 0; i < derived.Length; i++)
+                {
+                    AuthorityGrantLineage? lineage;
+                    try
+                    {
+                        lineage = await derivations.GetLineageAsync(derived[i].Id, cancellationToken).ConfigureAwait(false);
+                    }
+                    catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
+                    catch
+                    {
+                        // The lineage store itself is unreachable: this is an
+                        // availability failure, not a lineage fact. Fail closed
+                        // without reporting it as a denial.
+                        return new(CurrentParentPolicyVerdict.EvaluationUnavailable, null, null, null, null, null, null, evaluatedAt);
+                    }
+                    if (lineage is null)
+                        return new(CurrentParentPolicyVerdict.LineageUnavailable, null, null, null, null, null, null, evaluatedAt);
+                    if (lineage.ChildGrantId != derived[i].Id ||
+                        lineage.ParentGrantId != derived[i].ParentGrantId ||
+                        lineage.ChildGrantId == lineage.ParentGrantId ||
+                        lineage.ChildContext != snapshot.Context)
+                        return new(CurrentParentPolicyVerdict.MalformedLineage, null, null, null, null, null, null, evaluatedAt);
+                    if (lineage.ParentContext.TenantId != snapshot.Context.TenantId)
+                        return new(CurrentParentPolicyVerdict.UnsupportedLineage, null, null, null, null, null, null, evaluatedAt);
+                    lineages[i] = lineage;
+                }
+
+                var parentGrantId = lineages[0].ParentGrantId;
+                var parentContext = lineages[0].ParentContext;
+                if (lineages.Any(lineage => lineage.ParentGrantId != parentGrantId || lineage.ParentContext != parentContext))
+                    return new(CurrentParentPolicyVerdict.UnsupportedLineage, null, null, null, null, null, null, evaluatedAt);
+
+                AuthoritySnapshot? parent;
+                try
+                {
+                    parent = await source.GetCurrentAsync(parentContext, cancellationToken).ConfigureAwait(false);
+                }
+                catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
+                catch
+                {
+                    return new(CurrentParentPolicyVerdict.EvaluationUnavailable, null, null, null, null, null, null, evaluatedAt);
+                }
+                if (parent is null)
+                    return new(CurrentParentPolicyVerdict.AncestorRevoked, null, null, parentGrantId, null, null, null, evaluatedAt);
+                if (parent.Context != parentContext)
+                    return new(CurrentParentPolicyVerdict.MalformedLineage, null, null, parentGrantId, null, null, null, evaluatedAt);
+                if (parent.ValidUntil <= evaluatedAt)
+                    return new(CurrentParentPolicyVerdict.AncestorRevoked, null, null, parentGrantId, parent.Version, parent.Identity, null, evaluatedAt);
+                var parentGrant = parent.Layers
+                    .SelectMany(layer => layer.Grants)
+                    .FirstOrDefault(grant => grant.Id == parentGrantId);
+                if (parentGrant is null ||
+                    !(parentGrant.NotBefore <= evaluatedAt && evaluatedAt < parentGrant.ExpiresAt))
+                    return new(CurrentParentPolicyVerdict.AncestorRevoked, null, null, parentGrantId, parent.Version, parent.Identity, null, evaluatedAt);
+                if (parentGrant.ParentGrantId is not null)
+                    return new(CurrentParentPolicyVerdict.UnsupportedLineage, null, null, parentGrantId, parent.Version, parent.Identity, null, evaluatedAt);
+
+                var parentRequest = request with { Context = parent.Context };
+                AuthorityDecision parentDecision;
+                try
+                {
+                    parentDecision = evaluator.Evaluate(parent, parentRequest, evaluatedAt);
+                }
+                catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
+                catch
+                {
+                    return new(CurrentParentPolicyVerdict.EvaluationUnavailable, null, null, parentGrantId, parent.Version, parent.Identity, null, evaluatedAt);
+                }
+                if (parentDecision is null || parentDecision.SnapshotIdentity != parent.Identity ||
+                    parentDecision.SnapshotVersion != parent.Version ||
+                    !AuthorityValidation.ValidToken(parentDecision.EvaluatorIdentity) ||
+                    !AuthorityValidation.ValidToken(parentDecision.ReasonCode) ||
+                    !Enum.IsDefined(parentDecision.Status))
+                    return new(CurrentParentPolicyVerdict.EvaluationUnavailable, null, null, parentGrantId, parent.Version, parent.Identity, null, evaluatedAt);
+                if (parentDecision.Status == AuthorityStatus.Permit)
+                    return new(CurrentParentPolicyVerdict.Permit, parentRequest, parentDecision,
+                        parentGrantId, parent.Version, parent.Identity, parentDecision.EvaluatorIdentity, evaluatedAt);
+                if (parentDecision.Status == AuthorityStatus.Deny)
+                    return new(CurrentParentPolicyVerdict.ParentDenied, parentRequest, parentDecision,
+                        parentGrantId, parent.Version, parent.Identity, parentDecision.EvaluatorIdentity, evaluatedAt);
+                return new(CurrentParentPolicyVerdict.EvaluationUnavailable, parentRequest, parentDecision,
+                    parentGrantId, parent.Version, parent.Identity, parentDecision.EvaluatorIdentity, evaluatedAt);
+            }
+            catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
+            catch
+            {
+                // Unexpected failure inside the checker itself: report
+                // unavailability rather than inventing a lineage fact.
+                return new(CurrentParentPolicyVerdict.EvaluationUnavailable, null, null, null, null, null, null, evaluatedAt);
+            }
+        }
+    }
 }

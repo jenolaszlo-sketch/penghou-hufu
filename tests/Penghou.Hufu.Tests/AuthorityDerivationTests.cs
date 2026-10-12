@@ -470,12 +470,10 @@ public sealed class AuthorityDerivationTests
     {
         var evaluator = new CoverEvaluator();
         var source = new AuthorityStoreSnapshotSource(store, Actor);
-        return new CurrentAuthorityRequestAuthorizer(
-            source,
-            evaluator,
-            new AllowRecorder(),
-            time,
-            new AuthorityDerivation.LineageAncestorLiveness(source, store));
+        // Qualified derived-authority composition: ancestor liveness plus the
+        // required current-parent-policy checker. An incomplete composition
+        // must not Permit a known derived grant.
+        return DerivedAuthorityRequestAuthorizer.Create(source, evaluator, new AllowRecorder(), store, time);
     }
 
     private sealed class AllowAllAuthorizer : IAuthorityStoreAuthorizer

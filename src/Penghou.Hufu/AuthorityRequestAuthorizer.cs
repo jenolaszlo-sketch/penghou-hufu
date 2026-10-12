@@ -20,6 +20,31 @@ public interface IAuthorityRequestAuthorizer
     ValueTask<AuthorityRequestAuthorization> AuthorizeAsync(AuthorityRequest request, CancellationToken cancellationToken = default);
 }
 
+/// <summary>
+/// Qualified derived-authority composition. A known derived grant cannot
+/// return a usable Permit through this factory without the required
+/// lineage/current-parent-policy checker: the checker is a mandatory
+/// constructor argument, not an optional add-on.
+/// </summary>
+public static class DerivedAuthorityRequestAuthorizer
+{
+    public static CurrentAuthorityRequestAuthorizer Create(
+        IAuthoritySnapshotSource source,
+        IAuthorityEvaluator evaluator,
+        IAuthorityDecisionRecorder recorder,
+        IAuthorityDerivationStore derivations,
+        TimeProvider? clock = null)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(evaluator);
+        ArgumentNullException.ThrowIfNull(recorder);
+        ArgumentNullException.ThrowIfNull(derivations);
+        return new CurrentAuthorityRequestAuthorizer(source, evaluator, recorder, clock,
+            new AuthorityDerivation.LineageAncestorLiveness(source, derivations),
+            new AuthorityDerivation.LineageCurrentParentPolicy(source, derivations, evaluator));
+    }
+}
+
 /// <summary>Composes the existing current snapshot, evaluator and required recorder without blocking asynchronous I/O.</summary>
 public sealed class CurrentAuthorityRequestAuthorizer : IAuthorityRequestAuthorizer
 {
@@ -28,22 +53,35 @@ public sealed class CurrentAuthorityRequestAuthorizer : IAuthorityRequestAuthori
     private readonly IAuthorityDecisionRecorder _recorder;
     private readonly TimeProvider _clock;
     private readonly IAncestorLiveness? _ancestorLiveness;
+    private readonly ICurrentParentPolicy? _parentPolicy;
     public CurrentAuthorityRequestAuthorizer(IAuthoritySnapshotSource source, IAuthorityEvaluator evaluator,
         IAuthorityDecisionRecorder recorder, TimeProvider? clock)
-        : this(source, evaluator, recorder, clock, ancestorLiveness: null)
+        : this(source, evaluator, recorder, clock, ancestorLiveness: null, parentPolicy: null)
     {
     }
 
-    /// <summary>Composes the current snapshot, evaluator, and recorder with an optional ancestor-liveness check.</summary>
+    /// <summary>Composes the current snapshot, evaluator, and recorder with lineage checks for derived grants.</summary>
+    /// <remarks>
+    /// This is the qualified derived-authority composition when a current-parent
+    /// checker is supplied: use <see cref="DerivedAuthorityRequestAuthorizer.Create"/>
+    /// so the checker cannot be omitted. A null <paramref name="parentPolicy"/> is
+    /// an incomplete composition: known derived grants deny rather than silently
+    /// skipping the current-parent check. Root-only behavior is unchanged.
+    /// </remarks>
     public CurrentAuthorityRequestAuthorizer(IAuthoritySnapshotSource source, IAuthorityEvaluator evaluator,
-        IAuthorityDecisionRecorder recorder, TimeProvider? clock = null, IAncestorLiveness? ancestorLiveness = null)
+        IAuthorityDecisionRecorder recorder, TimeProvider? clock = null, IAncestorLiveness? ancestorLiveness = null,
+        ICurrentParentPolicy? parentPolicy = null)
     {
         _source = source ?? throw new ArgumentNullException(nameof(source));
         _evaluator = evaluator ?? throw new ArgumentNullException(nameof(evaluator));
         _recorder = recorder ?? throw new ArgumentNullException(nameof(recorder));
         _clock = clock ?? TimeProvider.System;
         _ancestorLiveness = ancestorLiveness;
+        _parentPolicy = parentPolicy;
     }
+
+    private static bool HasDerivedGrants(AuthoritySnapshot snapshot) =>
+        snapshot.Layers.SelectMany(layer => layer.Grants).Any(grant => grant.ParentGrantId is not null);
 
     public async ValueTask<AuthorityRequestAuthorization> AuthorizeAsync(AuthorityRequest request, CancellationToken cancellationToken = default)
     {
@@ -71,6 +109,66 @@ public sealed class CurrentAuthorityRequestAuthorizer : IAuthorityRequestAuthori
                     decision = new AuthorityDecision(AuthorityStatus.Deny,
                         liveness == AncestorLivenessVerdict.AncestorRevoked ? "authority.ancestor-revoked" : "authority.lineage-unavailable",
                         snapshot.Version, "hufu-lineage-v1", snapshot.Identity);
+            }
+            // Current-parent policy runs only on the way to Permit. A known
+            // derived grant reaching an incomplete composition (no qualified
+            // checker) cannot Permit: omitting the checker is a fail-closed
+            // Deny, never a downgrade to root-only evaluation.
+            if (decision.Status == AuthorityStatus.Permit && HasDerivedGrants(snapshot))
+            {
+                if (_parentPolicy is null)
+                {
+                    decision = new AuthorityDecision(AuthorityStatus.Deny, "authority.derived-checker-missing",
+                        snapshot.Version, "hufu-lineage-v1", snapshot.Identity);
+                }
+                else
+                {
+                    var policy = await _parentPolicy.CheckAsync(snapshot, request, now, cancellationToken).ConfigureAwait(false);
+                    cancellationToken.ThrowIfCancellationRequested();
+                    switch (policy.Verdict)
+                    {
+                        case CurrentParentPolicyVerdict.Permit
+                            when policy.ParentRequest is not null && policy.ParentDecision is not null:
+                            // Mandatory parent evidence: without a recorded
+                            // parent evaluation no usable Permit is returned.
+                            var parentRecorded = await _recorder.RecordAsync(policy.ParentRequest, policy.ParentDecision, cancellationToken)
+                                .AsTask().WaitAsync(cancellationToken).ConfigureAwait(false);
+                            cancellationToken.ThrowIfCancellationRequested();
+                            if (!parentRecorded) return new(request, AuthorityStatus.Unavailable, decision);
+                            break;
+                        case CurrentParentPolicyVerdict.ParentDenied
+                            when policy.ParentRequest is not null && policy.ParentDecision is not null:
+                            // Best-effort parent-denial evidence; the child
+                            // denial below is always recorded. Either way the
+                            // operation stays denied.
+                            await _recorder.RecordAsync(policy.ParentRequest, policy.ParentDecision, cancellationToken)
+                                .AsTask().WaitAsync(cancellationToken).ConfigureAwait(false);
+                            cancellationToken.ThrowIfCancellationRequested();
+                            decision = new AuthorityDecision(AuthorityStatus.Deny, "authority.parent-policy-denied",
+                                snapshot.Version, "hufu-lineage-v1", snapshot.Identity);
+                            break;
+                        case CurrentParentPolicyVerdict.ParentDenied:
+                            return new(request, AuthorityStatus.Unavailable, decision);
+                        case CurrentParentPolicyVerdict.AncestorRevoked:
+                            decision = new AuthorityDecision(AuthorityStatus.Deny, "authority.ancestor-revoked",
+                                snapshot.Version, "hufu-lineage-v1", snapshot.Identity);
+                            break;
+                        case CurrentParentPolicyVerdict.MalformedLineage:
+                            decision = new AuthorityDecision(AuthorityStatus.Deny, "authority.lineage-malformed",
+                                snapshot.Version, "hufu-lineage-v1", snapshot.Identity);
+                            break;
+                        case CurrentParentPolicyVerdict.UnsupportedLineage:
+                            decision = new AuthorityDecision(AuthorityStatus.Deny, "authority.lineage-unsupported",
+                                snapshot.Version, "hufu-lineage-v1", snapshot.Identity);
+                            break;
+                        case CurrentParentPolicyVerdict.LineageUnavailable:
+                            decision = new AuthorityDecision(AuthorityStatus.Deny, "authority.lineage-unavailable",
+                                snapshot.Version, "hufu-lineage-v1", snapshot.Identity);
+                            break;
+                        default:
+                            return new(request, AuthorityStatus.Unavailable, decision);
+                    }
+                }
             }
             var recorded = await _recorder.RecordAsync(request, decision, cancellationToken).AsTask().WaitAsync(cancellationToken).ConfigureAwait(false);
             cancellationToken.ThrowIfCancellationRequested();
