@@ -71,6 +71,14 @@ qualify during implementation, not new delivered guarantees or closed CI gates.
   the child cannot use the parent's extra rights, and a current denial reaches
   the actual I/O boundary. A cooperative-worker test proves the protocol only;
   hostile-worker bypass closure requires a separately qualified provider.
+  - [x] **AE-2.0/2.1** — Scope/spec frozen and the transport-neutral contract
+    slice implemented in the experimental `Penghou.Hufu.Broker` project:
+    protocol v1 bounds, host-issued single-use session bootstrap/authentication,
+    opaque session-bound references, the closed `BrokerReadFileRequest` DTO, and
+    canonical request mapping. See the [broker profile](broker-authority-profile.md).
+  - [ ] **AE-2.2/2.3** — Named-pipe transport, broker-local start ordering,
+    provider read composed with the AE-1 qualified authorization via Hufu.IO,
+    start/release evidence, and the separate-process qualification.
 - [ ] **AE-3 — Evaluate an optional Biscuit carrier on that same path.** Depends
   on AE-1/2, not on a new sandbox. Reconcile the older adapter's subset logic and
   registration chain with core grant lineage; define versioned child-grant,

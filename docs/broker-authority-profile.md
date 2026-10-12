@@ -1,7 +1,22 @@
 # Worker-to-host broker authority profile (AE-2)
 
-Status: **Specification only, 2026-10-12. Not implemented, not published.**
-This is the AE-2 scope frozen before implementation. It refines the
+Status: **Specification frozen 2026-10-12; AE-2.0/2.1 contracts implemented, experimental and unpublished.**
+This is the AE-2 scope frozen before implementation. The frozen values below are
+locked. No qualification or publication is claimed.
+
+**Implementation status (2026-10-12).** The first contract slice landed in the
+new `Penghou.Hufu.Broker` project (non-packable, no core/IO dependency beyond
+Hufu core): `BrokerProtocol` v1 bounds; host-issued single-use bootstrap and
+`BrokerSessionRegistry` authentication; the opaque session-bound
+`BrokerAuthorityReferenceStore`; the closed `BrokerReadFileRequest` DTO; and
+`BrokerReadRequestMapper`, which resolves the reference under the authenticated
+session into the exact canonical `AuthorityRequest`. This slice is
+transport-neutral and performs no I/O. Deferred to AE-2.2: named-pipe framing,
+the broker-local start arbiter execution, provider read through `Penghou.Hufu.IO`
+with the AE-1 qualified authorization, and `BrokerStartEvidence`/
+`BrokerReleaseEvidence` recording and result release.
+
+This document refines the
 [authority/enforcement implementation plan](authority-enforcement-implementation-plan.md);
 [ADR 0014](decisions/0014-authority-delegation-enforcement.md), the
 [canonical model](authority-delegation-enforcement.md) and the
@@ -80,6 +95,10 @@ implementation pressure forces it.
 
 - Parse a closed versioned DTO: protocol version, reference, requested action,
   and bounded payload/limit fields. Unknown fields/shapes reject.
+- The request `WorkspaceId`/`RelativePath` must **exactly** match the bound
+  reference target. This profile has no narrowing semantics, and the canonical
+  request is built from the **reference** target, never from caller fields, so a
+  request can never substitute or reinterpret the authorized target.
 - Produce one canonical `ResourceAuthorizationRequest`/`FileReadRequest` for the
   bound target. No search or directory-discovery endpoint in this first proof;
   if the reader internally probes ancestry/candidates, its individual checks are

@@ -6,6 +6,7 @@
     <Project Path="src/Penghou.Hufu.Luban/Penghou.Hufu.Luban.csproj" />
     <Project Path="src/Penghou.Hufu.Luban.Sqlite/Penghou.Hufu.Luban.Sqlite.csproj" />
     <Project Path="src/Penghou.Hufu.IO/Penghou.Hufu.IO.csproj" />
+    <Project Path="src/Penghou.Hufu.Broker/Penghou.Hufu.Broker.csproj" />
     <Project Path="src/Penghou.Hufu.Sqlite/Penghou.Hufu.Sqlite.csproj" />
     <Project Path="src/Penghou.Hufu.Zhinu.Sqlite/Penghou.Hufu.Zhinu.Sqlite.csproj" />
     <Project Path="src/Penghou.Hufu/Penghou.Hufu.csproj" />
@@ -19,6 +20,7 @@
     <Project Path="tests/Penghou.Hufu.Biscuit.Tests/Penghou.Hufu.Biscuit.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.StartWorker.Tests/Penghou.Hufu.StartWorker.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj" />
+    <Project Path="tests/Penghou.Hufu.Broker.Tests/Penghou.Hufu.Broker.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.IO.Tests/Penghou.Hufu.IO.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.Luban.Sqlite.Tests/Penghou.Hufu.Luban.Sqlite.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.LegacyIntegration.Tests/Penghou.Hufu.LegacyIntegration.Tests.csproj" />

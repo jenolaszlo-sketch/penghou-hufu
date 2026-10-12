@@ -303,6 +303,16 @@ AE-1 qualified authorization composed through `Penghou.Hufu.IO`; and distinct
 start vs result-release evidence. No runtime change, qualification or
 publication is claimed by the spec.
 
+**Status 2026-10-12: AE-2.0/2.1 contract slice landed.** `Penghou.Hufu.Broker`
+provides protocol v1 bounds, host-issued single-use bootstrap and
+`BrokerSessionRegistry` authentication, the opaque session-bound
+`BrokerAuthorityReferenceStore`, the closed `BrokerReadFileRequest` DTO, and
+`BrokerReadRequestMapper` resolving a request into the canonical
+`AuthorityRequest` under the authenticated session. Transport-neutral and
+I/O-free (22 focused tests). Deferred to AE-2.2: named-pipe framing, broker-local
+start ordering execution, provider read composed with the AE-1 qualified
+authorization through Hufu.IO, and start/release evidence recording.
+
 ### AE-2.0 — Freeze the smallest useful profile
 
 Planned default: a local Windows broker over one protected named-pipe transport,
