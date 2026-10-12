@@ -355,6 +355,17 @@ fresh resource observation. No successful response survives failed evidence.
 
 ### AE-2.2 — Enforce at provider start and result release
 
+**Spec 2026-10-12: [AE-2.2 implementation spec](broker-ae22-implementation-spec.md).**
+Frozen invariants and the ordered start/release sequence: one identity model over
+the named pipe; a concrete broker-local arbiter keyed by the execution/authority
+binding; AE-1 authorization inside the ordered boundary followed by mandatory
+start evidence before admission; participating lifecycle/revocation mutations on
+the same key; the real `HufuWorkspaceAccess`/`IWorkspaceReader` path; no lock
+across file I/O; independent release authorization; separate start/release
+evidence; response loss grants nothing; coarse failure disclosure; no hostile
+containment claim. AE-2.2 implements the vertical; AE-2.3 exercises the race/
+restart/response-loss corpus and closes AE-2. No code is claimed by this spec.
+
 Compose AE-1's qualified current checker through Hufu.IO and the actual reader,
 including required ancestry metadata, exact-target content and result disclosure.
 There is no search or directory-discovery endpoint in this first proof. If the

@@ -76,9 +76,13 @@ qualify during implementation, not new delivered guarantees or closed CI gates.
     protocol v1 bounds, host-issued single-use session bootstrap/authentication,
     opaque session-bound references, the closed `BrokerReadFileRequest` DTO, and
     canonical request mapping. See the [broker profile](broker-authority-profile.md).
-  - [ ] **AE-2.2/2.3** — Named-pipe transport, broker-local start ordering,
-    provider read composed with the AE-1 qualified authorization via Hufu.IO,
-    start/release evidence, and the separate-process qualification.
+  - [ ] **AE-2.2** — Authenticated named-pipe session, concrete broker-local start
+    arbiter, AE-1 authorization inside the ordered boundary, real read via
+    `HufuWorkspaceAccess`/`IWorkspaceReader`, independent release, and separate
+    start/release evidence. Spec frozen in the [AE-2.2 implementation spec](broker-ae22-implementation-spec.md);
+    implementation pending.
+  - [ ] **AE-2.3** — Cross-process adversarial/restart/response-loss race corpus
+    that closes AE-2.
 - [ ] **AE-3 — Evaluate an optional Biscuit carrier on that same path.** Depends
   on AE-1/2, not on a new sandbox. Reconcile the older adapter's subset logic and
   registration chain with core grant lineage; define versioned child-grant,

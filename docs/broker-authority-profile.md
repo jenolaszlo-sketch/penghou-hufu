@@ -16,6 +16,9 @@ the broker-local start arbiter execution, provider read through `Penghou.Hufu.IO
 with the AE-1 qualified authorization, and `BrokerStartEvidence`/
 `BrokerReleaseEvidence` recording and result release.
 
+The AE-2.2 enforcement vertical is specified separately in the
+[AE-2.2 implementation spec](broker-ae22-implementation-spec.md).
+
 This document refines the
 [authority/enforcement implementation plan](authority-enforcement-implementation-plan.md);
 [ADR 0014](decisions/0014-authority-delegation-enforcement.md), the
