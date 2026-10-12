@@ -30,7 +30,7 @@ qualify during implementation, not new delivered guarantees or closed CI gates.
 - [x] **AE-0 — Reconcile the design.** Preserve the proposal, publish the layered
   model and ADR, identify source gaps, and distinguish current lifecycle execution
   from future isolation. Documentation only; no new enforcement qualification.
-- [ ] **AE-1 — Qualify current derived authority.** Preserve existing core
+- [x] **AE-1 — Qualify current derived authority.** Preserve existing core
   containment, exact Derive approval and idempotency. Define authenticated
   workflow-event/fence binding and host policy for invalidation. Require ancestor
   checks for derived-grant consumers and prove applicable current parent-policy
@@ -53,7 +53,14 @@ qualify during implementation, not new delivered guarantees or closed CI gates.
     SQLite implementation and a `Penghou.Hufu.Workflow` event translator;
     suspend/resume and terminal cancel/complete/supersede, ordering and replay.
     See the [lifecycle profile](execution-lifecycle-authority.md).
-  - [ ] **AE-1.3** — Freshness and consumption qualification over the full case table.
+  - [x] **AE-1.3** — Freshness and consumption qualification. Optimistic
+    capture-and-revalidation over the child/parent/lifecycle read set after
+    mandatory evidence recording; any moved head fails closed with typed
+    `authority.read-set-superseded`. Versioned lifecycle reads; last awaited
+    authority operation before Permit. Preflight freshness only. See the
+    [freshness rule](current-authority-profile.md#derived-authority-freshness-ae-13).
+  - AE-1 complete for the qualified direct-child profile; general nested
+    delegation, DAGs, brokers and gateways remain separate gates.
 - [ ] **AE-2 — Prove one worker → host broker path.** This is the selected first
   consumer. Use one bounded resource read with existing Hufu contracts and a
   host-bound context/reference first. Authenticate the worker on one protected

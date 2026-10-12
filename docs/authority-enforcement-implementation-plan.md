@@ -242,6 +242,20 @@ general derived-authority support.
 current-parent rule and trusted lifecycle policy, preserves fixed ceilings and
 retry semantics, and has evidence for the complete case table.
 
+**Status 2026-10-12: AE-1.3 landed.** The qualified composition uses optimistic
+capture-and-revalidation, not a combined transactional read set. It captures the
+child snapshot identity/version, the bound parent identity and snapshot
+identity/version, the lifecycle binding/state/sequence, the evaluator identity
+and the evaluated instant; after mandatory evidence recording it re-reads every
+contributing head and fails closed with typed `authority.read-set-superseded`
+(`Unavailable`, not `Deny`) on any movement. Lifecycle reads are versioned
+(`ExecutionLifecycleCheckResult`, `ExecutionLifecycleStateRead`); the sequence is
+a freshness token only. The final revalidation is the last awaited authority
+operation before a Permit is returned, so this is preflight freshness, not
+atomic provider-start ordering. See the
+[freshness rule](current-authority-profile.md#derived-authority-freshness-ae-13)
+and [qualification](authority-profile-qualification.md).
+
 ## HUFU-R1: contention and HOST-SERVICES-CI closure
 
 1. **R1.0 — Reconcile evidence.** Inspect the actual CI runs for `02b070e` and the

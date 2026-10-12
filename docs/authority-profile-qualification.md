@@ -195,3 +195,47 @@ Unqualified by this record: new-generation authority creation (events never
 create rights; a new generation is a new binding needing explicit authority),
 atomic provider-I/O start ordering, lifecycle gating of root-only profiles,
 visibility authority, and any broker/Biscuit/Gagamba integration.
+
+## AE-1.3 derived-authority freshness qualification (2026-10-12)
+
+Local qualification of optimistic capture-and-revalidation over the derived
+decision read set. Environment: Windows x64, .NET SDK 10.0.401, .NET 8 and .NET
+10 targets.
+
+Focused suite: `DerivedAuthorityFreshnessTests` (8 tests) plus the extended
+lifecycle versioned-read tests (gate sequence, SQLite `GetStateReadAsync`).
+
+| Case (injected during mandatory recording) | Expected | Result |
+| --- | --- | --- |
+| Unchanged child/parent/lifecycle read set | Permit | Permit |
+| Child snapshot moves (re-published) | Superseded | `authority.read-set-superseded` / `Unavailable` |
+| Child revoked | Superseded | `authority.read-set-superseded` / `Unavailable` |
+| Parent snapshot moves | Superseded | `authority.read-set-superseded` / `Unavailable` |
+| Parent becomes denied | Superseded | `authority.read-set-superseded` / `Unavailable` |
+| Lifecycle sequence moves | Superseded | `authority.read-set-superseded` / `Unavailable` |
+| Lifecycle becomes Suspended | Superseded | `authority.read-set-superseded` / `Unavailable` |
+| Permit recorded, head moves, revalidation fails | Superseded | recorded `Permit` evidence exists; delivered result `Unavailable`; usable Permit never returned |
+
+Qualified observations:
+
+- A Permit is returned only when every contributing version captured during
+  authorization is observed unchanged again after mandatory evidence recording.
+- A changed contributing head yields typed `authority.read-set-superseded`,
+  classified as `Unavailable` (not `Deny`): retryable freshness failure, not a
+  policy refusal.
+- Lifecycle reads are versioned; the sequence is a freshness token, not a grant.
+- The final revalidation is the last awaited authority operation before Permit;
+  only synchronous clock/validity checks follow.
+- The recorded decision is **evaluation evidence**, not delivered authorization.
+  A recorded `Permit` can be superseded before the call returns: the durable
+  evidence then says `Permit` while the caller receives
+  `authority.read-set-superseded` / `Unavailable`. A host decides dispatch from
+  the returned result, never from the mere presence of a recorded `Permit`, and
+  historical reconstruction must not replay a recorded `Permit` as a fresh
+  authorization.
+
+Unqualified by this record: cross-store transactional consistency (the re-read
+is independent reads, not one simultaneous snapshot), atomic provider-start
+ordering, and any stronger freshness profile a future consumer may require. The
+revalidation detects intervening mutation of the relevant heads; it does not
+prove all stores shared one exact state at one instant.

@@ -148,6 +148,24 @@ public sealed record ExecutionLifecycleApplyResult(
     ExecutionLifecycleReceipt? Receipt = null);
 
 /// <summary>
+/// A versioned lifecycle observation. <see cref="Sequence"/> is a freshness token
+/// only; it never grants permission. It means the state observed has not been
+/// superseded, nothing more.
+/// </summary>
+public sealed record ExecutionLifecycleStateRead(ExecutionLifecycleState State, long Sequence);
+
+/// <summary>
+/// The versioned outcome of one lifecycle-gate check. The same gate that decides
+/// the verdict also returns the bound state and the sequence it observed, so a
+/// caller can later revalidate that exact observation. The sequence is a
+/// freshness token, not a permission.
+/// </summary>
+public sealed record ExecutionLifecycleCheckResult(
+    ExecutionLifecycleVerdict Verdict,
+    ExecutionLifecycleState? State,
+    long Sequence);
+
+/// <summary>
 /// Durable, ordered, idempotent persistence of neutral execution-lifecycle
 /// authority state. It stores neutral transitions, never workflow events; the
 /// trusted translator authenticates the source event before applying.
@@ -162,16 +180,26 @@ public interface IExecutionLifecycleStore
     ValueTask<ExecutionLifecycleState?> GetStateAsync(
         ExecutionLifecycleBinding binding,
         CancellationToken cancellationToken = default);
+
+    /// <summary>
+    /// Returns the current versioned state, or null when no transition exists.
+    /// The sequence is a freshness token; callers revalidate it, never treat it
+    /// as permission.
+    /// </summary>
+    ValueTask<ExecutionLifecycleStateRead?> GetStateReadAsync(
+        ExecutionLifecycleBinding binding,
+        CancellationToken cancellationToken = default);
 }
 
 /// <summary>
 /// Required fail-closed gate consulted by qualified derived-authority
 /// consumption. Absence of any lifecycle fact is live; a suspended or terminal
-/// binding cannot yield a usable Permit. A store failure is unavailable.
+/// binding cannot yield a usable Permit. A store failure is unavailable. The
+/// returned sequence is a freshness token for later revalidation, not a grant.
 /// </summary>
 public interface IExecutionLifecycleGate
 {
-    ValueTask<ExecutionLifecycleVerdict> CheckAsync(
+    ValueTask<ExecutionLifecycleCheckResult> CheckAsync(
         ExecutionLifecycleBinding binding,
         DateTimeOffset evaluatedAt,
         CancellationToken cancellationToken = default);
@@ -185,7 +213,7 @@ public sealed class StoreExecutionLifecycleGate : IExecutionLifecycleGate
     public StoreExecutionLifecycleGate(IExecutionLifecycleStore store) =>
         _store = store ?? throw new ArgumentNullException(nameof(store));
 
-    public async ValueTask<ExecutionLifecycleVerdict> CheckAsync(
+    public async ValueTask<ExecutionLifecycleCheckResult> CheckAsync(
         ExecutionLifecycleBinding binding,
         DateTimeOffset evaluatedAt,
         CancellationToken cancellationToken = default)
@@ -193,16 +221,18 @@ public sealed class StoreExecutionLifecycleGate : IExecutionLifecycleGate
         ArgumentNullException.ThrowIfNull(binding);
         try
         {
-            var state = await _store.GetStateAsync(binding, cancellationToken).ConfigureAwait(false);
-            return state switch
+            var read = await _store.GetStateReadAsync(binding, cancellationToken).ConfigureAwait(false);
+            if (read is null)
+                return new(ExecutionLifecycleVerdict.Live, null, 0);
+            return read.State switch
             {
-                null or ExecutionLifecycleState.Active => ExecutionLifecycleVerdict.Live,
-                ExecutionLifecycleState.Suspended => ExecutionLifecycleVerdict.Suspended,
-                ExecutionLifecycleState.Terminal => ExecutionLifecycleVerdict.Terminal,
-                _ => ExecutionLifecycleVerdict.Unavailable
+                ExecutionLifecycleState.Active => new(ExecutionLifecycleVerdict.Live, ExecutionLifecycleState.Active, read.Sequence),
+                ExecutionLifecycleState.Suspended => new(ExecutionLifecycleVerdict.Suspended, ExecutionLifecycleState.Suspended, read.Sequence),
+                ExecutionLifecycleState.Terminal => new(ExecutionLifecycleVerdict.Terminal, ExecutionLifecycleState.Terminal, read.Sequence),
+                _ => new(ExecutionLifecycleVerdict.Unavailable, null, 0)
             };
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
-        catch { return ExecutionLifecycleVerdict.Unavailable; }
+        catch { return new(ExecutionLifecycleVerdict.Unavailable, null, 0); }
     }
 }

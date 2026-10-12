@@ -29,6 +29,25 @@ public sealed class SqliteExecutionLifecycleStoreTests
     }
 
     [Fact]
+    public async Task VersionedRead_ReportsSequenceAcrossReopen()
+    {
+        using var database = new TemporaryDatabase();
+        var store = new SqliteExecutionLifecycleStore(database.DatabasePath, new Clock(Now));
+        Assert.Null(await store.GetStateReadAsync(Binding));
+        await store.ApplyAsync(Transition("t1", 0, ExecutionLifecycleTransitionKind.Suspend));
+
+        var read = await store.GetStateReadAsync(Binding);
+        Assert.NotNull(read);
+        Assert.Equal(ExecutionLifecycleState.Suspended, read!.State);
+        Assert.Equal(1, read.Sequence);
+
+        var reopened = new SqliteExecutionLifecycleStore(database.DatabasePath, new Clock(Now.AddMinutes(1)));
+        var resumed = await reopened.ApplyAsync(Transition("t2", 1, ExecutionLifecycleTransitionKind.Resume));
+        Assert.Equal(2, resumed.Receipt!.Sequence);
+        Assert.Equal(2, (await reopened.GetStateReadAsync(Binding))!.Sequence);
+    }
+
+    [Fact]
     public async Task Reopen_RecoversStateAndReplaysReceipt()
     {
         using var database = new TemporaryDatabase();

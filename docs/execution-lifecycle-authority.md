@@ -99,6 +99,15 @@ The gate is an additional restriction, not a permission source. Absence of any
 lifecycle fact is live; a suspended or terminal binding cannot yield a usable
 Permit.
 
+The gate also returns the bound state and the **sequence** it observed
+(`ExecutionLifecycleCheckResult`; the store exposes the versioned
+`ExecutionLifecycleStateRead`). The sequence is a freshness token, never
+permission: after mandatory evidence recording, the qualified composition
+re-reads the lifecycle sequence and fails closed with
+`authority.read-set-superseded` if it moved. This closes the window where a
+Suspend commits after the lifecycle check but before authorization completes;
+see the [derived-authority freshness rule](current-authority-profile.md#derived-authority-freshness-ae-13).
+
 ## What this slice does not claim
 
 - No new-generation or higher authority is created by any event.

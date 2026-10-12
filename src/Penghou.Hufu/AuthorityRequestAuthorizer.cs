@@ -104,6 +104,10 @@ public sealed class CurrentAuthorityRequestAuthorizer : IAuthorityRequestAuthori
             if (decision is null || decision.SnapshotIdentity != snapshot.Identity || decision.SnapshotVersion != snapshot.Version ||
                 !AuthorityValidation.ValidToken(decision.EvaluatorIdentity) || !AuthorityValidation.ValidToken(decision.ReasonCode) ||
                 !Enum.IsDefined(decision.Status)) return new(request, AuthorityStatus.Unavailable);
+            // Captured contributing observations for AE-1.3 freshness revalidation.
+            CurrentParentPolicyResult? parentObservation = null;
+            ExecutionLifecycleCheckResult? lifecycleObservation = null;
+            ExecutionLifecycleBinding? lifecycleBinding = null;
             // Ancestor liveness runs only on the way to Permit: existing denial
             // behavior is untouched, and root snapshots never pay for a lookup.
             if (decision.Status == AuthorityStatus.Permit && _ancestorLiveness is not null)
@@ -139,6 +143,7 @@ public sealed class CurrentAuthorityRequestAuthorizer : IAuthorityRequestAuthori
                                 .AsTask().WaitAsync(cancellationToken).ConfigureAwait(false);
                             cancellationToken.ThrowIfCancellationRequested();
                             if (!parentRecorded) return new(request, AuthorityStatus.Unavailable, decision);
+                            parentObservation = policy;
                             break;
                         case CurrentParentPolicyVerdict.ParentDenied
                             when policy.ParentRequest is not null && policy.ParentDecision is not null:
@@ -180,11 +185,14 @@ public sealed class CurrentAuthorityRequestAuthorizer : IAuthorityRequestAuthori
             if (decision.Status == AuthorityStatus.Permit && _lifecycleGate is not null && HasDerivedGrants(snapshot))
             {
                 var binding = ExecutionLifecycleBinding.FromContext(request.Context);
-                var verdict = await _lifecycleGate.CheckAsync(binding, now, cancellationToken).ConfigureAwait(false);
+                var lifecycle = await _lifecycleGate.CheckAsync(binding, now, cancellationToken).ConfigureAwait(false);
                 cancellationToken.ThrowIfCancellationRequested();
-                switch (verdict)
+                switch (lifecycle.Verdict)
                 {
                     case ExecutionLifecycleVerdict.Live:
+                        // Capture the bound lifecycle observation for freshness revalidation.
+                        lifecycleObservation = lifecycle;
+                        lifecycleBinding = binding;
                         break;
                     case ExecutionLifecycleVerdict.Suspended:
                         decision = new AuthorityDecision(AuthorityStatus.Deny, "authority.lifecycle-suspended",
@@ -201,10 +209,62 @@ public sealed class CurrentAuthorityRequestAuthorizer : IAuthorityRequestAuthori
             var recorded = await _recorder.RecordAsync(request, decision, cancellationToken).AsTask().WaitAsync(cancellationToken).ConfigureAwait(false);
             cancellationToken.ThrowIfCancellationRequested();
             if (!recorded) return new(request, AuthorityStatus.Unavailable, decision);
+            // AE-1.3 optimistic freshness. After all mandatory evidence is
+            // recorded, re-read every contributing head and require the exact
+            // captured versions/identities. Any movement fails closed with a
+            // typed superseded outcome. This final revalidation is the last
+            // awaited authority operation before a Permit is returned: after it,
+            // only synchronous checks run.
+            if (decision.Status == AuthorityStatus.Permit && HasDerivedGrants(snapshot))
+            {
+                var superseded = await RevalidateAsync().ConfigureAwait(false);
+                if (superseded is not null)
+                    return new(request, AuthorityStatus.Unavailable, superseded, true);
+            }
             // Snapshot and grant validity must survive required asynchronous recording.
             if (decision.Status == AuthorityStatus.Permit && !snapshot.HasUnchangedValidity(now, _clock.GetUtcNow()))
                 return new(request, AuthorityStatus.Unavailable, decision, true);
             return new(request, decision.Status, decision, true);
+
+            async ValueTask<AuthorityDecision?> RevalidateAsync()
+            {
+                // The already-recorded mandatory evidence is the pre-supersession
+                // evaluation; the returned superseded outcome is a live freshness
+                // failure and is intentionally not re-recorded (no awaited
+                // authority work may follow the final freshness boundary).
+                AuthorityDecision Superseded() => new(AuthorityStatus.Unavailable, "authority.read-set-superseded",
+                    snapshot.Version, "hufu-freshness-v1", snapshot.Identity);
+                try
+                {
+                    var current = await _source.GetCurrentAsync(request.Context, cancellationToken).AsTask()
+                        .WaitAsync(cancellationToken).ConfigureAwait(false);
+                    cancellationToken.ThrowIfCancellationRequested();
+                    if (current is null || current.Context != request.Context ||
+                        current.Identity != snapshot.Identity || current.Version != snapshot.Version)
+                        return Superseded();
+                    if (parentObservation is { } parent && _parentPolicy is not null)
+                    {
+                        var again = await _parentPolicy.CheckAsync(snapshot, request, now, cancellationToken).ConfigureAwait(false);
+                        cancellationToken.ThrowIfCancellationRequested();
+                        if (again.Verdict != CurrentParentPolicyVerdict.Permit ||
+                            again.ParentGrantId != parent.ParentGrantId ||
+                            again.ParentSnapshotVersion != parent.ParentSnapshotVersion ||
+                            again.ParentSnapshotIdentity != parent.ParentSnapshotIdentity)
+                            return Superseded();
+                    }
+                    if (lifecycleObservation is { } lifecycle && lifecycleBinding is { } binding && _lifecycleGate is not null)
+                    {
+                        var again = await _lifecycleGate.CheckAsync(binding, now, cancellationToken).ConfigureAwait(false);
+                        cancellationToken.ThrowIfCancellationRequested();
+                        if (again.Verdict != ExecutionLifecycleVerdict.Live ||
+                            again.Sequence != lifecycle.Sequence || again.State != lifecycle.State)
+                            return Superseded();
+                    }
+                    return null;
+                }
+                catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
+                catch { return Superseded(); }
+            }
         }
         catch (OperationCanceledException) when (cancellationToken.IsCancellationRequested) { throw; }
         catch { return new(request, AuthorityStatus.Unavailable); }

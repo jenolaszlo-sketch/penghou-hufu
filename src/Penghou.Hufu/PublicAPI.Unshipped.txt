@@ -323,12 +323,10 @@ Penghou.Hufu.ExecutionLifecycleVerdict.Suspended = 1 -> Penghou.Hufu.ExecutionLi
 Penghou.Hufu.ExecutionLifecycleVerdict.Terminal = 2 -> Penghou.Hufu.ExecutionLifecycleVerdict
 Penghou.Hufu.ExecutionLifecycleVerdict.Unavailable = 3 -> Penghou.Hufu.ExecutionLifecycleVerdict
 Penghou.Hufu.IExecutionLifecycleGate
-Penghou.Hufu.IExecutionLifecycleGate.CheckAsync(Penghou.Hufu.ExecutionLifecycleBinding! binding, System.DateTimeOffset evaluatedAt, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.ExecutionLifecycleVerdict>
 Penghou.Hufu.IExecutionLifecycleStore
 Penghou.Hufu.IExecutionLifecycleStore.ApplyAsync(Penghou.Hufu.ExecutionLifecycleTransition! transition, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.ExecutionLifecycleApplyResult!>
 Penghou.Hufu.IExecutionLifecycleStore.GetStateAsync(Penghou.Hufu.ExecutionLifecycleBinding! binding, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.ExecutionLifecycleState?>
 Penghou.Hufu.StoreExecutionLifecycleGate
-Penghou.Hufu.StoreExecutionLifecycleGate.CheckAsync(Penghou.Hufu.ExecutionLifecycleBinding! binding, System.DateTimeOffset evaluatedAt, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.ExecutionLifecycleVerdict>
 Penghou.Hufu.StoreExecutionLifecycleGate.StoreExecutionLifecycleGate(Penghou.Hufu.IExecutionLifecycleStore! store) -> void
 static Penghou.Hufu.ExecutionLifecycleApplyResult.operator !=(Penghou.Hufu.ExecutionLifecycleApplyResult? left, Penghou.Hufu.ExecutionLifecycleApplyResult? right) -> bool
 static Penghou.Hufu.ExecutionLifecycleApplyResult.operator ==(Penghou.Hufu.ExecutionLifecycleApplyResult? left, Penghou.Hufu.ExecutionLifecycleApplyResult? right) -> bool
@@ -339,3 +337,36 @@ static Penghou.Hufu.ExecutionLifecycleReceipt.operator !=(Penghou.Hufu.Execution
 static Penghou.Hufu.ExecutionLifecycleReceipt.operator ==(Penghou.Hufu.ExecutionLifecycleReceipt? left, Penghou.Hufu.ExecutionLifecycleReceipt? right) -> bool
 static Penghou.Hufu.ExecutionLifecycleTransition.operator !=(Penghou.Hufu.ExecutionLifecycleTransition? left, Penghou.Hufu.ExecutionLifecycleTransition? right) -> bool
 static Penghou.Hufu.ExecutionLifecycleTransition.operator ==(Penghou.Hufu.ExecutionLifecycleTransition? left, Penghou.Hufu.ExecutionLifecycleTransition? right) -> bool
+override Penghou.Hufu.ExecutionLifecycleCheckResult.Equals(object? obj) -> bool
+override Penghou.Hufu.ExecutionLifecycleCheckResult.GetHashCode() -> int
+override Penghou.Hufu.ExecutionLifecycleCheckResult.ToString() -> string!
+override Penghou.Hufu.ExecutionLifecycleStateRead.Equals(object? obj) -> bool
+override Penghou.Hufu.ExecutionLifecycleStateRead.GetHashCode() -> int
+override Penghou.Hufu.ExecutionLifecycleStateRead.ToString() -> string!
+Penghou.Hufu.ExecutionLifecycleCheckResult
+Penghou.Hufu.ExecutionLifecycleCheckResult.<Clone>$() -> Penghou.Hufu.ExecutionLifecycleCheckResult!
+Penghou.Hufu.ExecutionLifecycleCheckResult.Deconstruct(out Penghou.Hufu.ExecutionLifecycleVerdict Verdict, out Penghou.Hufu.ExecutionLifecycleState? State, out long Sequence) -> void
+Penghou.Hufu.ExecutionLifecycleCheckResult.Equals(Penghou.Hufu.ExecutionLifecycleCheckResult? other) -> bool
+Penghou.Hufu.ExecutionLifecycleCheckResult.ExecutionLifecycleCheckResult(Penghou.Hufu.ExecutionLifecycleVerdict Verdict, Penghou.Hufu.ExecutionLifecycleState? State, long Sequence) -> void
+Penghou.Hufu.ExecutionLifecycleCheckResult.Sequence.get -> long
+Penghou.Hufu.ExecutionLifecycleCheckResult.Sequence.init -> void
+Penghou.Hufu.ExecutionLifecycleCheckResult.State.get -> Penghou.Hufu.ExecutionLifecycleState?
+Penghou.Hufu.ExecutionLifecycleCheckResult.State.init -> void
+Penghou.Hufu.ExecutionLifecycleCheckResult.Verdict.get -> Penghou.Hufu.ExecutionLifecycleVerdict
+Penghou.Hufu.ExecutionLifecycleCheckResult.Verdict.init -> void
+Penghou.Hufu.ExecutionLifecycleStateRead
+Penghou.Hufu.ExecutionLifecycleStateRead.<Clone>$() -> Penghou.Hufu.ExecutionLifecycleStateRead!
+Penghou.Hufu.ExecutionLifecycleStateRead.Deconstruct(out Penghou.Hufu.ExecutionLifecycleState State, out long Sequence) -> void
+Penghou.Hufu.ExecutionLifecycleStateRead.Equals(Penghou.Hufu.ExecutionLifecycleStateRead? other) -> bool
+Penghou.Hufu.ExecutionLifecycleStateRead.ExecutionLifecycleStateRead(Penghou.Hufu.ExecutionLifecycleState State, long Sequence) -> void
+Penghou.Hufu.ExecutionLifecycleStateRead.Sequence.get -> long
+Penghou.Hufu.ExecutionLifecycleStateRead.Sequence.init -> void
+Penghou.Hufu.ExecutionLifecycleStateRead.State.get -> Penghou.Hufu.ExecutionLifecycleState
+Penghou.Hufu.ExecutionLifecycleStateRead.State.init -> void
+Penghou.Hufu.IExecutionLifecycleGate.CheckAsync(Penghou.Hufu.ExecutionLifecycleBinding! binding, System.DateTimeOffset evaluatedAt, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.ExecutionLifecycleCheckResult!>
+Penghou.Hufu.IExecutionLifecycleStore.GetStateReadAsync(Penghou.Hufu.ExecutionLifecycleBinding! binding, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.ExecutionLifecycleStateRead?>
+Penghou.Hufu.StoreExecutionLifecycleGate.CheckAsync(Penghou.Hufu.ExecutionLifecycleBinding! binding, System.DateTimeOffset evaluatedAt, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.ExecutionLifecycleCheckResult!>
+static Penghou.Hufu.ExecutionLifecycleCheckResult.operator !=(Penghou.Hufu.ExecutionLifecycleCheckResult? left, Penghou.Hufu.ExecutionLifecycleCheckResult? right) -> bool
+static Penghou.Hufu.ExecutionLifecycleCheckResult.operator ==(Penghou.Hufu.ExecutionLifecycleCheckResult? left, Penghou.Hufu.ExecutionLifecycleCheckResult? right) -> bool
+static Penghou.Hufu.ExecutionLifecycleStateRead.operator !=(Penghou.Hufu.ExecutionLifecycleStateRead? left, Penghou.Hufu.ExecutionLifecycleStateRead? right) -> bool
+static Penghou.Hufu.ExecutionLifecycleStateRead.operator ==(Penghou.Hufu.ExecutionLifecycleStateRead? left, Penghou.Hufu.ExecutionLifecycleStateRead? right) -> bool

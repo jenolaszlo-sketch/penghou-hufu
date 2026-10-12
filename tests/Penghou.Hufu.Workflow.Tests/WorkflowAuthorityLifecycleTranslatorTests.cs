@@ -172,6 +172,11 @@ public sealed class WorkflowAuthorityLifecycleTranslatorTests
         public ValueTask<ExecutionLifecycleState?> GetStateAsync(ExecutionLifecycleBinding binding, CancellationToken ct = default) =>
             ValueTask.FromResult(_byBinding.TryGetValue(Key(binding), out var row) ? row.State : (ExecutionLifecycleState?)null);
 
+        public ValueTask<ExecutionLifecycleStateRead?> GetStateReadAsync(ExecutionLifecycleBinding binding, CancellationToken ct = default) =>
+            ValueTask.FromResult(_byBinding.TryGetValue(Key(binding), out var row)
+                ? new ExecutionLifecycleStateRead(row.State, row.Sequence)
+                : (ExecutionLifecycleStateRead?)null);
+
         private static string Key(ExecutionLifecycleBinding binding) =>
             binding.TenantId + "\0" + binding.SubjectId + "\0" + binding.RunId;
 

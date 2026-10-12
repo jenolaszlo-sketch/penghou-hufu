@@ -1,4 +1,4 @@
-using Xunit;
+﻿using Xunit;
 
 namespace Penghou.Hufu.Tests;
 
@@ -21,7 +21,25 @@ public sealed class ExecutionLifecycleTests
     public async Task AbsenceOfLifecycleFact_IsLive()
     {
         var gate = new StoreExecutionLifecycleGate(new InMemoryLifecycleStore());
-        Assert.Equal(ExecutionLifecycleVerdict.Live, await gate.CheckAsync(Binding, Now));
+        Assert.Equal(ExecutionLifecycleVerdict.Live, (await gate.CheckAsync(Binding, Now)).Verdict);
+    }
+
+    [Fact]
+    public async Task Gate_ReturnsObservedLifecycleSequence()
+    {
+        var store = new InMemoryLifecycleStore();
+        var gate = new StoreExecutionLifecycleGate(store);
+
+        var none = await gate.CheckAsync(Binding, Now);
+        Assert.Equal(ExecutionLifecycleVerdict.Live, none.Verdict);
+        Assert.Null(none.State);
+        Assert.Equal(0, none.Sequence);
+
+        await store.ApplyAsync(Transition("s1", 0, ExecutionLifecycleTransitionKind.Suspend));
+        var suspended = await gate.CheckAsync(Binding, Now);
+        Assert.Equal(ExecutionLifecycleVerdict.Suspended, suspended.Verdict);
+        Assert.Equal(ExecutionLifecycleState.Suspended, suspended.State);
+        Assert.Equal(1, suspended.Sequence);
     }
 
     [Fact]
@@ -34,13 +52,13 @@ public sealed class ExecutionLifecycleTests
         Assert.Equal(ExecutionLifecycleApplyStatus.Applied, suspended.Status);
         Assert.Equal(1, suspended.Receipt!.Sequence);
         Assert.Equal(ExecutionLifecycleState.Suspended, suspended.Receipt.State);
-        Assert.Equal(ExecutionLifecycleVerdict.Suspended, await gate.CheckAsync(Binding, Now));
+        Assert.Equal(ExecutionLifecycleVerdict.Suspended, (await gate.CheckAsync(Binding, Now)).Verdict);
 
         var resumed = await store.ApplyAsync(Transition("t2", 1, ExecutionLifecycleTransitionKind.Resume));
         Assert.Equal(ExecutionLifecycleApplyStatus.Applied, resumed.Status);
         Assert.Equal(2, resumed.Receipt!.Sequence);
         Assert.Equal(ExecutionLifecycleState.Active, resumed.Receipt.State);
-        Assert.Equal(ExecutionLifecycleVerdict.Live, await gate.CheckAsync(Binding, Now));
+        Assert.Equal(ExecutionLifecycleVerdict.Live, (await gate.CheckAsync(Binding, Now)).Verdict);
     }
 
     [Theory]
@@ -54,12 +72,12 @@ public sealed class ExecutionLifecycleTests
         var result = await store.ApplyAsync(Transition("t1", 0, ExecutionLifecycleTransitionKind.Terminate, reason));
         Assert.Equal(ExecutionLifecycleApplyStatus.Applied, result.Status);
         Assert.Equal(reason, result.Receipt!.Reason);
-        Assert.Equal(ExecutionLifecycleVerdict.Terminal, await gate.CheckAsync(Binding, Now));
+        Assert.Equal(ExecutionLifecycleVerdict.Terminal, (await gate.CheckAsync(Binding, Now)).Verdict);
 
         // A later suspend/resume on a terminal binding cannot reopen it.
         var suspend = await store.ApplyAsync(Transition("t2", 1, ExecutionLifecycleTransitionKind.Suspend));
         Assert.Equal(ExecutionLifecycleApplyStatus.Terminated, suspend.Status);
-        Assert.Equal(ExecutionLifecycleVerdict.Terminal, await gate.CheckAsync(Binding, Now));
+        Assert.Equal(ExecutionLifecycleVerdict.Terminal, (await gate.CheckAsync(Binding, Now)).Verdict);
     }
 
     [Fact]
@@ -110,7 +128,7 @@ public sealed class ExecutionLifecycleTests
     {
         var store = new InMemoryLifecycleStore { Throw = true };
         var gate = new StoreExecutionLifecycleGate(store);
-        Assert.Equal(ExecutionLifecycleVerdict.Unavailable, await gate.CheckAsync(Binding, Now));
+        Assert.Equal(ExecutionLifecycleVerdict.Unavailable, (await gate.CheckAsync(Binding, Now)).Verdict);
     }
 
     [Fact]
@@ -258,6 +276,14 @@ public sealed class ExecutionLifecycleTests
             return ValueTask.FromResult(_byBinding.TryGetValue(Key(binding), out var row) ? row.State : (ExecutionLifecycleState?)null);
         }
 
+        public ValueTask<ExecutionLifecycleStateRead?> GetStateReadAsync(ExecutionLifecycleBinding binding, CancellationToken ct = default)
+        {
+            if (Throw) throw new InvalidOperationException("lifecycle store unavailable");
+            return ValueTask.FromResult(_byBinding.TryGetValue(Key(binding), out var row)
+                ? new ExecutionLifecycleStateRead(row.State, row.Sequence)
+                : (ExecutionLifecycleStateRead?)null);
+        }
+
         private static string Key(ExecutionLifecycleBinding binding) =>
             binding.TenantId + "\0" + binding.SubjectId + "\0" + binding.RunId;
 
@@ -308,3 +334,4 @@ public sealed class ExecutionLifecycleTests
         public override DateTimeOffset GetUtcNow() => now;
     }
 }
+

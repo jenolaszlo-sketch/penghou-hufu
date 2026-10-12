@@ -233,6 +233,69 @@ Permit. A child Permit never bypasses a current applicable parent denial.
   decision. Visibility (Observe/Cancel/Intervene) authority stays distinct
   from resource/execution authority.
 
+## Derived-authority freshness (AE-1.3)
+
+The qualified composition uses optimistic capture-and-revalidation over the
+contributing read set. It does not create a combined transactional view across
+independent stores. For the first direct-child profile the decision captures:
+
+```text
+child:      snapshot identity and version
+lineage:    derivation identity and bound parent identity
+parent:     snapshot identity and version
+lifecycle:  binding, state and sequence
+policy:     evaluator/profile identity
+decision:   evaluated instant
+```
+
+After all mandatory evidence is recorded, every contributing head is re-read
+and must match the captured observation exactly:
+
+- child snapshot re-read must return the same identity and version (or the
+  child is gone/revoked);
+- the current parent evaluation must still permit the same bound parent grant
+  with the same parent snapshot identity/version;
+- the lifecycle gate must still return the same state and sequence.
+
+Any movement — including a Suspend committing after the lifecycle check but
+before evidence completes — fails closed with a distinct
+`authority.read-set-superseded` outcome and no usable Permit. This is
+classified as `Unavailable`, not `Deny`: the evaluated policy did not say no;
+the evaluated facts stopped being current. Lineage is immutable for a
+derivation identity in the current store, so it is re-resolved and required to
+bind the same parent rather than carrying a separate version.
+
+The final revalidation is the last awaited authority operation before a Permit
+is returned; only synchronous clock/validity checks follow. This is explicitly
+optimistic preflight freshness, **not** atomic provider-start ordering and not
+a claim that all stores existed in this exact state simultaneously. It detects
+intervening mutation of the relevant heads. Ordering authorization with actual
+provider I/O remains AE-2/provider work.
+
+### Recorded evidence is evaluation evidence, not delivered authorization
+
+A recorded decision is evidence of the evaluator's output for the captured
+read set at the evaluated instant. It is **not** proof that a usable Permit was
+returned or that dispatch was authorized. Because the mandatory evidence write
+happens before the final freshness boundary, a recorded `Permit` can be
+superseded before the call returns: the durable record then says `Permit` while
+the caller receives `Unavailable` (`authority.read-set-superseded`). Re-recording
+after revalidation is deliberately avoided so that the freshness check remains
+the last awaited authority operation and no new stale window opens.
+
+Consequences a host must honor:
+
+- The **returned result** — not the presence of a recorded `Permit` — decides
+  whether a protected operation may proceed. A recorded `Permit` whose returned
+  result was `Unavailable`, `Deny`, or superseded authorizes nothing.
+- Historical reconstruction must never replay a recorded `Permit` as a fresh
+  authorization; every protected use re-evaluates current authority and passes
+  the freshness boundary again.
+- The evidence read interface (`AuthorityDecisionRecord`/`AuthorityDecisionEntry`)
+  carries the captured decision and evaluated instant only; it is an evaluation
+  record, not a dispatch receipt. Actual provider/start evidence remains the
+  provider's obligation (AE-2).
+
 ## Next protected-operation gate
 
 Fetching Hufu state and subsequently acquiring a Zhinu operation handle is not

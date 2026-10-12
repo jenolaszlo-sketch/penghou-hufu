@@ -99,6 +99,15 @@ public sealed class SqliteExecutionLifecycleStore : IExecutionLifecycleStore
         ExecutionLifecycleBinding binding,
         CancellationToken cancellationToken = default)
     {
+        var read = await GetStateReadAsync(binding, cancellationToken).ConfigureAwait(false);
+        return read?.State;
+    }
+
+    /// <summary>Returns current versioned state (state + sequence) or null; throws on store failure.</summary>
+    public async ValueTask<ExecutionLifecycleStateRead?> GetStateReadAsync(
+        ExecutionLifecycleBinding binding,
+        CancellationToken cancellationToken = default)
+    {
         var ct = cancellationToken;
         ct.ThrowIfCancellationRequested();
         ArgumentNullException.ThrowIfNull(binding);
@@ -107,7 +116,13 @@ public sealed class SqliteExecutionLifecycleStore : IExecutionLifecycleStore
         using var transaction = connection.BeginTransaction(deferred: true);
         var state = await ScalarAsync(connection, transaction,
             "SELECT state FROM hufu_lifecycle WHERE binding_key=$key", ct, ("$key", key)).ConfigureAwait(false);
-        return state is null ? null : (ExecutionLifecycleState)Convert.ToInt32(state);
+        if (state is null) return null;
+        var sequence = await ScalarAsync(connection, transaction,
+            "SELECT sequence FROM hufu_lifecycle WHERE binding_key=$key", ct, ("$key", key)).ConfigureAwait(false);
+        if (sequence is null) throw new InvalidDataException();
+        var value = Convert.ToInt64(sequence);
+        if (value < 1) throw new InvalidDataException();
+        return new((ExecutionLifecycleState)Convert.ToInt32(state), value);
     }
 
     private static (ExecutionLifecycleState State, ExecutionLifecycleApplyStatus Status) NextState(
