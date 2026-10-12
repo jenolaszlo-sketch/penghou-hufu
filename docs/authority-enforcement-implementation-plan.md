@@ -162,8 +162,8 @@ Existing shipped constructor signatures are unchanged; the unshipped overload
 gained an optional checker parameter because API back-compat rules forbid a
 second overload with optional parameters. Qualified lineage shape is exactly
 one direct root parent; unsupported shapes fail closed. Local results are in the
-[profile qualification](authority-profile-qualification.md). AE-1.2 and AE-1.3
-are deliberately not started.
+[profile qualification](authority-profile-qualification.md). AE-1.3
+is deliberately not started.
 
 ### AE-1.2 — Bind trusted lifecycle facts to authority transitions
 
@@ -195,6 +195,18 @@ handle/fence; visibility authorization alone cannot execute either action.
 
 **Exit:** real trusted-adapter fixtures prove suspend/resume, cancel/complete,
 duplicate events, stale fences and new generations, including process/store reopen.
+
+**Status 2026-10-12: AE-1.2 landed.** Lifecycle state is generic Hufu authority
+state: `Penghou.Hufu` owns `IExecutionLifecycleStore`/`IExecutionLifecycleGate`
+and the binding/state/transition/receipt types; `Penghou.Hufu.Sqlite` owns the
+durable atomic/idempotent implementation; `Penghou.Hufu.Workflow` owns
+`WorkflowAuthorityEvent`, `IWorkflowAuthorityEventTrustSource` and the translator.
+The gate is mandatory only in the qualified derived-authority composition and
+never applies to root-only profiles. Suspend/Resume and terminal
+Cancel/Complete/Supersede are implemented; no new-generation authority is
+created and no workflow contract changed. See the
+[lifecycle profile](execution-lifecycle-authority.md) and
+[profile qualification](authority-profile-qualification.md).
 
 ### AE-1.3 — Qualify freshness and consumption
 

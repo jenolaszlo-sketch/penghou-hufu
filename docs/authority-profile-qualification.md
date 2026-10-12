@@ -157,3 +157,41 @@ Unqualified by this record: general nested delegation, DAG ancestry, mixed
 root/derived contributor snapshots, lifecycle-event binding (AE-1.2),
 freshness/consumption qualification (AE-1.3), worker/broker transport (AE-2),
 Biscuit, Gagamba, and gateways.
+
+## AE-1.2 execution-lifecycle qualification (2026-10-12)
+
+Local qualification of generic execution-lifecycle authority state and its
+authenticated workflow-event translation. Environment: Windows x64, .NET SDK
+10.0.401, .NET 8 and .NET 10 targets, real file-backed SQLite.
+
+Focused suites:
+
+| Suite | .NET 8 | .NET 10 | Scope |
+| --- | --- | --- | --- |
+| ExecutionLifecycleTests | passed, 0 skipped | passed, 0 skipped | Gate semantics, suspend/resume/terminal, replay, stale, fail-closed consumption |
+| SqliteExecutionLifecycleStoreTests | passed, 0 skipped | passed, 0 skipped | Durable apply, replay/conflict/stale, reopen/recovery |
+| WorkflowAuthorityLifecycleTranslatorTests (within Penghou.Hufu.Workflow.Tests) | passed, 0 skipped | passed, 0 skipped | Auth/forgery, event mapping, duplicate/stale, supersession |
+
+Qualified observations:
+
+- Suspend denies a derived use (`authority.lifecycle-suspended`); Resume
+  restores the same binding; Cancel/Complete/Supersede are terminal
+  (`authority.lifecycle-terminal`). Absence of any lifecycle fact is live.
+- Duplicate transitions replay the original durable receipt; the same
+  transition identity with different intent conflicts; stale/out-of-order
+  sequence is rejected; invalid transitions conflict and terminal binds cannot
+  be reopened.
+- State and receipts survive store reopen; a fresh instance recovers state and
+  replays the original receipt.
+- A lifecycle store failure yields no usable Permit (`Unavailable`).
+- The gate applies only to known derived grants in the qualified composition;
+  root-only use is unchanged.
+- The workflow translator authenticates through `IWorkflowAuthorityEventTrustSource`,
+  rejects forged labels as `Conflict`, returns `Unavailable` when authentication
+  is unavailable, and maps Suspend/Resume/Cancel/Complete/Supersede to neutral
+  transitions without introducing workflow vocabulary into core.
+
+Unqualified by this record: new-generation authority creation (events never
+create rights; a new generation is a new binding needing explicit authority),
+atomic provider-I/O start ordering, lifecycle gating of root-only profiles,
+visibility authority, and any broker/Biscuit/Gagamba integration.

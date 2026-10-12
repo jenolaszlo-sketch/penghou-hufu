@@ -33,7 +33,8 @@ public static class DerivedAuthorityRequestAuthorizer
         IAuthorityEvaluator evaluator,
         IAuthorityDecisionRecorder recorder,
         IAuthorityDerivationStore derivations,
-        TimeProvider? clock = null)
+        TimeProvider? clock = null,
+        IExecutionLifecycleGate? lifecycleGate = null)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(evaluator);
@@ -41,7 +42,8 @@ public static class DerivedAuthorityRequestAuthorizer
         ArgumentNullException.ThrowIfNull(derivations);
         return new CurrentAuthorityRequestAuthorizer(source, evaluator, recorder, clock,
             new AuthorityDerivation.LineageAncestorLiveness(source, derivations),
-            new AuthorityDerivation.LineageCurrentParentPolicy(source, derivations, evaluator));
+            new AuthorityDerivation.LineageCurrentParentPolicy(source, derivations, evaluator),
+            lifecycleGate);
     }
 }
 
@@ -54,9 +56,10 @@ public sealed class CurrentAuthorityRequestAuthorizer : IAuthorityRequestAuthori
     private readonly TimeProvider _clock;
     private readonly IAncestorLiveness? _ancestorLiveness;
     private readonly ICurrentParentPolicy? _parentPolicy;
+    private readonly IExecutionLifecycleGate? _lifecycleGate;
     public CurrentAuthorityRequestAuthorizer(IAuthoritySnapshotSource source, IAuthorityEvaluator evaluator,
         IAuthorityDecisionRecorder recorder, TimeProvider? clock)
-        : this(source, evaluator, recorder, clock, ancestorLiveness: null, parentPolicy: null)
+        : this(source, evaluator, recorder, clock, ancestorLiveness: null, parentPolicy: null, lifecycleGate: null)
     {
     }
 
@@ -70,7 +73,7 @@ public sealed class CurrentAuthorityRequestAuthorizer : IAuthorityRequestAuthori
     /// </remarks>
     public CurrentAuthorityRequestAuthorizer(IAuthoritySnapshotSource source, IAuthorityEvaluator evaluator,
         IAuthorityDecisionRecorder recorder, TimeProvider? clock = null, IAncestorLiveness? ancestorLiveness = null,
-        ICurrentParentPolicy? parentPolicy = null)
+        ICurrentParentPolicy? parentPolicy = null, IExecutionLifecycleGate? lifecycleGate = null)
     {
         _source = source ?? throw new ArgumentNullException(nameof(source));
         _evaluator = evaluator ?? throw new ArgumentNullException(nameof(evaluator));
@@ -78,6 +81,7 @@ public sealed class CurrentAuthorityRequestAuthorizer : IAuthorityRequestAuthori
         _clock = clock ?? TimeProvider.System;
         _ancestorLiveness = ancestorLiveness;
         _parentPolicy = parentPolicy;
+        _lifecycleGate = lifecycleGate;
     }
 
     private static bool HasDerivedGrants(AuthoritySnapshot snapshot) =>
@@ -168,6 +172,30 @@ public sealed class CurrentAuthorityRequestAuthorizer : IAuthorityRequestAuthori
                         default:
                             return new(request, AuthorityStatus.Unavailable, decision);
                     }
+                }
+            }
+            // Lifecycle gate applies only to derived grants and only when a
+            // qualified lifecycle gate is composed. Absence of any lifecycle
+            // fact is live; a store failure is unavailable, never a permit.
+            if (decision.Status == AuthorityStatus.Permit && _lifecycleGate is not null && HasDerivedGrants(snapshot))
+            {
+                var binding = ExecutionLifecycleBinding.FromContext(request.Context);
+                var verdict = await _lifecycleGate.CheckAsync(binding, now, cancellationToken).ConfigureAwait(false);
+                cancellationToken.ThrowIfCancellationRequested();
+                switch (verdict)
+                {
+                    case ExecutionLifecycleVerdict.Live:
+                        break;
+                    case ExecutionLifecycleVerdict.Suspended:
+                        decision = new AuthorityDecision(AuthorityStatus.Deny, "authority.lifecycle-suspended",
+                            snapshot.Version, "hufu-lifecycle-v1", snapshot.Identity);
+                        break;
+                    case ExecutionLifecycleVerdict.Terminal:
+                        decision = new AuthorityDecision(AuthorityStatus.Deny, "authority.lifecycle-terminal",
+                            snapshot.Version, "hufu-lifecycle-v1", snapshot.Identity);
+                        break;
+                    default:
+                        return new(request, AuthorityStatus.Unavailable, decision);
                 }
             }
             var recorded = await _recorder.RecordAsync(request, decision, cancellationToken).AsTask().WaitAsync(cancellationToken).ConfigureAwait(false);

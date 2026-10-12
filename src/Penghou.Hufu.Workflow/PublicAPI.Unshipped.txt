@@ -1,1 +1,65 @@
 #nullable enable
+override Penghou.Hufu.Workflow.WorkflowAuthorityEvent.Equals(object? obj) -> bool
+override Penghou.Hufu.Workflow.WorkflowAuthorityEvent.GetHashCode() -> int
+override Penghou.Hufu.Workflow.WorkflowAuthorityEvent.ToString() -> string!
+override Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.Equals(object? obj) -> bool
+override Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.GetHashCode() -> int
+override Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.ToString() -> string!
+Penghou.Hufu.Workflow.IWorkflowAuthorityEventTrustSource
+Penghou.Hufu.Workflow.IWorkflowAuthorityEventTrustSource.AuthenticateAsync(Penghou.Hufu.Workflow.WorkflowAuthorityEvent! event, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal?>
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.<Clone>$() -> Penghou.Hufu.Workflow.WorkflowAuthorityEvent!
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.ActivityId.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.DelegationId.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.Equals(Penghou.Hufu.Workflow.WorkflowAuthorityEvent? other) -> bool
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.EventIdentity.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.EventOrder.get -> long
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.ExpectedAuthoritySequence.get -> long
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.FenceId.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.Generation.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.Kind.get -> Penghou.Hufu.Workflow.WorkflowAuthorityEventKind
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.Reason.get -> string?
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.RevisionId.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.RunId.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.Source.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.SubjectId.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.TenantId.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEvent.WorkflowAuthorityEvent(string! source, string! tenantId, string! subjectId, string! runId, string! activityId, string! delegationId, string! generation, string! revisionId, string! fenceId, string! eventIdentity, long eventOrder, long expectedAuthoritySequence, Penghou.Hufu.Workflow.WorkflowAuthorityEventKind kind, string? reason = null) -> void
+Penghou.Hufu.Workflow.WorkflowAuthorityEventKind
+Penghou.Hufu.Workflow.WorkflowAuthorityEventKind.Cancel = 2 -> Penghou.Hufu.Workflow.WorkflowAuthorityEventKind
+Penghou.Hufu.Workflow.WorkflowAuthorityEventKind.Complete = 3 -> Penghou.Hufu.Workflow.WorkflowAuthorityEventKind
+Penghou.Hufu.Workflow.WorkflowAuthorityEventKind.Resume = 1 -> Penghou.Hufu.Workflow.WorkflowAuthorityEventKind
+Penghou.Hufu.Workflow.WorkflowAuthorityEventKind.Supersede = 4 -> Penghou.Hufu.Workflow.WorkflowAuthorityEventKind
+Penghou.Hufu.Workflow.WorkflowAuthorityEventKind.Suspend = 0 -> Penghou.Hufu.Workflow.WorkflowAuthorityEventKind
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.<Clone>$() -> Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal!
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.ActivityId.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.ActivityId.init -> void
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.Deconstruct(out string! Source, out string! TenantId, out string! SubjectId, out string! RunId, out string! ActivityId, out string! DelegationId, out string! Generation, out string! RevisionId, out string! FenceId, out string! EventIdentity) -> void
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.DelegationId.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.DelegationId.init -> void
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.Equals(Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal? other) -> bool
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.EventIdentity.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.EventIdentity.init -> void
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.FenceId.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.FenceId.init -> void
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.Generation.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.Generation.init -> void
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.RevisionId.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.RevisionId.init -> void
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.RunId.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.RunId.init -> void
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.Source.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.Source.init -> void
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.SubjectId.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.SubjectId.init -> void
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.TenantId.get -> string!
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.TenantId.init -> void
+Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.WorkflowAuthorityEventPrincipal(string! Source, string! TenantId, string! SubjectId, string! RunId, string! ActivityId, string! DelegationId, string! Generation, string! RevisionId, string! FenceId, string! EventIdentity) -> void
+Penghou.Hufu.Workflow.WorkflowAuthorityLifecycleTranslator
+Penghou.Hufu.Workflow.WorkflowAuthorityLifecycleTranslator.ApplyAsync(Penghou.Hufu.Workflow.WorkflowAuthorityEvent! event, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.ExecutionLifecycleApplyResult!>
+Penghou.Hufu.Workflow.WorkflowAuthorityLifecycleTranslator.WorkflowAuthorityLifecycleTranslator(Penghou.Hufu.Workflow.IWorkflowAuthorityEventTrustSource! trust, Penghou.Hufu.IExecutionLifecycleStore! store) -> void
+static Penghou.Hufu.Workflow.WorkflowAuthorityEvent.operator !=(Penghou.Hufu.Workflow.WorkflowAuthorityEvent? left, Penghou.Hufu.Workflow.WorkflowAuthorityEvent? right) -> bool
+static Penghou.Hufu.Workflow.WorkflowAuthorityEvent.operator ==(Penghou.Hufu.Workflow.WorkflowAuthorityEvent? left, Penghou.Hufu.Workflow.WorkflowAuthorityEvent? right) -> bool
+static Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.operator !=(Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal? left, Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal? right) -> bool
+static Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.operator ==(Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal? left, Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal? right) -> bool

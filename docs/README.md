@@ -21,6 +21,7 @@ New to Hufu? Read the [project README](../README.md) for the goal, then [the ove
 | Document | Use it for |
 | --- | --- |
 | [Current authority profile](current-authority-profile.md) and [durable store](durable-authority-store.md) | Snapshot, revocation, evidence and SQLite store limits. |
+| [Execution-lifecycle authority](execution-lifecycle-authority.md) | Generic suspend/resume/terminal lifecycle state, its durable SQLite store and the authenticated workflow-event translator (AE-1.2). |
 | [Core admission and issuance](core-admission-and-issuance.md) | Bounded evaluation capacity, issuer ceiling and exact publication approval. |
 | [Decision explanations](decision-explanations.md) and [optional telemetry](optional-telemetry.md) | What can be disclosed or observed without changing authorization. |
 | [Workflow authorizer](workflow-authorizer.md) | Host services and requirements for the neutral workflow adapter. |

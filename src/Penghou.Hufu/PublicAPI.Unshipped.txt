@@ -1,6 +1,5 @@
-#nullable enable
+﻿#nullable enable
 Penghou.Hufu.AuthorityAction.ExecuteProcess = 6 -> Penghou.Hufu.AuthorityAction
-
 override Penghou.Hufu.AuthorityDerivationCommand.Equals(object? obj) -> bool
 override Penghou.Hufu.AuthorityDerivationCommand.GetHashCode() -> int
 override Penghou.Hufu.AuthorityDerivationCommand.ToString() -> string!
@@ -83,7 +82,7 @@ Penghou.Hufu.AuthorityGrantLineage.IssuedAt.get -> System.DateTimeOffset
 Penghou.Hufu.AuthorityGrantLineage.ParentContext.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
 Penghou.Hufu.AuthorityGrantLineage.ParentGrantId.get -> string!
 Penghou.Hufu.AuthorityGrantLineage.Requested.get -> Penghou.Hufu.RequestedAuthority!
-Penghou.Hufu.CurrentAuthorityRequestAuthorizer.CurrentAuthorityRequestAuthorizer(Penghou.Hufu.IAuthoritySnapshotSource! source, Penghou.Hufu.IAuthorityEvaluator! evaluator, Penghou.Hufu.IAuthorityDecisionRecorder! recorder, System.TimeProvider? clock = null, Penghou.Hufu.IAncestorLiveness? ancestorLiveness = null, Penghou.Hufu.ICurrentParentPolicy? parentPolicy = null) -> void
+Penghou.Hufu.CurrentAuthorityRequestAuthorizer.CurrentAuthorityRequestAuthorizer(Penghou.Hufu.IAuthoritySnapshotSource! source, Penghou.Hufu.IAuthorityEvaluator! evaluator, Penghou.Hufu.IAuthorityDecisionRecorder! recorder, System.TimeProvider? clock = null, Penghou.Hufu.IAncestorLiveness? ancestorLiveness = null, Penghou.Hufu.ICurrentParentPolicy? parentPolicy = null, Penghou.Hufu.IExecutionLifecycleGate? lifecycleGate = null) -> void
 Penghou.Hufu.CurrentParentPolicyResult
 Penghou.Hufu.CurrentParentPolicyResult.<Clone>$() -> Penghou.Hufu.CurrentParentPolicyResult!
 Penghou.Hufu.CurrentParentPolicyResult.CurrentParentPolicyResult(Penghou.Hufu.CurrentParentPolicyVerdict Verdict, Penghou.Hufu.AuthorityRequest? ParentRequest, Penghou.Hufu.AuthorityDecision? ParentDecision, string? ParentGrantId, string? ParentSnapshotVersion, string? ParentSnapshotIdentity, string? ParentEvaluatorIdentity, System.DateTimeOffset EvaluatedAt) -> void
@@ -118,7 +117,7 @@ Penghou.Hufu.ICurrentParentPolicy
 Penghou.Hufu.ICurrentParentPolicy.CheckAsync(Penghou.Hufu.AuthoritySnapshot! snapshot, Penghou.Hufu.AuthorityRequest! request, System.DateTimeOffset evaluatedAt, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.CurrentParentPolicyResult!>
 static Penghou.Hufu.CurrentParentPolicyResult.operator !=(Penghou.Hufu.CurrentParentPolicyResult? left, Penghou.Hufu.CurrentParentPolicyResult? right) -> bool
 static Penghou.Hufu.CurrentParentPolicyResult.operator ==(Penghou.Hufu.CurrentParentPolicyResult? left, Penghou.Hufu.CurrentParentPolicyResult? right) -> bool
-static Penghou.Hufu.DerivedAuthorityRequestAuthorizer.Create(Penghou.Hufu.IAuthoritySnapshotSource! source, Penghou.Hufu.IAuthorityEvaluator! evaluator, Penghou.Hufu.IAuthorityDecisionRecorder! recorder, Penghou.Hufu.IAuthorityDerivationStore! derivations, System.TimeProvider? clock = null) -> Penghou.Hufu.CurrentAuthorityRequestAuthorizer!
+static Penghou.Hufu.DerivedAuthorityRequestAuthorizer.Create(Penghou.Hufu.IAuthoritySnapshotSource! source, Penghou.Hufu.IAuthorityEvaluator! evaluator, Penghou.Hufu.IAuthorityDecisionRecorder! recorder, Penghou.Hufu.IAuthorityDerivationStore! derivations, System.TimeProvider? clock = null, Penghou.Hufu.IExecutionLifecycleGate? lifecycleGate = null) -> Penghou.Hufu.CurrentAuthorityRequestAuthorizer!
 Penghou.Hufu.IAncestorLiveness
 Penghou.Hufu.IAncestorLiveness.CheckAsync(Penghou.Hufu.AuthoritySnapshot! snapshot, Penghou.Hufu.AuthorityRequest! request, System.DateTimeOffset evaluatedAt, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AncestorLivenessVerdict>
 Penghou.Hufu.IAuthorityDerivationStore
@@ -233,3 +232,110 @@ Penghou.Hufu.IDelegationVisibilityStore.PublishAsync(Penghou.Hufu.DelegationVisi
 Penghou.Hufu.IDelegationVisibilityStore.RevokeAsync(string! tenantId, string! subjectId, string! delegationId, string! generation, string! commandId, string! reasonCode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.DelegationVisibilityRevokeStatus>
 static Penghou.Hufu.DelegationVisibilityBinding.operator !=(Penghou.Hufu.DelegationVisibilityBinding? left, Penghou.Hufu.DelegationVisibilityBinding? right) -> bool
 static Penghou.Hufu.DelegationVisibilityBinding.operator ==(Penghou.Hufu.DelegationVisibilityBinding? left, Penghou.Hufu.DelegationVisibilityBinding? right) -> bool
+override Penghou.Hufu.ExecutionLifecycleApplyResult.Equals(object? obj) -> bool
+override Penghou.Hufu.ExecutionLifecycleApplyResult.GetHashCode() -> int
+override Penghou.Hufu.ExecutionLifecycleApplyResult.ToString() -> string!
+override Penghou.Hufu.ExecutionLifecycleBinding.Equals(object? obj) -> bool
+override Penghou.Hufu.ExecutionLifecycleBinding.GetHashCode() -> int
+override Penghou.Hufu.ExecutionLifecycleBinding.ToString() -> string!
+override Penghou.Hufu.ExecutionLifecycleReceipt.Equals(object? obj) -> bool
+override Penghou.Hufu.ExecutionLifecycleReceipt.GetHashCode() -> int
+override Penghou.Hufu.ExecutionLifecycleReceipt.ToString() -> string!
+override Penghou.Hufu.ExecutionLifecycleTransition.Equals(object? obj) -> bool
+override Penghou.Hufu.ExecutionLifecycleTransition.GetHashCode() -> int
+override Penghou.Hufu.ExecutionLifecycleTransition.ToString() -> string!
+Penghou.Hufu.ExecutionLifecycleApplyResult
+Penghou.Hufu.ExecutionLifecycleApplyResult.<Clone>$() -> Penghou.Hufu.ExecutionLifecycleApplyResult!
+Penghou.Hufu.ExecutionLifecycleApplyResult.Deconstruct(out Penghou.Hufu.ExecutionLifecycleApplyStatus Status, out Penghou.Hufu.ExecutionLifecycleReceipt? Receipt) -> void
+Penghou.Hufu.ExecutionLifecycleApplyResult.Equals(Penghou.Hufu.ExecutionLifecycleApplyResult? other) -> bool
+Penghou.Hufu.ExecutionLifecycleApplyResult.ExecutionLifecycleApplyResult(Penghou.Hufu.ExecutionLifecycleApplyStatus Status, Penghou.Hufu.ExecutionLifecycleReceipt? Receipt = null) -> void
+Penghou.Hufu.ExecutionLifecycleApplyResult.Receipt.get -> Penghou.Hufu.ExecutionLifecycleReceipt?
+Penghou.Hufu.ExecutionLifecycleApplyResult.Receipt.init -> void
+Penghou.Hufu.ExecutionLifecycleApplyResult.Status.get -> Penghou.Hufu.ExecutionLifecycleApplyStatus
+Penghou.Hufu.ExecutionLifecycleApplyResult.Status.init -> void
+Penghou.Hufu.ExecutionLifecycleApplyStatus
+Penghou.Hufu.ExecutionLifecycleApplyStatus.Applied = 2 -> Penghou.Hufu.ExecutionLifecycleApplyStatus
+Penghou.Hufu.ExecutionLifecycleApplyStatus.Conflict = 4 -> Penghou.Hufu.ExecutionLifecycleApplyStatus
+Penghou.Hufu.ExecutionLifecycleApplyStatus.InvalidRequest = 0 -> Penghou.Hufu.ExecutionLifecycleApplyStatus
+Penghou.Hufu.ExecutionLifecycleApplyStatus.Replayed = 3 -> Penghou.Hufu.ExecutionLifecycleApplyStatus
+Penghou.Hufu.ExecutionLifecycleApplyStatus.Stale = 5 -> Penghou.Hufu.ExecutionLifecycleApplyStatus
+Penghou.Hufu.ExecutionLifecycleApplyStatus.Terminated = 6 -> Penghou.Hufu.ExecutionLifecycleApplyStatus
+Penghou.Hufu.ExecutionLifecycleApplyStatus.Unavailable = 1 -> Penghou.Hufu.ExecutionLifecycleApplyStatus
+Penghou.Hufu.ExecutionLifecycleBinding
+Penghou.Hufu.ExecutionLifecycleBinding.<Clone>$() -> Penghou.Hufu.ExecutionLifecycleBinding!
+Penghou.Hufu.ExecutionLifecycleBinding.Equals(Penghou.Hufu.ExecutionLifecycleBinding? other) -> bool
+Penghou.Hufu.ExecutionLifecycleBinding.ExecutionLifecycleBinding(string! tenantId, string! subjectId, string! runId) -> void
+Penghou.Hufu.ExecutionLifecycleBinding.RunId.get -> string!
+Penghou.Hufu.ExecutionLifecycleBinding.SubjectId.get -> string!
+Penghou.Hufu.ExecutionLifecycleBinding.TenantId.get -> string!
+Penghou.Hufu.ExecutionLifecycleReceipt
+Penghou.Hufu.ExecutionLifecycleReceipt.<Clone>$() -> Penghou.Hufu.ExecutionLifecycleReceipt!
+Penghou.Hufu.ExecutionLifecycleReceipt.Binding.get -> Penghou.Hufu.ExecutionLifecycleBinding!
+Penghou.Hufu.ExecutionLifecycleReceipt.Binding.init -> void
+Penghou.Hufu.ExecutionLifecycleReceipt.Deconstruct(out Penghou.Hufu.ExecutionLifecycleBinding! Binding, out long Sequence, out Penghou.Hufu.ExecutionLifecycleState State, out Penghou.Hufu.ExecutionLifecycleTransitionKind Kind, out Penghou.Hufu.ExecutionLifecycleTerminalReason Reason, out string! TransitionId, out string! Generation, out string! Fence, out System.DateTimeOffset RecordedAt) -> void
+Penghou.Hufu.ExecutionLifecycleReceipt.Equals(Penghou.Hufu.ExecutionLifecycleReceipt? other) -> bool
+Penghou.Hufu.ExecutionLifecycleReceipt.ExecutionLifecycleReceipt(Penghou.Hufu.ExecutionLifecycleBinding! Binding, long Sequence, Penghou.Hufu.ExecutionLifecycleState State, Penghou.Hufu.ExecutionLifecycleTransitionKind Kind, Penghou.Hufu.ExecutionLifecycleTerminalReason Reason, string! TransitionId, string! Generation, string! Fence, System.DateTimeOffset RecordedAt) -> void
+Penghou.Hufu.ExecutionLifecycleReceipt.Fence.get -> string!
+Penghou.Hufu.ExecutionLifecycleReceipt.Fence.init -> void
+Penghou.Hufu.ExecutionLifecycleReceipt.Generation.get -> string!
+Penghou.Hufu.ExecutionLifecycleReceipt.Generation.init -> void
+Penghou.Hufu.ExecutionLifecycleReceipt.Kind.get -> Penghou.Hufu.ExecutionLifecycleTransitionKind
+Penghou.Hufu.ExecutionLifecycleReceipt.Kind.init -> void
+Penghou.Hufu.ExecutionLifecycleReceipt.Reason.get -> Penghou.Hufu.ExecutionLifecycleTerminalReason
+Penghou.Hufu.ExecutionLifecycleReceipt.Reason.init -> void
+Penghou.Hufu.ExecutionLifecycleReceipt.RecordedAt.get -> System.DateTimeOffset
+Penghou.Hufu.ExecutionLifecycleReceipt.RecordedAt.init -> void
+Penghou.Hufu.ExecutionLifecycleReceipt.Sequence.get -> long
+Penghou.Hufu.ExecutionLifecycleReceipt.Sequence.init -> void
+Penghou.Hufu.ExecutionLifecycleReceipt.State.get -> Penghou.Hufu.ExecutionLifecycleState
+Penghou.Hufu.ExecutionLifecycleReceipt.State.init -> void
+Penghou.Hufu.ExecutionLifecycleReceipt.TransitionId.get -> string!
+Penghou.Hufu.ExecutionLifecycleReceipt.TransitionId.init -> void
+Penghou.Hufu.ExecutionLifecycleState
+Penghou.Hufu.ExecutionLifecycleState.Active = 0 -> Penghou.Hufu.ExecutionLifecycleState
+Penghou.Hufu.ExecutionLifecycleState.Suspended = 1 -> Penghou.Hufu.ExecutionLifecycleState
+Penghou.Hufu.ExecutionLifecycleState.Terminal = 2 -> Penghou.Hufu.ExecutionLifecycleState
+Penghou.Hufu.ExecutionLifecycleTerminalReason
+Penghou.Hufu.ExecutionLifecycleTerminalReason.Cancelled = 1 -> Penghou.Hufu.ExecutionLifecycleTerminalReason
+Penghou.Hufu.ExecutionLifecycleTerminalReason.Completed = 2 -> Penghou.Hufu.ExecutionLifecycleTerminalReason
+Penghou.Hufu.ExecutionLifecycleTerminalReason.Expired = 4 -> Penghou.Hufu.ExecutionLifecycleTerminalReason
+Penghou.Hufu.ExecutionLifecycleTerminalReason.None = 0 -> Penghou.Hufu.ExecutionLifecycleTerminalReason
+Penghou.Hufu.ExecutionLifecycleTerminalReason.Superseded = 3 -> Penghou.Hufu.ExecutionLifecycleTerminalReason
+Penghou.Hufu.ExecutionLifecycleTransition
+Penghou.Hufu.ExecutionLifecycleTransition.<Clone>$() -> Penghou.Hufu.ExecutionLifecycleTransition!
+Penghou.Hufu.ExecutionLifecycleTransition.Binding.get -> Penghou.Hufu.ExecutionLifecycleBinding!
+Penghou.Hufu.ExecutionLifecycleTransition.Equals(Penghou.Hufu.ExecutionLifecycleTransition? other) -> bool
+Penghou.Hufu.ExecutionLifecycleTransition.ExecutionLifecycleTransition(Penghou.Hufu.ExecutionLifecycleBinding! binding, long expectedSequence, string! transitionId, Penghou.Hufu.ExecutionLifecycleTransitionKind kind, Penghou.Hufu.ExecutionLifecycleTerminalReason reason, string! generation, string! fence, string? sourceEvidence = null) -> void
+Penghou.Hufu.ExecutionLifecycleTransition.ExpectedSequence.get -> long
+Penghou.Hufu.ExecutionLifecycleTransition.Fence.get -> string!
+Penghou.Hufu.ExecutionLifecycleTransition.Generation.get -> string!
+Penghou.Hufu.ExecutionLifecycleTransition.Kind.get -> Penghou.Hufu.ExecutionLifecycleTransitionKind
+Penghou.Hufu.ExecutionLifecycleTransition.Reason.get -> Penghou.Hufu.ExecutionLifecycleTerminalReason
+Penghou.Hufu.ExecutionLifecycleTransition.SourceEvidence.get -> string?
+Penghou.Hufu.ExecutionLifecycleTransition.TransitionId.get -> string!
+Penghou.Hufu.ExecutionLifecycleTransitionKind
+Penghou.Hufu.ExecutionLifecycleTransitionKind.Resume = 1 -> Penghou.Hufu.ExecutionLifecycleTransitionKind
+Penghou.Hufu.ExecutionLifecycleTransitionKind.Suspend = 0 -> Penghou.Hufu.ExecutionLifecycleTransitionKind
+Penghou.Hufu.ExecutionLifecycleTransitionKind.Terminate = 2 -> Penghou.Hufu.ExecutionLifecycleTransitionKind
+Penghou.Hufu.ExecutionLifecycleVerdict
+Penghou.Hufu.ExecutionLifecycleVerdict.Live = 0 -> Penghou.Hufu.ExecutionLifecycleVerdict
+Penghou.Hufu.ExecutionLifecycleVerdict.Suspended = 1 -> Penghou.Hufu.ExecutionLifecycleVerdict
+Penghou.Hufu.ExecutionLifecycleVerdict.Terminal = 2 -> Penghou.Hufu.ExecutionLifecycleVerdict
+Penghou.Hufu.ExecutionLifecycleVerdict.Unavailable = 3 -> Penghou.Hufu.ExecutionLifecycleVerdict
+Penghou.Hufu.IExecutionLifecycleGate
+Penghou.Hufu.IExecutionLifecycleGate.CheckAsync(Penghou.Hufu.ExecutionLifecycleBinding! binding, System.DateTimeOffset evaluatedAt, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.ExecutionLifecycleVerdict>
+Penghou.Hufu.IExecutionLifecycleStore
+Penghou.Hufu.IExecutionLifecycleStore.ApplyAsync(Penghou.Hufu.ExecutionLifecycleTransition! transition, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.ExecutionLifecycleApplyResult!>
+Penghou.Hufu.IExecutionLifecycleStore.GetStateAsync(Penghou.Hufu.ExecutionLifecycleBinding! binding, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.ExecutionLifecycleState?>
+Penghou.Hufu.StoreExecutionLifecycleGate
+Penghou.Hufu.StoreExecutionLifecycleGate.CheckAsync(Penghou.Hufu.ExecutionLifecycleBinding! binding, System.DateTimeOffset evaluatedAt, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.ExecutionLifecycleVerdict>
+Penghou.Hufu.StoreExecutionLifecycleGate.StoreExecutionLifecycleGate(Penghou.Hufu.IExecutionLifecycleStore! store) -> void
+static Penghou.Hufu.ExecutionLifecycleApplyResult.operator !=(Penghou.Hufu.ExecutionLifecycleApplyResult? left, Penghou.Hufu.ExecutionLifecycleApplyResult? right) -> bool
+static Penghou.Hufu.ExecutionLifecycleApplyResult.operator ==(Penghou.Hufu.ExecutionLifecycleApplyResult? left, Penghou.Hufu.ExecutionLifecycleApplyResult? right) -> bool
+static Penghou.Hufu.ExecutionLifecycleBinding.FromContext(Penghou.Hufu.AuthenticatedAuthorityContext! context) -> Penghou.Hufu.ExecutionLifecycleBinding!
+static Penghou.Hufu.ExecutionLifecycleBinding.operator !=(Penghou.Hufu.ExecutionLifecycleBinding? left, Penghou.Hufu.ExecutionLifecycleBinding? right) -> bool
+static Penghou.Hufu.ExecutionLifecycleBinding.operator ==(Penghou.Hufu.ExecutionLifecycleBinding? left, Penghou.Hufu.ExecutionLifecycleBinding? right) -> bool
+static Penghou.Hufu.ExecutionLifecycleReceipt.operator !=(Penghou.Hufu.ExecutionLifecycleReceipt? left, Penghou.Hufu.ExecutionLifecycleReceipt? right) -> bool
+static Penghou.Hufu.ExecutionLifecycleReceipt.operator ==(Penghou.Hufu.ExecutionLifecycleReceipt? left, Penghou.Hufu.ExecutionLifecycleReceipt? right) -> bool
+static Penghou.Hufu.ExecutionLifecycleTransition.operator !=(Penghou.Hufu.ExecutionLifecycleTransition? left, Penghou.Hufu.ExecutionLifecycleTransition? right) -> bool
+static Penghou.Hufu.ExecutionLifecycleTransition.operator ==(Penghou.Hufu.ExecutionLifecycleTransition? left, Penghou.Hufu.ExecutionLifecycleTransition? right) -> bool

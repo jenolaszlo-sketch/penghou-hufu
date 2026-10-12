@@ -48,7 +48,11 @@ qualify during implementation, not new delivered guarantees or closed CI gates.
     grant. Policy-only parent narrowing, parent expansion, unavailable/unsupported
     lineage and root-only regression qualified locally; see the [profile
     qualification](authority-profile-qualification.md).
-  - [ ] **AE-1.2** — Trusted lifecycle-event/fence binding.
+  - [x] **AE-1.2** — Trusted lifecycle-event/fence binding. Generic Hufu lifecycle
+    state (`IExecutionLifecycleStore`/`IExecutionLifecycleGate`) with a durable
+    SQLite implementation and a `Penghou.Hufu.Workflow` event translator;
+    suspend/resume and terminal cancel/complete/supersede, ordering and replay.
+    See the [lifecycle profile](execution-lifecycle-authority.md).
   - [ ] **AE-1.3** — Freshness and consumption qualification over the full case table.
 - [ ] **AE-2 — Prove one worker → host broker path.** This is the selected first
   consumer. Use one bounded resource read with existing Hufu contracts and a

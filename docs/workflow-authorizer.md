@@ -126,6 +126,18 @@ Budget exhaustion and a backward clock change invalidate a proposed permit or
 pending approval. Hosts must supply clocks and services appropriate to their
 deployment.
 
+## Lifecycle-event translation
+
+The adapter also supplies `WorkflowAuthorityLifecycleTranslator` for runtime
+lifecycle facts. It authenticates a `WorkflowAuthorityEvent` through
+`IWorkflowAuthorityEventTrustSource`, rejects forged labels and mismatched
+tenants, and maps Suspend/Resume/Cancel/Complete/Supersede onto neutral Hufu
+execution-lifecycle transitions applied durably and idempotently. The
+translator never creates authority: a new generation needs explicit new
+admitted authority and is a new binding. Workflow vocabulary stays in the
+adapter; Hufu core holds only neutral lifecycle state. See the
+[execution-lifecycle authority profile](execution-lifecycle-authority.md).
+
 ## Runtime and effect boundaries
 
 The runtime owns durable pending approvals, exact wakes, claims, leases,

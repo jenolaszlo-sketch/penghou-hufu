@@ -105,6 +105,12 @@ contract; see the [source review](authority-model-review.md).
 | Ordinary resume without changed authority meaning | Validate the current workflow fence and authority again. Resume alone neither forces a new grant nor revives an invalidated one. |
 | Delegability approval withdrawn | Block new derivations according to the issuance gate. Already issued children remain subject to their own validity and ancestor liveness. |
 
+Generic execution-lifecycle authority (Active/Suspended/Terminal) is separate
+Hufu authority state, distinct from terminal grant revocation. Authenticated
+workflow events are translated into neutral lifecycle transitions and can
+quiesce or close a binding without creating new rights; see the
+[execution-lifecycle authority profile](execution-lifecycle-authority.md).
+
 For the first restricted-execution profile, the execution policy is immutable.
 This means a fixed authorized ceiling, not a promise that access must remain
 available: broker decisions can deny more, leases can expire, and the host can
