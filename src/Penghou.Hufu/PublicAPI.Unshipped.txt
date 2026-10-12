@@ -128,3 +128,67 @@ Penghou.Hufu.DerivedAuthorityApproval.RequestedAuthorityHash.init -> void
 static Penghou.Hufu.AuthorityDerivation.RequestedAuthorityHash(Penghou.Hufu.RequestedAuthority! requested) -> string!
 static Penghou.Hufu.DerivedAuthorityApproval.operator !=(Penghou.Hufu.DerivedAuthorityApproval? left, Penghou.Hufu.DerivedAuthorityApproval? right) -> bool
 static Penghou.Hufu.DerivedAuthorityApproval.operator ==(Penghou.Hufu.DerivedAuthorityApproval? left, Penghou.Hufu.DerivedAuthorityApproval? right) -> bool
+override Penghou.Hufu.DelegationVisibilityBinding.Equals(object? obj) -> bool
+override Penghou.Hufu.DelegationVisibilityBinding.GetHashCode() -> int
+override Penghou.Hufu.DelegationVisibilityBinding.ToString() -> string!
+Penghou.Hufu.DelegationVisibilityBinding
+Penghou.Hufu.DelegationVisibilityBinding.<Clone>$() -> Penghou.Hufu.DelegationVisibilityBinding!
+Penghou.Hufu.DelegationVisibilityBinding.CommandId.get -> string!
+Penghou.Hufu.DelegationVisibilityBinding.CommandId.init -> void
+Penghou.Hufu.DelegationVisibilityBinding.CreatedAt.get -> System.DateTimeOffset
+Penghou.Hufu.DelegationVisibilityBinding.CreatedAt.init -> void
+Penghou.Hufu.DelegationVisibilityBinding.Deconstruct(out string! TenantId, out string! SubjectId, out string! DelegationId, out string! Generation, out string! RequestKey, out string! FingerprintVersion, out string! FingerprintHash, out Penghou.Hufu.DelegationVisibilityOperation Operations, out System.DateTimeOffset NotBefore, out System.DateTimeOffset ExpiresAt, out string! CommandId, out bool Revoked, out string! RevokeReason, out System.DateTimeOffset CreatedAt) -> void
+Penghou.Hufu.DelegationVisibilityBinding.DelegationId.get -> string!
+Penghou.Hufu.DelegationVisibilityBinding.DelegationId.init -> void
+Penghou.Hufu.DelegationVisibilityBinding.DelegationVisibilityBinding(string! TenantId, string! SubjectId, string! DelegationId, string! Generation, string! RequestKey, string! FingerprintVersion, string! FingerprintHash, Penghou.Hufu.DelegationVisibilityOperation Operations, System.DateTimeOffset NotBefore, System.DateTimeOffset ExpiresAt, string! CommandId, bool Revoked, string! RevokeReason, System.DateTimeOffset CreatedAt) -> void
+Penghou.Hufu.DelegationVisibilityBinding.Equals(Penghou.Hufu.DelegationVisibilityBinding? other) -> bool
+Penghou.Hufu.DelegationVisibilityBinding.ExpiresAt.get -> System.DateTimeOffset
+Penghou.Hufu.DelegationVisibilityBinding.ExpiresAt.init -> void
+Penghou.Hufu.DelegationVisibilityBinding.FingerprintHash.get -> string!
+Penghou.Hufu.DelegationVisibilityBinding.FingerprintHash.init -> void
+Penghou.Hufu.DelegationVisibilityBinding.FingerprintVersion.get -> string!
+Penghou.Hufu.DelegationVisibilityBinding.FingerprintVersion.init -> void
+Penghou.Hufu.DelegationVisibilityBinding.Generation.get -> string!
+Penghou.Hufu.DelegationVisibilityBinding.Generation.init -> void
+Penghou.Hufu.DelegationVisibilityBinding.NotBefore.get -> System.DateTimeOffset
+Penghou.Hufu.DelegationVisibilityBinding.NotBefore.init -> void
+Penghou.Hufu.DelegationVisibilityBinding.Operations.get -> Penghou.Hufu.DelegationVisibilityOperation
+Penghou.Hufu.DelegationVisibilityBinding.Operations.init -> void
+Penghou.Hufu.DelegationVisibilityBinding.RequestKey.get -> string!
+Penghou.Hufu.DelegationVisibilityBinding.RequestKey.init -> void
+Penghou.Hufu.DelegationVisibilityBinding.Revoked.get -> bool
+Penghou.Hufu.DelegationVisibilityBinding.Revoked.init -> void
+Penghou.Hufu.DelegationVisibilityBinding.RevokeReason.get -> string!
+Penghou.Hufu.DelegationVisibilityBinding.RevokeReason.init -> void
+Penghou.Hufu.DelegationVisibilityBinding.SubjectId.get -> string!
+Penghou.Hufu.DelegationVisibilityBinding.SubjectId.init -> void
+Penghou.Hufu.DelegationVisibilityBinding.TenantId.get -> string!
+Penghou.Hufu.DelegationVisibilityBinding.TenantId.init -> void
+Penghou.Hufu.DelegationVisibilityCheckStatus
+Penghou.Hufu.DelegationVisibilityCheckStatus.Expired = 3 -> Penghou.Hufu.DelegationVisibilityCheckStatus
+Penghou.Hufu.DelegationVisibilityCheckStatus.Forbidden = 4 -> Penghou.Hufu.DelegationVisibilityCheckStatus
+Penghou.Hufu.DelegationVisibilityCheckStatus.Granted = 0 -> Penghou.Hufu.DelegationVisibilityCheckStatus
+Penghou.Hufu.DelegationVisibilityCheckStatus.Revoked = 2 -> Penghou.Hufu.DelegationVisibilityCheckStatus
+Penghou.Hufu.DelegationVisibilityCheckStatus.Unknown = 1 -> Penghou.Hufu.DelegationVisibilityCheckStatus
+Penghou.Hufu.DelegationVisibilityOperation
+Penghou.Hufu.DelegationVisibilityOperation.Cancel = 2 -> Penghou.Hufu.DelegationVisibilityOperation
+Penghou.Hufu.DelegationVisibilityOperation.Intervene = 4 -> Penghou.Hufu.DelegationVisibilityOperation
+Penghou.Hufu.DelegationVisibilityOperation.None = 0 -> Penghou.Hufu.DelegationVisibilityOperation
+Penghou.Hufu.DelegationVisibilityOperation.Observe = 1 -> Penghou.Hufu.DelegationVisibilityOperation
+Penghou.Hufu.DelegationVisibilityPublishStatus
+Penghou.Hufu.DelegationVisibilityPublishStatus.Conflict = 2 -> Penghou.Hufu.DelegationVisibilityPublishStatus
+Penghou.Hufu.DelegationVisibilityPublishStatus.Published = 0 -> Penghou.Hufu.DelegationVisibilityPublishStatus
+Penghou.Hufu.DelegationVisibilityPublishStatus.Replayed = 1 -> Penghou.Hufu.DelegationVisibilityPublishStatus
+Penghou.Hufu.DelegationVisibilityPublishStatus.Revoked = 3 -> Penghou.Hufu.DelegationVisibilityPublishStatus
+Penghou.Hufu.DelegationVisibilityRevokeStatus
+Penghou.Hufu.DelegationVisibilityRevokeStatus.Conflict = 3 -> Penghou.Hufu.DelegationVisibilityRevokeStatus
+Penghou.Hufu.DelegationVisibilityRevokeStatus.NotFound = 2 -> Penghou.Hufu.DelegationVisibilityRevokeStatus
+Penghou.Hufu.DelegationVisibilityRevokeStatus.Replayed = 1 -> Penghou.Hufu.DelegationVisibilityRevokeStatus
+Penghou.Hufu.DelegationVisibilityRevokeStatus.Revoked = 0 -> Penghou.Hufu.DelegationVisibilityRevokeStatus
+Penghou.Hufu.IDelegationVisibilityStore
+Penghou.Hufu.IDelegationVisibilityStore.CheckAsync(string! tenantId, string! subjectId, string! delegationId, string! generation, Penghou.Hufu.DelegationVisibilityOperation required, System.DateTimeOffset now, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.DelegationVisibilityCheckStatus>
+Penghou.Hufu.IDelegationVisibilityStore.GetAsync(string! tenantId, string! subjectId, string! delegationId, string! generation, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.DelegationVisibilityBinding?>
+Penghou.Hufu.IDelegationVisibilityStore.PublishAsync(Penghou.Hufu.DelegationVisibilityBinding! candidate, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<(Penghou.Hufu.DelegationVisibilityPublishStatus Status, Penghou.Hufu.DelegationVisibilityBinding? Binding)>
+Penghou.Hufu.IDelegationVisibilityStore.RevokeAsync(string! tenantId, string! subjectId, string! delegationId, string! generation, string! commandId, string! reasonCode, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.DelegationVisibilityRevokeStatus>
+static Penghou.Hufu.DelegationVisibilityBinding.operator !=(Penghou.Hufu.DelegationVisibilityBinding? left, Penghou.Hufu.DelegationVisibilityBinding? right) -> bool
+static Penghou.Hufu.DelegationVisibilityBinding.operator ==(Penghou.Hufu.DelegationVisibilityBinding? left, Penghou.Hufu.DelegationVisibilityBinding? right) -> bool
