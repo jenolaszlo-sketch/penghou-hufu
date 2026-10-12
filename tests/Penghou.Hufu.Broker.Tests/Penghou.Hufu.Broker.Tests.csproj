@@ -3,6 +3,7 @@
     <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
     <IsPackable>false</IsPackable>
     <IsTestProject>true</IsTestProject>
+    <UsePenghouSource Condition="'$(UsePenghouSource)' == ''">false</UsePenghouSource>
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.14.1" />
@@ -10,6 +11,11 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../../src/Penghou.Hufu.Broker/Penghou.Hufu.Broker.csproj" />
+    <ProjectReference Include="../../src/Penghou.Hufu.Broker/Penghou.Hufu.Broker.csproj" AdditionalProperties="UsePenghouSource=$(UsePenghouSource)" />
+    <ProjectReference Include="../../src/Penghou.Hufu.IO/Penghou.Hufu.IO.csproj" AdditionalProperties="UsePenghouSource=$(UsePenghouSource)" />
+    <ProjectReference Include="../../../Penghou/src/Penghou.IO.Abstractions/Penghou.IO.Abstractions.csproj" Condition="'$(UsePenghouSource)' == 'true'" />
+    <ProjectReference Include="../../../Penghou/src/Penghou.IO.Local/Penghou.IO.Local.csproj" Condition="'$(UsePenghouSource)' == 'true'" />
+    <PackageReference Include="Penghou.IO.Abstractions" Version="[0.1.0-preview.1]" Condition="'$(UsePenghouSource)' != 'true'" />
+    <PackageReference Include="Penghou.IO.Local" Version="[0.1.0-preview.1]" Condition="'$(UsePenghouSource)' != 'true'" />
   </ItemGroup>
 </Project>

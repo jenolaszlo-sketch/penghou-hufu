@@ -366,6 +366,14 @@ evidence; response loss grants nothing; coarse failure disclosure; no hostile
 containment claim. AE-2.2 implements the vertical; AE-2.3 exercises the race/
 restart/response-loss corpus and closes AE-2. No code is claimed by this spec.
 
+**Status 2026-10-12: AE-2.2 vertical landed.** `Penghou.Hufu.Broker` now
+implements the concrete broker-local start arbiter, start/release evidence,
+the `BrokerReadHandler` enforcement vertical over the real
+`HufuWorkspaceAccess`/`IWorkspaceReader` path with the AE-1 qualified
+authorization, and the protocol-v1 named-pipe server/client. Locally validated
+with the real `Penghou.IO.Local` reader (35 focused tests, net8/net10). AE-2.3
+(cross-process race/restart/response-loss corpus) is not started.
+
 Compose AE-1's qualified current checker through Hufu.IO and the actual reader,
 including required ancestry metadata, exact-target content and result disclosure.
 There is no search or directory-discovery endpoint in this first proof. If the

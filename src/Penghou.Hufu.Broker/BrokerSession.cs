@@ -6,6 +6,7 @@ namespace Penghou.Hufu.Broker;
 /// <summary>Host-issued, single-use bootstrap material. The secret is never logged or exposed as evidence.</summary>
 public sealed record BrokerSessionBootstrap(
     string BootstrapSecret,
+    string SessionId,
     string TenantId,
     string SubjectId,
     string WorkerIdentity,
@@ -76,12 +77,13 @@ public sealed class BrokerSessionRegistry : IBrokerSessionAuthenticator, IDispos
         var now = _clock.GetUtcNow();
         var expiresAt = now.Add(lifetimeValue);
         var secret = NewSecret();
+        var sessionId = NewSecret();
         lock (_gate)
         {
             PruneLocked(now);
-            _pending[Hash(secret)] = new Pending(tenantId, subjectId, workerIdentity, audience, expiresAt);
+            _pending[Hash(secret)] = new Pending(sessionId, tenantId, subjectId, workerIdentity, audience, expiresAt);
         }
-        return new BrokerSessionBootstrap(secret, tenantId, subjectId, workerIdentity, audience, expiresAt);
+        return new BrokerSessionBootstrap(secret, sessionId, tenantId, subjectId, workerIdentity, audience, expiresAt);
     }
 
     public ValueTask<BrokerSessionPrincipal?> AuthenticateAsync(string bootstrapSecret, string connectionIdentity,
@@ -106,7 +108,7 @@ public sealed class BrokerSessionRegistry : IBrokerSessionAuthenticator, IDispos
             if (pending is null) return ValueTask.FromResult<BrokerSessionPrincipal?>(null);
             if (ActiveForWorkerLocked(pending.WorkerIdentity, now) >= _maximumSessionsPerWorker)
                 return ValueTask.FromResult<BrokerSessionPrincipal?>(null);
-            var session = new BrokerSessionPrincipal(NewSecret(), pending.TenantId, pending.SubjectId,
+            var session = new BrokerSessionPrincipal(pending.SessionId, pending.TenantId, pending.SubjectId,
                 pending.WorkerIdentity, pending.Audience, protocolVersion, now, now.Add(BrokerProtocol.MaximumSessionLifetime));
             _sessions[session.SessionId] = session;
             return ValueTask.FromResult<BrokerSessionPrincipal?>(session);
@@ -159,6 +161,6 @@ public sealed class BrokerSessionRegistry : IBrokerSessionAuthenticator, IDispos
     private static string Hash(string secret) =>
         Convert.ToHexString(SHA256.HashData(StrictUtf8.GetBytes(secret))).ToLowerInvariant();
 
-    private sealed record Pending(string TenantId, string SubjectId, string WorkerIdentity, string Audience,
-        DateTimeOffset ExpiresAt);
+    private sealed record Pending(string SessionId, string TenantId, string SubjectId, string WorkerIdentity,
+        string Audience, DateTimeOffset ExpiresAt);
 }

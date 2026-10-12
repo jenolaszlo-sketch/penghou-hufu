@@ -22,8 +22,8 @@ New to Hufu? Read the [project README](../README.md) for the goal, then [the ove
 | --- | --- |
 | [Current authority profile](current-authority-profile.md) and [durable store](durable-authority-store.md) | Snapshot, revocation, evidence and SQLite store limits. |
 | [Execution-lifecycle authority](execution-lifecycle-authority.md) | Generic suspend/resume/terminal lifecycle state, its durable SQLite store and the authenticated workflow-event translator (AE-1.2). |
-| [Broker authority profile](broker-authority-profile.md) | Frozen AE-2 scope: authenticated worker-to-host broker, opaque references, broker-local start ordering, start/release evidence. AE-2.0/2.1 contracts implemented (protocol, sessions, references, DTO); transport and dispatch pending. |
-| [AE-2.2 implementation spec](broker-ae22-implementation-spec.md) | Frozen AE-2.2 vertical: named-pipe session, concrete broker-local start arbiter, AE-1 inside the ordered boundary, real read via Hufu.IO, independent release, separate start/release evidence. Specification only. |
+| [Broker authority profile](broker-authority-profile.md) | Frozen AE-2 scope: authenticated worker-to-host broker, opaque references, broker-local start ordering, start/release evidence. AE-2.0/2.1 contracts and the AE-2.2 vertical (named pipe, start arbiter, real read, release) implemented; AE-2.3 qualification pending. |
+| [AE-2.2 implementation spec](broker-ae22-implementation-spec.md) | Frozen AE-2.2 vertical (and its landed implementation): named-pipe session, concrete broker-local start arbiter, AE-1 inside the ordered boundary, real read via Hufu.IO, independent release, separate start/release evidence. |
 | [Core admission and issuance](core-admission-and-issuance.md) | Bounded evaluation capacity, issuer ceiling and exact publication approval. |
 | [Decision explanations](decision-explanations.md) and [optional telemetry](optional-telemetry.md) | What can be disclosed or observed without changing authorization. |
 | [Workflow authorizer](workflow-authorizer.md) | Host services and requirements for the neutral workflow adapter. |

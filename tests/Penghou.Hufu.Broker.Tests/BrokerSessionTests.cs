@@ -81,6 +81,21 @@ public sealed class BrokerSessionTests
         Assert.Null(await registry.AuthenticateAsync(bootstrap.BootstrapSecret, " ", BrokerProtocol.Version));
     }
 
+    [Fact]
+    public async Task SessionIdIsHostIssuedAndNotWorkerInfluenced()
+    {
+        using var registry = new BrokerSessionRegistry(new Clock(Now));
+        var bootstrap = registry.Issue("tenant", "subject", "worker-1", "audience");
+
+        // The authenticated session uses the host-issued bootstrap session id; the
+        // worker's only inputs are the secret and a server-chosen connection identity.
+        var session = await registry.AuthenticateAsync(bootstrap.BootstrapSecret, "worker-supplied-connection", BrokerProtocol.Version);
+
+        Assert.NotNull(session);
+        Assert.Equal(bootstrap.SessionId, session!.SessionId);
+        Assert.NotEqual("worker-supplied-connection", session.SessionId);
+    }
+
     private sealed class Clock(DateTimeOffset now) : TimeProvider
     {
         public DateTimeOffset Now { get; set; } = now;

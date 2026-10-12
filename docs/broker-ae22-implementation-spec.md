@@ -1,10 +1,23 @@
 # AE-2.2 implementation spec: authenticated start and real read
 
-Status: **Specification only, 2026-10-12. No code.** This narrows the AE-2.2
-boundary in the [broker authority profile](broker-authority-profile.md). It
-freezes the invariants and the start/release sequence before implementation.
-**AE-2.2 does not claim AE-2 complete:** the adversarial/restart/response-loss
-qualification corpus is AE-2.3. Stop before AE-2.3.
+Status: **Specification frozen 2026-10-12; AE-2.2 vertical implemented, experimental and unpublished.**
+This narrows the AE-2.2 boundary in the
+[broker authority profile](broker-authority-profile.md). It froze the invariants
+and the start/release sequence before implementation. **AE-2.2 does not claim
+AE-2 complete:** the adversarial/restart/response-loss qualification corpus is
+AE-2.3. Stop before AE-2.3.
+
+**Implementation status (2026-10-12).** The vertical landed in
+`Penghou.Hufu.Broker`: `BrokerAuthorityBinding` and the concrete
+`BrokerStartArbiter` (per-binding ordered entry, no lock across the read);
+`BrokerStartEvidence`/`BrokerReleaseEvidence`/`IBrokerEvidenceRecorder`;
+`BrokerReadHandler` (map under the session → AE-1 authorization + start evidence
+inside the arbiter → real `HufuWorkspaceAccess`/`IWorkspaceReader` read with no
+arbiter held → independent release authorization + release evidence); and the
+protocol-v1 named-pipe `BrokerPipeServer`/`BrokerPipeClient` using the existing
+bootstrap/session model. Locally validated with the real `Penghou.IO.Local`
+reader (35 focused tests). This is the cooperative-worker vertical; the AE-2.3
+race/restart/response-loss corpus and AE-2 completion remain open.
 
 ## Frozen invariants
 
