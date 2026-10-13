@@ -13,6 +13,8 @@ $dependencies = @{
     'Penghou.Hufu.Sqlite' = @{ 'Penghou.Hufu'=$Version; 'Microsoft.Data.Sqlite'='[10.0.10]'; 'SQLitePCLRaw.bundle_e_sqlite3'='[2.1.12]' }
     'Penghou.Hufu.Luban.Sqlite' = @{ 'Penghou.Hufu.Luban'=$Version; 'Penghou.Hufu.Sqlite'=$Version }
     'Penghou.Hufu.Workflow' = @{ 'Penghou.Hufu'=$Version; 'Penghou.Workflow.Abstractions'='[0.1.0-preview.2]' }
+    'Penghou.Hufu.Biscuit' = @{ 'Penghou.Hufu.Cedar'=$Version; 'BiscuitSharp'='[0.1.0-preview.2]' }
+    'Penghou.Hufu.Biscuit.Sqlite' = @{ 'Penghou.Hufu.Biscuit'=$Version; 'Penghou.Hufu.Sqlite'=$Version }
 }
 $packages = @(Get-ChildItem -LiteralPath $directory -Filter '*.nupkg' -File)
 $symbols = @(Get-ChildItem -LiteralPath $directory -Filter '*.snupkg' -File)
@@ -30,7 +32,8 @@ $report = foreach ($id in $dependencies.Keys | Sort-Object) {
         $metadata = $nuspec.package.metadata
         if ([string]$metadata.id -cne $id -or [string]$metadata.version -cne $Version) { throw "Package identity mismatch: $id" }
         if ([string]::IsNullOrWhiteSpace([string]$metadata.description)) { throw "Missing package description: $id" }
-        if ($nuspec.OuterXml -match 'Penghou\.Zhinu|BiscuitSharp') { throw "Forbidden dependency in released package: $id" }
+        if ($nuspec.OuterXml -match 'Penghou\.Zhinu') { throw "Forbidden Zhinu dependency in released package: $id" }
+        if ($id -ne 'Penghou.Hufu.Biscuit' -and $nuspec.OuterXml -match 'BiscuitSharp') { throw "Forbidden Biscuit dependency in released package: $id" }
         foreach ($entry in @('README.md','package-release-profile.md',"lib/net8.0/$id.dll","lib/net10.0/$id.dll","lib/net8.0/$id.xml","lib/net10.0/$id.xml")) {
             if ($null -eq $archive.GetEntry($entry)) { throw "Missing $entry in $id" }
         }
@@ -59,4 +62,4 @@ $report = foreach ($id in $dependencies.Keys | Sort-Object) {
 }
 ConvertTo-Json -InputObject ([ordered]@{SchemaVersion=1;Packages=@($report);NoZhinuDependencies=$true;PortableSymbolsMatchAssemblies=$true;Status='passed'}) -Depth 8 |
     Set-Content -LiteralPath (Join-Path $directory 'package-inspection.json')
-Write-Output 'Seven package/symbol pairs, target frameworks and exact dependency inventories verified.'
+Write-Output 'Nine package/symbol pairs, target frameworks and exact dependency inventories verified.'

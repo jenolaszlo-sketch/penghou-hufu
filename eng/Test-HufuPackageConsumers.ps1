@@ -9,8 +9,8 @@ $run = [IO.Path]::GetFullPath((Join-Path $OutputDirectory ('consumer-' + [Guid]:
 $cache = Join-Path ([IO.Path]::GetTempPath()) ('hfc-' + [Guid]::NewGuid().ToString('N'))
 $consumer = Join-Path $run 'consumer'
 New-Item -ItemType Directory -Path $cache,$consumer -Force | Out-Null
-$ids = @('Penghou.Hufu','Penghou.Hufu.Cedar','Penghou.Hufu.IO','Penghou.Hufu.Luban','Penghou.Hufu.Sqlite','Penghou.Hufu.Workflow','Penghou.Hufu.Luban.Sqlite')
-if ($Version -in @('0.1.0-preview.1','0.1.0-preview.2')) { $ids = @($ids | Where-Object { $_ -ne 'Penghou.Hufu.Luban.Sqlite' }) }
+$ids = @('Penghou.Hufu','Penghou.Hufu.Cedar','Penghou.Hufu.IO','Penghou.Hufu.Luban','Penghou.Hufu.Sqlite','Penghou.Hufu.Workflow','Penghou.Hufu.Luban.Sqlite','Penghou.Hufu.Biscuit','Penghou.Hufu.Biscuit.Sqlite')
+if ($Version -in @('0.1.0-preview.1','0.1.0-preview.2')) { $ids = @($ids | Where-Object { $_ -notin @('Penghou.Hufu.Luban.Sqlite','Penghou.Hufu.Biscuit','Penghou.Hufu.Biscuit.Sqlite') }) }
 Set-Content -LiteralPath (Join-Path $consumer 'Directory.Build.props') '<Project />'
 Set-Content -LiteralPath (Join-Path $consumer 'Directory.Build.targets') '<Project />'
 $references = ($ids | ForEach-Object { "<PackageReference Include=`"$_`" Version=`"[$Version]`"/>" }) -join "`n"
@@ -26,6 +26,7 @@ Set-Content -LiteralPath $config @"
 "@
 $program = @'
 using Penghou.Hufu;
+using Penghou.Hufu.Biscuit;
 using Penghou.Hufu.Workflow;
 using Penghou.Hufu.Luban;
 using Penghou.IO.Abstractions;
@@ -36,9 +37,10 @@ using System.Diagnostics.Metrics;
 
 Type[] packages = [typeof(AuthoritySnapshot), typeof(Penghou.Hufu.Cedar.CedarAuthorityEvaluator),
     typeof(Penghou.Hufu.IO.HufuResourceAuthorizer), typeof(Penghou.Hufu.Luban.HufuLanguageAuthorizer),
-    typeof(Penghou.Hufu.Sqlite.SqliteAuthorityStore), typeof(HufuExecutionAuthorizer), typeof(Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost)];
-if (packages.Select(t => t.Assembly.GetName().Name).Distinct().Count() != 7)
-    throw new Exception("Seven candidate package assemblies must load independently.");
+    typeof(Penghou.Hufu.Sqlite.SqliteAuthorityStore), typeof(HufuExecutionAuthorizer), typeof(Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost),
+    typeof(BiscuitAuthorityService), typeof(BiscuitQualifiedRequestAuthorizer), typeof(Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitCredentialRegistry)];
+if (packages.Select(t => t.Assembly.GetName().Name).Distinct().Count() != 9)
+    throw new Exception("Nine candidate package assemblies must load independently.");
 var recorder = new Recorder();
 var authorizer = new HufuExecutionAuthorizer("probe-policy", "probe-host", "probe-mapping-v1",
     new Bindings(), new Authority(), new Approval(), recorder);
@@ -48,7 +50,15 @@ if (result.Decision != ExecutionAuthorizationDecision.Denied || result.EvidenceI
     result.AuthorizationRequestId != context.AuthorizationRequestId || recorder.Record?.Context != context ||
     recorder.Record.Result.Decision != ExecutionAuthorizationDecision.Denied)
     throw new Exception("Empty declarations must deny with the exact recorded outcome before any trusted service activation.");
-Console.WriteLine("Seven-package standalone consumer and recorded denial passed.");
+Console.WriteLine("Nine-package standalone consumer and recorded denial passed.");
+
+// Biscuit composition probe: the AE-5A carrier surface must be available from
+// the published packages without native Biscuit invocation.
+if (string.IsNullOrWhiteSpace(BiscuitProfile.MappingIdentity)) throw new Exception("Biscuit mapping identity must be available.");
+var probeEnvelope = new BiscuitEnvelope("probe-key", new byte[] { 7, 8 });
+if (probeEnvelope.TokenLength != 2 || !probeEnvelope.ToString().Contains("redacted")) throw new Exception("Biscuit envelope must round-trip bounded bytes with redacted display.");
+Console.WriteLine("Biscuit credential composition surface available.");
+// End Biscuit composition probe.
 
 var authorityContext = new AuthenticatedAuthorityContext("tenant", "subject", "run", "revision", "fence");
 var request = new AuthorityRequest(authorityContext, AuthorityAction.ReadFile, "workspace", "src/file.txt", "probe-request");
@@ -224,12 +234,16 @@ sealed class Recorder : IWorkflowAuthorizationRecorder
 }
 '@
 if ($Version -in @('0.1.0-preview.1','0.1.0-preview.2')) {
-    $program = $program.Replace(', typeof(Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost)', '').Replace('Count() != 7','Count() != 6')
-    $program = $program.Replace('Seven candidate','Six candidate').Replace('Seven-package','Six-package')
+    $program = $program.Replace(', typeof(Penghou.Hufu.Luban.Sqlite.HufuSinglePatchHost)', '').Replace(', typeof(BiscuitAuthorityService), typeof(BiscuitQualifiedRequestAuthorizer), typeof(Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitCredentialRegistry)', '').Replace('Count() != 9','Count() != 6')
+    $program = $program.Replace('using Penghou.Hufu.Biscuit;', '').Replace('Nine candidate','Six candidate').Replace('Nine-package','Six-package')
     $start = $program.IndexOf('// Optional patch journal:', [StringComparison]::Ordinal)
     $end = $program.IndexOf('sealed class DiffAuthority', [StringComparison]::Ordinal)
     if ($start -lt 0 -or $end -le $start) { throw 'Patch probe boundaries must be present.' }
     $program = $program.Remove($start, $end - $start)
+    $start = $program.IndexOf('// Biscuit composition probe:', [StringComparison]::Ordinal)
+    $end = $program.IndexOf('// End Biscuit composition probe.', [StringComparison]::Ordinal)
+    if ($start -lt 0 -or $end -le $start) { throw 'Biscuit probe boundaries must be present.' }
+    $program = $program.Remove($start, ($end - $start) + '// End Biscuit composition probe.'.Length)
 }
 # Preserve qualification of immutable preview.1 recovery artifacts, which do not
 # expose the new opt-in profile. Later candidates must run the v2 API probes.
@@ -246,7 +260,10 @@ if ($LASTEXITCODE -ne 0) { throw 'Isolated consumer restore failed.' }
 $assetsPath = Join-Path $consumer 'obj/project.assets.json'
 $assets = Get-Content -LiteralPath $assetsPath -Raw | ConvertFrom-Json
 $libraries = @($assets.libraries.PSObject.Properties)
-if ($libraries | Where-Object { $_.Value.type -eq 'project' -or $_.Name -match 'Penghou\.Zhinu|BiscuitSharp' }) { throw 'Forbidden project/Zhinu/Biscuit dependency in release consumer.' }
+if ($libraries | Where-Object { $_.Value.type -eq 'project' -or $_.Name -match 'Penghou\.Zhinu' }) { throw 'Forbidden project/Zhinu dependency in release consumer.' }
+if ($Version -in @('0.1.0-preview.1','0.1.0-preview.2')) {
+    if ($libraries | Where-Object { $_.Name -match 'BiscuitSharp|Penghou\.Hufu\.Biscuit' }) { throw 'Biscuit must be absent from historical release consumers.' }
+} elseif (-not ($libraries.Name -ccontains 'BiscuitSharp/0.1.0-preview.2')) { throw 'BiscuitSharp pin missing from release consumer.' }
 foreach ($id in $ids) {
     if (-not ($libraries.Name -ccontains "$id/$Version")) { throw "Consumer did not resolve exact candidate: $id" }
 }

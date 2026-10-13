@@ -118,9 +118,14 @@ jobs:
         shell: pwsh
         run: |
           $report = Get-Content artifacts/packages/package-inspection.json -Raw | ConvertFrom-Json
-          if ($report.Status -ne 'passed' -or $report.Packages.Count -ne 7) { throw 'Invalid package qualification manifest.' }
           $versions = @($report.Packages.Version | Select-Object -Unique)
           if ($versions.Count -ne 1) { throw 'Release versions must agree.' }
+          $expectedIds = if ($versions[0] -in @('0.1.0-preview.1','0.1.0-preview.2')) {
+            @('Penghou.Hufu','Penghou.Hufu.Cedar','Penghou.Hufu.IO','Penghou.Hufu.Luban','Penghou.Hufu.Sqlite','Penghou.Hufu.Workflow')
+          } else {
+            @('Penghou.Hufu','Penghou.Hufu.Cedar','Penghou.Hufu.IO','Penghou.Hufu.Luban','Penghou.Hufu.Sqlite','Penghou.Hufu.Workflow','Penghou.Hufu.Luban.Sqlite','Penghou.Hufu.Biscuit','Penghou.Hufu.Biscuit.Sqlite')
+          }
+          if ($report.Status -ne 'passed' -or (@($report.Packages.Id | Sort-Object) -join ',') -cne (($expectedIds | Sort-Object) -join ',')) { throw 'Invalid package qualification manifest.' }
           $originals = @{
             '0.1.0-preview.1' = @{ Run = '37171589215'; Artifact = 'release-packages-3023ddb3fb9d50e01db9a8887f15f02e90cde209' }
             '0.1.0-preview.3' = @{ Run = '37197831939'; Artifact = 'release-packages-3206c4447add6ef0821fb70f118b638598d9aac0' }
@@ -172,8 +177,13 @@ jobs:
           NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
         run: |
           $report = Get-Content artifacts/packages/package-inspection.json -Raw | ConvertFrom-Json
-          $expectedCount = if (@($report.Packages.Version | Select-Object -Unique) -eq '0.1.0-preview.1') { 6 } else { 7 }
-          if ($report.Status -ne 'passed' -or $report.Packages.Count -ne $expectedCount) { throw 'Invalid package qualification manifest.' }
+          $manifestVersions = @($report.Packages.Version | Select-Object -Unique)
+          $manifestExpected = if ($manifestVersions.Count -eq 1 -and $manifestVersions[0] -in @('0.1.0-preview.1','0.1.0-preview.2')) {
+            @('Penghou.Hufu','Penghou.Hufu.Cedar','Penghou.Hufu.IO','Penghou.Hufu.Luban','Penghou.Hufu.Sqlite','Penghou.Hufu.Workflow')
+          } else {
+            @('Penghou.Hufu','Penghou.Hufu.Cedar','Penghou.Hufu.IO','Penghou.Hufu.Luban','Penghou.Hufu.Sqlite','Penghou.Hufu.Workflow','Penghou.Hufu.Luban.Sqlite','Penghou.Hufu.Biscuit','Penghou.Hufu.Biscuit.Sqlite')
+          }
+          if ($report.Status -ne 'passed' -or (@($report.Packages.Id | Sort-Object) -join ',') -cne (($manifestExpected | Sort-Object) -join ',')) { throw 'Invalid package qualification manifest.' }
           $public = Get-Content artifacts/packages/public-package-inspection.json -Raw | ConvertFrom-Json
           if ($public.Status -ne 'passed') { throw 'Immutable public package checks did not pass.' }
           foreach ($package in $report.Packages) {

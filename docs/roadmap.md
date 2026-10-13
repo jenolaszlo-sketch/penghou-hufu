@@ -128,8 +128,8 @@ qualify during implementation, not new delivered guarantees or closed CI gates.
     metadata; gate at the top of `AcceptAsync` before durable state. Spec frozen
     in the [AE-5A Marang acceptance spec](marang-mcp-acceptance-spec.md);
     Hufu-side `DelegationAcceptanceOperation.Accept` contract implemented
-    (7 focused tests); Marang wiring blocked on a published
-    `Penghou.Hufu.Biscuit` preview (no local feed/source reference).
+    (7 focused tests); `BiscuitSharp preview.2` now published so Marang wiring
+    waits only on Hufu nine-package `preview.8` (no local feed/source reference).
 
 The next authority-design work is AE-1, followed by the broker proof. Biscuit
 comes later. Existing HOST-SERVICES, neutral workflow and legacy-profile gates
@@ -822,3 +822,16 @@ remote-job termination and stronger drain guarantees remain separate profiles.
 Hufu does not own provider protocols, a credential vault, billing ledger or OS
 sandbox. The sandbox-parent experiment was already completed externally and is
 not reopened by these milestones.
+
+## Cross-store knowledge projection — idea, unscheduled
+
+Recorded 2026-10-13. **Status: Idea. Priority: Unscheduled. Implementation commitment: none.**
+See the [full cross-store knowledge projection idea](../../Penghou/docs/ideas/cross-store-knowledge-projection.md)
+(sibling checkout; [GitHub](https://github.com/jenolaszlo-sketch/penghou/blob/main/docs/ideas/cross-store-knowledge-projection.md)).
+
+Projected knowledge must retain the authority boundaries of its underlying sources. Hufu or the appropriate authority layer would determine allowed retrieval; projection metadata and visibility do not grant permission. How authorization applies to projected information remains an open design question.
+
+This is context for future design discussions, not an accepted decision or a new
+delivery/release gate. Revisit when cross-repository knowledge retrieval becomes
+a measurable problem or existing stores require duplicated indexing logic.
+Do not implement a projection merely because this idea has been recorded.

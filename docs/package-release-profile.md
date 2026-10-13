@@ -1,28 +1,32 @@
 # Hufu package release profile
 
-## Candidate: `0.1.0-preview.7` (prepared, not yet published)
+## Candidate: `0.1.0-preview.8` (nine-package release)
 
-Status: local release candidate, 2026-10-12. The checked-in version is
-`0.1.0-preview.7` (`Directory.Build.props`); the current **published** baseline
-is `0.1.0-preview.6`. All seven packages (`Penghou.Hufu`,
+Status: local release candidate, 2026-10-13. The checked-in version is
+`0.1.0-preview.8` (`Directory.Build.props`); the current **published** baseline
+is `0.1.0-preview.7`. All nine packages (`Penghou.Hufu`,
 `Penghou.Hufu.Cedar`, `Penghou.Hufu.IO`, `Penghou.Hufu.Luban`,
-`Penghou.Hufu.Sqlite`, `Penghou.Hufu.Workflow`, `Penghou.Hufu.Luban.Sqlite`)
-pack cleanly at preview.7 with package validation against the unchanged
-`0.1.0-preview.3` baseline, restored from the public feed
-(`UsePenghouSource=false`, `UseLubanSource=false`).
+`Penghou.Hufu.Sqlite`, `Penghou.Hufu.Workflow`, `Penghou.Hufu.Luban.Sqlite`,
+`Penghou.Hufu.Biscuit`, `Penghou.Hufu.Biscuit.Sqlite`)
+pack cleanly at preview.8. The seven existing packages validate against the
+unchanged `0.1.0-preview.3` baseline; the two new Biscuit packages are first
+releases with no published baseline (re-enable validation with a `preview.8`
+baseline next version). All restores use the public feed
+(`UsePenghouSource=false`, `UseLubanSource=false`); `BiscuitSharp
+0.1.0-preview.2` is now public, so the Biscuit dependency resolves with no
+local feed.
 
-preview.7 carries the accumulated qualified surface since preview.6: the current
-derived-authority rule and required current-parent checker (AE-1.0/1.1), generic
-execution-lifecycle authority and workflow translation (AE-1.2), optimistic
-freshness revalidation (AE-1.3), the worker-to-host broker contract/vertical and
-its cross-process qualification corpus (AE-2.0–2.3), the Biscuit reconciliation
-(AE-3B), and the `DelegationAcceptanceOperation.Accept` semantic (AE-5A core).
-It is additive over the preview.3 compatibility baseline.
+preview.8 carries the accumulated qualified surface since preview.7: the AE-5A.1b
+Biscuit package surface (packable projects, API inventories, nine-package
+pipeline, clean consumers). It is additive; existing seven-package behavior and
+tests are unchanged (Biscuit 97/97, Hufu core 327/327 on .NET 8/10). A clean
+fresh-cache consumer proves the three preview.8 Hufu packages plus
+`BiscuitSharp/0.1.0-preview.2` resolve with zero project references.
 
-**Publication is user-controlled and not performed here.** The publish path is
-`eng/Pack-HufuRelease.ps1` (pack + set/symbol verification), then the
-user/CI-controlled push after three-platform CI. Update this section with the
-actual run/tag and fresh-cache consumer evidence when published.
+**Publication is user/CI-controlled.** The publish path is the normal
+`publish.yml` workflow (three-platform validation, pack, set/symbol/consumer
+verification, trusted-publisher push of the exact qualified bytes). Update this
+section with the actual run/tag and fresh-cache consumer evidence when published.
 
 Current release: seven packages at `0.1.0-preview.5`, carrying the corrected
 additive derived-authority surface. It is compatible with the `preview.3`

@@ -16,13 +16,13 @@ on .NET 8/10. **Pending:** the Marang `marang_delegate` wiring (credential via
 HTTP metadata, an acceptance evaluator/policy, the gate at the top of
 `AcceptAsync`) and the end-to-end qualification table below.
 
-**AE-5A.2 is blocked on a published `Penghou.Hufu.Biscuit` preview.**
-`preview.7` (Hufu) is published and verified; the reconciled
-`BiscuitQualifiedRequestAuthorizer` lives in the still-unpublished
-`Penghou.Hufu.Biscuit` package. Marang must consume both from NuGet with no
-local feed and no source reference, so the credential-signature step cannot be
-wired until a Biscuit preview ships. No local-feed or source-reference
-shortcut.
+**AE-5A.2 dependency update (2026-10-13).** `BiscuitSharp 0.1.0-preview.2` is now
+published and verified content-identical to the Hufu-pinned CI artifact
+(native identity ABI 1 / BiscuitAuth 6.0.0 / Bridge 0.1.0 confirmed from a fresh
+cache). The `BiscuitSharp` blocker is cleared. Remaining before Marang wiring:
+Hufu AE-5A.1b must publish the nine-package `preview.8` (including
+`Penghou.Hufu.Biscuit[.Sqlite]`); Marang must consume all three from NuGet with
+no local feed and no source reference.
 
 ## Architectural rule
 
