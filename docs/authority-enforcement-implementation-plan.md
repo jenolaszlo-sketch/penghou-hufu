@@ -498,6 +498,14 @@ revocation/stop/recovery/output gates. Unsupported restrictions fail before laun
 
 ## AE-5: one real A2A or MCP gateway
 
+**Spec 2026-10-12: [AE-5A Marang MCP acceptance spec](marang-mcp-acceptance-spec.md).**
+First slice uses Marang's real MCP boundary (`marang_delegate`). Acceptance
+requires current Hufu authority via a new narrow
+`DelegationAcceptanceOperation.Accept` (not `Derive`, not workspace
+containment, no resource rights by implication); the Biscuit credential enters
+via HTTP metadata and the gate runs at the top of `AcceptAsync` before durable
+acceptance state. Specification only; no code.
+
 Select one provider, one real tool schema/version and one bounded action based
 on an actual consumer. Keep Qingniao/Marang protocol ownership; Hufu supplies
 neutral authority rather than another A2A/MCP SDK. Reuse AE-2's authentication,
