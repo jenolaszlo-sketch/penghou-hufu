@@ -1,9 +1,20 @@
 # AE-5A spec: Marang MCP delegated-authority acceptance proof
 
-Status: **Specification only, 2026-10-12. No code.** This is the narrow first
-slice of [AE-5](authority-enforcement-implementation-plan.md): prove that
-`marang_delegate` acceptance requires **current Hufu authority**, not merely a
-valid delegated credential. Stop before implementation.
+Status: **Specification frozen 2026-10-12; AE-5A core semantic landed.** This is
+the narrow first slice of [AE-5](authority-enforcement-implementation-plan.md):
+prove that `marang_delegate` acceptance requires **current Hufu authority**, not
+merely a valid delegated credential.
+
+**Implementation status (2026-10-12).** The Hufu-side neutral contract landed in
+`Penghou.Hufu/DelegationAcceptance.cs`: `DelegationAcceptanceOperation.Accept`,
+`DelegationAcceptanceRequest`, `IDelegationAcceptanceEvaluator`,
+`IDelegationAcceptanceRecorder`, `IDelegationAcceptanceAuthorizer`, and
+`CurrentDelegationAcceptanceAuthorizer` (current snapshot + optional lifecycle
+gate + mandatory evidence + freshness). Additive: the resource action
+vocabulary, Cedar schema and Biscuit mapping are unchanged. 7 focused tests pass
+on .NET 8/10. **Pending:** the Marang `marang_delegate` wiring (credential via
+HTTP metadata, an acceptance evaluator/policy, the gate at the top of
+`AcceptAsync`) and the end-to-end qualification table below.
 
 ## Architectural rule
 

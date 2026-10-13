@@ -127,7 +127,8 @@ qualify during implementation, not new delivered guarantees or closed CI gates.
     containment, no resource rights by implication); credential via HTTP
     metadata; gate at the top of `AcceptAsync` before durable state. Spec frozen
     in the [AE-5A Marang acceptance spec](marang-mcp-acceptance-spec.md);
-    implementation pending.
+    Hufu-side `DelegationAcceptanceOperation.Accept` contract implemented
+    (7 focused tests); Marang wiring pending.
 
 The next authority-design work is AE-1, followed by the broker proof. Biscuit
 comes later. Existing HOST-SERVICES, neutral workflow and legacy-profile gates

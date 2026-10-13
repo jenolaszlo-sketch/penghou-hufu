@@ -506,6 +506,13 @@ containment, no resource rights by implication); the Biscuit credential enters
 via HTTP metadata and the gate runs at the top of `AcceptAsync` before durable
 acceptance state. Specification only; no code.
 
+**Status 2026-10-12: AE-5A core semantic landed.** `Penghou.Hufu` now defines
+`DelegationAcceptanceOperation.Accept`, the bounded acceptance request,
+evaluator/recorder seams, and `CurrentDelegationAcceptanceAuthorizer` (current
+snapshot + optional lifecycle gate + mandatory evidence + freshness). Additive;
+resource action/Cedar/Biscuit vocabularies unchanged; 7 focused tests on
+.NET 8/10. Marang wiring and acceptance policy remain the next step.
+
 Select one provider, one real tool schema/version and one bounded action based
 on an actual consumer. Keep Qingniao/Marang protocol ownership; Hufu supplies
 neutral authority rather than another A2A/MCP SDK. Reuse AE-2's authentication,
