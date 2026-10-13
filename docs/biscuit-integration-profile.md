@@ -147,4 +147,6 @@ the restore script.
 
 See the [qualification record](biscuit-integration-qualification.md) for
 tested behavior and open gates. The governing design and wrapper handoff remain
-in the sibling BiscuitSharp documentation.
+in the sibling BiscuitSharp documentation. The AE-3 comparison that decides
+whether to adopt, defer or remove this prototype against the proven opaque
+broker path is specified in the [Biscuit comparison spec](biscuit-comparison-spec.md).

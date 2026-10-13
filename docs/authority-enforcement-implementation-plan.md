@@ -431,6 +431,13 @@ provider/channel gate.
 
 ## AE-3: compare Biscuit on the same broker path
 
+**Spec 2026-10-12: [Biscuit comparison spec](biscuit-comparison-spec.md).**
+AE-2 now provides the control path. AE-3 is a comparison, not a feature: it
+answers, with evidence on the identical AE-2 corpus, whether Biscuit's
+portability/attenuation benefit justifies its complexity over the opaque
+session-bound reference. A defer/remove decision is a valid outcome.
+Specification only; no code or publication claimed.
+
 1. Reconcile the experimental adapter's subset routine and registry ancestry with
    core `AuthorityDerivation`; preserve one definition of containment and exact
    Derive approval. Freeze versioned mappings for child grant, worker, audience,

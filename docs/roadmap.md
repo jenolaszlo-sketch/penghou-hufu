@@ -76,11 +76,11 @@ qualify during implementation, not new delivered guarantees or closed CI gates.
     protocol v1 bounds, host-issued single-use session bootstrap/authentication,
     opaque session-bound references, the closed `BrokerReadFileRequest` DTO, and
     canonical request mapping. See the [broker profile](broker-authority-profile.md).
-  - [ ] **AE-2.2** — Authenticated named-pipe session, concrete broker-local start
+  - [x] **AE-2.2** — Authenticated named-pipe session, concrete broker-local start
     arbiter, AE-1 authorization inside the ordered boundary, real read via
     `HufuWorkspaceAccess`/`IWorkspaceReader`, independent release, and separate
     start/release evidence. Spec frozen in the [AE-2.2 implementation spec](broker-ae22-implementation-spec.md);
-    vertical implemented and locally validated (35 focused tests).
+    vertical implemented and locally validated.
   - [x] **AE-2.3** — Cross-process adversarial/restart/response-loss race corpus
     that closes AE-2. Spec frozen in the [AE-2.3 qualification spec](broker-ae23-qualification-spec.md);
     corpus implemented (separate-process harness, races, restart, retry,
@@ -97,6 +97,9 @@ qualify during implementation, not new delivered guarantees or closed CI gates.
   portability/attenuation benefit; no automatic package publication. Offline
   verification, new-subject exchange and arbitrary onward delegation remain
   separate profiles.
+  - Spec frozen in the [Biscuit comparison spec](biscuit-comparison-spec.md):
+    compare on the identical AE-2 corpus; a defer/remove decision is valid.
+    Implementation pending.
 - [ ] **AE-4 — Integrate qualified restricted execution when available.** Depends
   on Gagamba's [restricted-provider gates](../../Gagamba/docs/adr/0003-ar7-linux-first-restricted-execution.md)
   and AE-1; it can progress independently of Biscuit. Authorize bounded preparation,

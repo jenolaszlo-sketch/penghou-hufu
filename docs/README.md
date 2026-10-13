@@ -41,6 +41,7 @@ New to Hufu? Read the [project README](../README.md) for the goal, then [the ove
 | [Sandbox runner sample](../samples/Hufu.SandboxRunner/README.md) | Experimental end-to-end native execution diagnostic. |
 | [Authority-mediated execution](sandbox-execution.md), [Zhinu composition](sandbox-execution-zhinu.md), [Fuwen composition](sandbox-execution-fuwen.md) | Frozen, unpublished implementation slices with explicit qualification limits. |
 | [Biscuit profile](biscuit-integration-profile.md) and [qualification](biscuit-integration-qualification.md) | Optional experimental credential adapter; outside the published package set. |
+| [Biscuit comparison spec](biscuit-comparison-spec.md) | Frozen AE-3 plan: compare Biscuit against the proven opaque broker path on the identical corpus; adopt/defer/remove decision. Specification only. |
 | [Luban integration](luban-integration.md) and [AMLE guide](authority-mediated-language-execution.md) | Existing language-oriented integration and its historical design context. New Hufu work follows the [language-neutral roadmap amendment](roadmap.md). |
 
 ## Follow implementation and evidence
