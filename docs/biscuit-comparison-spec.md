@@ -89,3 +89,27 @@ permission.
 A reproducible comparison on the frozen AE-2 corpus justifies one recorded
 decision (including defer/remove). **Stop before implementation of any chosen
 carrier until that decision is recorded and reviewed.**
+
+## Inspection findings (2026-10-12, source review, no code)
+
+Reviewed `Penghou.Hufu.Biscuit` (`BiscuitProfile`, `BiscuitAuthorityService`,
+`BiscuitCredentialRegistration`, `BiscuitKeyRing`, `BiscuitContracts`,
+`BiscuitRequestAuthorizer`) against the core-derived authority path. The adapter
+is a **credential carrier with its own subset, ancestry and current-authority
+composition** — not "already too divergent to be a fair candidate", but it needs
+a **bounded reconciliation** before the comparison is fair.
+
+| Area | Core-derived path | Biscuit adapter | Delta / reconciliation |
+| --- | --- | --- | --- |
+| Containment | `AuthorityDerivation.IsContainedBy(RequestedAuthority, AuthorityGrant)`: new child grant id; overlap-based exclusion rule | `BiscuitProfile.IsSubset(parent, child)`: requires `parent.Id == child.Id`; intersection-based exclusion rule | **Two definitions.** Unify on core containment; drop or forward the adapter routine. |
+| Ancestry | `IAuthorityDerivationStore` lineage: child grant id → parent grant id + parent context | Registry chain via token-block `ParentFingerprint`, `RevocationIds`, `GrantVersionIdentity`, `AuthorityScopeId` (`LoadChainAsync`) | **Different lineage models.** Reconcile registry ancestry with core lineage so both resolve the same ancestry. |
+| Subject | Child `AuthorityGrant` bound to `ChildContext` (tenant/subject/run/revision/fence) | `BiscuitWorkloadBinding(Context, Realm, WorkflowId, ActivityId, Audience)`; token binds subject/run/workflow/revision/activity/fence/audience; attenuation keeps subject fixed | Additive (`Realm`/`WorkflowId`/`ActivityId`); must not invent a subject or rebind identity. |
+| Audience | Host-side `BrokerAuthorityReference.Audience` + authenticated session | `hufu_audience` fact inside the credential + registration binding | Same concept, different carrier — this is the portability axis of the comparison. |
+| Key handling | None (opaque host reference) | `BiscuitKeyRing`/`IBiscuitKeyProvider`: Ed25519 signing leases, `RootKeyId`, realm key selection, retired-key verification, `RetireKey` | **Added crypto + key-custody lifecycle and an unpublished BiscuitSharp dependency.** The main cost side. |
+| Current authority | AE-1 qualified: child → ancestor liveness → **current-parent policy** → lifecycle → read-set freshness revalidation | `Applicable` (root grant still present and identical by `SameGrant`) + Cedar `EvaluateDetailed` over the current snapshot + `Covers(EffectiveGrant)` + `HasUnchangedValidity` | **Not equivalent.** Biscuit lacks AE-1's current-parent-policy re-evaluation, lifecycle gate, and `authority.read-set-superseded` revalidation. Must compose the same checks or it compares different semantics. |
+
+**Conclusion.** The comparison is viable, but only after reconciling
+containment to the core definition and composing the AE-1 current-parent,
+lifecycle and freshness checks on the Biscuit route. That is a bounded adapter
+correction, not a redesign. Until then, Biscuit and the opaque route would be
+compared on different authority semantics, which the spec forbids.
