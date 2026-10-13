@@ -1,0 +1,352 @@
+#nullable enable
+const Penghou.Hufu.Biscuit.BiscuitProfile.Identity = "hufu-biscuit-v1" -> string!
+const Penghou.Hufu.Biscuit.BiscuitProfile.MaximumBlocks = 32 -> int
+const Penghou.Hufu.Biscuit.BiscuitProfile.MaximumChecks = 256 -> int
+const Penghou.Hufu.Biscuit.BiscuitProfile.MaximumSourceBytes = 65536 -> int
+const Penghou.Hufu.Biscuit.BiscuitProfile.MaximumTokenBytes = 65536 -> int
+override Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload.Equals(object? obj) -> bool
+override Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload.GetHashCode() -> int
+override Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload.ToString() -> string!
+override Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.ToString() -> string!
+override Penghou.Hufu.Biscuit.BiscuitCredentialResult.Equals(object? obj) -> bool
+override Penghou.Hufu.Biscuit.BiscuitCredentialResult.GetHashCode() -> int
+override Penghou.Hufu.Biscuit.BiscuitCredentialResult.ToString() -> string!
+override Penghou.Hufu.Biscuit.BiscuitCredentialVerification.Equals(object? obj) -> bool
+override Penghou.Hufu.Biscuit.BiscuitCredentialVerification.GetHashCode() -> int
+override Penghou.Hufu.Biscuit.BiscuitCredentialVerification.ToString() -> string!
+override Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Equals(object? obj) -> bool
+override Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.GetHashCode() -> int
+override Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.ToString() -> string!
+override Penghou.Hufu.Biscuit.BiscuitEnvelope.ToString() -> string!
+override Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.Equals(object? obj) -> bool
+override Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.GetHashCode() -> int
+override Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.ToString() -> string!
+override Penghou.Hufu.Biscuit.BiscuitIssueRequest.Equals(object? obj) -> bool
+override Penghou.Hufu.Biscuit.BiscuitIssueRequest.GetHashCode() -> int
+override Penghou.Hufu.Biscuit.BiscuitIssueRequest.ToString() -> string!
+override Penghou.Hufu.Biscuit.BiscuitKeyRing.ToString() -> string!
+override Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.Equals(object? obj) -> bool
+override Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.GetHashCode() -> int
+override Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.ToString() -> string!
+override Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Equals(object? obj) -> bool
+override Penghou.Hufu.Biscuit.BiscuitRegistryAccess.GetHashCode() -> int
+override Penghou.Hufu.Biscuit.BiscuitRegistryAccess.ToString() -> string!
+override Penghou.Hufu.Biscuit.BiscuitResourceBinding.Equals(object? obj) -> bool
+override Penghou.Hufu.Biscuit.BiscuitResourceBinding.GetHashCode() -> int
+override Penghou.Hufu.Biscuit.BiscuitResourceBinding.ToString() -> string!
+override Penghou.Hufu.Biscuit.BiscuitVerificationResult.Equals(object? obj) -> bool
+override Penghou.Hufu.Biscuit.BiscuitVerificationResult.GetHashCode() -> int
+override Penghou.Hufu.Biscuit.BiscuitVerificationResult.ToString() -> string!
+override Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.Equals(object? obj) -> bool
+override Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.GetHashCode() -> int
+override Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.ToString() -> string!
+Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload
+Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload.<Clone>$() -> Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload!
+Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload.Actor.init -> void
+Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload.Binding.get -> Penghou.Hufu.Biscuit.BiscuitWorkloadBinding!
+Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload.Binding.init -> void
+Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload.BiscuitAuthenticatedWorkload(Penghou.Hufu.AuthorityStoreActor! Actor, Penghou.Hufu.Biscuit.BiscuitWorkloadBinding! Binding) -> void
+Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload.Deconstruct(out Penghou.Hufu.AuthorityStoreActor! Actor, out Penghou.Hufu.Biscuit.BiscuitWorkloadBinding! Binding) -> void
+Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload.Equals(Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload? other) -> bool
+Penghou.Hufu.Biscuit.BiscuitAuthorityService
+Penghou.Hufu.Biscuit.BiscuitAuthorityService.AttenuateAsync(Penghou.Hufu.AuthenticatedAuthorityContext! context, Penghou.Hufu.Biscuit.BiscuitEnvelope! parentEnvelope, Penghou.Hufu.Biscuit.BiscuitRestriction! restriction, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.BiscuitCredentialResult!>
+Penghou.Hufu.Biscuit.BiscuitAuthorityService.BiscuitAuthorityService(Penghou.Hufu.Biscuit.IBiscuitAuthorityHost! host, Penghou.Hufu.Biscuit.IBiscuitKeyProvider! keys, Penghou.Hufu.Biscuit.IBiscuitCredentialRegistry! registry, Penghou.Hufu.IAuthoritySnapshotSource! snapshots, Penghou.Hufu.Cedar.CedarAuthorityEvaluator! cedar, Penghou.Hufu.Biscuit.IBiscuitDecisionRecorder! recorder, BiscuitSharp.BiscuitAuthorizerLimits! limits, System.TimeProvider? clock = null) -> void
+Penghou.Hufu.Biscuit.BiscuitAuthorityService.EngineIdentity.get -> string!
+Penghou.Hufu.Biscuit.BiscuitAuthorityService.IssueAsync(Penghou.Hufu.Biscuit.BiscuitIssueRequest! request, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.BiscuitCredentialResult!>
+Penghou.Hufu.Biscuit.BiscuitAuthorityService.VerifyAsync(Penghou.Hufu.Biscuit.BiscuitEnvelope! envelope, Penghou.Hufu.AuthorityRequest! request, string? startBindingIdentity = null, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.BiscuitVerificationResult!>
+Penghou.Hufu.Biscuit.BiscuitAuthorityService.VerifyCredentialAsync(Penghou.Hufu.Biscuit.BiscuitEnvelope! envelope, Penghou.Hufu.AuthorityRequest! request, string? startBindingIdentity = null, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.BiscuitCredentialVerification!>
+Penghou.Hufu.Biscuit.BiscuitComponentStatus
+Penghou.Hufu.Biscuit.BiscuitComponentStatus.Deny = 2 -> Penghou.Hufu.Biscuit.BiscuitComponentStatus
+Penghou.Hufu.Biscuit.BiscuitComponentStatus.NotEvaluated = 0 -> Penghou.Hufu.Biscuit.BiscuitComponentStatus
+Penghou.Hufu.Biscuit.BiscuitComponentStatus.Permit = 1 -> Penghou.Hufu.Biscuit.BiscuitComponentStatus
+Penghou.Hufu.Biscuit.BiscuitComponentStatus.Unavailable = 3 -> Penghou.Hufu.Biscuit.BiscuitComponentStatus
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.AuthorityScopeId.get -> string!
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.Binding.get -> Penghou.Hufu.Biscuit.BiscuitWorkloadBinding!
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.BlockCount.get -> int
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.CheckCount.get -> int
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.EffectiveGrant.get -> Penghou.Hufu.AuthorityGrant!
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.Fingerprint.get -> string!
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.GrantVersion.get -> string!
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.GrantVersionIdentity.get -> string!
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.IssuerId.get -> string!
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.LayerId.get -> string!
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.ParentFingerprint.get -> string?
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.RestrictionId.get -> string!
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.RevocationIds.get -> System.Collections.Generic.IReadOnlyList<string!>!
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.RootGrant.get -> Penghou.Hufu.AuthorityGrant!
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.RootKeyId.get -> string!
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.SourceBytes.get -> int
+Penghou.Hufu.Biscuit.BiscuitCredentialRegistration.TokenLength.get -> int
+Penghou.Hufu.Biscuit.BiscuitCredentialResult
+Penghou.Hufu.Biscuit.BiscuitCredentialResult.<Clone>$() -> Penghou.Hufu.Biscuit.BiscuitCredentialResult!
+Penghou.Hufu.Biscuit.BiscuitCredentialResult.BiscuitCredentialResult(Penghou.Hufu.Biscuit.BiscuitFailureCode FailureCode, Penghou.Hufu.Biscuit.BiscuitEnvelope? Envelope = null) -> void
+Penghou.Hufu.Biscuit.BiscuitCredentialResult.Deconstruct(out Penghou.Hufu.Biscuit.BiscuitFailureCode FailureCode, out Penghou.Hufu.Biscuit.BiscuitEnvelope? Envelope) -> void
+Penghou.Hufu.Biscuit.BiscuitCredentialResult.Envelope.get -> Penghou.Hufu.Biscuit.BiscuitEnvelope?
+Penghou.Hufu.Biscuit.BiscuitCredentialResult.Envelope.init -> void
+Penghou.Hufu.Biscuit.BiscuitCredentialResult.Equals(Penghou.Hufu.Biscuit.BiscuitCredentialResult? other) -> bool
+Penghou.Hufu.Biscuit.BiscuitCredentialResult.FailureCode.get -> Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitCredentialResult.FailureCode.init -> void
+Penghou.Hufu.Biscuit.BiscuitCredentialResult.IsSuccess.get -> bool
+Penghou.Hufu.Biscuit.BiscuitCredentialVerification
+Penghou.Hufu.Biscuit.BiscuitCredentialVerification.<Clone>$() -> Penghou.Hufu.Biscuit.BiscuitCredentialVerification!
+Penghou.Hufu.Biscuit.BiscuitCredentialVerification.BiscuitCredentialVerification(Penghou.Hufu.Biscuit.BiscuitFailureCode FailureCode, Penghou.Hufu.Biscuit.BiscuitCredentialRegistration? Registration = null, Penghou.Hufu.Biscuit.BiscuitResourceBinding? Resource = null) -> void
+Penghou.Hufu.Biscuit.BiscuitCredentialVerification.Deconstruct(out Penghou.Hufu.Biscuit.BiscuitFailureCode FailureCode, out Penghou.Hufu.Biscuit.BiscuitCredentialRegistration? Registration, out Penghou.Hufu.Biscuit.BiscuitResourceBinding? Resource) -> void
+Penghou.Hufu.Biscuit.BiscuitCredentialVerification.Equals(Penghou.Hufu.Biscuit.BiscuitCredentialVerification? other) -> bool
+Penghou.Hufu.Biscuit.BiscuitCredentialVerification.FailureCode.get -> Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitCredentialVerification.FailureCode.init -> void
+Penghou.Hufu.Biscuit.BiscuitCredentialVerification.IsVerified.get -> bool
+Penghou.Hufu.Biscuit.BiscuitCredentialVerification.Registration.get -> Penghou.Hufu.Biscuit.BiscuitCredentialRegistration?
+Penghou.Hufu.Biscuit.BiscuitCredentialVerification.Registration.init -> void
+Penghou.Hufu.Biscuit.BiscuitCredentialVerification.Resource.get -> Penghou.Hufu.Biscuit.BiscuitResourceBinding?
+Penghou.Hufu.Biscuit.BiscuitCredentialVerification.Resource.init -> void
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.<Clone>$() -> Penghou.Hufu.Biscuit.BiscuitDecisionEvidence!
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Actor.init -> void
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.BiscuitDecisionEvidence(string! Id, Penghou.Hufu.AuthorityStoreActor! Actor, string! Realm, string! Fingerprint, string! RootKeyId, Penghou.Hufu.AuthorityRequest! Request, Penghou.Hufu.AuthorityDecision! Decision, System.DateTimeOffset EvaluatedAt, System.DateTimeOffset ValidUntil, string! EngineIdentity, string! MappingIdentity, Penghou.Hufu.Biscuit.BiscuitResourceBinding? Resource, string! EvidenceJson) -> void
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Decision.get -> Penghou.Hufu.AuthorityDecision!
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Decision.init -> void
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Deconstruct(out string! Id, out Penghou.Hufu.AuthorityStoreActor! Actor, out string! Realm, out string! Fingerprint, out string! RootKeyId, out Penghou.Hufu.AuthorityRequest! Request, out Penghou.Hufu.AuthorityDecision! Decision, out System.DateTimeOffset EvaluatedAt, out System.DateTimeOffset ValidUntil, out string! EngineIdentity, out string! MappingIdentity, out Penghou.Hufu.Biscuit.BiscuitResourceBinding? Resource, out string! EvidenceJson) -> void
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.EngineIdentity.get -> string!
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.EngineIdentity.init -> void
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Equals(Penghou.Hufu.Biscuit.BiscuitDecisionEvidence? other) -> bool
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.EvaluatedAt.get -> System.DateTimeOffset
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.EvaluatedAt.init -> void
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.EvidenceJson.get -> string!
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.EvidenceJson.init -> void
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Fingerprint.get -> string!
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Fingerprint.init -> void
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Id.get -> string!
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Id.init -> void
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.MappingIdentity.get -> string!
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.MappingIdentity.init -> void
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Realm.get -> string!
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Realm.init -> void
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Request.get -> Penghou.Hufu.AuthorityRequest!
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Request.init -> void
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Resource.get -> Penghou.Hufu.Biscuit.BiscuitResourceBinding?
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.Resource.init -> void
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.RootKeyId.get -> string!
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.RootKeyId.init -> void
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.ValidUntil.get -> System.DateTimeOffset
+Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.ValidUntil.init -> void
+Penghou.Hufu.Biscuit.BiscuitEnvelope
+Penghou.Hufu.Biscuit.BiscuitEnvelope.BiscuitEnvelope(string! rootKeyId, byte[]! tokenBytes, int version = 1, string! profile = "hufu-biscuit-v1") -> void
+Penghou.Hufu.Biscuit.BiscuitEnvelope.GetTokenBytes() -> byte[]!
+Penghou.Hufu.Biscuit.BiscuitEnvelope.Profile.get -> string!
+Penghou.Hufu.Biscuit.BiscuitEnvelope.RootKeyId.get -> string!
+Penghou.Hufu.Biscuit.BiscuitEnvelope.TokenLength.get -> int
+Penghou.Hufu.Biscuit.BiscuitEnvelope.Version.get -> int
+Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitFailureCode.AuthorityConstraintFailed = 5 -> Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitFailureCode.AuthorityDenied = 6 -> Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitFailureCode.AuthorityRevoked = 4 -> Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitFailureCode.AuthorizationBudgetExceeded = 9 -> Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitFailureCode.AuthorizationFailure = 11 -> Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitFailureCode.AuthorizationUnavailable = 10 -> Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitFailureCode.EnforcementPreconditionFailed = 12 -> Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitFailureCode.InvalidAuthorityEnvelope = 1 -> Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitFailureCode.InvalidCredential = 2 -> Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitFailureCode.None = 0 -> Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitFailureCode.PolicyDenied = 8 -> Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitFailureCode.UnknownRootKey = 3 -> Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitFailureCode.WorkflowAuthorityDenied = 7 -> Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitIssuanceApproval
+Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.<Clone>$() -> Penghou.Hufu.Biscuit.BiscuitIssuanceApproval!
+Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.BiscuitIssuanceApproval(Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload! Workload, Penghou.Hufu.AuthoritySnapshot! Snapshot, string! LayerId, string! GrantId, string! GrantVersion) -> void
+Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.Deconstruct(out Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload! Workload, out Penghou.Hufu.AuthoritySnapshot! Snapshot, out string! LayerId, out string! GrantId, out string! GrantVersion) -> void
+Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.Equals(Penghou.Hufu.Biscuit.BiscuitIssuanceApproval? other) -> bool
+Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.GrantId.get -> string!
+Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.GrantId.init -> void
+Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.GrantVersion.get -> string!
+Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.GrantVersion.init -> void
+Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.LayerId.get -> string!
+Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.LayerId.init -> void
+Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.Snapshot.get -> Penghou.Hufu.AuthoritySnapshot!
+Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.Snapshot.init -> void
+Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.Workload.get -> Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload!
+Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.Workload.init -> void
+Penghou.Hufu.Biscuit.BiscuitIssueRequest
+Penghou.Hufu.Biscuit.BiscuitIssueRequest.<Clone>$() -> Penghou.Hufu.Biscuit.BiscuitIssueRequest!
+Penghou.Hufu.Biscuit.BiscuitIssueRequest.BiscuitIssueRequest(Penghou.Hufu.AuthenticatedAuthorityContext! Context, string! LayerId, string! GrantId) -> void
+Penghou.Hufu.Biscuit.BiscuitIssueRequest.Context.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.Biscuit.BiscuitIssueRequest.Context.init -> void
+Penghou.Hufu.Biscuit.BiscuitIssueRequest.Deconstruct(out Penghou.Hufu.AuthenticatedAuthorityContext! Context, out string! LayerId, out string! GrantId) -> void
+Penghou.Hufu.Biscuit.BiscuitIssueRequest.Equals(Penghou.Hufu.Biscuit.BiscuitIssueRequest? other) -> bool
+Penghou.Hufu.Biscuit.BiscuitIssueRequest.GrantId.get -> string!
+Penghou.Hufu.Biscuit.BiscuitIssueRequest.GrantId.init -> void
+Penghou.Hufu.Biscuit.BiscuitIssueRequest.LayerId.get -> string!
+Penghou.Hufu.Biscuit.BiscuitIssueRequest.LayerId.init -> void
+Penghou.Hufu.Biscuit.BiscuitKeyRing
+Penghou.Hufu.Biscuit.BiscuitKeyRing.AcquireSigningKeyAsync(string! realm, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.IBiscuitSigningKeyLease?>
+Penghou.Hufu.Biscuit.BiscuitKeyRing.AddSigningKey(string! realm, string! keyId, BiscuitSharp.BiscuitPrivateKey! key, bool makeCurrent = true) -> void
+Penghou.Hufu.Biscuit.BiscuitKeyRing.BiscuitKeyRing() -> void
+Penghou.Hufu.Biscuit.BiscuitKeyRing.Dispose() -> void
+Penghou.Hufu.Biscuit.BiscuitKeyRing.FindVerificationKeyAsync(string! realm, string! keyId, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<BiscuitSharp.BiscuitPublicKey?>
+Penghou.Hufu.Biscuit.BiscuitKeyRing.RetireSigningKey(string! realm, string! keyId) -> void
+Penghou.Hufu.Biscuit.BiscuitKeyRing.SelectSigningKey(string! realm, string! keyId) -> void
+Penghou.Hufu.Biscuit.BiscuitProfile
+Penghou.Hufu.Biscuit.BiscuitQualifiedRequestAuthorizer
+Penghou.Hufu.Biscuit.BiscuitQualifiedRequestAuthorizer.AuthorizeAsync(Penghou.Hufu.AuthorityRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityRequestAuthorization!>
+Penghou.Hufu.Biscuit.BiscuitQualifiedRequestAuthorizer.BiscuitQualifiedRequestAuthorizer(Penghou.Hufu.Biscuit.BiscuitAuthorityService! service, Penghou.Hufu.Biscuit.BiscuitEnvelope! envelope, Penghou.Hufu.IAuthorityRequestAuthorizer! authority) -> void
+Penghou.Hufu.Biscuit.BiscuitRegistrationLookup
+Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.<Clone>$() -> Penghou.Hufu.Biscuit.BiscuitRegistrationLookup!
+Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.BiscuitRegistrationLookup(Penghou.Hufu.Biscuit.BiscuitRegistryStatus Status, Penghou.Hufu.Biscuit.BiscuitCredentialRegistration? Registration = null, Penghou.Hufu.Biscuit.BiscuitDecisionEvidence? Evidence = null, string? ReasonCode = null) -> void
+Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.Deconstruct(out Penghou.Hufu.Biscuit.BiscuitRegistryStatus Status, out Penghou.Hufu.Biscuit.BiscuitCredentialRegistration? Registration, out Penghou.Hufu.Biscuit.BiscuitDecisionEvidence? Evidence, out string? ReasonCode) -> void
+Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.Equals(Penghou.Hufu.Biscuit.BiscuitRegistrationLookup? other) -> bool
+Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.Evidence.get -> Penghou.Hufu.Biscuit.BiscuitDecisionEvidence?
+Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.Evidence.init -> void
+Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.ReasonCode.get -> string?
+Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.ReasonCode.init -> void
+Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.Registration.get -> Penghou.Hufu.Biscuit.BiscuitCredentialRegistration?
+Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.Registration.init -> void
+Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.Status.get -> Penghou.Hufu.Biscuit.BiscuitRegistryStatus
+Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.Status.init -> void
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.<Clone>$() -> Penghou.Hufu.Biscuit.BiscuitRegistryAccess!
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Actor.get -> Penghou.Hufu.AuthorityStoreActor!
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Actor.init -> void
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.BiscuitRegistryAccess(Penghou.Hufu.AuthorityStoreActor! Actor, Penghou.Hufu.Biscuit.BiscuitRegistryOperation Operation, string! Realm, Penghou.Hufu.AuthenticatedAuthorityContext? Context = null, string? Fingerprint = null, string? KeyId = null, Penghou.Hufu.Biscuit.BiscuitCredentialRegistration? Registration = null, Penghou.Hufu.Biscuit.BiscuitDecisionEvidence? Evidence = null, string? ReasonCode = null) -> void
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Context.get -> Penghou.Hufu.AuthenticatedAuthorityContext?
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Context.init -> void
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Deconstruct(out Penghou.Hufu.AuthorityStoreActor! Actor, out Penghou.Hufu.Biscuit.BiscuitRegistryOperation Operation, out string! Realm, out Penghou.Hufu.AuthenticatedAuthorityContext? Context, out string? Fingerprint, out string? KeyId, out Penghou.Hufu.Biscuit.BiscuitCredentialRegistration? Registration, out Penghou.Hufu.Biscuit.BiscuitDecisionEvidence? Evidence, out string? ReasonCode) -> void
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Equals(Penghou.Hufu.Biscuit.BiscuitRegistryAccess? other) -> bool
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Evidence.get -> Penghou.Hufu.Biscuit.BiscuitDecisionEvidence?
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Evidence.init -> void
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Fingerprint.get -> string?
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Fingerprint.init -> void
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.KeyId.get -> string?
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.KeyId.init -> void
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Operation.get -> Penghou.Hufu.Biscuit.BiscuitRegistryOperation
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Operation.init -> void
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Realm.get -> string!
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Realm.init -> void
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.ReasonCode.get -> string?
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.ReasonCode.init -> void
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Registration.get -> Penghou.Hufu.Biscuit.BiscuitCredentialRegistration?
+Penghou.Hufu.Biscuit.BiscuitRegistryAccess.Registration.init -> void
+Penghou.Hufu.Biscuit.BiscuitRegistryOperation
+Penghou.Hufu.Biscuit.BiscuitRegistryOperation.Check = 2 -> Penghou.Hufu.Biscuit.BiscuitRegistryOperation
+Penghou.Hufu.Biscuit.BiscuitRegistryOperation.Lookup = 0 -> Penghou.Hufu.Biscuit.BiscuitRegistryOperation
+Penghou.Hufu.Biscuit.BiscuitRegistryOperation.RecordVerification = 3 -> Penghou.Hufu.Biscuit.BiscuitRegistryOperation
+Penghou.Hufu.Biscuit.BiscuitRegistryOperation.Register = 1 -> Penghou.Hufu.Biscuit.BiscuitRegistryOperation
+Penghou.Hufu.Biscuit.BiscuitRegistryOperation.RetireKey = 5 -> Penghou.Hufu.Biscuit.BiscuitRegistryOperation
+Penghou.Hufu.Biscuit.BiscuitRegistryOperation.Revoke = 4 -> Penghou.Hufu.Biscuit.BiscuitRegistryOperation
+Penghou.Hufu.Biscuit.BiscuitRegistryStatus
+Penghou.Hufu.Biscuit.BiscuitRegistryStatus.Active = 6 -> Penghou.Hufu.Biscuit.BiscuitRegistryStatus
+Penghou.Hufu.Biscuit.BiscuitRegistryStatus.CapacityExceeded = 5 -> Penghou.Hufu.Biscuit.BiscuitRegistryStatus
+Penghou.Hufu.Biscuit.BiscuitRegistryStatus.Conflict = 4 -> Penghou.Hufu.Biscuit.BiscuitRegistryStatus
+Penghou.Hufu.Biscuit.BiscuitRegistryStatus.Denied = 1 -> Penghou.Hufu.Biscuit.BiscuitRegistryStatus
+Penghou.Hufu.Biscuit.BiscuitRegistryStatus.Recorded = 9 -> Penghou.Hufu.Biscuit.BiscuitRegistryStatus
+Penghou.Hufu.Biscuit.BiscuitRegistryStatus.Registered = 7 -> Penghou.Hufu.Biscuit.BiscuitRegistryStatus
+Penghou.Hufu.Biscuit.BiscuitRegistryStatus.Replayed = 8 -> Penghou.Hufu.Biscuit.BiscuitRegistryStatus
+Penghou.Hufu.Biscuit.BiscuitRegistryStatus.Revoked = 3 -> Penghou.Hufu.Biscuit.BiscuitRegistryStatus
+Penghou.Hufu.Biscuit.BiscuitRegistryStatus.Unavailable = 0 -> Penghou.Hufu.Biscuit.BiscuitRegistryStatus
+Penghou.Hufu.Biscuit.BiscuitRegistryStatus.Unknown = 2 -> Penghou.Hufu.Biscuit.BiscuitRegistryStatus
+Penghou.Hufu.Biscuit.BiscuitRequestAuthorizer
+Penghou.Hufu.Biscuit.BiscuitRequestAuthorizer.AuthorizeAsync(Penghou.Hufu.AuthorityRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityRequestAuthorization!>
+Penghou.Hufu.Biscuit.BiscuitRequestAuthorizer.BiscuitRequestAuthorizer(Penghou.Hufu.Biscuit.BiscuitAuthorityService! service, Penghou.Hufu.Biscuit.BiscuitEnvelope! envelope) -> void
+Penghou.Hufu.Biscuit.BiscuitResourceBinding
+Penghou.Hufu.Biscuit.BiscuitResourceBinding.<Clone>$() -> Penghou.Hufu.Biscuit.BiscuitResourceBinding!
+Penghou.Hufu.Biscuit.BiscuitResourceBinding.BiscuitResourceBinding(Penghou.Hufu.AuthorityRequest! Request, string! ProviderIdentity, string! ObjectIdentity, string! EffectIdentity, string? StartBindingIdentity = null) -> void
+Penghou.Hufu.Biscuit.BiscuitResourceBinding.Deconstruct(out Penghou.Hufu.AuthorityRequest! Request, out string! ProviderIdentity, out string! ObjectIdentity, out string! EffectIdentity, out string? StartBindingIdentity) -> void
+Penghou.Hufu.Biscuit.BiscuitResourceBinding.EffectIdentity.get -> string!
+Penghou.Hufu.Biscuit.BiscuitResourceBinding.EffectIdentity.init -> void
+Penghou.Hufu.Biscuit.BiscuitResourceBinding.Equals(Penghou.Hufu.Biscuit.BiscuitResourceBinding? other) -> bool
+Penghou.Hufu.Biscuit.BiscuitResourceBinding.ObjectIdentity.get -> string!
+Penghou.Hufu.Biscuit.BiscuitResourceBinding.ObjectIdentity.init -> void
+Penghou.Hufu.Biscuit.BiscuitResourceBinding.ProviderIdentity.get -> string!
+Penghou.Hufu.Biscuit.BiscuitResourceBinding.ProviderIdentity.init -> void
+Penghou.Hufu.Biscuit.BiscuitResourceBinding.Request.get -> Penghou.Hufu.AuthorityRequest!
+Penghou.Hufu.Biscuit.BiscuitResourceBinding.Request.init -> void
+Penghou.Hufu.Biscuit.BiscuitResourceBinding.StartBindingIdentity.get -> string?
+Penghou.Hufu.Biscuit.BiscuitResourceBinding.StartBindingIdentity.init -> void
+Penghou.Hufu.Biscuit.BiscuitRestriction
+Penghou.Hufu.Biscuit.BiscuitRestriction.Actions.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityAction>!
+Penghou.Hufu.Biscuit.BiscuitRestriction.BiscuitRestriction(System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityAction>! actions, Penghou.Hufu.AuthorityScope! scope, System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>! exclusions, System.DateTimeOffset notBefore, System.DateTimeOffset expiresAt) -> void
+Penghou.Hufu.Biscuit.BiscuitRestriction.Exclusions.get -> System.Collections.Generic.IReadOnlyList<Penghou.Hufu.AuthorityScope!>!
+Penghou.Hufu.Biscuit.BiscuitRestriction.ExpiresAt.get -> System.DateTimeOffset
+Penghou.Hufu.Biscuit.BiscuitRestriction.NotBefore.get -> System.DateTimeOffset
+Penghou.Hufu.Biscuit.BiscuitRestriction.Scope.get -> Penghou.Hufu.AuthorityScope!
+Penghou.Hufu.Biscuit.BiscuitVerificationResult
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.<Clone>$() -> Penghou.Hufu.Biscuit.BiscuitVerificationResult!
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.Biscuit.get -> Penghou.Hufu.Biscuit.BiscuitComponentStatus
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.Biscuit.init -> void
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.BiscuitVerificationResult(Penghou.Hufu.Biscuit.BiscuitFailureCode FailureCode, Penghou.Hufu.AuthorityDecision? Decision, string? VerificationId, Penghou.Hufu.Biscuit.BiscuitComponentStatus Biscuit, Penghou.Hufu.Biscuit.BiscuitComponentStatus CurrentAuthority, Penghou.Hufu.Biscuit.BiscuitComponentStatus Enforcement, Penghou.Hufu.Biscuit.BiscuitComponentStatus Evidence) -> void
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.CurrentAuthority.get -> Penghou.Hufu.Biscuit.BiscuitComponentStatus
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.CurrentAuthority.init -> void
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.Decision.get -> Penghou.Hufu.AuthorityDecision?
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.Decision.init -> void
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.Deconstruct(out Penghou.Hufu.Biscuit.BiscuitFailureCode FailureCode, out Penghou.Hufu.AuthorityDecision? Decision, out string? VerificationId, out Penghou.Hufu.Biscuit.BiscuitComponentStatus Biscuit, out Penghou.Hufu.Biscuit.BiscuitComponentStatus CurrentAuthority, out Penghou.Hufu.Biscuit.BiscuitComponentStatus Enforcement, out Penghou.Hufu.Biscuit.BiscuitComponentStatus Evidence) -> void
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.Enforcement.get -> Penghou.Hufu.Biscuit.BiscuitComponentStatus
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.Enforcement.init -> void
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.Equals(Penghou.Hufu.Biscuit.BiscuitVerificationResult? other) -> bool
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.Evidence.get -> Penghou.Hufu.Biscuit.BiscuitComponentStatus
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.Evidence.init -> void
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.FailureCode.get -> Penghou.Hufu.Biscuit.BiscuitFailureCode
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.FailureCode.init -> void
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.IsAuthorized.get -> bool
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.VerificationId.get -> string?
+Penghou.Hufu.Biscuit.BiscuitVerificationResult.VerificationId.init -> void
+Penghou.Hufu.Biscuit.BiscuitWorkloadBinding
+Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.<Clone>$() -> Penghou.Hufu.Biscuit.BiscuitWorkloadBinding!
+Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.ActivityId.get -> string!
+Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.ActivityId.init -> void
+Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.Audience.get -> string!
+Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.Audience.init -> void
+Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.BiscuitWorkloadBinding(Penghou.Hufu.AuthenticatedAuthorityContext! Context, string! Realm, string! WorkflowId, string! ActivityId, string! Audience) -> void
+Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.Context.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.Context.init -> void
+Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.Deconstruct(out Penghou.Hufu.AuthenticatedAuthorityContext! Context, out string! Realm, out string! WorkflowId, out string! ActivityId, out string! Audience) -> void
+Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.Equals(Penghou.Hufu.Biscuit.BiscuitWorkloadBinding? other) -> bool
+Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.Realm.get -> string!
+Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.Realm.init -> void
+Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.WorkflowId.get -> string!
+Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.WorkflowId.init -> void
+Penghou.Hufu.Biscuit.IBiscuitAuthorityHost
+Penghou.Hufu.Biscuit.IBiscuitAuthorityHost.ApproveDerivationAsync(Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload! workload, Penghou.Hufu.Biscuit.BiscuitCredentialRegistration! parent, Penghou.Hufu.Biscuit.BiscuitRestriction! restriction, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<bool>
+Penghou.Hufu.Biscuit.IBiscuitAuthorityHost.ApproveIssueAsync(Penghou.Hufu.Biscuit.BiscuitIssueRequest! request, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.BiscuitIssuanceApproval?>
+Penghou.Hufu.Biscuit.IBiscuitAuthorityHost.AuthenticateAsync(Penghou.Hufu.AuthenticatedAuthorityContext! context, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload?>
+Penghou.Hufu.Biscuit.IBiscuitAuthorityHost.BindResourceAsync(Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload! workload, Penghou.Hufu.AuthorityRequest! request, string? startBindingIdentity, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.BiscuitResourceBinding?>
+Penghou.Hufu.Biscuit.IBiscuitCredentialRegistry
+Penghou.Hufu.Biscuit.IBiscuitCredentialRegistry.CheckAsync(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.Biscuit.BiscuitCredentialRegistration! registration, System.DateTimeOffset now, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.BiscuitRegistryStatus>
+Penghou.Hufu.Biscuit.IBiscuitCredentialRegistry.FindAsync(Penghou.Hufu.AuthorityStoreActor! actor, string! realm, Penghou.Hufu.AuthenticatedAuthorityContext! context, string! fingerprint, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.BiscuitRegistrationLookup!>
+Penghou.Hufu.Biscuit.IBiscuitCredentialRegistry.RegisterAsync(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.Biscuit.BiscuitCredentialRegistration! registration, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.BiscuitRegistryStatus>
+Penghou.Hufu.Biscuit.IBiscuitDecisionRecorder
+Penghou.Hufu.Biscuit.IBiscuitDecisionRecorder.RecordAsync(Penghou.Hufu.Biscuit.BiscuitDecisionEvidence! evidence, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<bool>
+Penghou.Hufu.Biscuit.IBiscuitKeyProvider
+Penghou.Hufu.Biscuit.IBiscuitKeyProvider.AcquireSigningKeyAsync(string! realm, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.IBiscuitSigningKeyLease?>
+Penghou.Hufu.Biscuit.IBiscuitKeyProvider.FindVerificationKeyAsync(string! realm, string! keyId, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<BiscuitSharp.BiscuitPublicKey?>
+Penghou.Hufu.Biscuit.IBiscuitRegistryAuthorizer
+Penghou.Hufu.Biscuit.IBiscuitRegistryAuthorizer.AuthorizeAsync(Penghou.Hufu.Biscuit.BiscuitRegistryAccess! access, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.AuthorityStoreAuthorization!>
+Penghou.Hufu.Biscuit.IBiscuitSigningKeyLease
+Penghou.Hufu.Biscuit.IBiscuitSigningKeyLease.Build(BiscuitSharp.BiscuitTokenBuilder! builder) -> BiscuitSharp.BiscuitToken!
+Penghou.Hufu.Biscuit.IBiscuitSigningKeyLease.KeyId.get -> string!
+Penghou.Hufu.Biscuit.IBiscuitSigningKeyLease.PublicKey.get -> BiscuitSharp.BiscuitPublicKey!
+Penghou.Hufu.Biscuit.IBiscuitSigningKeyLease.Realm.get -> string!
+static Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload.operator !=(Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload? left, Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload.operator ==(Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload? left, Penghou.Hufu.Biscuit.BiscuitAuthenticatedWorkload? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitCredentialResult.operator !=(Penghou.Hufu.Biscuit.BiscuitCredentialResult? left, Penghou.Hufu.Biscuit.BiscuitCredentialResult? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitCredentialResult.operator ==(Penghou.Hufu.Biscuit.BiscuitCredentialResult? left, Penghou.Hufu.Biscuit.BiscuitCredentialResult? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitCredentialVerification.operator !=(Penghou.Hufu.Biscuit.BiscuitCredentialVerification? left, Penghou.Hufu.Biscuit.BiscuitCredentialVerification? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitCredentialVerification.operator ==(Penghou.Hufu.Biscuit.BiscuitCredentialVerification? left, Penghou.Hufu.Biscuit.BiscuitCredentialVerification? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.operator !=(Penghou.Hufu.Biscuit.BiscuitDecisionEvidence? left, Penghou.Hufu.Biscuit.BiscuitDecisionEvidence? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitDecisionEvidence.operator ==(Penghou.Hufu.Biscuit.BiscuitDecisionEvidence? left, Penghou.Hufu.Biscuit.BiscuitDecisionEvidence? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.operator !=(Penghou.Hufu.Biscuit.BiscuitIssuanceApproval? left, Penghou.Hufu.Biscuit.BiscuitIssuanceApproval? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitIssuanceApproval.operator ==(Penghou.Hufu.Biscuit.BiscuitIssuanceApproval? left, Penghou.Hufu.Biscuit.BiscuitIssuanceApproval? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitIssueRequest.operator !=(Penghou.Hufu.Biscuit.BiscuitIssueRequest? left, Penghou.Hufu.Biscuit.BiscuitIssueRequest? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitIssueRequest.operator ==(Penghou.Hufu.Biscuit.BiscuitIssueRequest? left, Penghou.Hufu.Biscuit.BiscuitIssueRequest? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitProfile.GetEvaluatorIdentity(string! engineIdentity, string! cedarEvaluatorIdentity) -> string!
+static Penghou.Hufu.Biscuit.BiscuitProfile.MappingIdentity.get -> string!
+static Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.operator !=(Penghou.Hufu.Biscuit.BiscuitRegistrationLookup? left, Penghou.Hufu.Biscuit.BiscuitRegistrationLookup? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitRegistrationLookup.operator ==(Penghou.Hufu.Biscuit.BiscuitRegistrationLookup? left, Penghou.Hufu.Biscuit.BiscuitRegistrationLookup? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitRegistryAccess.operator !=(Penghou.Hufu.Biscuit.BiscuitRegistryAccess? left, Penghou.Hufu.Biscuit.BiscuitRegistryAccess? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitRegistryAccess.operator ==(Penghou.Hufu.Biscuit.BiscuitRegistryAccess? left, Penghou.Hufu.Biscuit.BiscuitRegistryAccess? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitResourceBinding.operator !=(Penghou.Hufu.Biscuit.BiscuitResourceBinding? left, Penghou.Hufu.Biscuit.BiscuitResourceBinding? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitResourceBinding.operator ==(Penghou.Hufu.Biscuit.BiscuitResourceBinding? left, Penghou.Hufu.Biscuit.BiscuitResourceBinding? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitVerificationResult.operator !=(Penghou.Hufu.Biscuit.BiscuitVerificationResult? left, Penghou.Hufu.Biscuit.BiscuitVerificationResult? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitVerificationResult.operator ==(Penghou.Hufu.Biscuit.BiscuitVerificationResult? left, Penghou.Hufu.Biscuit.BiscuitVerificationResult? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.operator !=(Penghou.Hufu.Biscuit.BiscuitWorkloadBinding? left, Penghou.Hufu.Biscuit.BiscuitWorkloadBinding? right) -> bool
+static Penghou.Hufu.Biscuit.BiscuitWorkloadBinding.operator ==(Penghou.Hufu.Biscuit.BiscuitWorkloadBinding? left, Penghou.Hufu.Biscuit.BiscuitWorkloadBinding? right) -> bool

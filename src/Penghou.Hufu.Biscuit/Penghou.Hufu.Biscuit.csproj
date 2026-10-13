@@ -1,5 +1,14 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup><TargetFrameworks>net8.0;net10.0</TargetFrameworks><IsPackable>false</IsPackable><IsAotCompatible>true</IsAotCompatible></PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <PackageId>Penghou.Hufu.Biscuit</PackageId>
+    <Title>Penghou Hufu Biscuit credential adapter</Title>
+    <Description>Optional registered Biscuit credential representation, attenuation and verification for Hufu authority. Experimental; credential verification never substitutes for current Hufu authority.</Description>
+    <IsPackable>true</IsPackable>
+    <!-- First release has no published baseline to validate against; re-enable with a preview.8 baseline for the next version. -->
+    <EnablePackageValidation>false</EnablePackageValidation>
+    <IsAotCompatible>true</IsAotCompatible>
+  </PropertyGroup>
   <ItemGroup><PackageReference Include="BiscuitSharp" Version="[0.1.0-preview.2]" /></ItemGroup>
   <ItemGroup><ProjectReference Include="../Penghou.Hufu.Cedar/Penghou.Hufu.Cedar.csproj" /></ItemGroup>
   <ItemGroup>

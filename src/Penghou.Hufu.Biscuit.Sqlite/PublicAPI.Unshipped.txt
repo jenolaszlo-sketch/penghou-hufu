@@ -1,0 +1,29 @@
+#nullable enable
+override Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions.Equals(object? obj) -> bool
+override Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions.GetHashCode() -> int
+override Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions.ToString() -> string!
+Penghou.Hufu.Biscuit.Sqlite.BiscuitSqliteDecisionRecorder
+Penghou.Hufu.Biscuit.Sqlite.BiscuitSqliteDecisionRecorder.BiscuitSqliteDecisionRecorder(Penghou.Hufu.IAuthorityStore! store, Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitCredentialRegistry! registry) -> void
+Penghou.Hufu.Biscuit.Sqlite.BiscuitSqliteDecisionRecorder.RecordAsync(Penghou.Hufu.Biscuit.BiscuitDecisionEvidence! evidence, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<bool>
+Penghou.Hufu.Biscuit.Sqlite.BiscuitSqliteStartParticipant
+Penghou.Hufu.Biscuit.Sqlite.BiscuitSqliteStartParticipant.BiscuitSqliteStartParticipant(Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitCredentialRegistry! registry, Penghou.Hufu.Sqlite.IAuthoritySqliteStartParticipant! inner, string! engineIdentity, string! mappingIdentity, string! evaluatorIdentity) -> void
+Penghou.Hufu.Biscuit.Sqlite.BiscuitSqliteStartParticipant.ProfileIdentity.get -> string!
+Penghou.Hufu.Biscuit.Sqlite.BiscuitSqliteStartParticipant.TryStartAsync(Microsoft.Data.Sqlite.SqliteConnection! connection, Microsoft.Data.Sqlite.SqliteTransaction! transaction, Penghou.Hufu.AuthorityOperationStartCommand! command, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Sqlite.SqliteRuntimeStartResult!>
+Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitCredentialRegistry
+Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitCredentialRegistry.CheckAsync(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.Biscuit.BiscuitCredentialRegistration! registration, System.DateTimeOffset now, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.BiscuitRegistryStatus>
+Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitCredentialRegistry.FindAsync(Penghou.Hufu.AuthorityStoreActor! actor, string! realm, Penghou.Hufu.AuthenticatedAuthorityContext! context, string! fingerprint, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.BiscuitRegistrationLookup!>
+Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitCredentialRegistry.RecordVerificationAsync(Penghou.Hufu.Biscuit.BiscuitDecisionEvidence! evidence, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.BiscuitRegistryStatus>
+Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitCredentialRegistry.RegisterAsync(Penghou.Hufu.AuthorityStoreActor! actor, Penghou.Hufu.Biscuit.BiscuitCredentialRegistration! registration, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.BiscuitRegistryStatus>
+Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitCredentialRegistry.RetireKeyAsync(Penghou.Hufu.AuthorityStoreActor! actor, string! realm, string! keyId, string! reasonCode, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.BiscuitRegistryStatus>
+Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitCredentialRegistry.RevokeAsync(Penghou.Hufu.AuthorityStoreActor! actor, string! realm, Penghou.Hufu.AuthenticatedAuthorityContext! context, string! fingerprint, string! reasonCode, System.Threading.CancellationToken ct = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Biscuit.BiscuitRegistryStatus>
+Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitCredentialRegistry.SqliteBiscuitCredentialRegistry(Penghou.Hufu.Sqlite.ISqliteAuthorityDatabase! owner, string! physicalDatabasePath, Penghou.Hufu.Biscuit.IBiscuitRegistryAuthorizer! authorizer, Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions? options = null) -> void
+Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions
+Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions.<Clone>$() -> Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions!
+Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions.Equals(Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions? other) -> bool
+Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions.MaxEntries.get -> int
+Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions.MaxEntries.init -> void
+Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions.MaxStoredBytes.get -> long
+Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions.MaxStoredBytes.init -> void
+Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions.SqliteBiscuitRegistryOptions() -> void
+static Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions.operator !=(Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions? left, Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions? right) -> bool
+static Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions.operator ==(Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions? left, Penghou.Hufu.Biscuit.Sqlite.SqliteBiscuitRegistryOptions? right) -> bool

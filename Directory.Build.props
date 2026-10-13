@@ -1,7 +1,7 @@
 <Project>
   <PropertyGroup>
     <LangVersion>latest</LangVersion>
-    <Version>0.1.0-preview.7</Version>
+    <Version>0.1.0-preview.8</Version>
     <IsPackable>false</IsPackable>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
@@ -12,7 +12,7 @@
     <Authors>Penghou.Hufu contributors</Authors>
     <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'Penghou.Hufu' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Cedar' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.IO' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Luban' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Sqlite' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Workflow' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Luban.Sqlite'">
+  <PropertyGroup Condition="'$(MSBuildProjectName)' == 'Penghou.Hufu' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Cedar' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.IO' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Luban' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Sqlite' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Workflow' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Luban.Sqlite' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Biscuit' Or '$(MSBuildProjectName)' == 'Penghou.Hufu.Biscuit.Sqlite'">
     <IsPackable>true</IsPackable>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageTags>authorization;authority;workflow</PackageTags>

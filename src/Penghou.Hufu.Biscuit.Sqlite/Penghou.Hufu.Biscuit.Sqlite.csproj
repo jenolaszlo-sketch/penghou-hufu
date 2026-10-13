@@ -1,4 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup><TargetFrameworks>net8.0;net10.0</TargetFrameworks><IsPackable>false</IsPackable><IsAotCompatible>true</IsAotCompatible></PropertyGroup>
+  <PropertyGroup>
+    <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+    <PackageId>Penghou.Hufu.Biscuit.Sqlite</PackageId>
+    <Title>Penghou Hufu Biscuit durable credential registry</Title>
+    <Description>Optional durable SQLite credential registry, revocation and decision evidence for the Hufu Biscuit adapter. Experimental.</Description>
+    <IsPackable>true</IsPackable>
+    <!-- First release has no published baseline to validate against; re-enable with a preview.8 baseline for the next version. -->
+    <EnablePackageValidation>false</EnablePackageValidation>
+    <IsAotCompatible>true</IsAotCompatible>
+  </PropertyGroup>
   <ItemGroup><ProjectReference Include="../Penghou.Hufu.Biscuit/Penghou.Hufu.Biscuit.csproj" /><ProjectReference Include="../Penghou.Hufu.Sqlite/Penghou.Hufu.Sqlite.csproj" /></ItemGroup>
 </Project>
