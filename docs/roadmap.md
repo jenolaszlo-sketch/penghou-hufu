@@ -100,6 +100,10 @@ qualify during implementation, not new delivered guarantees or closed CI gates.
   - Spec frozen in the [Biscuit comparison spec](biscuit-comparison-spec.md):
     compare on the identical AE-2 corpus; a defer/remove decision is valid.
     Implementation pending.
+  - Reconciliation required before comparison, specified in the
+    [Biscuit reconciliation spec](biscuit-reconciliation-spec.md): one
+    containment definition, one lineage model, one AE-1 current-authority path
+    (carriers, not authority engines).
 - [ ] **AE-4 — Integrate qualified restricted execution when available.** Depends
   on Gagamba's [restricted-provider gates](../../Gagamba/docs/adr/0003-ar7-linux-first-restricted-execution.md)
   and AE-1; it can progress independently of Biscuit. Authorize bounded preparation,

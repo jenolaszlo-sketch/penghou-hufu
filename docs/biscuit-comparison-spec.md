@@ -113,3 +113,8 @@ containment to the core definition and composing the AE-1 current-parent,
 lifecycle and freshness checks on the Biscuit route. That is a bounded adapter
 correction, not a redesign. Until then, Biscuit and the opaque route would be
 compared on different authority semantics, which the spec forbids.
+
+The bounded correction is specified separately in the
+[Biscuit reconciliation spec](biscuit-reconciliation-spec.md): one containment
+definition, one lineage model, one AE-1 current-authority path — carriers, not
+authority engines.

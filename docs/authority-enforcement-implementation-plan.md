@@ -436,7 +436,10 @@ AE-2 now provides the control path. AE-3 is a comparison, not a feature: it
 answers, with evidence on the identical AE-2 corpus, whether Biscuit's
 portability/attenuation benefit justifies its complexity over the opaque
 session-bound reference. A defer/remove decision is a valid outcome.
-Specification only; no code or publication claimed.
+Specification only; no code or publication claimed. The bounded adapter
+correction needed before a fair comparison is specified in the
+[Biscuit reconciliation spec](biscuit-reconciliation-spec.md): one containment
+definition, one lineage model, one current-authority (AE-1) path.
 
 1. Reconcile the experimental adapter's subset routine and registry ancestry with
    core `AuthorityDerivation`; preserve one definition of containment and exact
