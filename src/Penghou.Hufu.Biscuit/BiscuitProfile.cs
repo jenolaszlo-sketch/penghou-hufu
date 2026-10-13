@@ -71,16 +71,18 @@ public static class BiscuitProfile
                 .ThenBy(s => s.RelativePath, StringComparer.Ordinal).ThenBy(s => s.Kind));
     internal static bool IsSubset(AuthorityGrant parent, AuthorityGrant child)
     {
-        if (parent.Id != child.Id || child.Actions.Any(a => !parent.Actions.Contains(a)) ||
-            child.NotBefore < parent.NotBefore || child.ExpiresAt > parent.ExpiresAt ||
-            !AuthorityValidation.Contains(parent.Scope, child.Scope)) return false;
-        foreach (var exclusion in parent.Exclusions)
+        ArgumentNullException.ThrowIfNull(parent);
+        ArgumentNullException.ThrowIfNull(child);
+        // One containment definition: delegate to the core derivation predicate.
+        // A different child grant id is valid when core containment permits it,
+        // and there is no separate exclusion/scope-intersection interpretation.
+        try
         {
-            AuthorityScope? intersection = AuthorityValidation.Contains(exclusion, child.Scope) ? child.Scope :
-                AuthorityValidation.Contains(child.Scope, exclusion) ? exclusion : null;
-            if (intersection is not null && !child.Exclusions.Any(e => AuthorityValidation.Contains(e, intersection))) return false;
+            return AuthorityDerivation.IsContainedBy(
+                new RequestedAuthority(child.Actions, child.Scope, child.Exclusions, child.NotBefore, child.ExpiresAt),
+                parent);
         }
-        return true;
+        catch { return false; }
     }
     internal static bool Covers(AuthorityGrant grant, AuthorityRequest request, DateTimeOffset now)
     {

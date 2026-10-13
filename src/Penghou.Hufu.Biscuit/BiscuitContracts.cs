@@ -91,6 +91,18 @@ public sealed record BiscuitCredentialResult(BiscuitFailureCode FailureCode, Bis
 {
     public bool IsSuccess => FailureCode == BiscuitFailureCode.None && Envelope is not null;
 }
+
+/// <summary>
+/// The credential-only result: a genuine, registered, cryptographically
+/// attenuated credential that covers the exact request. It is NOT an
+/// authorization decision; the protected operation still requires the AE-1
+/// qualified current-authority path.
+/// </summary>
+public sealed record BiscuitCredentialVerification(BiscuitFailureCode FailureCode,
+    BiscuitCredentialRegistration? Registration = null, BiscuitResourceBinding? Resource = null)
+{
+    public bool IsVerified => FailureCode == BiscuitFailureCode.None && Registration is not null;
+}
 public sealed record BiscuitVerificationResult(BiscuitFailureCode FailureCode, AuthorityDecision? Decision,
     string? VerificationId, BiscuitComponentStatus Biscuit, BiscuitComponentStatus CurrentAuthority,
     BiscuitComponentStatus Enforcement, BiscuitComponentStatus Evidence)

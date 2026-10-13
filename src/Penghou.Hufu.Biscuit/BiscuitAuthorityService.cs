@@ -229,6 +229,60 @@ public sealed class BiscuitAuthorityService
             new(code, null, null, biscuit, authority, enforcement, BiscuitComponentStatus.NotEvaluated);
     }
 
+    /// <summary>
+    /// Credential-only verification for the reconciled AE-3 path: proves the
+    /// credential is genuine, registered and cryptographically attenuated and
+    /// that its transferred grant covers the exact request. It deliberately does
+    /// NOT decide current authority; the caller must run the AE-1 qualified
+    /// current-authority composition for the protected operation.
+    /// </summary>
+    public async ValueTask<BiscuitCredentialVerification> VerifyCredentialAsync(BiscuitEnvelope envelope,
+        AuthorityRequest request, string? startBindingIdentity = null, CancellationToken ct = default)
+    {
+        ct.ThrowIfCancellationRequested();
+        if (envelope is null || !AuthorityValidation.IsValidRequest(request) ||
+            startBindingIdentity is not null && !BiscuitProfile.IsHash(startBindingIdentity))
+            return new(BiscuitFailureCode.InvalidAuthorityEnvelope);
+        try
+        {
+            var workload = await _host.AuthenticateAsync(request.Context, ct).ConfigureAwait(false);
+            ct.ThrowIfCancellationRequested();
+            if (!BiscuitProfile.ValidWorkload(workload) || workload!.Binding.Context != request.Context)
+                return new(BiscuitFailureCode.WorkflowAuthorityDenied);
+            var loaded = await LoadAsync(workload, envelope, ct).ConfigureAwait(false);
+            if (loaded.Failure != BiscuitFailureCode.None) return new(loaded.Failure);
+            var registration = loaded.Registration!;
+            var current = await _snapshots.GetCurrentAsync(request.Context, ct).ConfigureAwait(false);
+            ct.ThrowIfCancellationRequested();
+            if (current is null) return new(BiscuitFailureCode.AuthorizationUnavailable);
+            var evaluatedAt = _clock.GetUtcNow();
+            if (!Applicable(current, registration, evaluatedAt)) return new(BiscuitFailureCode.WorkflowAuthorityDenied);
+            if (!BiscuitProfile.Covers(registration.EffectiveGrant, request, evaluatedAt))
+                return new(BiscuitFailureCode.AuthorityConstraintFailed);
+            var resource = await _host.BindResourceAsync(workload, request, startBindingIdentity, ct).ConfigureAwait(false);
+            ct.ThrowIfCancellationRequested();
+            if (resource is null || resource.Request != request ||
+                !AuthorityValidation.ValidToken(resource.ProviderIdentity) || !AuthorityValidation.ValidToken(resource.ObjectIdentity) ||
+                !AuthorityValidation.ValidToken(resource.EffectIdentity) || resource.StartBindingIdentity != startBindingIdentity)
+                return new(BiscuitFailureCode.EnforcementPreconditionFailed);
+            var ancestry = await LoadChainAsync(workload, registration, ct).ConfigureAwait(false);
+            if (ancestry.Failure != BiscuitFailureCode.None) return new(ancestry.Failure);
+            var chain = ancestry.Chain!;
+            if (chain.Any(item => !BiscuitProfile.Covers(item.EffectiveGrant, request, evaluatedAt)))
+                return new(BiscuitFailureCode.AuthorityConstraintFailed);
+            var native = BiscuitProfile.CreateAuthorizer(loaded.Token!, registration, chain, request, evaluatedAt)
+                .WithLimits(_limits).Authorize();
+            var failure = BiscuitProfile.Classify(native);
+            return failure == BiscuitFailureCode.None
+                ? new(BiscuitFailureCode.None, registration, resource)
+                : new(failure);
+        }
+        catch (OperationCanceledException) when (ct.IsCancellationRequested) { throw; }
+        catch (BiscuitBridgeException) { return new(BiscuitFailureCode.AuthorizationFailure); }
+        catch (BiscuitTokenException) { return new(BiscuitFailureCode.InvalidCredential); }
+        catch { return new(BiscuitFailureCode.AuthorizationFailure); }
+    }
+
     private async ValueTask<(BiscuitFailureCode Failure, BiscuitToken? Token, BiscuitCredentialRegistration? Registration)>
         LoadAsync(BiscuitAuthenticatedWorkload workload, BiscuitEnvelope envelope, CancellationToken ct)
     {

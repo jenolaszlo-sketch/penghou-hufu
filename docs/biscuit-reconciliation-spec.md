@@ -1,8 +1,29 @@
 # AE-3 reconciliation spec: Biscuit as a carrier, not an authority engine
 
-Status: **Specification only, 2026-10-12. No code.** This is the bounded adapter
-correction required by the [inspection findings](biscuit-comparison-spec.md#inspection-findings-2026-10-12-source-review-no-code)
-before the AE-3 comparison can be fair. Stop before implementation.
+Status: **Specification frozen 2026-10-12; reconciliation implemented.** This is
+the bounded adapter correction required by the
+[inspection findings](biscuit-comparison-spec.md#inspection-findings-2026-10-12-source-review-no-code)
+before the AE-3 comparison can be fair.
+
+**Implementation status (2026-10-12).** Landed in `Penghou.Hufu.Biscuit`,
+additively (existing behavior and tests unchanged):
+- **One containment definition** — `BiscuitProfile.IsSubset` now delegates to
+  core `AuthorityDerivation.IsContainedBy`; the independent exclusion/
+  scope-intersection semantics and same-grant-id requirement are gone. A derived
+  child with a different grant id is valid when core containment permits it.
+- **One current-authority path** — `BiscuitAuthorityService.VerifyCredentialAsync`
+  performs credential-only verification (genuine, registered, cryptographically
+  attenuated, covers the exact request) and `BiscuitQualifiedRequestAuthorizer`
+  then routes the protected operation through the same AE-1 qualified
+  `IAuthorityRequestAuthorizer` as the opaque route. A signature never
+  authorizes on its own.
+- **One lineage model** — authority ancestry is resolved by the AE-1 qualified
+  composition (core derivation lineage); Biscuit block ancestry/fingerprints/
+  revocation IDs remain credential-carrier evidence.
+
+4 focused reconciliation tests plus the existing 93 Biscuit tests pass on .NET 8
+and .NET 10 (97 total). AE-3C (the carrier comparison and adopt/defer/remove
+decision) remains a separate milestone.
 
 ## Architectural rule
 

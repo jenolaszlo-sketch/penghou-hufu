@@ -441,6 +441,14 @@ correction needed before a fair comparison is specified in the
 [Biscuit reconciliation spec](biscuit-reconciliation-spec.md): one containment
 definition, one lineage model, one current-authority (AE-1) path.
 
+**Status 2026-10-12: AE-3B reconciliation landed.** `BiscuitProfile.IsSubset`
+delegates to core `AuthorityDerivation.IsContainedBy`; the adapter adds
+credential-only `VerifyCredentialAsync` and `BiscuitQualifiedRequestAuthorizer`,
+which routes the protected operation through the AE-1 qualified authorizer so a
+signature never authorizes on its own. Additive (existing behavior unchanged);
+97 Biscuit tests pass on .NET 8/10. AE-3C (carrier comparison and
+adopt/defer/remove decision) is not started.
+
 1. Reconcile the experimental adapter's subset routine and registry ancestry with
    core `AuthorityDerivation`; preserve one definition of containment and exact
    Derive approval. Freeze versioned mappings for child grant, worker, audience,
