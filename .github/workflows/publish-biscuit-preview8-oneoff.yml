@@ -1,0 +1,81 @@
+# One-time recovery: publish ONLY the two missing Biscuit preview.8 IDs using
+# exact CI-qualified bytes from run 38416963934. Remove after use. Do NOT
+# generalize into a partial-publish path and do NOT republish the seven.
+name: Publish Biscuit preview.8 (one-time)
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: hufu-nuget-publication
+  cancel-in-progress: false
+jobs:
+  publish-biscuit:
+    runs-on: ubuntu-latest
+    environment: nuget
+    permissions:
+      contents: read
+      actions: read
+      id-token: write
+    steps:
+      - name: Refuse if either Biscuit ID already exists publicly
+        shell: pwsh
+        run: |
+          foreach ($id in @('penghou.hufu.biscuit','penghou.hufu.biscuit.sqlite')) {
+            try {
+              Invoke-WebRequest -Uri "https://api.nuget.org/v3-flatcontainer/$id/0.1.0-preview.8/$id.0.1.0-preview.8.nupkg" -Method Head | Out-Null
+              throw "Already public, refusing to overwrite: $id 0.1.0-preview.8"
+            } catch {
+              if ($null -ne $_.Exception.Response -and [int]$_.Exception.Response.StatusCode -ne 404) { throw }
+            }
+          }
+      - uses: actions/download-artifact@v4
+        with:
+          name: release-packages-1b802373d4f57a59623f449763ba94d584e10215
+          path: artifacts/packages
+          run-id: 38416963934
+          github-token: ${{ github.token }}
+      - name: Verify manifest and hashes for the two new IDs
+        shell: pwsh
+        run: |
+          $report = Get-Content artifacts/packages/package-inspection.json -Raw | ConvertFrom-Json
+          if ($report.Status -ne 'passed') { throw 'Manifest not passed.' }
+          $versions = @($report.Packages.Version | Select-Object -Unique)
+          if ($versions.Count -ne 1 -or $versions[0] -ne '0.1.0-preview.8') { throw 'Manifest is not preview.8.' }
+          foreach ($id in @('Penghou.Hufu.Biscuit','Penghou.Hufu.Biscuit.Sqlite')) {
+            $entry = @($report.Packages | Where-Object Id -ceq $id)
+            if ($entry.Count -ne 1) { throw "Manifest missing $id" }
+            foreach ($ext in @('nupkg','snupkg')) {
+              $path = "artifacts/packages/$id.0.1.0-preview.8.$ext"
+              $expected = if ($ext -eq 'nupkg') { $entry[0].Sha256 } else { $entry[0].SymbolSha256 }
+              if ((Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash -cne $expected) { throw "Hash changed: $path" }
+            }
+          }
+      - name: Require repository publishing identity
+        shell: pwsh
+        env:
+          NUGET_USER: ${{ secrets.NUGET_USER }}
+        run: |
+          if ([string]::IsNullOrWhiteSpace($env:NUGET_USER)) { throw 'Configure NUGET_USER in the nuget environment and trust this repository/workflow/environment in NuGet.' }
+      - name: NuGet trusted-publisher login
+        id: login
+        uses: NuGet/login@v1
+        with:
+          user: ${{ secrets.NUGET_USER }}
+      - name: Push only the two Biscuit packages
+        shell: pwsh
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: |
+          foreach ($id in @('Penghou.Hufu.Biscuit','Penghou.Hufu.Biscuit.Sqlite')) {
+            foreach ($ext in @('nupkg','snupkg')) {
+              $path = "artifacts/packages/$id.0.1.0-preview.8.$ext"
+              if ($ext -eq 'nupkg') {
+                dotnet nuget push $path --source https://api.nuget.org/v3/index.json --api-key $env:NUGET_API_KEY --no-symbols
+              } else {
+                dotnet nuget push $path --source https://api.nuget.org/v3/index.json --api-key $env:NUGET_API_KEY --skip-duplicate
+              }
+              if ($LASTEXITCODE -ne 0) { throw "Publication failed: $path" }
+            }
+          }
