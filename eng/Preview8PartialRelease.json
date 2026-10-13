@@ -1,0 +1,21 @@
+{
+  "SchemaVersion": 1,
+  "Version": "0.1.0-preview.8",
+  "ProvenanceCommit": "6a2be3ce1eccf31615da0ef690505fea5bbb5dac",
+  "ProvenanceNote": "The seven AlreadyPublished IDs were published from this commit outside the normal publish.yml flow. src/ is identical between this commit and 1b802373d4f57a59623f449763ba94d584e10215 (the AE-5A.1b pipeline commit), so the published seven are the right code; they differ only in embedded build provenance and must not be re-pushed. Only the two Missing IDs may be published by the recovery.",
+  "AlreadyPublished": [
+    "Penghou.Hufu",
+    "Penghou.Hufu.Cedar",
+    "Penghou.Hufu.IO",
+    "Penghou.Hufu.Luban",
+    "Penghou.Hufu.Sqlite",
+    "Penghou.Hufu.Workflow",
+    "Penghou.Hufu.Luban.Sqlite"
+  ],
+  "Missing": [
+    "Penghou.Hufu.Biscuit",
+    "Penghou.Hufu.Biscuit.Sqlite"
+  ],
+  "FailedRunReference": 38423213367,
+  "FailedRunNote": "A one-off publish workflow (since removed) failed trusted-publisher OIDC because NuGet only trusts publish.yml. Preserved here as evidence; deleting that file does not erase the historical run."
+}

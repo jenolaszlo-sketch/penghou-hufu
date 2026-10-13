@@ -1,6 +1,11 @@
 name: Publish to NuGet
 on:
   workflow_dispatch:
+    inputs:
+      recovery_manifest:
+        description: 'Checked-in eng/ recovery manifest for a partially published release; blank selects the normal full release.'
+        required: false
+        type: string
 permissions:
   contents: read
   actions: read
@@ -156,6 +161,7 @@ jobs:
           ./eng/Test-PackagedWorkflowIntegration.ps1 -PackageDirectory artifacts/packages -Version $version
           if ($version -ne '0.1.0-preview.1') { ./eng/Test-PackagedPatchIntegration.ps1 -PackageDirectory artifacts/packages -Version $version }
       - name: Verify immutable public packages before any upload
+        if: inputs.recovery_manifest == ''
         shell: pwsh
         run: |
           ./eng/Verify-HufuPublishedPackages.ps1 -PackageDirectory artifacts/packages |
@@ -171,7 +177,82 @@ jobs:
         uses: NuGet/login@v1
         with:
           user: ${{ secrets.NUGET_USER }}
+      - name: Verify partial-release recovery manifest
+        if: inputs.recovery_manifest != ''
+        shell: pwsh
+        run: |
+          $manifestPath = '${{ inputs.recovery_manifest }}'
+          if ([string]::IsNullOrWhiteSpace($manifestPath)) { throw 'Recovery manifest is required.' }
+          $full = [IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE $manifestPath))
+          $eng = [IO.Path]::GetFullPath((Join-Path $env:GITHUB_WORKSPACE 'eng'))
+          if (-not $full.StartsWith($eng + [IO.Path]::DirectorySeparatorChar, [StringComparison]::Ordinal)) { throw 'Recovery manifest must live under eng/.' }
+          $manifest = Get-Content -LiteralPath $full -Raw | ConvertFrom-Json
+          if ($manifest.SchemaVersion -ne 1) { throw 'Unknown recovery manifest schema.' }
+          $version = [string]$manifest.Version
+          if ([string]::IsNullOrWhiteSpace($version)) { throw 'Recovery manifest must declare a version.' }
+          $already = @($manifest.AlreadyPublished)
+          $missing = @($manifest.Missing)
+          if ($already.Count -eq 0 -or $missing.Count -eq 0) { throw 'Recovery manifest must list already-published and missing IDs.' }
+          if ((@($already + $missing) | Sort-Object -Unique).Count -ne ($already.Count + $missing.Count)) { throw 'Recovery manifest IDs must be distinct.' }
+          foreach ($id in $already) {
+            $lower = ([string]$id).ToLowerInvariant()
+            $url = "https://api.nuget.org/v3-flatcontainer/$lower/$($version.ToLowerInvariant())/$lower.$($version.ToLowerInvariant()).nupkg"
+            try { Invoke-WebRequest -Uri $url -Method Head | Out-Null }
+            catch { throw "Expected public package missing: $id $version" }
+          }
+          foreach ($id in $missing) {
+            $lower = ([string]$id).ToLowerInvariant()
+            $url = "https://api.nuget.org/v3-flatcontainer/$lower/$($version.ToLowerInvariant())/$lower.$($version.ToLowerInvariant()).nupkg"
+            try {
+              Invoke-WebRequest -Uri $url -Method Head | Out-Null
+              throw "Must be absent but already exists: $id $version"
+            } catch {
+              if ($null -eq $_.Exception.Response -or [int]$_.Exception.Response.StatusCode -ne 404) { throw }
+            }
+          }
+          $report = Get-Content artifacts/packages/package-inspection.json -Raw | ConvertFrom-Json
+          if ($report.Status -ne 'passed') { throw 'Manifest not passed.' }
+          $reportVersions = @($report.Packages.Version | Select-Object -Unique)
+          if ($reportVersions.Count -ne 1 -or $reportVersions[0] -cne $version) { throw 'Manifest version mismatch.' }
+          $expectedAll = @($already + $missing | Sort-Object)
+          if ((@($report.Packages.Id | Sort-Object) -join ',') -cne ($expectedAll -join ',')) { throw 'Manifest ID set mismatch.' }
+          foreach ($id in $missing) {
+            $entry = @($report.Packages | Where-Object Id -ceq $id)
+            if ($entry.Count -ne 1) { throw "Manifest missing $id" }
+            foreach ($ext in @('nupkg','snupkg')) {
+              $path = "artifacts/packages/$id.$version.$ext"
+              $expected = if ($ext -eq 'nupkg') { $entry[0].Sha256 } else { $entry[0].SymbolSha256 }
+              if ((Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash -cne $expected) { throw "Hash changed: $path" }
+            }
+          }
+          $record = [ordered]@{ SchemaVersion=1; Mode='partial-recovery'; Manifest=$manifestPath; Version=$version; AlreadyPublished=@($already); Missing=@($missing); Status='passed' }
+          ConvertTo-Json -InputObject $record -Depth 8 | Set-Content -LiteralPath artifacts/packages/recovery-inspection.json
+      - name: Publish only missing recovery IDs
+        if: inputs.recovery_manifest != ''
+        shell: pwsh
+        env:
+          NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+        run: |
+          $recovery = Get-Content artifacts/packages/recovery-inspection.json -Raw | ConvertFrom-Json
+          if ($recovery.Status -ne 'passed') { throw 'Recovery was not verified.' }
+          $report = Get-Content artifacts/packages/package-inspection.json -Raw | ConvertFrom-Json
+          foreach ($id in @($recovery.Missing)) {
+            $entry = @($report.Packages | Where-Object Id -ceq $id)
+            if ($entry.Count -ne 1) { throw "Manifest missing $id" }
+            foreach ($ext in @('nupkg','snupkg')) {
+              $path = "artifacts/packages/$id.$($recovery.Version).$ext"
+              $expected = if ($ext -eq 'nupkg') { $entry[0].Sha256 } else { $entry[0].SymbolSha256 }
+              if ((Get-FileHash -LiteralPath $path -Algorithm SHA256).Hash -cne $expected) { throw "Validated artifact hash changed: $path" }
+              if ($ext -eq 'nupkg') {
+                dotnet nuget push $path --source https://api.nuget.org/v3/index.json --api-key $env:NUGET_API_KEY --no-symbols
+              } else {
+                dotnet nuget push $path --source https://api.nuget.org/v3/index.json --api-key $env:NUGET_API_KEY --skip-duplicate
+              }
+              if ($LASTEXITCODE -ne 0) { throw "Publication failed: $path" }
+            }
+          }
       - name: Publish the same validated package and symbol bytes
+        if: inputs.recovery_manifest == ''
         shell: pwsh
         env:
           NUGET_API_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
