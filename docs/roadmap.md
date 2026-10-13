@@ -128,7 +128,8 @@ qualify during implementation, not new delivered guarantees or closed CI gates.
     metadata; gate at the top of `AcceptAsync` before durable state. Spec frozen
     in the [AE-5A Marang acceptance spec](marang-mcp-acceptance-spec.md);
     Hufu-side `DelegationAcceptanceOperation.Accept` contract implemented
-    (7 focused tests); Marang wiring pending.
+    (7 focused tests); Marang wiring blocked on a published
+    `Penghou.Hufu.Biscuit` preview (no local feed/source reference).
 
 The next authority-design work is AE-1, followed by the broker proof. Biscuit
 comes later. Existing HOST-SERVICES, neutral workflow and legacy-profile gates

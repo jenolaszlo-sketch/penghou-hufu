@@ -513,6 +513,11 @@ snapshot + optional lifecycle gate + mandatory evidence + freshness). Additive;
 resource action/Cedar/Biscuit vocabularies unchanged; 7 focused tests on
 .NET 8/10. Marang wiring and acceptance policy remain the next step.
 
+**AE-5A.2 is blocked on a published `Penghou.Hufu.Biscuit` preview.**
+`preview.7` (Hufu) is published; the reconciled `BiscuitQualifiedRequestAuthorizer`
+is in the unpublished Biscuit package. Marang must consume both from NuGet with
+no local feed and no source reference. No action until a Biscuit preview ships.
+
 Select one provider, one real tool schema/version and one bounded action based
 on an actual consumer. Keep Qingniao/Marang protocol ownership; Hufu supplies
 neutral authority rather than another A2A/MCP SDK. Reuse AE-2's authentication,
