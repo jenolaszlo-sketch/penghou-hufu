@@ -21,6 +21,7 @@
     <Project Path="tests/Penghou.Hufu.StartWorker.Tests/Penghou.Hufu.StartWorker.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.Tests/Penghou.Hufu.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.Broker.Tests/Penghou.Hufu.Broker.Tests.csproj" />
+    <Project Path="tests/Penghou.Hufu.BrokerWorkerHarness/Penghou.Hufu.BrokerWorkerHarness.csproj" />
     <Project Path="tests/Penghou.Hufu.IO.Tests/Penghou.Hufu.IO.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.Luban.Sqlite.Tests/Penghou.Hufu.Luban.Sqlite.Tests.csproj" />
     <Project Path="tests/Penghou.Hufu.LegacyIntegration.Tests/Penghou.Hufu.LegacyIntegration.Tests.csproj" />

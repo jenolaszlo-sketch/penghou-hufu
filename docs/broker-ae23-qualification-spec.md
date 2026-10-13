@@ -1,11 +1,27 @@
 # AE-2.3 qualification spec: cross-process, race and adversarial corpus
 
-Status: **Specification only, 2026-10-12. No code, no new architecture.** This
-closes AE-2 once its corpus passes against the AE-2.2 vertical
+Status: **Specification frozen 2026-10-12; corpus implemented and locally validated. AE-2 complete for the cooperative-worker profile.**
+This closes AE-2 against the AE-2.2 vertical
 ([spec](broker-ae22-implementation-spec.md)). It is a qualification/test
 milestone: prove the existing vertical survives real process boundaries, races,
-restart, lost responses, saturation and malformed/adversarial traffic. Stop
-before adding the corpus.
+restart, lost responses, saturation and malformed/adversarial traffic. No new
+architecture was introduced.
+
+**Qualification result (2026-10-12).** The corpus landed in
+`Penghou.Hufu.Broker.Tests` with a private cross-process worker harness
+(`Penghou.Hufu.BrokerWorkerHarness`). Cases covered: separate worker process
+authorized read; second worker cannot use the first worker's reference;
+revoked reference before read; unknown bootstrap; single-use bootstrap reuse;
+restart invalidating old session/reference; identical retry re-authorizing with
+fresh start/release evidence; mutation-first blocking a handler start
+(revocation wins) with no provider access; unknown protocol version; unknown
+field; oversized frame (connection closed, no provider access). One narrow
+defect was found and fixed in its own change: a malformed read frame closed the
+connection instead of returning typed `InvalidRequest` (server error mapping
+only; no architecture change). 49 focused broker tests pass on .NET 8 and .NET 10.
+
+Unqualified by this record: hostile same-account containment (AE-4), Biscuit
+(AE-3), restricted execution (AE-4) and gateways (AE-5).
 
 ## Purpose
 

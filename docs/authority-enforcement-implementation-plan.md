@@ -402,8 +402,15 @@ rights or treating a read receipt as a future mutation receipt.
 
 **Spec 2026-10-12: [AE-2.3 qualification spec](broker-ae23-qualification-spec.md).**
 Cross-process/race/restart/lost-response/saturation/malformed-traffic corpus
-that closes AE-2. Qualification only; no new architecture. No code is claimed by
-this spec.
+that closes AE-2.
+
+**Status 2026-10-12: AE-2.3 corpus landed; AE-2 complete for the cooperative-worker profile.**
+The corpus (with a private cross-process worker harness) covers separate-process
+reads, wrong-worker reference, revoked reference, unknown/reused bootstrap,
+restart invalidation, fresh-evidence retry, mutation-first ordering, and
+malformed/oversized traffic. One narrow server error-mapping defect (malformed
+read frame now returns typed `InvalidRequest`) was fixed separately. 49 focused
+broker tests pass on .NET 8/10. Hostile-worker containment remains AE-4.
 
 Use separate worker/broker processes and a real qualified resource provider.
 Prove A cannot use B's reference, a child cannot borrow parent-only scope/actions,

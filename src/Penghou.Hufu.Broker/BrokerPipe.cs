@@ -56,7 +56,16 @@ public sealed class BrokerPipeServer : IAsyncDisposable
         var connectionIdentity = Guid.NewGuid().ToString("N");
         var payload = await BrokerFrame.ReadAsync(server, cancellationToken).ConfigureAwait(false);
         if (payload is null) return;
-        var handshake = BrokerFrame.Decode<WireHandshake>(payload);
+        WireHandshake? handshake;
+        try
+        {
+            handshake = BrokerFrame.Decode<WireHandshake>(payload);
+        }
+        catch (System.Text.Json.JsonException)
+        {
+            await WriteAsync(server, new WireHandshakeResult((int)BrokerFailureKind.Unauthorized), cancellationToken).ConfigureAwait(false);
+            return;
+        }
         if (handshake is null || string.IsNullOrWhiteSpace(handshake.Bootstrap))
         {
             await WriteAsync(server, new WireHandshakeResult((int)BrokerFailureKind.Unauthorized), cancellationToken).ConfigureAwait(false);
@@ -73,15 +82,15 @@ public sealed class BrokerPipeServer : IAsyncDisposable
 
         var requestPayload = await BrokerFrame.ReadAsync(server, cancellationToken).ConfigureAwait(false);
         if (requestPayload is null) return;
-        var wire = BrokerFrame.Decode<WireReadRequest>(requestPayload);
         BrokerReadFileRequest request;
         try
         {
+            var wire = BrokerFrame.Decode<WireReadRequest>(requestPayload);
             if (wire is null) throw new ArgumentException("invalid");
             request = new BrokerReadFileRequest(wire.ProtocolVersion, wire.OperationId, wire.AuthorityReference,
                 wire.WorkspaceId, wire.RelativePath, wire.MaxBytes, wire.Deadline);
         }
-        catch (Exception exception) when (exception is ArgumentException or ArgumentOutOfRangeException)
+        catch (Exception exception) when (exception is ArgumentException or ArgumentOutOfRangeException or System.Text.Json.JsonException)
         {
             await WriteAsync(server, new WireResponse((int)BrokerFailureKind.InvalidRequest, null, null, null, null), cancellationToken)
                 .ConfigureAwait(false);

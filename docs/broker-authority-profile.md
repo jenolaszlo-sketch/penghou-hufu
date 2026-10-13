@@ -15,8 +15,10 @@ transport-neutral and performs no I/O. AE-2.2 then adds the named-pipe
 transport, the broker-local start arbiter, the real `HufuWorkspaceAccess`/
 `IWorkspaceReader` read composed with the AE-1 qualified authorization, and
 `BrokerStartEvidence`/`BrokerReleaseEvidence` recording and result release
-(implemented, 35 focused tests). AE-2.3 exercises the cross-process race/restart/
-response-loss corpus and closes AE-2.
+(implemented, 35 focused tests). AE-2.3 then exercised the cross-process
+race/restart/response-loss and malformed-traffic corpus (49 focused tests across
+both), closing AE-2 for the cooperative-worker profile. Hostile same-account
+containment remains AE-4.
 
 The AE-2.2 enforcement vertical is specified separately in the
 [AE-2.2 implementation spec](broker-ae22-implementation-spec.md).

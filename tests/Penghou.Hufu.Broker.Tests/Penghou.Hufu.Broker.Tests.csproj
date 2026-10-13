@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="../../src/Penghou.Hufu.Broker/Penghou.Hufu.Broker.csproj" AdditionalProperties="UsePenghouSource=$(UsePenghouSource)" />
     <ProjectReference Include="../../src/Penghou.Hufu.IO/Penghou.Hufu.IO.csproj" AdditionalProperties="UsePenghouSource=$(UsePenghouSource)" />
+    <ProjectReference Include="../../tests/Penghou.Hufu.BrokerWorkerHarness/Penghou.Hufu.BrokerWorkerHarness.csproj" ReferenceOutputAssembly="false" />
     <ProjectReference Include="../../../Penghou/src/Penghou.IO.Abstractions/Penghou.IO.Abstractions.csproj" Condition="'$(UsePenghouSource)' == 'true'" />
     <ProjectReference Include="../../../Penghou/src/Penghou.IO.Local/Penghou.IO.Local.csproj" Condition="'$(UsePenghouSource)' == 'true'" />
     <PackageReference Include="Penghou.IO.Abstractions" Version="[0.1.0-preview.1]" Condition="'$(UsePenghouSource)' != 'true'" />
