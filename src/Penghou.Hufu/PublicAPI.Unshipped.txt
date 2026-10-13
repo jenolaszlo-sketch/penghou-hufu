@@ -370,3 +370,48 @@ static Penghou.Hufu.ExecutionLifecycleCheckResult.operator !=(Penghou.Hufu.Execu
 static Penghou.Hufu.ExecutionLifecycleCheckResult.operator ==(Penghou.Hufu.ExecutionLifecycleCheckResult? left, Penghou.Hufu.ExecutionLifecycleCheckResult? right) -> bool
 static Penghou.Hufu.ExecutionLifecycleStateRead.operator !=(Penghou.Hufu.ExecutionLifecycleStateRead? left, Penghou.Hufu.ExecutionLifecycleStateRead? right) -> bool
 static Penghou.Hufu.ExecutionLifecycleStateRead.operator ==(Penghou.Hufu.ExecutionLifecycleStateRead? left, Penghou.Hufu.ExecutionLifecycleStateRead? right) -> bool
+override Penghou.Hufu.DelegationAcceptanceAuthorization.Equals(object? obj) -> bool
+override Penghou.Hufu.DelegationAcceptanceAuthorization.GetHashCode() -> int
+override Penghou.Hufu.DelegationAcceptanceAuthorization.ToString() -> string!
+override Penghou.Hufu.DelegationAcceptanceRequest.Equals(object? obj) -> bool
+override Penghou.Hufu.DelegationAcceptanceRequest.GetHashCode() -> int
+override Penghou.Hufu.DelegationAcceptanceRequest.ToString() -> string!
+Penghou.Hufu.CurrentDelegationAcceptanceAuthorizer
+Penghou.Hufu.CurrentDelegationAcceptanceAuthorizer.AuthorizeAsync(Penghou.Hufu.DelegationAcceptanceRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.DelegationAcceptanceAuthorization!>
+Penghou.Hufu.CurrentDelegationAcceptanceAuthorizer.CurrentDelegationAcceptanceAuthorizer(Penghou.Hufu.IAuthoritySnapshotSource! source, Penghou.Hufu.IDelegationAcceptanceEvaluator! evaluator, Penghou.Hufu.IDelegationAcceptanceRecorder! recorder, System.TimeProvider? clock = null, Penghou.Hufu.IExecutionLifecycleGate? lifecycleGate = null) -> void
+Penghou.Hufu.DelegationAcceptanceAuthorization
+Penghou.Hufu.DelegationAcceptanceAuthorization.<Clone>$() -> Penghou.Hufu.DelegationAcceptanceAuthorization!
+Penghou.Hufu.DelegationAcceptanceAuthorization.Decision.get -> Penghou.Hufu.AuthorityDecision?
+Penghou.Hufu.DelegationAcceptanceAuthorization.Decision.init -> void
+Penghou.Hufu.DelegationAcceptanceAuthorization.Deconstruct(out Penghou.Hufu.DelegationAcceptanceRequest! Request, out Penghou.Hufu.AuthorityStatus Status, out Penghou.Hufu.AuthorityDecision? Decision, out bool EvidenceRecorded) -> void
+Penghou.Hufu.DelegationAcceptanceAuthorization.DelegationAcceptanceAuthorization(Penghou.Hufu.DelegationAcceptanceRequest! Request, Penghou.Hufu.AuthorityStatus Status, Penghou.Hufu.AuthorityDecision? Decision = null, bool EvidenceRecorded = false) -> void
+Penghou.Hufu.DelegationAcceptanceAuthorization.Equals(Penghou.Hufu.DelegationAcceptanceAuthorization? other) -> bool
+Penghou.Hufu.DelegationAcceptanceAuthorization.EvidenceRecorded.get -> bool
+Penghou.Hufu.DelegationAcceptanceAuthorization.EvidenceRecorded.init -> void
+Penghou.Hufu.DelegationAcceptanceAuthorization.IsAuthorized.get -> bool
+Penghou.Hufu.DelegationAcceptanceAuthorization.Request.get -> Penghou.Hufu.DelegationAcceptanceRequest!
+Penghou.Hufu.DelegationAcceptanceAuthorization.Request.init -> void
+Penghou.Hufu.DelegationAcceptanceAuthorization.Status.get -> Penghou.Hufu.AuthorityStatus
+Penghou.Hufu.DelegationAcceptanceAuthorization.Status.init -> void
+Penghou.Hufu.DelegationAcceptanceOperation
+Penghou.Hufu.DelegationAcceptanceOperation.Accept = 0 -> Penghou.Hufu.DelegationAcceptanceOperation
+Penghou.Hufu.DelegationAcceptanceRequest
+Penghou.Hufu.DelegationAcceptanceRequest.<Clone>$() -> Penghou.Hufu.DelegationAcceptanceRequest!
+Penghou.Hufu.DelegationAcceptanceRequest.AcceptanceIdentity.get -> string!
+Penghou.Hufu.DelegationAcceptanceRequest.BoundedRequestDigest.get -> string!
+Penghou.Hufu.DelegationAcceptanceRequest.Context.get -> Penghou.Hufu.AuthenticatedAuthorityContext!
+Penghou.Hufu.DelegationAcceptanceRequest.DelegationAcceptanceRequest(Penghou.Hufu.AuthenticatedAuthorityContext! context, string! acceptanceIdentity, string! workspaceId, string! provider, string! generation, string! boundedRequestDigest) -> void
+Penghou.Hufu.DelegationAcceptanceRequest.Equals(Penghou.Hufu.DelegationAcceptanceRequest? other) -> bool
+Penghou.Hufu.DelegationAcceptanceRequest.Generation.get -> string!
+Penghou.Hufu.DelegationAcceptanceRequest.Provider.get -> string!
+Penghou.Hufu.DelegationAcceptanceRequest.WorkspaceId.get -> string!
+Penghou.Hufu.IDelegationAcceptanceAuthorizer
+Penghou.Hufu.IDelegationAcceptanceAuthorizer.AuthorizeAsync(Penghou.Hufu.DelegationAcceptanceRequest! request, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.DelegationAcceptanceAuthorization!>
+Penghou.Hufu.IDelegationAcceptanceEvaluator
+Penghou.Hufu.IDelegationAcceptanceEvaluator.Evaluate(Penghou.Hufu.AuthoritySnapshot! snapshot, Penghou.Hufu.DelegationAcceptanceRequest! request, System.DateTimeOffset now) -> Penghou.Hufu.AuthorityDecision!
+Penghou.Hufu.IDelegationAcceptanceRecorder
+Penghou.Hufu.IDelegationAcceptanceRecorder.RecordAsync(Penghou.Hufu.DelegationAcceptanceRequest! request, Penghou.Hufu.AuthorityDecision! decision, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<bool>
+static Penghou.Hufu.DelegationAcceptanceAuthorization.operator !=(Penghou.Hufu.DelegationAcceptanceAuthorization? left, Penghou.Hufu.DelegationAcceptanceAuthorization? right) -> bool
+static Penghou.Hufu.DelegationAcceptanceAuthorization.operator ==(Penghou.Hufu.DelegationAcceptanceAuthorization? left, Penghou.Hufu.DelegationAcceptanceAuthorization? right) -> bool
+static Penghou.Hufu.DelegationAcceptanceRequest.operator !=(Penghou.Hufu.DelegationAcceptanceRequest? left, Penghou.Hufu.DelegationAcceptanceRequest? right) -> bool
+static Penghou.Hufu.DelegationAcceptanceRequest.operator ==(Penghou.Hufu.DelegationAcceptanceRequest? left, Penghou.Hufu.DelegationAcceptanceRequest? right) -> bool
