@@ -130,8 +130,13 @@ qualify during implementation, not new delivered guarantees or closed CI gates.
     Hufu-side `DelegationAcceptanceOperation.Accept` contract implemented
     (7 focused tests). **AE-5A.1b complete:** Hufu nine-package
     `0.1.0-preview.8` published (including the two Biscuit packages) and
-    fresh-cache verified. **AE-5A.2 (Marang wiring) unblocked and next**; no
-    local feed/source reference.
+    fresh-cache verified. **AE-5A.2 complete** (Marang commit `0bce996`): mandatory
+    Hufu `Accept` gate before all acceptance-side state, credential via HTTP
+    metadata, evaluator/recorder integration qualified, public NuGet-only graph
+    proven, end-to-end table complete. **AE-5A CLOSED.** Carried residuals: the
+    default Server host has no live Hufu authority source (fails closed by design);
+    Biscuit signature/registry trust is host-supplied. Do not reopen AE-5A to wire
+    the default host.
 
 The next authority-design work is AE-1, followed by the broker proof. Biscuit
 comes later. Existing HOST-SERVICES, neutral workflow and legacy-profile gates

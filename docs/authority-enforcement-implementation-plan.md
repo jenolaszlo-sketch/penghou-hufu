@@ -520,6 +520,13 @@ project references. **AE-5A.2 (Marang wiring) is unblocked** and is the next
 workstream; it consumes the three packages from NuGet with no local feed and no
 source reference.
 
+**AE-5A closed (2026-10-14).** Marang commit `0bce996` gates acceptance with the
+mandatory Hufu `Accept` decision before all durable state, transports the
+credential via HTTP metadata, qualifies the evaluator/recorder integration and
+the end-to-end table, and proves public NuGet-only consumption. Default-host
+non-operational acceptance is an intentional fail-closed host-composition
+residual, not a defect; do not reopen AE-5A to wire the default host.
+
 Select one provider, one real tool schema/version and one bounded action based
 on an actual consumer. Keep Qingniao/Marang protocol ownership; Hufu supplies
 neutral authority rather than another A2A/MCP SDK. Reuse AE-2's authentication,

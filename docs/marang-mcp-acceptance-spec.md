@@ -176,5 +176,35 @@ semantics beyond the single `DelegationAcceptanceOperation.Accept` semantic.
 `marang_delegate` acceptance is gated by `DelegationAcceptanceOperation.Accept`
 through the AE-1 qualified current-authority composition, placed before durable
 acceptance state, with the qualification table above passing, and evidence
-proving both credential validity and independent current authority. **Stop
-before implementation.**
+proving both credential validity and independent current authority.
+
+## AE-5A closure (2026-10-14)
+
+```text
+AE-5A: CLOSED
+
+AE-5A.1b
+  Hufu 0.1.0-preview.8 published as nine public packages
+  public-only package qualification complete
+
+AE-5A.2
+  Marang commit 0bce996
+  Hufu Accept gate mandatory and before all acceptance-side state
+  credential transported via HTTP metadata
+  evaluator/recorder integration qualified
+  public NuGet-only dependency graph proven
+  AE-5A end-to-end qualification table complete
+
+Carried residuals:
+  - Marang.Server default host has no live Hufu authority source and therefore
+    fails closed until one is composed
+  - Biscuit cryptographic/registry verification is host-supplied
+  - unrelated pre-existing README.md / docs/roadmap.md checkout edits remain
+```
+
+The default host being non-operational for acceptance is intentional and
+fail-closed, not a bypass or defect: it is a host-composition residual, not
+unfinished acceptance-authority semantics. Likewise the envelope-shape verifier
+is non-cryptographic by design; signature/registry trust stays with the
+host-supplied verifier. Do not reopen AE-5A to wire the default host — that is
+a separate host-composition work item.
