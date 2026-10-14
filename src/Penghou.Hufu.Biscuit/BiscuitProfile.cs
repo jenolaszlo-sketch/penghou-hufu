@@ -97,6 +97,10 @@ public static class BiscuitProfile
         AuthorityAction.ReadMetadata => "fs.metadata", AuthorityAction.PatchFile => "fs.patch",
         AuthorityAction.Release => "data.release", AuthorityAction.WriteFile => "fs.write",
         AuthorityAction.ExecuteProcess => "proc.execute",
+        AuthorityAction.MarangReadDelegation => "marang.delegation.read",
+        AuthorityAction.MarangReadResult => "marang.result.read",
+        AuthorityAction.MarangIntervene => "marang.intervene",
+        AuthorityAction.MarangCancel => "marang.cancel",
         _ => throw new ArgumentOutOfRangeException(nameof(action)),
     };
     // Shared by production verification and the fixed-policy measurement probe.

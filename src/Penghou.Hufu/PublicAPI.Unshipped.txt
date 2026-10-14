@@ -1,5 +1,9 @@
 ﻿#nullable enable
 Penghou.Hufu.AuthorityAction.ExecuteProcess = 6 -> Penghou.Hufu.AuthorityAction
+Penghou.Hufu.AuthorityAction.MarangReadDelegation = 7 -> Penghou.Hufu.AuthorityAction
+Penghou.Hufu.AuthorityAction.MarangReadResult = 8 -> Penghou.Hufu.AuthorityAction
+Penghou.Hufu.AuthorityAction.MarangIntervene = 9 -> Penghou.Hufu.AuthorityAction
+Penghou.Hufu.AuthorityAction.MarangCancel = 10 -> Penghou.Hufu.AuthorityAction
 override Penghou.Hufu.AuthorityDerivationCommand.Equals(object? obj) -> bool
 override Penghou.Hufu.AuthorityDerivationCommand.GetHashCode() -> int
 override Penghou.Hufu.AuthorityDerivationCommand.ToString() -> string!

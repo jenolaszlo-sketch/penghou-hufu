@@ -59,6 +59,10 @@ public sealed class CedarAuthorityEvaluator : IAuthorityEvaluator
           action Release appliesTo { principal: [Subject], resource: [Resource], context: {} };
           action WriteFile appliesTo { principal: [Subject], resource: [Resource], context: {} };
           action ExecuteProcess appliesTo { principal: [Subject], resource: [Resource], context: {} };
+          action MarangReadDelegation appliesTo { principal: [Subject], resource: [Resource], context: {} };
+          action MarangReadResult appliesTo { principal: [Subject], resource: [Resource], context: {} };
+          action MarangIntervene appliesTo { principal: [Subject], resource: [Resource], context: {} };
+          action MarangCancel appliesTo { principal: [Subject], resource: [Resource], context: {} };
         }
         """;
     private static readonly CedarSchema Schema = CedarSchema.FromText(SchemaText);
@@ -316,6 +320,10 @@ public sealed class CedarAuthorityEvaluator : IAuthorityEvaluator
         AuthorityAction.Release => "Release",
         AuthorityAction.WriteFile => "WriteFile",
         AuthorityAction.ExecuteProcess => "ExecuteProcess",
+        AuthorityAction.MarangReadDelegation => "MarangReadDelegation",
+        AuthorityAction.MarangReadResult => "MarangReadResult",
+        AuthorityAction.MarangIntervene => "MarangIntervene",
+        AuthorityAction.MarangCancel => "MarangCancel",
         _ => throw new ArgumentOutOfRangeException(nameof(action))
     });
 

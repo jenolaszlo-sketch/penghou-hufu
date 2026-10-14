@@ -7,7 +7,21 @@ namespace Penghou.Hufu;
 // ExecuteProcess authorizes starting a process whose executable is the request's
 // scoped resource (workspace + canonical relative path). It does not by itself
 // contain the process; the host selects and records an external execution provider.
-public enum AuthorityAction { ReadFile, ListDirectory, ReadMetadata, PatchFile, Release, WriteFile, ExecuteProcess }
+// Marang* actions govern Marang delegation-lifecycle resources (delegations,
+// checkpoints, result outputs), never workspace files. They are distinct policy
+// meanings, not aliases: no Marang operation reuses a file verb by analogy.
+public enum AuthorityAction
+{
+    ReadFile, ListDirectory, ReadMetadata, PatchFile, Release, WriteFile, ExecuteProcess,
+    /// <summary>Read lifecycle/supervision state of a caller-owned Marang delegation.</summary>
+    MarangReadDelegation,
+    /// <summary>Read execution outputs (results, findings, artifact descriptors, projections) of a caller-owned Marang delegation.</summary>
+    MarangReadResult,
+    /// <summary>Apply one fenced supervisor intervention to a waiting Marang checkpoint.</summary>
+    MarangIntervene,
+    /// <summary>Request durable cancellation of a live Marang delegation.</summary>
+    MarangCancel,
+}
 public enum AuthorityScopeKind { Exact, Subtree }
 public enum AuthorityStatus { Unavailable, Deny, Permit }
 public sealed record AuthenticatedAuthorityContext(string TenantId, string SubjectId, string RunId,
