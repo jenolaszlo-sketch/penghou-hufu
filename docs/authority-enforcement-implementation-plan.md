@@ -513,9 +513,11 @@ snapshot + optional lifecycle gate + mandatory evidence + freshness). Additive;
 resource action/Cedar/Biscuit vocabularies unchanged; 7 focused tests on
 .NET 8/10. Marang wiring and acceptance policy remain the next step.
 
-**AE-5A.2 dependency update (2026-10-13).** `BiscuitSharp 0.1.0-preview.2` is now
-published and content-verified. Remaining: Hufu AE-5A.1b must publish the
-nine-package `preview.8`; Marang consumes from NuGet with no local feed and no
+**AE-5A.1b complete (2026-10-14).** The Hufu nine-package `0.1.0-preview.8`
+release is published, including the two Biscuit packages (dependency
+`BiscuitSharp 0.1.0-preview.2`), and verified from a fresh cache with zero
+project references. **AE-5A.2 (Marang wiring) is unblocked** and is the next
+workstream; it consumes the three packages from NuGet with no local feed and no
 source reference.
 
 Select one provider, one real tool schema/version and one bounded action based

@@ -1,15 +1,68 @@
 # Hufu package release profile
 
-## Candidate: `0.1.0-preview.8` (nine-package release)
+## Current release: `0.1.0-preview.8` (nine packages, published)
 
-Status: local release candidate, 2026-10-13. The checked-in version is
-`0.1.0-preview.8` (`Directory.Build.props`); the current **published** baseline
-is `0.1.0-preview.7`. All nine packages (`Penghou.Hufu`,
-`Penghou.Hufu.Cedar`, `Penghou.Hufu.IO`, `Penghou.Hufu.Luban`,
-`Penghou.Hufu.Sqlite`, `Penghou.Hufu.Workflow`, `Penghou.Hufu.Luban.Sqlite`,
-`Penghou.Hufu.Biscuit`, `Penghou.Hufu.Biscuit.Sqlite`)
-pack cleanly at preview.8. The seven existing packages validate against the
-unchanged `0.1.0-preview.3` baseline; the two new Biscuit packages are first
+Status: published, 2026-10-14. The Hufu family is now a **nine-package set** at
+`0.1.0-preview.8`: the seven existing packages plus the two Biscuit packages
+`Penghou.Hufu.Biscuit` and `Penghou.Hufu.Biscuit.Sqlite`. Both new packages
+depend on the now-public `BiscuitSharp 0.1.0-preview.2`. The seven existing
+packages validate against the unchanged `0.1.0-preview.3` baseline; the two
+Biscuit packages are first releases with no published baseline (re-enable
+package validation with a `preview.8` baseline next version).
+
+### Split publication provenance (explicit)
+
+preview.8 was **not** a single atomic release:
+
+- The **seven** existing packages were published **out-of-band from
+  `6a2be3ce1eccf31615da0ef690505fea5bbb5dac`**, not through `publish.yml`.
+  `src/` is identical between that commit and the AE-5A.1b pipeline commit
+  `1b802373d4f57a59623f449763ba94d584e10215` (`git diff` empty), so the
+  published seven are the correct code; they differ from a fresh build only in
+  embedded build provenance, so they must not be re-pushed.
+- The **two** Biscuit packages were published through the explicit, fail-closed
+  **partial-release recovery mode** of `publish.yml`, driven by the checked-in
+  `eng/Preview8PartialRelease.json`, using exact CI-qualified bytes
+  (publish run `38434676203`, artifact
+  `release-packages-b4b0e066984708c5b8f87f03c3770c75cab66922`).
+- The first normal `publish.yml` attempt (`38416963934`) correctly failed the
+  immutable-version check on the seven already-published packages. A one-off
+  workflow attempt (`38423213367`) failed because NuGet trusted publishing binds
+  to the exact `publish.yml` file; that workflow was removed and the approach
+  replaced by the in-workflow recovery mode.
+
+### Verification
+
+- Published `Penghou.Hufu.Biscuit[.Sqlite] 0.1.0-preview.8` are visible on
+  nuget.org (flatcontainer HTTP 200; index lists preview.8).
+- Published Biscuit nupkg bytes equal the CI-qualified artifact entry-for-entry
+  excluding NuGet `.signature.p7s` (0 mismatches); CI manifest hashes:
+  `Penghou.Hufu.Biscuit` nupkg `48A63FFE…3EC2325`, snupkg
+  `62E641D0…A83978C7E`; `Penghou.Hufu.Biscuit.Sqlite` nupkg
+  `BF9849DA…EEA03A8`, snupkg `2B606F1C…1BD6AFEE`.
+- A fresh, isolated-cache consumer with **nuget.org only** and **zero project
+  references** resolves all nine Hufu packages plus `BiscuitSharp/0.1.0-preview.2`
+  and passes on .NET 8 and .NET 10.
+
+### Known packaged-documentation defect (next-release correction)
+
+The `README.md` packed into every preview.8 package (and shown on the nuget.org
+package pages, including `Penghou.Hufu.Biscuit.Sqlite`) still states "seven Hufu
+packages … `0.1.0-preview.5`" and "Biscuit … unpublished". This is a
+**packaged-documentation defect, not release-blocking** for AE-5A.1b (no
+acceptance criterion covers packaged README content). It is corrected in the
+repository for the next release; preview.8 is not mutated or republished.
+
+Local machine-readable evidence: `qualification/ae-5a-1b-preview8.json`
+(gitignored by convention).
+
+Current release history follows.
+
+## Prior candidate: `0.1.0-preview.8` (local candidate notes)
+
+The checked-in version is `0.1.0-preview.8` (`Directory.Build.props`). All nine
+packages pack cleanly at preview.8. The seven existing packages validate against
+the unchanged `0.1.0-preview.3` baseline; the two new Biscuit packages are first
 releases with no published baseline (re-enable validation with a `preview.8`
 baseline next version). All restores use the public feed
 (`UsePenghouSource=false`, `UseLubanSource=false`); `BiscuitSharp
@@ -19,14 +72,8 @@ local feed.
 preview.8 carries the accumulated qualified surface since preview.7: the AE-5A.1b
 Biscuit package surface (packable projects, API inventories, nine-package
 pipeline, clean consumers). It is additive; existing seven-package behavior and
-tests are unchanged (Biscuit 97/97, Hufu core 327/327 on .NET 8/10). A clean
-fresh-cache consumer proves the three preview.8 Hufu packages plus
-`BiscuitSharp/0.1.0-preview.2` resolve with zero project references.
+tests are unchanged (Biscuit 97/97, Hufu core 327/327 on .NET 8/10).
 
-**Publication is user/CI-controlled.** The publish path is the normal
-`publish.yml` workflow (three-platform validation, pack, set/symbol/consumer
-verification, trusted-publisher push of the exact qualified bytes). Update this
-section with the actual run/tag and fresh-cache consumer evidence when published.
 
 Current release: seven packages at `0.1.0-preview.5`, carrying the corrected
 additive derived-authority surface. It is compatible with the `preview.3`
