@@ -63,3 +63,32 @@ static Penghou.Hufu.Workflow.WorkflowAuthorityEvent.operator !=(Penghou.Hufu.Wor
 static Penghou.Hufu.Workflow.WorkflowAuthorityEvent.operator ==(Penghou.Hufu.Workflow.WorkflowAuthorityEvent? left, Penghou.Hufu.Workflow.WorkflowAuthorityEvent? right) -> bool
 static Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.operator !=(Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal? left, Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal? right) -> bool
 static Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal.operator ==(Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal? left, Penghou.Hufu.Workflow.WorkflowAuthorityEventPrincipal? right) -> bool
+const Penghou.Hufu.Workflow.WorkflowRunAuthorityBindingCodec.Prefix = "hufu-workflow-binding-v1" -> string!
+override Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.Equals(object? obj) -> bool
+override Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.GetHashCode() -> int
+override Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.ToString() -> string!
+Penghou.Hufu.Workflow.DurableWorkflowAuthorityBindingSource
+Penghou.Hufu.Workflow.DurableWorkflowAuthorityBindingSource.DurableWorkflowAuthorityBindingSource(Penghou.Hufu.Workflow.IWorkflowRunBindingReader! reader, Penghou.Hufu.Workflow.IWorkflowAuthorityTargetMapper! mapper, string! hostNamespace, string! mappingId, System.TimeProvider? clock = null, System.TimeSpan? validFor = null) -> void
+Penghou.Hufu.Workflow.DurableWorkflowAuthorityBindingSource.ResolveAsync(Penghou.Workflow.Abstractions.ExecutionAuthorizationContext! context, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Workflow.WorkflowAuthorityBinding?>
+Penghou.Hufu.Workflow.IWorkflowAuthorityTargetMapper
+Penghou.Hufu.Workflow.IWorkflowAuthorityTargetMapper.MapAsync(Penghou.Workflow.Abstractions.ExecutionAuthorizationContext! context, Penghou.Workflow.Abstractions.ExecutionRequirement! requirement, Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity! identity, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<Penghou.Hufu.Workflow.WorkflowAuthorityTarget?>
+Penghou.Hufu.Workflow.IWorkflowRunBindingReader
+Penghou.Hufu.Workflow.IWorkflowRunBindingReader.ReadAuthorityBindingAsync(string! executionId, System.Threading.CancellationToken cancellationToken = default(System.Threading.CancellationToken)) -> System.Threading.Tasks.ValueTask<string?>
+Penghou.Hufu.Workflow.WorkflowRunAuthorityBindingCodec
+Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity
+Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.<Clone>$() -> Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity!
+Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.Deconstruct(out string! TenantId, out string! SubjectId, out string! DelegationId, out string! WorkspaceId) -> void
+Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.DelegationId.get -> string!
+Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.DelegationId.init -> void
+Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.Equals(Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity? other) -> bool
+Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.SubjectId.get -> string!
+Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.SubjectId.init -> void
+Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.TenantId.get -> string!
+Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.TenantId.init -> void
+Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.WorkflowRunAuthorityIdentity(string! TenantId, string! SubjectId, string! DelegationId, string! WorkspaceId) -> void
+Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.WorkspaceId.get -> string!
+Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.WorkspaceId.init -> void
+static Penghou.Hufu.Workflow.WorkflowRunAuthorityBindingCodec.Encode(Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity! identity) -> string!
+static Penghou.Hufu.Workflow.WorkflowRunAuthorityBindingCodec.TryDecode(string? opaque, out Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity! identity) -> bool
+static Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.operator !=(Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity? left, Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity? right) -> bool
+static Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity.operator ==(Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity? left, Penghou.Hufu.Workflow.WorkflowRunAuthorityIdentity? right) -> bool
