@@ -101,6 +101,8 @@ public static class BiscuitProfile
         AuthorityAction.MarangReadResult => "marang.result.read",
         AuthorityAction.MarangIntervene => "marang.intervene",
         AuthorityAction.MarangCancel => "marang.cancel",
+        AuthorityAction.ReadExecutionResult => "exec.result.read",
+        AuthorityAction.CancelExecution => "exec.cancel",
         _ => throw new ArgumentOutOfRangeException(nameof(action)),
     };
     // Shared by production verification and the fixed-policy measurement probe.

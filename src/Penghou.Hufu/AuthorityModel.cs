@@ -21,6 +21,10 @@ public enum AuthorityAction
     MarangIntervene,
     /// <summary>Request durable cancellation of a live Marang delegation.</summary>
     MarangCancel,
+    /// <summary>Read terminal execution-result content (summary, artifact descriptors, provenance) of a workflow operation.</summary>
+    ReadExecutionResult,
+    /// <summary>Abort a live external execution operation.</summary>
+    CancelExecution,
 }
 public enum AuthorityScopeKind { Exact, Subtree }
 public enum AuthorityStatus { Unavailable, Deny, Permit }

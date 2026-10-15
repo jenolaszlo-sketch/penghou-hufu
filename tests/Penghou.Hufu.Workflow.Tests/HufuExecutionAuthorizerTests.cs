@@ -17,7 +17,9 @@ public sealed class HufuExecutionAuthorizerTests
         { "patch-file", AuthorityAction.PatchFile },
         { "release", AuthorityAction.Release },
         { "write-file", AuthorityAction.WriteFile },
-        { "process.execute", AuthorityAction.ExecuteProcess }
+        { "process.execute", AuthorityAction.ExecuteProcess },
+        { "read-execution-result", AuthorityAction.ReadExecutionResult },
+        { "cancel-execution", AuthorityAction.CancelExecution }
     };
 
     [Theory]
